@@ -85,6 +85,7 @@ export default {
         username: "合并测试",
         password: "123456",
       },
+
       // 通过 loginRules 属性传入约定的验证规则
       loginRules: {
         username: [
@@ -116,7 +117,7 @@ export default {
         this.$refs.password.focus();
       });
     },
-    // 在登录页面，点击登录按钮，调用handleLogin方法 
+    // 在登录页面，点击登录按钮，调用handleLogin方法
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
@@ -264,7 +265,7 @@ $light_gray: #eee;
   }
 }
 @media (max-width: 768px)  {
-  
+
 .login-container {
   min-height: 100%;
   width: 100%;
