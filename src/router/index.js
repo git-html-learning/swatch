@@ -101,7 +101,7 @@ export const constantRoutes = [
     component: Layout,
     meta: {
       title: '电子围栏',
-      icon:'产品'
+      icon:'轴承'
     },
     children: [
       {
@@ -188,19 +188,6 @@ export const constantRoutes = [
     }, ]
   },
 
-  {
-    path: '/debug',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'Debug',
-      component: () => import('@/views/Debug/index'),
-      meta: {
-        title: '接口调试',
-        icon: '调试'
-      }
-    }]
-  }, 
   
   {
     path: '/user',

@@ -1,4 +1,17 @@
 <template>
+<div class="layout">
+      <div
+      id="background"
+      style="position: absolute; z-index: -1; width:100%; height:100%; top:0px; left:0px; -webkit-filter: blur(15px);
+            -moz-filter: blur(11px);
+            -o-filter: blur(10px);
+            -ms-filter: blur(8px);
+            filter: blur(8px);"
+    >
+      <img src="@/assets/img/background.png" width="100%" height="100%" />
+    </div>
+
+
   <div class="login-container">
     <el-form
       ref="loginForm"
@@ -9,7 +22,7 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">弘恩云设备管理平台</h3>
+        <h3 class="title">智能手环管理平台</h3>
       </div>
 
       <el-form-item prop="username">
@@ -58,6 +71,7 @@
       >
     </el-form>
   </div>
+  </div>
 </template>
 
 <script>
@@ -82,7 +96,7 @@ export default {
     };
     return {
       loginForm: {
-        username: "合并测试",
+        username: "智能手环测试",
         password: "123456",
       },
 
@@ -209,7 +223,7 @@ $light_gray: #eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background: url("~@/icons/pic/2.jpg");
+  // background: url("~@/icons/pic/timg.jpg");
   background-size: 100%;
   overflow: hidden;
 
@@ -221,6 +235,7 @@ $light_gray: #eee;
     margin: 0 auto;
     overflow: hidden;
   }
+
 
   .tips {
     font-size: 14px;

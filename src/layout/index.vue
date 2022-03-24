@@ -6,7 +6,7 @@
     <div class="main-container">
       <!-- 页面的主要内容区域-->
       <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
+        <navbar  @handleRing = "handleRing" />
         <!-- 表示右上方的 navbar,  面包屑的功能也在这个组件内  -->
       </div>
       <app-main />
@@ -25,12 +25,28 @@ export default {
     Sidebar,
     AppMain
   },
+    data() {
+return {
+  ring: [false,false],
+}
+    },
+ watch: {
+ ring() {
+   if (this.ring[0] == true) {
+  this.btnClick0();
+   }
+   else if (this.ring[1] == true) {
+  this.btnClick1();
+   }
+ }
+  },
   mixins: [ResizeMixin],
   computed: {
     sidebar() {
       return this.$store.state.app.sidebar;
       //是否展示左侧sidebar，通过cookie获得
     },
+  
     device() {
       return this.$store.state.app.device;
     },
@@ -49,6 +65,30 @@ export default {
   methods: {
     handleClickOutside() {
       this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
+    },
+    handleRing(r) {
+      this.ring = r;
+      console.log(this.ring)
+    },
+        btnClick0() {
+      this.$popup({
+        btnText: '确定',
+        click: () => {
+          // 点击按钮事件
+          //   this.$router.push('……')
+          console.log("点击按钮了！")
+        },
+      })
+    },
+       btnClick1() {
+      this.$alarm({
+        btnText: '确定',
+        click: () => {
+          // 点击按钮事件
+          //   this.$router.push('……')
+          console.log("点击按钮了！")
+        },
+      })
     }
   }
 };

@@ -336,12 +336,11 @@ pointArray = pointArray.concat(polygon.getPath());
     //判断点是否在已绘制的区域内
     isInside(p) {
  if(BMapLib.GeoUtils.isPointInPolygon(this.marker1,p)){
-　　　　　　　　console.log("在区域内");
-        }else{
-　　　　　　　　console.log("不在区域内");
+　alert("目前在电子围栏");　　　　　　　
+        }else{    
+  alert("目前不在电子围栏内")
         }
-    }
-   
+    }  
   },
 };
 </script>
@@ -380,7 +379,7 @@ pointArray = pointArray.concat(polygon.getPath());
   position: absolute;
   left: 30px;
   top: 30px;
-  z-index: 999;
+  z-index: 100;
 }
 
 .s-control-r {
@@ -389,7 +388,7 @@ pointArray = pointArray.concat(polygon.getPath());
   position: absolute;
   right: 30px;
   top: 30px;
-  z-index: 999;
+  z-index: 100;
 }
 
 .s-search {
@@ -431,9 +430,9 @@ pointArray = pointArray.concat(polygon.getPath());
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAJFBMVEUAAAD///////////////////////////////////////////+0CY3pAAAAC3RSTlMAGjFNX32CoLPO5hUiNAEAAAABYktHRAsf18TAAAAAqklEQVRYw2NgGAWkg1mrIKAAtxJ2qJKVUP7q3RDQgFsLB1TJLjprURQUFPTGr2ULUIkQkhYBIGmNX8tmIMmIoQUvGGJayPA+SVqcjY2Ns/Fr2QZUYkL3BEOyloqOjt27Ozo6AnBrYe2AqGlHCO3eTTgnoqkZ1TKqZVTLqJZRLaNaRrWMahnVMqploLSQ0egdxJ1EMjoj9OkljfB+JRmd90GaxsgYVBkFpAAAyZJmP55ExscAAAAASUVORK5CYII=);
 }
 .s-icon.s-icon-polyline {
-  background-image: url('./折线1.png')
+  background-image: url('~@/assets/img/折线1.png')
 }
 .el-radio-button.is-active .s-icon.s-icon-polyline {
-  background-image: url('./折线2.png')
+  background-image: url('~@/assets/img/折线2.png')
 }
 </style>

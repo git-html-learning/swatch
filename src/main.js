@@ -13,6 +13,7 @@ import vRegion from 'v-region'
 
 
 
+
 // Vue.use() 的第二个参数是可选的
 
 
@@ -25,6 +26,12 @@ import '@/permission' // permission control
 // import "./assets/scss/style.scss";
 import BaiduMap from 'vue-baidu-map'
 import {BmlMarkerClusterer} from 'vue-baidu-map'
+//实现sos组件的全局注册
+import Popup from "./components/popup/index"
+ Vue.prototype.$popup = Popup.install
+//报警组件全局注册
+ import alarm from "./components/alarm/index"
+ Vue.prototype.$alarm = alarm.install
 Vue.use(jsonView)
 Vue.use(Antd);
 Vue.use(scroll);

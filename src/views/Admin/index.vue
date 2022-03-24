@@ -25,8 +25,7 @@
           :value="activeName"
         >
           <el-tab-pane label="用户资料" name="user"><user /></el-tab-pane>
-          <el-tab-pane label="用户注册" name="regist"><regist /></el-tab-pane>
-          <el-tab-pane label="管理用户" name="admin"><admin /></el-tab-pane>
+          
         </el-tabs>
       </div>
     </el-card>
@@ -39,13 +38,11 @@
 
 <script>
 import user from "./user";
-import admin from "./admin";
-import regist from "./regist";
+
 export default {
   components: {
     user,
-    admin,
-    regist,
+   
   },
   data() {
     return { backAdmin: false, activeIndex: "userdetail" };

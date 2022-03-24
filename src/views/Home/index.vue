@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <div class="title title-bg">
-      <span style="position: absolute; left: 49%;">欧孚通信</span>
+      <span style="position: absolute; left: 49%;">海工智能</span>
       <!-- 点击触发报警，用于测试，有接口之后监视接口报警 -->
       <span style="position: absolute; left: 75%">
         <a-icon type="bell" @click="openBell" style="cursor: pointed" />
@@ -29,17 +29,17 @@
           <div class="body">
             <el-row type="flex" justify>
               <el-col :span="4" :offset="2">
-                <img src="@/assets/img/用户.png" style="margin-top: 30px" alt />
+                <img src="@/assets/img/用户.png" style="margin-top: 50px" alt />
               </el-col>
               <el-col :span="6">
-                <h2 style="margin-top: 30px;">0</h2>
+                <h2 style="margin-top: 50px;">0</h2>
                 <p style="font-size: 10px;">全部用户</p>
               </el-col>
               <el-col :span="4" :offset="2">
-                <img src="@/assets/img/手环.png" alt style="margin-top: 30px;" />
+                <img src="@/assets/img/手环.png" alt style="margin-top: 50px;" />
               </el-col>
               <el-col :span="6">
-                <h2 style="margin-top: 30px;">131</h2>
+                <h2 style="margin-top: 50px;">131</h2>
                 <p style="font-size: 10px;">全部产品</p>
               </el-col>
             </el-row>
@@ -593,7 +593,7 @@ console.log("进入详情页")
   color: #e9c29d;
 }
 .title-bg {
-  background: url("./titlebg.png") no-repeat;
+  background: url("~@/assets/img/titlebg.png") no-repeat;
   background-size: 100% 65px;
 }
 .left {
