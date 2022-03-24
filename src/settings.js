@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '弘恩云设备管理平台',
+  title: '智能手环管理平台',
 
   /**
    * @type {boolean} true | false

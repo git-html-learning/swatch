@@ -97,6 +97,32 @@ export const constantRoutes = [
     }]
   },
   {
+    path: '/fence',
+    component: Layout,
+    meta: {
+      title: '电子围栏',
+      icon:'产品'
+    },
+    children: [
+      {
+        path: 'index',
+        name: '主页',
+        component: () => import('@/views/fence/index'),
+        meta: {
+          title:'主页',
+        }
+      },
+      {
+        path: 'details',
+        name: '详情页',
+        component: ()=>import('@/views/fence/details'),
+        meta: {
+          title:'详情页',
+        },
+      }
+    ]
+  },
+  {
     path: '/device',
     component: Layout,
     redirect: '/devices/index',

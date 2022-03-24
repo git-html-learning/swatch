@@ -14,15 +14,15 @@
           </el-row>
         </el-col>
         <el-col :span="7">
-          <el-row :gutter="13" type="flex" align="middle" justify="end">
-            <el-col :span="2" :offset="6">
+          <el-row :gutter="13" type="flex" align="middle" justify="end" >
+            <el-col :span="6" :offset="6">
               <el-badge :value="massage" :max="99" class="item">
                 <router-link to="/device/alertData">
                   <svg-icon icon-class="消息" style="font-size: 18px"
                 /></router-link>
               </el-badge>
             </el-col>
-            <el-col :span="8" class="row">
+            <el-col :span="12" class="row">
               <svg-icon icon-class="用户" style="font-size: 15px" />
               {{ name }}
             </el-col>
