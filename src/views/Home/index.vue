@@ -25,14 +25,14 @@
           <div class="body">
             <el-row type="flex" justify>
               <el-col :span="4" :offset="2">
-                <img src="@/assets/img/手环.png" style="margin-top: 50px" alt />
+                <img src="@/assets/img/手环.png" style="margin-top: 50px" alt  @click = "viewProduct"/>
               </el-col>
               <el-col :span="6">
                 <h2 style="margin-top: 50px; color: #71919a;">{{productNum}}</h2>
                 <p style="font-size: 13px; color: #71919a;">全部产品</p>
               </el-col>
               <el-col :span="4" :offset="2">
-                <img src="@/assets/img/设备.png" style="margin-top: 60px;" alt />
+                <img src="@/assets/img/设备.png" style="margin-top: 60px;" alt  @click = "viewDevice"/>
               </el-col>
               <el-col :span="6">
                 <h2 style="margin-top: 50px; color: #71919a;">{{deviceNum}}</h2>
@@ -53,97 +53,99 @@
         <div id="body2"></div>
       </div>
       <div class="right">
-      
-        <div class="title-di">
-          <div v-if="show">
-            <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
-            设备列表
-            <span
-              @click="showDetail"
-              style="margin-left: 10px;
+        <div class="list">
+          <div class="title-di">
+            <div v-if="show">
+              <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
+              设备列表
+              <span
+                @click="showDetail"
+                style="margin-left: 10px;
              font-size: 12px; color: #0493da; cursor: pointer"
-            >设备详情</span>
-            <span style="float: right; margin-right: 10px; ">
-              <img src="@/assets/img/搜索.png" @click="searchOpen" alt />
-            </span>
+              >设备详情</span>
+              <span style="float: right; margin-right: 10px; ">
+                <img src="@/assets/img/搜索.png" @click="searchOpen" alt />
+              </span>
+            </div>
+            <div v-if="!show">
+              <span style="text-align: center;">
+                <el-input placeholder="设备名和设备类型搜索" v-model="searchNum">
+                  <span slot="suffix">
+                    <i
+                      class="el-icon-search"
+                      @click="search"
+                      style="cursor: pointer; color: rgb(0,0,0)"
+                    ></i>
+                  </span>
+                  <span style="margin-left: 20px;" slot="suffix">
+                    <i
+                      class="el-icon-close"
+                      @click="backHead"
+                      style="cursor: pointer;color: rgb(0,0,0)"
+                    ></i>
+                  </span>
+                </el-input>
+              </span>
+            </div>
           </div>
-          <div v-if="!show">
-            <span style="text-align: center;">
-              <el-input placeholder="设备名和设备类型搜索" v-model="searchNum">
-                <span slot="suffix">
-                  <i
-                    class="el-icon-search"
-                    @click="search"
-                    style="cursor: pointer; color: rgb(0,0,0)"
-                  ></i>
-                </span>
-                <span style="margin-left: 20px;" slot="suffix">
-                  <i
-                    class="el-icon-close"
-                    @click="backHead"
-                    style="cursor: pointer;color: rgb(0,0,0)"
-                  ></i>
-                </span>
-              </el-input>
-            </span>
+          <vue-seamless-scroll
+            :data="deviceList"
+            v-if="scrollShow"
+            :class-option="classOption"
+            class="warp"
+            loop
+          >
+            <ul class="item">
+              <li
+                v-for="(item, index) in deviceList"
+                :key="index"
+                class="liStyle"
+                @click="detail(item)"
+              >
+                <a-row>
+                  <a-col :span="12">
+                    <span class="title1" v-text="item.deviceKey"></span>
+                  </a-col>
+                  <a-col :span="12">
+                    <span class="date" v-text="item.productName"></span>
+                  </a-col>
+                </a-row>
+              </li>
+            </ul>
+          </vue-seamless-scroll>
+          <div v-if="!scrollShow" :data="deviceList" class="warp">
+            <ul class="item">
+              <li
+                v-for="(item, index) in this.deviceList"
+                :key="index"
+                class="liStyle"
+                @click="detail(item)"
+              >
+                <a-row>
+                  <a-col :span="6">
+                    <span class="title1" v-text="item.deviceKey"></span>
+                  </a-col>
+                  <a-col :span="6">
+                    <span class="date" v-text="item.productName"></span>
+                  </a-col>
+                </a-row>
+              </li>
+            </ul>
           </div>
         </div>
-        <vue-seamless-scroll
-          :data="deviceList"
-          v-if="scrollShow"
-          :class-option="classOption"
-          class="warp"
-          loop
-         >
-          <ul class="item">
-            <li
-              v-for="(item, index) in deviceList"
-              :key="index"
-              class="liStyle"
-              @click="detail(item)"
-            >
-              <a-row>
-                <a-col :span="12">
-                  <span
-                    class="title1"
-                    v-text="item.deviceKey"
-                  ></span>
-                </a-col>
-                <a-col :span="12">
-                  <span class="date" v-text="item.productName"></span>
-                </a-col>
-              </a-row>
-            </li>
-          </ul>
-        </vue-seamless-scroll>
-        <div v-if="!scrollShow"   :data="deviceList" class="warp">
-          <ul class="item">
-            <li
-              v-for="(item, index) in this.deviceList"
-              :key="index"
-              class="liStyle"
-              @click="detail(item)"
-            >
-              <a-row>
-                <a-col :span="6">
-                  <span
-                    class="title1"
-                    v-text="item.deviceKey"
-                  ></span>
-                </a-col>
-                <a-col :span="6">
-                  <span class="date" v-text="item.productName"></span>
-                </a-col>
-              </a-row>
-            </li>
-          </ul>
+        <div class="alarm">
+          <div class="title-di">
+            <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
+           报警统计
+          </div>
+          <div id="pie"></div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import vueSeamlessScroll from 'vue-seamless-scroll'
+import vueSeamlessScroll from "vue-seamless-scroll";
 import {
   allProductKey,
   alldeviceKey,
@@ -158,7 +160,7 @@ export default {
     this.prepare();
   },
   components: {
-vueSeamlessScroll
+    vueSeamlessScroll
   },
   data() {
     return {
@@ -291,11 +293,10 @@ vueSeamlessScroll
       show1: false,
       scrollShow: false,
       searchNum: "",
-      date: "",
+      date: ""
     };
   },
   mounted() {
-    
     this.map = new BMap.Map("body2", {
       enableMapClick: false,
       minZoom: 5,
@@ -314,17 +315,17 @@ vueSeamlessScroll
       {
         title: "设备名：1 ",
         point: "104.118821,30.642073",
-        address: "104.118821,30.642073",
+        address: "104.118821,30.642073"
       },
       {
         title: "设备名：2",
         point: "104.000092,30.672099",
-        address: "104.000092,30.672099",
+        address: "104.000092,30.672099"
       },
       {
         title: "设备名：3",
         point: "104.061895,30.556204",
-        address: "104.061895,30.556204",
+        address: "104.061895,30.556204"
       }
     ];
     // 绘制点
@@ -360,33 +361,31 @@ vueSeamlessScroll
       });
       this.allDeviceList();
     },
-    allDeviceList(){
-      this.deviceList  = [];
-   ProductNum().then(res => {
+    allDeviceList() {
+      this.deviceList = [];
+      ProductNum().then(res => {
         // console.log(res.data.productInfo);
         for (var i = 0; i < res.data.productInfo.length; i++) {
           var obj = {
             productName: res.data.productInfo[i].productName,
-            productKey: res.data.productInfo[i].productKey,
-          }
+            productKey: res.data.productInfo[i].productKey
+          };
           this.productList.push(obj);
         }
-         this.deviceList  = [];
+        this.deviceList = [];
         this.productList.forEach(item => {
           ProductOne(item.productKey).then(res => {
             for (var j = 0; j < res.data.deviceInfo.length; j++) {
               var obj = {
                 deviceKey: res.data.deviceInfo[j].deviceKey,
-               productName: item.productName
+                productName: item.productName
               };
               this.deviceList.push(obj);
             }
           });
         });
-  
       });
-             console.log(this.deviceList)
-     
+      console.log(this.deviceList);
     },
     echarts() {
       var chartDom = document.getElementById("body1");
@@ -444,6 +443,45 @@ vueSeamlessScroll
       };
 
       option && myChart.setOption(option);
+
+
+      var chartDom1 = document.getElementById('pie');
+var myChart1= echarts.init(chartDom1);
+var option1;
+
+option1 = {
+  title: {
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: '50%',
+      data: [
+        { value: 0, name: '脱落' },
+        { value: 0, name: '关机' },
+        { value: 0, name: '低电' },
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+
+option1 && myChart1.setOption(option1);
     },
     clickHandler(e) {
       alert(`单击点的坐标为：${e.point.lng}, ${e.point.lat}`);
@@ -509,11 +547,17 @@ vueSeamlessScroll
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
     },
+    viewProduct() {
+ this.$router.push({ path: "/products/index" });
+    },
+    viewDevice() {
+this.$router.push({ path: "/devices/index" });
+    },
     searchOpen() {
       // this.allDeviceList();
       this.show = !this.show;
-       this.deviceList =  this.deviceList.splice(0,17)
-      console.log(this.deviceList)
+      this.deviceList = this.deviceList.slice(0,this.deviceNum);
+      console.log(this.deviceList);
       this.scrollShow = false;
     },
     reset() {
@@ -535,21 +579,17 @@ vueSeamlessScroll
           searchList.push(this.deviceList[i]);
         }
       }
-     
+
       this.deviceList = searchList;
-      console.log(this.deviceList)
+      console.log(this.deviceList);
     },
     //搜索框的切换成head
     backHead() {
-      
       this.searchNum = "";
-        this.allDeviceList();
-       this.deviceList =  this.deviceList.splice(0,17)
-       console.log(this.deviceList)
-        console.log
+      console.log(this.deviceList);
+      console.log;
       this.show = true;
-      this.scrollShow = true;
-   
+      this.scrollShow = false
     },
     //将时间改成常见格式
     timer() {
@@ -681,27 +721,42 @@ h2 {
   margin-left: 10px;
   width: 25%;
   box-sizing: border-box;
+}
+.list {
+  height: 40vh;
   border: 2px solid #212c4d;
 }
+.alarm
+{
+  margin-top: 13px;
+height: 44vh;
+  border: 2px solid #212c4d;
+}
+#pie {
+  margin-top: 10px;
+  height: 86%;
+  width: 100%;
+  /* background-color: rgb(203, 116, 116); */
+}
 .warp {
-  height: 93%;
+  height: 86%;
   width: 100%;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: auto;
 }
-.warp  ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-  }
-  ul li {
-     display: block;
-        height: 30px;
-        line-height: 30px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 15px;
-  }
+.warp ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+ul li {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
 .item {
   position: relative;
   font-size: 18px;
@@ -710,13 +765,13 @@ h2 {
   color: #81a5ab;
 }
 .item .title1 {
- position: absolute;
- left: 10%;
+  position: absolute;
+  left: 10%;
 }
 
 .item .date {
- position: absolute;
- left: 70%;
+  position: absolute;
+  left: 70%;
 }
 
 /* .static {
@@ -730,4 +785,8 @@ h2 {
   background-color: rgba(255, 255, 255, 0.4);
   transition: all 0.4s ease-in-out;
 }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
 </style>
