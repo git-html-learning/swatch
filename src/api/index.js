@@ -50,7 +50,6 @@ export async function ProductOne(payload) {
   return await request({
     url: '/api/v1/productDetail',
     method: 'get',
-
     params: {
       "productKey": payload
     }
@@ -396,5 +395,32 @@ export function AlertTime(payload) {
       "endTime": parseInt(payload.end / 1000),
       "interval": payload.interval
     }
+  })
+}
+
+//获取全部的productKey
+export function allProductKey(data) {
+  return request({
+    url: '/api/v1/productKeys',
+    method: 'get',
+    data
+  })
+}
+
+//获取全部的deviceKey
+export function alldeviceKey(data) {
+  return request({
+    url: '/api/v1/deviceKeys',
+    method: 'get',
+    data
+  })
+}
+
+//获取当前用户设备状态信息统计
+export function allDeviceStatus(data) {
+  return request({
+    url: 'api/v1/allStatus?timeout=7200',   //目前离线时间定为两小时
+    method: 'get',
+    data
   })
 }

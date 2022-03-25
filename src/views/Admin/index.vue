@@ -3,7 +3,7 @@
     <el-card :body-style="{ padding: '10px', height: '100%' }">
       <div slot="header">
         <el-row type="flex" justify="">
-          <el-col :span="23"> <span>个人中心</span></el-col>
+          <el-col :span="23"> <span>个人信息与更新</span></el-col>
           <el-col :span="1">
             <el-button
               type="primary"
@@ -18,15 +18,9 @@
       </div>
       <div class="tab">
 
-        <el-tabs
-          tab-position="left"
-          @tab-click="tab"
-          style="height: 100%; overflow: auto"
-          :value="activeName"
-        >
-          <el-tab-pane label="用户资料" name="user"><user /></el-tab-pane>
+   <user />
           
-        </el-tabs>
+
       </div>
     </el-card>
   </div>
@@ -85,10 +79,12 @@ export default {
 <style lang="less" scoped>
 .content {
   margin: 10px;
-  height: 100%;
+  height: 90%;
   .tab {
     height: 80vh;
     overflow: auto;
+    margin-top: 30px;
+margin-left: 23%;
   }
 }
 .fade-enter-active,

@@ -1,13 +1,13 @@
 <template>
-  <div class="content">
-    
+  <el-card class="content"> 
         <el-form
           ref="userData"
-          label-position="top"
+          label-position="right"
           :rules="rules"
           label-width="80px"
           :model="userData"
-        >
+          class = "form"
+            >
           <el-form-item :label="user.username" prop="password">
             <el-input disabled v-model="userData.username" clearable></el-input>
           </el-form-item>
@@ -36,7 +36,7 @@
           </el-form-item>
           <el-form-item :label="user.userAddress">
             <el-row :gutter="6">
-              <el-col :span="8">
+              <el-col :span="7">
                 <el-select
                   v-model="userData.userAddress.province"
                   placeholder="省份"
@@ -79,6 +79,7 @@
                   >
                   </el-option> </el-select
               ></el-col>
+              <img src="@/assets/img/清空.png" @click = "empty" alt="清空">
             </el-row>
           </el-form-item>
           <el-form-item :label="user.addressDetail">
@@ -106,7 +107,7 @@
             >
           </el-form-item>
         </el-form>
-  </div>
+  </el-card>
 </template>
 
 
@@ -136,23 +137,30 @@ export default {
     };
     var validateEmail = (rule, value, callback) => {
       var email = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-      if (!email.test(value)) {
+      if (value == "") {
+        callback();
+      }
+       else if (!email.test(value)) {
         callback(new Error("输入的邮箱格式不正确"));
-      } else {
+      } 
+      else  {
         callback();
       }
     };
     var validatePhone = (rule, value, callback) => {
       var phone = /^1[3-9]\d{9}$/;
-      if (!phone.test(value)) {
+      if (value == "") {
+        callback();
+      }
+     else if (!phone.test(value)) {
         callback(new Error("输入的手机格式不正确"));
-      } else {
+      } 
+      else {
         callback();
       }
     };
     return {
       showcheck: false,
-
       userData: {
         checkpassword: "",
         userAddress: {
@@ -203,6 +211,15 @@ export default {
       //这个是为了验证密码
       this.$set(this.userData, "checkpassword", "");
     },
+    //省市区数据清空
+    empty() {
+      this.userData.userAddress =  {
+    province: "",
+          city: "",
+          county: "",
+      }
+// console.log("清空")
+    },
     selectCity(val) {
       var city = this.cityData.find((val) => {
         return val.label == this.userData.userAddress.province;
@@ -214,6 +231,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         console.log(valid);
+        // console.log(this.userData)
         if (valid) {
           var res = await EditUser(this.userData);
           if (res.code == 200) {
@@ -240,11 +258,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content{
-  width: 30%;
+  width: 70%;
+  min-height: 200px;
+  text-align: center;
+  .form {
+    padding: 30px;
+  }
 }
 @media (max-width: 768px)  {
 .content{
-  width: 90%;
+  width: 80%;
 }
 }
 </style>

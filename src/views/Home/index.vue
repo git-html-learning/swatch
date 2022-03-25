@@ -2,14 +2,10 @@
   <div class="layout">
     <div class="title title-bg">
       <span style="position: absolute; left: 49%;">海工智能</span>
-      <!-- 点击触发报警，用于测试，有接口之后监视接口报警 -->
-      <span style="position: absolute; left: 75%">
-        <a-icon type="bell" @click="openBell" style="cursor: pointed" />
-      </span>
       <span style="position: absolute;left:80%; font-size: 15px;">{{date}}</span>
       <span>
         <el-tooltip>
-        <div slot="content">全局刷新</div>
+          <div slot="content">全局刷新</div>
           <img
             src="@/assets/img/刷新.png"
             style="position: absolute; left: 95%; margin-top: 10px; cursor: pointer;"
@@ -29,18 +25,18 @@
           <div class="body">
             <el-row type="flex" justify>
               <el-col :span="4" :offset="2">
-                <img src="@/assets/img/用户.png" style="margin-top: 50px" alt />
+                <img src="@/assets/img/手环.png" style="margin-top: 50px" alt />
               </el-col>
               <el-col :span="6">
-                <h2 style="margin-top: 50px;">0</h2>
-                <p style="font-size: 10px;">全部用户</p>
+                <h2 style="margin-top: 50px; color: #71919a;">{{productNum}}</h2>
+                <p style="font-size: 13px; color: #71919a;">全部产品</p>
               </el-col>
               <el-col :span="4" :offset="2">
-                <img src="@/assets/img/手环.png" alt style="margin-top: 50px;" />
+                <img src="@/assets/img/设备.png" style="margin-top: 60px;" alt />
               </el-col>
               <el-col :span="6">
-                <h2 style="margin-top: 50px;">131</h2>
-                <p style="font-size: 10px;">全部产品</p>
+                <h2 style="margin-top: 50px; color: #71919a;">{{deviceNum}}</h2>
+                <p style="font-size: 13px; color: #71919a;">全部设备</p>
               </el-col>
             </el-row>
           </div>
@@ -57,48 +53,51 @@
         <div id="body2"></div>
       </div>
       <div class="right">
+      
         <div class="title-di">
           <div v-if="show">
             <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
             设备列表
-            <span  @click = "showDetail" style = "margin-left: 10px;
-             font-size: 12px; color: #0493da; cursor: pointer">设备详情</span>
+            <span
+              @click="showDetail"
+              style="margin-left: 10px;
+             font-size: 12px; color: #0493da; cursor: pointer"
+            >设备详情</span>
             <span style="float: right; margin-right: 10px; ">
               <img src="@/assets/img/搜索.png" @click="searchOpen" alt />
             </span>
           </div>
           <div v-if="!show">
             <span style="text-align: center;">
-              <el-input placeholder="设备号或姓名搜索" v-model="searchNum">
-               <span slot = "suffix">
-      <i class = "el-icon-search" @click="search" style = "cursor: pointer; color: rgb(0,0,0)"></i>
-                  <!-- <i class = "el-icon-close" @click="backHead" style = "cursor: pointed;color: rgb(0,0,0)"></i> -->
-               </span>
-                   <span style  = "margin-left: 20px;" slot = "suffix">
-      <!-- <i class = "el-icon-search" @click="search" style = "cursor: pointed; color: rgb(0,0,0)"></i> -->
-                  <i class = "el-icon-close" @click="backHead" style = "cursor: pointer;color: rgb(0,0,0)"></i>
-               </span>
-    
-            
-                  
-                  <!-- <a-icon type="search" @click="search" /> -->
-                  <!-- <span style="margin-left: 15px;">
-                    <a-icon type="close" @click="backHead" />
-                  </span> -->
+              <el-input placeholder="设备名和设备类型搜索" v-model="searchNum">
+                <span slot="suffix">
+                  <i
+                    class="el-icon-search"
+                    @click="search"
+                    style="cursor: pointer; color: rgb(0,0,0)"
+                  ></i>
+                </span>
+                <span style="margin-left: 20px;" slot="suffix">
+                  <i
+                    class="el-icon-close"
+                    @click="backHead"
+                    style="cursor: pointer;color: rgb(0,0,0)"
+                  ></i>
+                </span>
               </el-input>
             </span>
           </div>
         </div>
         <vue-seamless-scroll
-          :data="listData"
+          :data="deviceList"
           v-if="scrollShow"
           :class-option="classOption"
           class="warp"
-          ref="seamlessScroll"
-        >
+          loop
+         >
           <ul class="item">
             <li
-              v-for="(item, index) in listData"
+              v-for="(item, index) in deviceList"
               :key="index"
               class="liStyle"
               @click="detail(item)"
@@ -107,35 +106,33 @@
                 <a-col :span="12">
                   <span
                     class="title1"
-                    style="position: absolute; left: 9%;"
-                    v-text="item.deviceNum"
+                    v-text="item.deviceKey"
                   ></span>
                 </a-col>
                 <a-col :span="12">
-                  <span class="date" style="position: absolute; left: 60%;" v-text="item.name"></span>
+                  <span class="date" v-text="item.productName"></span>
                 </a-col>
               </a-row>
             </li>
           </ul>
         </vue-seamless-scroll>
-        <div v-if="!scrollShow" class="warp static">
+        <div v-if="!scrollShow"   :data="deviceList" class="warp">
           <ul class="item">
             <li
-              v-for="(item, index) in this.listData"
+              v-for="(item, index) in this.deviceList"
               :key="index"
               class="liStyle"
               @click="detail(item)"
             >
               <a-row>
-                <a-col :span="12">
+                <a-col :span="6">
                   <span
                     class="title1"
-                    style="position: absolute; left: 9%;"
-                    v-text="item.deviceNum"
+                    v-text="item.deviceKey"
                   ></span>
                 </a-col>
-                <a-col :span="12">
-                  <span class="date" style="position: absolute; left: 60%;" v-text="item.name"></span>
+                <a-col :span="6">
+                  <span class="date" v-text="item.productName"></span>
                 </a-col>
               </a-row>
             </li>
@@ -146,42 +143,31 @@
   </div>
 </template>
 <script>
-const clickoutside = {
-  // 初始化指令
-  bind(el, binding, vnode) {
-    function documentHandler(e) {
-      // 这里判断点击的元素是否是本身，是本身，则返回
-      if (el.contains(e.target)) {
-        return false;
-      }
-      // 判断指令中是否绑定了函数
-      if (binding.expression) {
-        // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
-        binding.value(e);
-      }
-    }
-    // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
-    el.__vueClickOutside__ = documentHandler;
-    document.addEventListener("click", documentHandler);
-  },
-  unbind(el, binding) {
-    // 解除事件监听
-    document.removeEventListener("click", el.__vueClickOutside__);
-    delete el.__vueClickOutside__;
-  }
-};
+  import vueSeamlessScroll from 'vue-seamless-scroll'
+import {
+  allProductKey,
+  alldeviceKey,
+  allDeviceStatus,
+  ProductNum,
+  ProductOne
+} from "@/api/index";
 import * as echarts from "echarts";
 export default {
   name: "key16",
-  directives: { clickoutside },
   created() {
-    this.$nextTick(function() {
-      this.echarts();
-    });
+    this.prepare();
   },
-  mounted() {},
+  components: {
+vueSeamlessScroll
+  },
   data() {
     return {
+      productNum: "暂无数据", //  产品数量
+      productList: [], //产品key的列表
+      deviceList: [],
+      deviceNum: "暂无数据", //设备数量
+      onlineNum: "", //在线设备数量
+      offlineNum: "", //离线设备数量
       point: [],
       center: { lng: 104.082684, lat: 30.656319 }, // 中心点坐标
       zoom: 10,
@@ -303,12 +289,13 @@ export default {
       },
       show: true,
       show1: false,
-      scrollShow: true,
+      scrollShow: false,
       searchNum: "",
-      date: ""
+      date: "",
     };
   },
   mounted() {
+    
     this.map = new BMap.Map("body2", {
       enableMapClick: false,
       minZoom: 5,
@@ -325,22 +312,19 @@ export default {
     this.map.enableScrollWheelZoom(true);
     var markerArr = [
       {
-        title: "名称：锦江区门诊部",
+        title: "设备名：1 ",
         point: "104.118821,30.642073",
-        address: "成都市锦江区通源街188号",
-        tel: "028-86712080"
+        address: "104.118821,30.642073",
       },
       {
-        title: "名称：青羊区门诊部",
+        title: "设备名：2",
         point: "104.000092,30.672099",
-        address: "成都市青羊区春晓路15号 ",
-        tel: "028-81067120"
+        address: "104.000092,30.672099",
       },
       {
-        title: "名称：高新区门诊部",
+        title: "设备名：3",
         point: "104.061895,30.556204",
-        address: "成都市高新区益州大道中段和天府二街交叉口复城国际T3-2号",
-        tel: "028-81067120"
+        address: "104.061895,30.556204",
       }
     ];
     // 绘制点
@@ -361,6 +345,49 @@ export default {
     }
   },
   methods: {
+    prepare() {
+      allProductKey().then(res => {
+        this.productNum = res.data.productKeys.length;
+        alldeviceKey().then(res => {
+          this.deviceNum = res.data.deviceKeys.length;
+          allDeviceStatus().then(res => {
+            // console.log(res);
+            this.onlineNum = res.data.status.online;
+            this.offlineNum = res.data.status.offline;
+            this.echarts();
+          });
+        });
+      });
+      this.allDeviceList();
+    },
+    allDeviceList(){
+      this.deviceList  = [];
+   ProductNum().then(res => {
+        // console.log(res.data.productInfo);
+        for (var i = 0; i < res.data.productInfo.length; i++) {
+          var obj = {
+            productName: res.data.productInfo[i].productName,
+            productKey: res.data.productInfo[i].productKey,
+          }
+          this.productList.push(obj);
+        }
+         this.deviceList  = [];
+        this.productList.forEach(item => {
+          ProductOne(item.productKey).then(res => {
+            for (var j = 0; j < res.data.deviceInfo.length; j++) {
+              var obj = {
+                deviceKey: res.data.deviceInfo[j].deviceKey,
+               productName: item.productName
+              };
+              this.deviceList.push(obj);
+            }
+          });
+        });
+  
+      });
+             console.log(this.deviceList)
+     
+    },
     echarts() {
       var chartDom = document.getElementById("body1");
       var myChart = echarts.init(chartDom);
@@ -392,20 +419,20 @@ export default {
           {
             data: [
               {
-                value: 200,
+                value: this.deviceNum,
                 itemStyle: {
                   color: "#0092fe"
                 }
               },
 
               {
-                value: 150,
+                value: this.onlineNum,
                 itemStyle: {
                   color: "#2abe80"
                 }
               },
               {
-                value: 50,
+                value: this.offlineNum,
                 itemStyle: {
                   color: "#ff432d"
                 }
@@ -483,12 +510,11 @@ export default {
       return openInfoWinFun;
     },
     searchOpen() {
+      // this.allDeviceList();
       this.show = !this.show;
+       this.deviceList =  this.deviceList.splice(0,17)
+      console.log(this.deviceList)
       this.scrollShow = false;
-    },
-    handleClose() {
-      this.show = true;
-      this.searchNum = "";
     },
     reset() {
       console.log("全局刷新");
@@ -499,27 +525,31 @@ export default {
     },
     //搜索
     search() {
-      //在之前要加上重新获取设备的接口
-      console.log("搜索");
       var searchList = [];
-      console.log(searchList);
-      console.log(this.searchNum);
-      for (var i = 0; i < this.listData.length; i++) {
+      for (var i = 0; i < this.deviceList.length; i++) {
         if (
-          this.listData[i].deviceNum.indexOf(this.searchNum) !== -1 ||
-          this.listData[i].deviceNum.indexOf(this.name) !== -1
+          this.deviceList[i].deviceKey.indexOf(this.searchNum) !== -1 ||
+          this.deviceList[i].productName.indexOf(this.searchNum) !== -1
         ) {
-          console.log(this.listData[i]);
-          searchList.push(this.listData[i]);
+          // console.log(this.deviceList[i]);
+          searchList.push(this.deviceList[i]);
         }
       }
-      this.listData = searchList;
+     
+      this.deviceList = searchList;
+      console.log(this.deviceList)
     },
     //搜索框的切换成head
     backHead() {
-      //切换的时候要加上获取设备列表的接口
+      
+      this.searchNum = "";
+        this.allDeviceList();
+       this.deviceList =  this.deviceList.splice(0,17)
+       console.log(this.deviceList)
+        console.log
       this.show = true;
       this.scrollShow = true;
+   
     },
     //将时间改成常见格式
     timer() {
@@ -559,20 +589,13 @@ export default {
         seconds;
     },
     allReset() {
-      console.log("全局刷新");
+      // console.log("全局刷新");
+      this.prepare();
     },
-    openBell() {
-      this.$popup({
-        btnText: "确定",
-        click: () => {
-          // 点击按钮事件
-          //   this.$router.push('……')
-          console.log("点击按钮了！");
-        }
-      });
-    },
+
     showDetail() {
-console.log("进入详情页")
+      console.log("进入详情页");
+      this.$router.push({ path: "/devices/index" });
     }
   }
 };
@@ -580,7 +603,6 @@ console.log("进入详情页")
 
 
 <style scoped>
-
 .layout {
   min-height: 95vh;
   width: 103%;
@@ -662,21 +684,44 @@ h2 {
   border: 2px solid #212c4d;
 }
 .warp {
-  position: relative;
   height: 93%;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
+.warp  ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+  }
+  ul li {
+     display: block;
+        height: 30px;
+        line-height: 30px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 15px;
+  }
 .item {
+  position: relative;
   font-size: 18px;
   color: #fff;
   margin-top: 10px;
   color: #81a5ab;
 }
-.static {
-  overflow: auto;
+.item .title1 {
+ position: absolute;
+ left: 10%;
 }
+
+.item .date {
+ position: absolute;
+ left: 70%;
+}
+
+/* .static {
+  overflow: auto;
+} */
 .liStyle {
   cursor: pointer;
   /* list-style:none; */
