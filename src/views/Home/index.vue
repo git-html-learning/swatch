@@ -88,32 +88,7 @@
               </span>
             </div>
           </div>
-          <vue-seamless-scroll
-            :data="deviceList"
-            v-if="scrollShow"
-            :class-option="classOption"
-            class="warp"
-            loop
-          >
-            <ul class="item">
-              <li
-                v-for="(item, index) in deviceList"
-                :key="index"
-                class="liStyle"
-                @click="detail(item)"
-              >
-                <a-row>
-                  <a-col :span="12">
-                    <span class="title1" v-text="item.deviceKey"></span>
-                  </a-col>
-                  <a-col :span="12">
-                    <span class="date" v-text="item.productName"></span>
-                  </a-col>
-                </a-row>
-              </li>
-            </ul>
-          </vue-seamless-scroll>
-          <div v-if="!scrollShow" :data="deviceList" class="warp">
+          <div :data="deviceList" class="warp">
             <ul class="item">
               <li
                 v-for="(item, index) in this.deviceList"
@@ -291,7 +266,6 @@ export default {
       },
       show: true,
       show1: false,
-      scrollShow: false,
       searchNum: "",
       date: ""
     };
@@ -363,6 +337,7 @@ export default {
     },
     allDeviceList() {
       this.deviceList = [];
+      this.productList = [];
       ProductNum().then(res => {
         // console.log(res.data.productInfo);
         for (var i = 0; i < res.data.productInfo.length; i++) {
@@ -372,7 +347,6 @@ export default {
           };
           this.productList.push(obj);
         }
-        this.deviceList = [];
         this.productList.forEach(item => {
           ProductOne(item.productKey).then(res => {
             for (var j = 0; j < res.data.deviceInfo.length; j++) {
@@ -558,7 +532,6 @@ this.$router.push({ path: "/devices/index" });
       this.show = !this.show;
       this.deviceList = this.deviceList.slice(0,this.deviceNum);
       console.log(this.deviceList);
-      this.scrollShow = false;
     },
     reset() {
       console.log("全局刷新");
@@ -589,7 +562,6 @@ this.$router.push({ path: "/devices/index" });
       console.log(this.deviceList);
       console.log;
       this.show = true;
-      this.scrollShow = false
     },
     //将时间改成常见格式
     timer() {
@@ -629,7 +601,6 @@ this.$router.push({ path: "/devices/index" });
         seconds;
     },
     allReset() {
-      // console.log("全局刷新");
       this.prepare();
     },
 
@@ -723,13 +694,13 @@ h2 {
   box-sizing: border-box;
 }
 .list {
-  height: 40vh;
+  height: 28vh;
   border: 2px solid #212c4d;
 }
 .alarm
 {
   margin-top: 13px;
-height: 44vh;
+height: 56vh;
   border: 2px solid #212c4d;
 }
 #pie {

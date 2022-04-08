@@ -1,32 +1,20 @@
 <template>
   <div class="mixin-components-container">
-
     <!-- :visible指的是属性绑定，表示弹框的显示隐藏 -->
     <!-- viewMoreproduct的值为true时，弹框显示，false弹框隐藏 -->
     <!-- .sync是同步动态双向的来表示visible的值,关闭窗口的时候，弹框隐藏了，visible的值发生了变化 -->
     <!-- visible.sync的原理，用于子组件修改父组件中的值，实现双向绑定功能。 -->
-    <el-dialog
-      :title="diglogTitle"
-      :visible.sync="viewMoreproduct"
-      :before-close="detailproduct"
-    
-    >
-    <!-- before-close：关闭前的回调，会暂停 Dialog 的关闭 -->
+    <el-dialog :title="diglogTitle" :visible.sync="viewMoreproduct" :before-close="detailproduct">
+      <!-- before-close：关闭前的回调，会暂停 Dialog 的关闭 -->
 
-      <product-detail
-        @beforeClose="closeDialog"
-        :condition="condition"
-        :productdetail="detail"
-      />
+      <product-detail @beforeClose="closeDialog" :condition="condition" :productdetail="detail" />
     </el-dialog>
     <el-row>
       <el-card class="box-card">
         <!-- Card 组件包括header和body部分，header部分需要有显式具名 slot 分发，同时也是可选的。 -->
         <div slot="header" style="margin-bottom: 50px">
           <el-col :span="3" class="text-center">
-            <router-link class="pan-btn blue-btn" to="/product/createProduct"
-              >创建产品</router-link
-            >
+            <router-link class="pan-btn blue-btn" to="/product/createProduct">创建手环</router-link>
           </el-col>
         </div>
         <!-- data绑定的数据是搜索筛选的数据 -->
@@ -51,15 +39,10 @@
             element-loading-text="数据加载中"
             element-loading-spinner="el-icon-loading"
           >
-              <!-- 搜索设备名 -->
-            <el-table-column
-              align="center"
-              min-width="30"
-              prop="productName"
-              label="设备名称"
-            >
+            <!-- 搜索设备名 -->
+            <el-table-column align="center" min-width="30" prop="productName" label="设备名称">
               <template slot="header" slot-scope="scope">
-                 <!-- 不点击显示产品名称，搜索框绑定一个点击事件，点击一下，show变成false -->
+                <!-- 不点击显示产品名称，搜索框绑定一个点击事件，点击一下，show变成false -->
                 <div v-show="show">
                   <el-row type="flex" justify="center">
                     <el-col :span="23">产品名称</el-col>
@@ -143,16 +126,23 @@
 </template>
 
 <script>
-import { Delete_product, ProductNum } from "@/api/index";
+import {
+  Delete_product,
+  ProductNum,
+  cloudDevcieDelete,
+  allProductKey,
+  ProductOne
+} from "@/api/index";
 import productDetail from "./productDetail";
 export default {
   name: "product",
   components: {
-    productDetail,
+    productDetail
   },
   data() {
     return {
       productList: [],
+      productNameList: [],
       loadingtext: "数据加载中",
 
       loading: true,
@@ -166,89 +156,125 @@ export default {
       product: {
         protocolType: "接入类型",
         productType: "产品类型",
-        typeIdentify: "产品识别符",
+        typeIdentify: "产品识别符"
       },
       currentPage: 1,
       // currentPage 初始页
       pageSize: 10,
       // 每页的数据
-      DeleteKey: { productKey: "", productKey: "" },
+      DeleteKey: { productKey: "" },
+      deleteId: ""
+      //用于设备注册的7个数据
     };
   },
   computed: {
     total() {
       return this.productList.filter(
-        (data) =>
+        data =>
           !this.search ||
           data.productName.toLowerCase().includes(this.search.toLowerCase())
       ).length;
-    },
+    }
   },
   created() {
     // this.$store.dispatch("productNum");
     this.products();
   },
-// vue 网页loading加载状态
+  // vue 网页loading加载状态
 
-// 在提交按钮上加入                  :loading="loading"（注意前面有冒号）
+  // 在提交按钮上加入                  :loading="loading"（注意前面有冒号）
 
-// 在return下加入                       loading: false, 先声明一下
+  // 在return下加入                       loading: false, 先声明一下
 
-// 在刚进入提交方法时              this.loading = true    开始启动加载状态
+  // 在刚进入提交方法时              this.loading = true    开始启动加载状态
 
-// 当提交之后完成加载状态       this.loading = false
+  // 当提交之后完成加载状态       this.loading = false
 
   methods: {
     products() {
-      this.productList = this.$store.state.other.productNums;
-      console.log(this.productList);
-      
+      // console.log(this.$store.state.other.productNums)
+      // this.productList = this.$store.state.other.productNums;
+
       if (this.productList.length != 0) {
         this.loading = false;
       }
-      ProductNum().then((res) => {
-        if (res.code == 200) {
-          this.productList = res.data.productInfo;
+      //扩充productList的内容，使其包含device的内容
+      // ProductNum().then((res) => {
+      //   if (res.code == 200) {
+      //     this.productList = res.data.productInfo;
+      //     console.log(this.productList);
+      //     this.loading = false;
+      //   }
+      // });
+      // 1. 获取所有pk
+      allProductKey().then(res => {
+        // console.log(res)
+        if (res.msg == "ok") {
+          this.productNameList = res.data.productKeys;
+          // console.log(this.productNameList)
+          this.productList = [];
+          //2. 每一个产品的详细信息
+          this.productNameList.forEach(item => {
+            // console.log(item)
+            ProductOne(item).then(res => {
+              // console.log(res)
+              this.productList.push(res.data);
+            });
+          });
+          console.log(this.productList);
           this.loading = false;
+        } else {
+          this.$message.error(res.msg);
         }
       });
     },
 
-
-
     deleteproduct(index, row, rows) {
       this.DeleteKey.productKey = row.productKey;
-      this.DeleteKey.productKey = row.productKey;
+      this.deleteId = row.extraInfo.DeviceId;
+      // console.log(this.DeleteKey)
+      // console.log(this.deleteId)
       this.$confirm("此操作将永久删除该产品, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning",
+        type: "warning"
       })
         .then(() => {
           rows.splice(index, 1);
-          Delete_product(this.DeleteKey).then((res) => {
-            if (res.code == 200) {
-              this.$message({
-                type: "success",
-                message: "删除成功!",
-              });
-              this.products();
+          cloudDevcieDelete(this.deleteId).then(res => {
+            console.log(res);
+            if (res.msg == "ok") {
+              console.log("ok");
             } else {
               this.$message({
-                type: "info",
-                message: res.msg,
+                type: "error",
+                message: res.msg
               });
             }
+            Delete_product(this.DeleteKey).then(res => {
+              if (res.code == 200) {
+                this.$message({
+                  type: "success",
+                  message: "删除成功!"
+                });
+                this.products();
+              } else {
+                this.$message({
+                  type: "info",
+                  message: res.msg
+                });
+              }
+            });
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除",
+            message: "已取消删除"
           });
         });
     },
-    
+
     // 打开弹窗
     detailproduct(val) {
       this.condition = 0;
@@ -266,7 +292,7 @@ export default {
       this.viewMoreproduct = !this.viewMoreproduct;
     },
 
-     // size-change	pageSize 改变时会触发	每页条数size
+    // size-change	pageSize 改变时会触发	每页条数size
     // current-change	currentPage 改变时会触发	当前页currentPage
 
     handleSizeChange(val) {
@@ -274,8 +300,8 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -99,7 +99,7 @@ export function inquire_device(payload) {
 
 
 // 创建设备
-export function CreateDevice(payload) {
+export function CreateDevice(productKey,payload) {
   return request({
     url: '/api/v1/device',
     method: 'post',
@@ -108,7 +108,7 @@ export function CreateDevice(payload) {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     params: {
-      "productKey": payload.productKey
+      "productKey": productKey
     },
     data: {
       "deviceName": payload.deviceName,
@@ -422,5 +422,22 @@ export function allDeviceStatus(data) {
     url: 'api/v1/allStatus?timeout=7200',   //目前离线时间定为两小时
     method: 'get',
     data
+  })
+}
+
+
+//电信云注册设备
+export function cloudDevcieRegister(simId,deviceType,deviceName) {
+  return request({
+    url: 'http://dianxinzhuce.ahusmart.com/register?simId='+simId+'&deviceType='+deviceType+'&deviceName='+deviceName,   
+    method: 'get',
+  })
+}
+
+//电信云删除设备
+export function cloudDevcieDelete(deviceId) {
+  return request({
+    url: 'http://dianxinzhuce.ahusmart.com/delete?DeviceId='+deviceId,   
+    method: 'delete',
   })
 }

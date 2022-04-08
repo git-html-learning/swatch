@@ -82,20 +82,20 @@ export const constantRoutes = [
       }
     }, ]
   },
-
-  {
-    path: '/devices',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'Device',
-      component: () => import('@/views/Device/index'),
-      meta: {
-        title: '设备管理',
-        icon: '设备'
-      }
-    }]
-  },
+  
+  // {
+  //   path: '/devices',
+  //   component: Layout,
+  //   children: [{
+  //     path: 'index',
+  //     name: 'Device',
+  //     component: () => import('@/views/Device/index'),
+  //     meta: {
+  //       title: '设备管理',
+  //       icon: '设备'
+  //     }
+  //   }]
+  // },
   {
     path: '/fence',
     component: Layout,
