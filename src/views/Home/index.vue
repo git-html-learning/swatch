@@ -58,11 +58,11 @@
             <div v-if="show">
               <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
               设备列表
-              <span
+              <!-- <span
                 @click="showDetail"
                 style="margin-left: 10px;
              font-size: 12px; color: #0493da; cursor: pointer"
-              >设备详情</span>
+              >设备详情</span> -->
               <span style="float: right; margin-right: 10px; ">
                 <img src="@/assets/img/搜索.png" @click="searchOpen" alt />
               </span>
@@ -146,10 +146,10 @@ export default {
       onlineNum: "", //在线设备数量
       offlineNum: "", //离线设备数量
       point: [],
-      center: { lng: 104.082684, lat: 30.656319 }, // 中心点坐标
-      zoom: 10,
+      center: { lng: 117.183992, lat: 31.77341 }, // 中心点坐标
+      zoom: 12,
       mapStyle: {
-        style: "midnight"
+        style: "light"
       },
       listData: [
         {
@@ -274,7 +274,7 @@ export default {
     this.map = new BMap.Map("body2", {
       enableMapClick: false,
       minZoom: 5,
-      maxZoom: 15
+      maxZoom: 20
     });
     // 设置中心点坐标和地图级别
     this.map.centerAndZoom(
@@ -287,20 +287,20 @@ export default {
     this.map.enableScrollWheelZoom(true);
     var markerArr = [
       {
-        title: "设备名：1 ",
-        point: "104.118821,30.642073",
-        address: "104.118821,30.642073"
+        title: "当前设备位置",
+        point: "117.183992,31.77341",
+        address: "(117.183992,31.77341)"
       },
-      {
-        title: "设备名：2",
-        point: "104.000092,30.672099",
-        address: "104.000092,30.672099"
-      },
-      {
-        title: "设备名：3",
-        point: "104.061895,30.556204",
-        address: "104.061895,30.556204"
-      }
+      // {
+      //   title: "设备名：2",
+      //   point: "104.000092,30.672099",
+      //   address: "104.000092,30.672099"
+      // },
+      // {
+      //   title: "设备名：3",
+      //   point: "104.061895,30.556204",
+      //   address: "104.061895,30.556204"
+      // }
     ];
     // 绘制点
     for (var i = 0; i < markerArr.length; i++) {
@@ -385,8 +385,8 @@ export default {
           type: "value"
         },
         textStyle: {
-          fontSize: 15,
-          color: "#fff"
+          fontSize: 18,
+          color: "#81a5ab"
         },
         series: [
           {
@@ -394,7 +394,7 @@ export default {
               {
                 value: this.deviceNum,
                 itemStyle: {
-                  color: "#0092fe"
+                  color: "#62a0e6"
                 }
               },
 
@@ -407,7 +407,7 @@ export default {
               {
                 value: this.offlineNum,
                 itemStyle: {
-                  color: "#ff432d"
+                  color: "#c63635"
                 }
               }
             ],
@@ -558,6 +558,7 @@ this.$router.push({ path: "/devices/index" });
     },
     //搜索框的切换成head
     backHead() {
+      this.allDeviceList();
       this.searchNum = "";
       console.log(this.deviceList);
       console.log;
@@ -604,10 +605,10 @@ this.$router.push({ path: "/devices/index" });
       this.prepare();
     },
 
-    showDetail() {
-      console.log("进入详情页");
-      this.$router.push({ path: "/devices/index" });
-    }
+    // showDetail() {
+    //   console.log("进入详情页");
+    //   this.$router.push({ path: "/devices/index" });
+    // }
   }
 };
 </script>
@@ -617,13 +618,13 @@ this.$router.push({ path: "/devices/index" });
 .layout {
   min-height: 95vh;
   width: 103%;
-  background-color: #0c102e;
+  background-color: #fff;
 }
 .title {
   height: 60px;
   line-height: 60px;
-  font-size: 23px;
-  color: #e9c29d;
+  font-size: 26px;
+  color: #a28970;
 }
 .title-bg {
   background: url("~@/assets/img/titlebg.png") no-repeat;
@@ -637,7 +638,7 @@ this.$router.push({ path: "/devices/index" });
   /* background-color: #fff; */
 }
 .statistic {
-  border: 2px solid #212c4d;
+  border: 2px solid #b6bdd2;
   min-height: 100px;
   margin-top: 10px;
 }
@@ -677,7 +678,7 @@ h2 {
   width: 41%;
   float: left;
   margin-left: 10px;
-  border: 2px solid #212c4d;
+  border: 2px solid #b6bdd2;
   /* background-color: rgb(145, 69, 69); */
 }
 #body2 {
@@ -687,7 +688,7 @@ h2 {
 }
 .right {
   float: left;
-  height: 86vh;
+  height: 80vh;
   margin-top: 10px;
   margin-left: 10px;
   width: 25%;
@@ -695,13 +696,13 @@ h2 {
 }
 .list {
   height: 28vh;
-  border: 2px solid #212c4d;
+  border: 2px solid #b6bdd2;
 }
 .alarm
 {
   margin-top: 13px;
 height: 56vh;
-  border: 2px solid #212c4d;
+  border: 2px solid #b6bdd2;
 }
 #pie {
   margin-top: 10px;
@@ -710,7 +711,7 @@ height: 56vh;
   /* background-color: rgb(203, 116, 116); */
 }
 .warp {
-  height: 86%;
+  height: 80%;
   width: 100%;
   margin: 0 auto;
   overflow: auto;
