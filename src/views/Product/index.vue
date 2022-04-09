@@ -21,7 +21,7 @@
         <div class="clearfix">
           <!-- clearfix 主要是用在浮动层的父层，而 clear 主要是用在浮动层与浮动层之间 -->
           <!-- 主要借助 tableData的数组分割来实现分页。currentPage是当前页数，pagesize是每页展示的条数  -->
-          <el-table
+          <el-table v-if= "tableShow"
             :data="
               productList
                 .filter(
@@ -64,15 +64,22 @@
               </template>
             </el-table-column>
 
+
+            <el-table-column align = "center" label = "IMEI" min-width = "20" prop = "extraInfo.nickname">
+              </el-table-column>
             <!-- 表头 -->
-            <el-table-column
-              align="center"
-              min-width="30"
-              v-for="(col, index) in product"
-              :prop="index"
-              :key="index"
-              :label="col"
-            ></el-table-column>
+                 <el-table-column align = "center" label = "体温" min-width = "20" prop = "latestData.body">
+              </el-table-column>
+                       <el-table-column align = "center" label = "手腕温度" min-width = "20" prop = "latestData.skin">
+              </el-table-column>
+               <el-table-column align = "center" label = "心率" min-width = "20" prop = "latestData.heartRate">
+              </el-table-column>
+              <el-table-column align = "center" label = "收缩压" min-width = "20" prop = "latestData.bpHigh">
+              </el-table-column>
+                        <el-table-column align = "center" label = "舒张压" min-width = "20" prop = "latestData.bpLow">
+              </el-table-column>
+              <el-table-column align = "center" label = "步数" min-width = "20" prop = "latestData.stepNum">
+              </el-table-column>
 
             <!-- 按钮 -->
             <el-table-column align="center" label="操作" min-width="20">
@@ -131,6 +138,7 @@ import {
   ProductNum,
   cloudDevcieDelete,
   allProductKey,
+  NewDeviceDataOne,
   ProductOne
 } from "@/api/index";
 import productDetail from "./productDetail";
@@ -163,8 +171,10 @@ export default {
       pageSize: 10,
       // 每页的数据
       DeleteKey: { productKey: "" },
-      deleteId: ""
+      deleteId: "",
       //用于设备注册的7个数据
+      tableShow: true,
+      timer: "",
     };
   },
   computed: {
@@ -180,6 +190,12 @@ export default {
     // this.$store.dispatch("productNum");
     this.products();
   },
+//     mounted() {
+//    this.timer =  setInterval(this.products, 5000);
+//   },
+//   beforeDestroy(){
+//  clearInterval(this.timer);
+//   },
   // vue 网页loading加载状态
 
   // 在提交按钮上加入                  :loading="loading"（注意前面有冒号）
@@ -195,34 +211,115 @@ export default {
       // console.log(this.$store.state.other.productNums)
       // this.productList = this.$store.state.other.productNums;
 
-      if (this.productList.length != 0) {
-        this.loading = false;
-      }
-      //扩充productList的内容，使其包含device的内容
-      // ProductNum().then((res) => {
-      //   if (res.code == 200) {
-      //     this.productList = res.data.productInfo;
+  
+      // //扩充productList的内容，使其包含device的内容
+      // // ProductNum().then((res) => {
+      // //   if (res.code == 200) {
+      // //     this.productList = res.data.productInfo;
+      // //     console.log(this.productList);
+      // //     this.loading = false;
+      // //   }
+      // // });
+      // // 1. 获取所有pk
+      // allProductKey().then(res => {
+      //   // console.log(res)
+      //   if (res.msg == "ok") {
+      //     this.productNameList = res.data.productKeys;
+      //     // console.log(this.productNameList)
+      //     this.productList = [];
+      //     //2. 每一个产品的详细信息
+      //     this.productNameList.forEach(item => {
+      //       // console.log(item)
+      //       ProductOne(item).then(res => {
+      //         var obj = [];
+      //         for (var i=0;i<res.data.deviceInfo.length;i++) {
+      //           obj.push(res.data.deviceInfo[i].deviceName)
+      //         }
+      //         res.data.deviceInfo1 = obj;
+      //         // console.log(res)
+      //         this.productList.push(res.data);
+      //       });
+      //     });
       //     console.log(this.productList);
       //     this.loading = false;
+      //   } else {
+      //     this.$message.error(res.msg);
       //   }
       // });
-      // 1. 获取所有pk
-      allProductKey().then(res => {
-        // console.log(res)
+      //改写页面，在product页面显示设备的具体数值，也就是改变produtcList的值
+      // 1. 获取用户产品列表
+      ProductNum().then(res => {
         if (res.msg == "ok") {
-          this.productNameList = res.data.productKeys;
-          // console.log(this.productNameList)
-          this.productList = [];
-          //2. 每一个产品的详细信息
-          this.productNameList.forEach(item => {
-            // console.log(item)
-            ProductOne(item).then(res => {
-              // console.log(res)
-              this.productList.push(res.data);
+          
+          this.productList = res.data.productInfo;
+          //2. 获取指定产品下所有设备列表
+          this.productList.forEach(item => {
+            ProductOne(item.productKey).then(res => {
+              if (res.msg == "ok") {
+                item.deviceKey = [];
+                for (var i = 0; i < res.data.deviceInfo.length; i++) {
+                  item.deviceKey.push(res.data.deviceInfo[i].deviceKey);
+                }
+                // console.log(item.productKey)
+                // console.log(item.deviceKey)
+     
+NewDeviceDataOne(item).then((res)=>{
+  item.deviceData = res.data.deviceData
+      item.latestData = {
+      body: "-",
+      skin: "-",
+      heartRate :"-",
+      bpHigh:"-",
+      bpLow:"-",
+      stepNum: "-",
+      location: "",
+    }
+    item.deviceName = []
+  if (item.deviceData !== undefined) {
+  for (var i=0;i<item.deviceData.length;i++) {
+  item.deviceName.push(item.deviceData[i].deviceName)
+  }
+  }
+ for (var i=0;i<item.deviceName.length;i++) {
+
+ }
+  if(item.deviceName.includes('BA')) {
+    item.latestData.body = item.deviceData[item.deviceName.indexOf('BA')].extraInfo.body.toString();
+    item.latestData.skin = item.deviceData[item.deviceName.indexOf('BA')].extraInfo.skin
+  }
+  if(item.deviceName.includes('C2')) {
+    item.latestData.heartRate= item.deviceData[item.deviceName.indexOf('C2')].extraInfo.BPHeart
+    item.latestData.bpHigh = item.deviceData[item.deviceName.indexOf('C2')].extraInfo.BPHigh
+    item.latestData.bpLow = item.deviceData[item.deviceName.indexOf('C2')].extraInfo.BPLow
+  }
+   if(item.deviceName.includes('F6')) {
+    item.latestData.stepNum = item.deviceData[item.deviceName.indexOf('F6')].extraInfo.StepNum
+  }
+    if(item.deviceName.includes('A4')) {
+    item.latestData.location= item.deviceData[item.deviceName.indexOf('A4')].extraInfo
+  }
+  // item.latestData = {};
+// console.log(item.extraInfo.nickname)
+// console.log(item.latestData.body)
+})
+  
+
+              } else {
+                this.$message.error(res.msg);
+              }
+    
             });
+   
           });
-          console.log(this.productList);
-          this.loading = false;
+              console.log(this.productList);
+             if (this.productList.length != 0) {
+this.loading = false;
+      }
+//            this.productList.forEach(item=>{
+// NewDeviceDataOne(item.productKey,item.deviceList).then((res)=>{
+//   console.log(res)
+// })
+//            })
         } else {
           this.$message.error(res.msg);
         }

@@ -49,10 +49,10 @@
           </template>
         </el-input>
       </el-col>
-      <el-col :span="24" :offset="0">
+      <!-- <el-col :span="24" :offset="0">
         <el-divider direction="horizontal" content-position="left"></el-divider>
-      </el-col>
-      <el-col :span = "24" v-if = "product.deviceInfo.length == 0">
+      </el-col> -->
+      <!-- <el-col :span = "24" v-if = "product.deviceInfo.length == 0">
         <span style="font-size: 16px; font-weight: 400">当前没有设备</span> 
       </el-col>
       <el-col :span="24">
@@ -61,16 +61,16 @@
             <template slot="title">
               <span style="font-size: 16px; font-weight: 400">设备信息展示</span>
             </template>
-            <el-button style="background-color: #00b6e3; color: #fff" @click="showData1">心跳包</el-button>
-            <el-button style="background-color: #00c354; color: #fff" @click="showData2">体温</el-button>
-            <el-button style="background-color: #fcd848; color: #fff" @click="showData3">心率血压</el-button>
-            <el-button style="background-color: #f55153; color: #fff" @click="showData4">睡眠监测</el-button>
-            <el-button style="background-color:#7364b7; color: #fff" @click="showData5">地理位置</el-button>
-            <el-button style="background-color: #ffb484; color: #fff" @click="showData6">报警信息</el-button>
-            <el-button style="background-color: #dd97fc; color: #fff" @click="showData7">下行反馈</el-button>
+            <el-button style="background-color: #00b6e3; color: #fff" @click="showData1" v-if  = "product.deviceInfo1.includes('F6')">心跳包</el-button>
+            <el-button style="background-color: #00c354; color: #fff" @click="showData2" v-if  = "product.deviceInfo1.includes('BA')">体温</el-button>
+            <el-button style="background-color: #fcd848; color: #fff" @click="showData3" v-if  = "product.deviceInfo1.includes('C2')">心率血压</el-button>
+            <el-button style="background-color: #f55153; color: #fff" @click="showData4"  v-if  = "product.deviceInfo1.includes('C5')">睡眠监测</el-button>
+            <el-button style="background-color:#7364b7; color: #fff" @click="showData5"  v-if  = "product.deviceInfo1.includes('A4')">地理位置</el-button>
+            <el-button style="background-color: #ffb484; color: #fff" @click="showData6"  v-if  = "product.deviceInfo1.includes('02')">报警信息</el-button>
+            <el-button style="background-color: #dd97fc; color: #fff" @click="showData7"  v-if  = "product.deviceInfo1.includes('C0')">下行反馈</el-button>
           </el-collapse-item>
         </el-collapse>
-      </el-col>
+      </el-col> -->
     </el-row>
 
     <!-- 编辑设备信息 -->

@@ -9,7 +9,7 @@
           <el-form-item prop="productName" label="手环名称">
             <el-input v-model="ruleForm.productName" clearable class="Input" placeholder="必填项"></el-input>
           </el-form-item>
-          <el-form-item prop="simId" label="simId">
+          <el-form-item prop="simId" label="IMEI">
             <el-input v-model="ruleForm.simId" clearable class="Input" placeholder="请在手环上查找"></el-input>
           </el-form-item>
 

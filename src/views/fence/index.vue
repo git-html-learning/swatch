@@ -60,6 +60,7 @@
 
 <script>
 import { Message } from "element-ui";
+import {OtherUserDetail} from "@/api/admin";
 export default {
   name: "index",
 

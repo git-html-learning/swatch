@@ -43,7 +43,7 @@ const mutations = {
   //设备列表
   RES_deviceNums: (state, payload) => {
     state.deviceNums = payload
-    window.sessionStorage.setItem('deviceNums', JSON.stringify(state.deviceNums))
+    window.Storage.setItem('deviceNums', JSON.stringify(state.deviceNums))
   },
   //在线设备列表
   RES_statusNums: (state, payload) => {

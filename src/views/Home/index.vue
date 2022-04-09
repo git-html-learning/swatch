@@ -126,7 +126,8 @@ import {
   alldeviceKey,
   allDeviceStatus,
   ProductNum,
-  ProductOne
+  ProductOne,
+    NewDeviceDataOne,
 } from "@/api/index";
 import * as echarts from "echarts";
 export default {
