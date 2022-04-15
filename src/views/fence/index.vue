@@ -526,17 +526,19 @@ export default {
       productList1.forEach(item => {
       
         if (item.latestData.location !== "") {
-          this.localMarker1 = item.latestData.location.location.substring(
-            0,
-            11
-          );
-          this.localMarker2 = item.latestData.location.location.substring(
-            12,
-            24
-          );
+                   var marker = item.latestData.location.location;
+               var array=marker.split(",");
+          // this.localMarker1 = item.latestData.location.location.substring(
+          //   0,
+          //   11
+          // );
+          // this.localMarker2 = item.latestData.location.location.substring(
+          //   12,
+          //   24
+          // );
 
           this.marker1 = new BMap.Marker(
-            new BMap.Point(this.localMarker1, this.localMarker2)
+            new BMap.Point(array[0], array[1])
           );
           this.map.addOverlay(this.marker1);
         }

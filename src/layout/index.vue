@@ -225,9 +225,8 @@ export default {
             this.productList1.forEach(item => {
               if (item.latestData.location !== "") {
                 var marker = item.latestData.location.location;
-                var marker12 = marker.substring(0, 11);
-                var marker22 = marker.substring(12, 24);
-                this.marker1 = new BMap.Point(marker12, marker22);
+               var array=marker.split(",");
+                this.marker1 = new BMap.Point(array[0], array[1]);
                 // 之前直接写 var polygon = new BMap.Polygon(item.latestData),返回的
                 // 全部是不在围栏内
                 //所以以下的数据处理是很是重要的
@@ -237,6 +236,8 @@ export default {
                   polArry.push(p);
                 });
                 var polygon = new BMap.Polygon(polArry);
+                // console.log(polygon)
+                // console.log(this.marker1)
                 if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
                   console.log("目前在电子围栏");
                 } else {

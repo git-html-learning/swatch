@@ -178,7 +178,7 @@ export default {
     this.map.setMapStyle(this.mapStyle);
     // 开启鼠标滚轮缩放
     this.map.enableScrollWheelZoom(true);
-  console.log(this.productList1);
+  // console.log(this.productList1);
 
     //获取当前的时间，每一秒钟刷新一次
     // let _this = this;  //声明一个变量指向vue实例this,保证作用域一致
@@ -211,14 +211,14 @@ export default {
               positionList.push(this.productList1[i].latestData.location)
               }
             }
-            console.log(positionList)
+            // console.log(positionList)
             var markerArr = new Array(positionList.length).fill({})
             for (var i=0;i<positionList.length;i++) {
               markerArr[i].point = positionList[i].location;
               markerArr[i].address = positionList[i].desc;
               markerArr[i].title = positionList[i].productName;
             }
-            console.log(markerArr)
+            // console.log(markerArr)
             //测试
     //             var markerArr = [
     //   {
@@ -244,7 +244,7 @@ export default {
     },
     prepare() {
       var productAll = JSON.parse(window.localStorage.getItem("productNums"));
-      console.log(productAll)
+      // console.log(productAll)
       allProductKey().then(res => {
         this.productNum = res.data.productKeys.length;
         alldeviceKey().then(res => {
