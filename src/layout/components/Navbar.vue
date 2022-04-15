@@ -31,7 +31,7 @@
             <el-col :span="8" class="row" style="cursor: pointer;">
               <el-dropdown trigger="hover">
                 <!-- <svg-icon icon-class="用户" style="font-size: 15px" /> -->
-                <i class = "el-icon-user"></i>
+                <i class="el-icon-user"></i>
                 {{ name }}
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item @click.native="userCenter">
@@ -61,7 +61,7 @@ import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
 import Hamburger from "@/components/Hamburger";
 import { getName } from "@/utils/auth";
-import { UnReadAlertNums, UserAllalert } from "@/api/index";
+import { UnReadAlertNums, UserAllalert,subjectCount } from "@/api/index";
 export default {
   components: {
     Breadcrumb,
@@ -102,91 +102,14 @@ export default {
     alertMsg() {
       UnReadAlertNums().then(res => {
         this.message = res.data;
-        var payload = {
-          asc: 0,
-          pageIndex: 1,
-          pageSize: 1
-        };
-        console.log(payload)
-        UserAllalert(payload).then(res => {
-          console.log(res)
-          var total = res.data.total;
-          window.sessionStorage.setItem("alertNum", total);
-          payload = {
-            asc: 0,
-            pageIndex: 1,
-            pageSize: total
-          };
-          console.log(payload)
-          UserAllalert(payload).then(res => {
-            console.log(res)
-            var alertInfo = res.data.alertInfo;
-            console.log(alertInfo)
-            //统计不同主题的设备数量
-            // 目前定为： 低电量 num1
-            // 关机 num2
-            // 摘掉设备 num3
-            // 震动报警 num4
-            // 表带破坏 num5
-            var alert1 = [];
-            var alert2 = [];
-            var alert3 = [];
-            var alert4 = [];
-            var alert5 = [];
-            var num1 = 0;
-            var num2 = 0;
-            var num3 = 0;
-            var num4 = 0;
-            var num5 = 0;
-            for (var i = 0; i < alertInfo.length; i++) {
-              if (alertInfo[i].subject == "低电量") {
-                alert1.push(alertInfo[i]);
-              }
-              if (alertInfo[i].subject == "关机") {
-                alert2.push(alertInfo[i]);
-              }
-              if (alertInfo[i].subject == "摘掉设备") {
-                alert3.push(alertInfo[i]);
-              }
-              if (alertInfo[i].subject == "震动报警") {
-                alert4.push(alertInfo[i]);
-              }
-              if (alertInfo[i].subject == "表带破坏") {
-                alert5.push(alertInfo[i]);
-              }
-            }
-            if (alert1 == []) {
-              num1 = 0;
-            } else {
-              num1 = alert1.length;
-            }
-            if (alert2 == []) {
-              num2 = 0;
-            } else {
-              num2 = alert2.length;
-            }
-            if (alert3 == []) {
-              num3 = 0;
-            } else {
-              num3 = alert3.length;
-            }
-            if (alert4 == []) {
-              num4 = 0;
-            } else {
-              num4 = alert4.length;
-            }
-            if (alert5 == []) {
-              num5 = 0;
-            } else {
-              num5 = alert5.length;
-            }
-            window.sessionStorage.setItem("num1", num1);
-            window.sessionStorage.setItem("num2", num2);
-            window.sessionStorage.setItem("num3", num3);
-            window.sessionStorage.setItem("num4", num4);
-            window.sessionStorage.setItem("num5", num5);
-          });
-        });
+        subjectCount().then((res)=>{
+          if (res.msg = "ok") {
+var subjectCount = res.data.subjectCount
+window.sessionStorage.setItem("subjectNum",JSON.stringify(subjectCount))
+          } else {
+            this.$message.error(res.msg)
+          }
+        })
       });
     },
     openBell() {

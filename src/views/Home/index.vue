@@ -58,11 +58,6 @@
             <div v-if="show">
               <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
               设备列表
-              <!-- <span
-                @click="showDetail"
-                style="margin-left: 10px;
-             font-size: 12px; color: #0493da; cursor: pointer"
-              >设备详情</span> -->
               <span style="float: right; margin-right: 10px; ">
                 <img src="@/assets/img/搜索.png" @click="searchOpen" alt />
               </span>
@@ -94,7 +89,6 @@
                 v-for="(item, index) in this.deviceList"
                 :key="index"
                 class="liStyle"
-                @click="detail(item)"
               >
                 <a-row>
                   <a-col :span="6">
@@ -289,7 +283,7 @@ export default {
           });
         });
       });
-      console.log(this.deviceList);
+      // console.log(this.deviceList);
     },
     echarts() {
       var chartDom = document.getElementById("body1");
@@ -348,11 +342,27 @@ export default {
 
       option && myChart.setOption(option);
 
-var num1 = window.sessionStorage.getItem("num1")
-var num2 = window.sessionStorage.getItem("num2")
-var num3 = window.sessionStorage.getItem("num3")
-var num4 = window.sessionStorage.getItem("num4")
-var num5 = window.sessionStorage.getItem("num5")
+var num1 = 0
+var num2 = 0
+var num3 = 0
+var num4 = 0
+var num5 = 0
+var subjectNum =JSON.parse(window.sessionStorage.getItem("subjectNum")) 
+if(subjectNum.低电量 !==undefined) {
+ num1 = subjectNum.低电量
+}
+if(subjectNum.关机 !==undefined) {
+  num2 = subjectNum.关机
+}
+if(subjectNum.摘掉设备 !==undefined) {
+ num3 = subjectNum.摘掉设备
+}
+if(subjectNum.震动报警 !==undefined) {
+  num4 = subjectNum.震动报警
+}
+if(subjectNum.表带破坏 !==undefined) {
+num5 = subjectNum.表带破坏
+}
       var chartDom1 = document.getElementById('pie');
 var myChart1= echarts.init(chartDom1);
 var option1;
@@ -472,14 +482,12 @@ this.$router.push({ path: "/devices/index" });
       // this.allDeviceList();
       this.show = !this.show;
       this.deviceList = this.deviceList.slice(0,this.deviceNum);
-      console.log(this.deviceList);
+      // console.log(this.deviceList);
     },
     reset() {
-      console.log("全局刷新");
-    },
-    //每个设备详情
-    detail(e) {
-      console.log(e);
+      // console.log("全局刷新");
+        this.prepare();
+    this.deviceData();
     },
     //搜索
     search() {
@@ -495,14 +503,13 @@ this.$router.push({ path: "/devices/index" });
       }
 
       this.deviceList = searchList;
-      console.log(this.deviceList);
+      // console.log(this.deviceList);
     },
     //搜索框的切换成head
     backHead() {
       this.allDeviceList();
       this.searchNum = "";
-      console.log(this.deviceList);
-      console.log;
+      // console.log(this.deviceList);
       this.show = true;
     },
     //将时间改成常见格式
@@ -545,11 +552,6 @@ this.$router.push({ path: "/devices/index" });
     allReset() {
       this.prepare();
     },
-
-    // showDetail() {
-    //   console.log("进入详情页");
-    //   this.$router.push({ path: "/devices/index" });
-    // }
   }
 };
 </script>

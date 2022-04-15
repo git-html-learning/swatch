@@ -330,7 +330,14 @@ export function UserAllalert (payload) {
     }
   })
 }
-
+//获取用户所有未读报警的各个主题（subject）数量✅
+export function subjectCount (payload) {
+  return request({
+    url: '/api/v1/userAlertInfos/subjectCount',
+    method: 'get',
+    payload
+  })
+}
 
 //获取用户设备状态统计信息
 export function UserAllStatus() {

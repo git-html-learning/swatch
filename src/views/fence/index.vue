@@ -1,39 +1,31 @@
 <template>
   <el-container>
     <!-- 头部 -->
-    <el-header style = "margin-top: 30px; height: 40px;">
+    <el-header style="margin-top: 30px; height: 40px;">
       <!-- <el-page-header @back="goBack" content="电子围栏绘制"></el-page-header> -->
-           <span style = "font-size: 20px; margin-left: 20px; color: #a38972" >电子围栏绘制与管理</span>
+      <span style="font-size: 20px; margin-left: 20px; color: #a38972">电子围栏绘制与管理</span>
     </el-header>
 
     <!-- 中间 -->
     <el-main>
       <!-- 地图 -->
       <div id="map-container"></div>
-      <div id="mask" v-if = "maskShow">
-        <div id = "box">
-     <p id = "name" v-for = "(item,index) in this.fenceList" :key = "index">
-   <!-- {{item.da}} -->
+      <div id="mask" v-if="maskShow">
+        <div id="box">
+          <p id="name" v-for="(item,index) in this.fenceList" :key="index">
+            <!-- {{item.da}} -->
 
-         <el-input placeholder="请输入电子围栏名字" v-model="input[index]" style = "width: 300px;">
-  </el-input>
-  <el-button type="primary"  @click = "nameShow(item,index)">确定</el-button>
- 
-  
-     </p>
-      <el-button type="primary" @click = "maskFalse">取消</el-button>
+            <el-input placeholder="请输入电子围栏名字" v-model="input[index]" style="width: 300px;"></el-input>
+            <el-button type="primary" @click="nameShow(item,index)">确定</el-button>
+          </p>
+          <el-button type="primary" @click="maskFalse">取消</el-button>
         </div>
-
-
-
       </div>
-     
 
       <!-- 左侧操作区 -->
       <div class="s-control-l">
         <v-region @values="regionChange" class="form-control"></v-region>
         <el-button type="primary" size="small" style="margin-left:20px;" @click="drawRegion">绘制区域</el-button>
-        
       </div>
 
       <!-- 右侧操作区 -->
@@ -75,23 +67,26 @@
     </el-main>
 
     <!-- 尾部 -->
-    <el-footer>
+    <el-footer class="footer">
       <el-row type="flex" class="row-bg" justify="end" style="margin:14px 0 0 0;">
-          <el-select v-model="selectedValue" placeholder="请选择"
-                    @change="changeFence(selectedValue)">
-    <el-option
-      v-for="item in options"
-      :key="item.fence.fenceName"
-      :label="item.fence.fenceName"
-      :value="item.fence.data">
-    </el-option>
-  </el-select>
+        <el-select
+          v-model="selectedValue"
+          placeholder="请选择电子围栏"
+          @change="changeFence(selectedValue)"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.fence.fenceName"
+            :label="item.fence.fenceName"
+            :value="item.fence.data"
+          ></el-option>
+        </el-select>
         <el-button
           type="primary"
           size="small"
           style="margin-left:20px;"
           @click="drawSelection"
-        >绘制已存在围栏</el-button>
+        >绘制电子围栏</el-button>
         <el-button type size="small" style="margin-left:20px;" @click="reset">清除</el-button>
         <el-button type="primary" size="small" style="margin-left:20px;" @click="saveHurdle">保存</el-button>
       </el-row>
@@ -102,16 +97,13 @@
 <script>
 import { Message } from "element-ui";
 import { OtherUserDetail } from "@/api/admin";
-import {
-UserDetail,
-EditUser
-} from "@/api/admin";
+import { UserDetail, EditUser } from "@/api/admin";
 export default {
   name: "index",
   data() {
     return {
       pointsStrArr: [],
-      center: { lng: 116.93761, lat: 40.059866 }, // 中心点坐标
+      center: { lng: 117.1863981, lat: 31.7696726 }, // 中心点坐标
       zoom: 11, // 缩放级别
 
       keyword: "",
@@ -143,8 +135,10 @@ export default {
         { lat: 40.59079133845712, lng: 117.03627987721553 },
         { lat: 40.72389848370573, lng: 117.03627987721553 }
       ],
-      localMarker1: 117.03627987721553,
-      localMarker2: 40.723898483709,
+      localMarker1: 117.1863981,
+      localMarker2: 31.7696726,
+      //  localMarker3: 119.72338,
+      // localMarker4: 30.374173,
       marker: null,
       marker1: null,
       maskShow: false,
@@ -155,12 +149,12 @@ export default {
       selectedValue: "",
       value: "",
       options: [],
-      outAlert: [],
+      outAlert: []
     };
   },
-created() {
- this.getFenceData();
-},
+  created() {
+    this.getFenceData();
+  },
   watch: {
     // 绘制类型变更
     radioSelect(nval, oval) {
@@ -234,16 +228,13 @@ created() {
     // 加载围栏数据
     this.loadHurdle();
 
-    //绘制点
-    this.marker = new BMap.Marker(
-      new BMap.Point(this.localMarker1, this.localMarker2)
-    );
-    this.marker1 = new BMap.Point(this.localMarker1, this.localMarker2);
-    console.log(this.marker);
-    this.map.addOverlay(this.marker);
-        setInterval(this.timer, 1000);
+    // 绘制点
+    this.addPiont();
+
+    setInterval(this.timer, 1000);
   },
-    //在vue实例销毁之前清除定时器
+
+  //在vue实例销毁之前清除定时器
   beforeDestroy() {
     if (this.date) {
       clearInterval(this.timer);
@@ -252,14 +243,14 @@ created() {
 
   methods: {
     getFenceData() {
-      this.options = JSON.parse(window.sessionStorage.getItem("fenceList"))
-// UserDetail().then((res)=>{
-//   if (res.msg == "ok") {
-// this.options = res.data.extraInfo.fence
-//   } else {
-//     this.$message.error(res.msg)
-//   }
-// })
+      this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
+      // UserDetail().then((res)=>{
+      //   if (res.msg == "ok") {
+      // this.options = res.data.extraInfo.fence
+      //   } else {
+      //     this.$message.error(res.msg)
+      //   }
+      // })
     },
     // 清除地图覆盖物
     clearOverlays() {
@@ -300,12 +291,10 @@ created() {
         this.drawingManager.getDrawingMode() === drawingType
       ) {
         this.drawingManager.close();
-        
       } else {
         this.drawingManager.setDrawingMode(drawingType);
-        this.drawingManager.open();      
+        this.drawingManager.open();
       }
-   
     },
 
     // 绘制行政区域
@@ -313,7 +302,7 @@ created() {
       if (!this.region.value) {
         this.$message.error("未选择任何行政区");
         return;
-      } 
+      }
       this.radioSelect = "none";
       var bdary = new BMap.Boundary();
       bdary.get(this.region.value, rs => {
@@ -327,7 +316,7 @@ created() {
         var pointArray = [];
         for (var i = 0; i < count; i++) {
           var ply = new BMap.Polygon(rs.boundaries[i], this.styleOptions); //建立多边形覆盖物
-          console.log(ply)
+          console.log(ply);
           ply.name = this.region.value;
           var str = JSON.stringify(ply.ia); //将BMap获取的行政区边界经纬度转为字符串
           this.map.addOverlay(ply); //添加覆盖物
@@ -355,13 +344,13 @@ created() {
     // 保存围栏数据
     saveHurdle() {
       var overlays = this.map.getOverlays();
-      console.log(overlays)
-      this.fenceList = overlays.slice(1)
-      console.log(this.fenceList)
-      console.log(this.fenceList.length)
-      this.input = new Array(this.fenceList.length).fill('')
-      console.log(this.input)
-this.lastFencedata =[];
+      console.log(overlays);
+      this.fenceList = overlays.slice(1);
+      console.log(this.fenceList);
+      console.log(this.fenceList.length);
+      this.input = new Array(this.fenceList.length).fill("");
+      console.log(this.input);
+      this.lastFencedata = [];
 
       // console.log(overlays);
       this.pointsStrArr = [];
@@ -401,98 +390,94 @@ this.lastFencedata =[];
       this.pointsStrArr = [];
       this.map.clearOverlays(); //清除地图覆盖物
       //这里本意是去除画了但不想要的围栏，但是这样操作之后会把点也给清除掉，所以在后面还需要再把点画上
-      this.marker = new BMap.Marker(
-        new BMap.Point(this.localMarker1, this.localMarker2)
-      );
-      this.marker1 = new BMap.Point(this.localMarker1, this.localMarker2);
-      this.map.addOverlay(this.marker);
+      this.addPiont();
     },
     maskFalse() {
-this.maskShow = false;
+      this.maskShow = false;
     },
     //绘制选择的围栏，这里用本地数据测试
     drawSelection() {
-      let polArry = [];
+      var polArry = [];
       this.localPoint.forEach(item => {
-        let p = new BMap.Point(item.lng, item.lat);
+        var p = new BMap.Point(item.lng, item.lat);
         polArry.push(p);
       });
       console.log(polArry);
       var polygon = new BMap.Polygon(polArry, this.styleOptions);
+      this.map.clearOverlays(); //清除地图覆盖物
       this.map.addOverlay(polygon);
       var pointArray = [];
       pointArray = pointArray.concat(polygon.getPath());
       this.map.setViewport(pointArray); //调整视野
-      this.isInside(polygon);
-      console.log(polygon)
     },
     //判断点是否在已绘制的区域内
-    isInside(p) {
-      console.log(this.marker1)
-      console.log(p)
-      if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, p)) {
-        alert("目前在电子围栏");
-      } else {
-        alert("目前不在电子围栏内");
-      }
-    },
+    // isInside(p) {
+    //   if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, p)) {
+    //     alert("目前在电子围栏");
+    //   } else {
+    //     alert("目前不在电子围栏内");
+    //   }
+    // },
     //确定围栏的名字
-    nameShow(item,index) {
-      console.log(this.date)
-      console.log(index)
-      console.log(this.input)
-      console.log(this.input[index])
-      if (this.input[index] =='') {
-        
-alert("电子围栏名字不能为空")
+    nameShow(item, index) {
+      console.log(this.date);
+      console.log(index);
+      console.log(this.input);
+      console.log(this.input[index]);
+      if (this.input[index] == "") {
+        alert("电子围栏名字不能为空");
       } else {
-      this.fenceList[index].name = this.input[index]
-      this.fenceList[index].updateAt = this.date
-      this.lastFencedata.push(this.fenceList[index])
-      this.fenceList.splice(index,1)
-      this.input.splice(index,1)
-      console.log(this.lastFencedata)
-      console.log(this.fenceList)
-      console.log(this.input)
-      if (this.fenceList.length == 0) {
-        //现在开始处理数据，把用户extraInfo的数据修改
+        this.fenceList[index].name = this.input[index];
+        this.fenceList[index].updateAt = this.date;
+        this.lastFencedata.push(this.fenceList[index]);
+        this.fenceList.splice(index, 1);
+        this.input.splice(index, 1);
+        console.log(this.lastFencedata);
+        console.log(this.fenceList);
+        console.log(this.input);
+        if (this.fenceList.length == 0) {
+          //现在开始处理数据，把用户extraInfo的数据修改
 
-        this.maskShow = false;
-          this.map.clearOverlays(); 
-    // var obj = [];
-     console.log(this.lastFencedata)
-          UserDetail().then((res)=>{
-            console.log(res)
-                  var fenceData = res.data;
-       var obj = res.data.extraInfo.fence;
-              for (var i=0; i< this.lastFencedata.length;i++) {
-         var name =  this.lastFencedata[i].name;
-          this.lastFencedata[i].description= {}
-          this.lastFencedata[i].description.fence= {}
-          this.lastFencedata[i].description.fence.data= this.lastFencedata[i].ja
-          this.lastFencedata[i].description.fence.updateAt =  this.lastFencedata[i].updateAt
-       this.lastFencedata[i].description.fence.fenceName = this.lastFencedata[i].name
-      //  var obj1 = JSON.parse(JSON.stringify(this.lastFencedata[i].description).replace(/name/g,name))
-      //  console.log(obj1)
-       obj.push(this.lastFencedata[i].description)
-       }
-       console.log(obj)
-      fenceData.extraInfo.fence = obj;
-      console.log(fenceData) 
-      EditUser(fenceData).then((res)=>{
-        console.log(res)
-        if (res.msg == "ok") {
-          this.$message.success("创建成功")
+          this.maskShow = false;
+          this.map.clearOverlays();
+          // var obj = [];
+          console.log(this.lastFencedata);
+          UserDetail().then(res => {
+            console.log(res);
+            var fenceData = res.data;
+            var obj = res.data.extraInfo.fence;
+            for (var i = 0; i < this.lastFencedata.length; i++) {
+              var name = this.lastFencedata[i].name;
+              this.lastFencedata[i].description = {};
+              this.lastFencedata[i].description.fence = {};
+              this.lastFencedata[i].description.fence.data = this.lastFencedata[
+                i
+              ].ja;
+              this.lastFencedata[
+                i
+              ].description.fence.updateAt = this.lastFencedata[i].updateAt;
+              this.lastFencedata[
+                i
+              ].description.fence.fenceName = this.lastFencedata[i].name;
+              //  var obj1 = JSON.parse(JSON.stringify(this.lastFencedata[i].description).replace(/name/g,name))
+              //  console.log(obj1)
+              obj.push(this.lastFencedata[i].description);
+            }
+            console.log(obj);
+            fenceData.extraInfo.fence = obj;
+            console.log(fenceData);
+            EditUser(fenceData).then(res => {
+              console.log(res);
+              if (res.msg == "ok") {
+                this.$message.success("创建成功");
+              }
+            });
+          });
         }
-      })
-          })
       }
-      }
-
-     
     },
 
-      //将时间改成常见格式
+    //将时间改成常见格式
     timer() {
       let year = new Date().getFullYear(); //获取当前时间的年份
       let month =
@@ -529,11 +514,34 @@ alert("电子围栏名字不能为空")
         ":" +
         seconds;
     },
-changeFence(value) {
-  console.log(value);
-  this.localPoint = value;
-},
+    changeFence(value) {
+      console.log(value);
+      this.localPoint = value;
+    },
+    //绘制手环的坐标的函数
+    addPiont() {
+      var productList1 = JSON.parse(
+        window.sessionStorage.getItem("productList1")
+      );
+      productList1.forEach(item => {
+      
+        if (item.latestData.location !== "") {
+          this.localMarker1 = item.latestData.location.location.substring(
+            0,
+            11
+          );
+          this.localMarker2 = item.latestData.location.location.substring(
+            12,
+            24
+          );
 
+          this.marker1 = new BMap.Marker(
+            new BMap.Point(this.localMarker1, this.localMarker2)
+          );
+          this.map.addOverlay(this.marker1);
+        }
+      });
+    }
   }
 };
 </script>
@@ -565,7 +573,7 @@ changeFence(value) {
 #mask {
   position: absolute;
   background-color: #fff;
-    width: 100%;
+  width: 100%;
   height: 600px;
   top: 0;
   left: 0;
@@ -574,22 +582,19 @@ changeFence(value) {
   /* display: none; */
 }
 #box {
- position: absolute;
+  position: absolute;
   top: 100px;
   left: 20px;
 }
 #name {
   z-index: 999;
   background-color: #fff;
- 
+
   opacity: 1;
   border: 1px solid rgb(182, 179, 179);
   color: black;
-
-
 }
 
-  
 #search-result {
   width: 400px;
 }
@@ -655,5 +660,8 @@ changeFence(value) {
 }
 .el-radio-button.is-active .s-icon.s-icon-polyline {
   background-image: url("~@/assets/img/折线2.png");
+}
+.footer .el-button {
+  height: 50px;
 }
 </style>

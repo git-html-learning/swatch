@@ -34,9 +34,9 @@ export default {
       latestAlert: [],
       content: "SOS报警",
       sosMessage: "",
-      marker1: "",
+      marker1: null,
       fenceList: [],
-      alertContent: "",
+      alertContent: ""
     };
   },
   mounted() {
@@ -94,14 +94,14 @@ export default {
   methods: {
     initWebSocket() {
       this.websock = new WebSocket("ws://smartwatch.ahusmart.com/api/v1/ws"); //这个连接ws://固定，后面的根据自己的IP和端口进行改变，我设置监听的就是8081
-      this.websock.onmessage = this.websocketonmessage;
+      // this.websock.onmessage = this.websocketonmessage;
       this.websock.onerror = this.websocketonerror;
       this.websock.onopen = this.websocketonopen;
       this.websock.onclose = this.websocketclose;
     },
     websocketonopen() {
       // 连接建立之后执行send方法发送数据，这个和自己的后端沟通好需要传什么数据，我的是要进行token验证
-      let data = {
+      var data = {
         type: "REGISTER",
         data: "message"
       };
@@ -125,7 +125,7 @@ export default {
     deviceData() {
       this.outAlert = [];
       UserDetail().then(res => {
-        console.log(res);
+        // console.log(res);
         this.fenceList = res.data.extraInfo.fence;
         var fenceData = res.data;
         window.sessionStorage.setItem(
@@ -138,13 +138,13 @@ export default {
       allProductKey().then(res => {
         if (res.msg == "ok") {
           this.productNameList = res.data.productKeys;
-          console.log(this.productNameList);
+          // console.log(this.productNameList);
           getDeviceDatas({
             username: "智能手环测试",
             pkList: this.productNameList,
             startTime: 100000
           }).then(res => {
-            console.log(res);
+            // console.log(res);
             this.productList1 = res.data;
             // console.log(this.productList1);
             // this.loading = false;
@@ -157,12 +157,10 @@ export default {
                   item.deviceName.push(item.deviceData[i].deviceName);
                 }
                 if (item.extraInfo.fence !== "-") {
-                  console.log(this.fenceList);
                   for (var i = 0; i < this.fenceList.length; i++) {
                     if (
                       item.extraInfo.fence == this.fenceList[i].fence.fenceName
                     ) {
-                      console.log("找到了");
                       item.latestData.fence = this.fenceList[i].fence.data;
                     }
                   }
@@ -219,39 +217,41 @@ export default {
                   heart: "-",
                   fence: "-"
                 };
-          
               }
 
               // console.log(item.deviceData.length)
             });
-            console.log(this.productList1);
-            this.productList1.forEach(item=>{
-                    if (item.latestData.location !== "") {
-                    var marker = item.latestData.location.location;
-                var marker1 = marker.substring(0, 11);
-                var marker2 = marker.substring(12, 24);
-                console.log(marker1);
-                console.log(marker2);
-                this.marker1 = new BMap.Point(marker1, marker2);
-                var polygon = new BMap.Polygon(item.latestData.fence);
-                console.log(this.marker1)
-                console.log(polygon)
+            // console.log(this.productList1);
+            this.productList1.forEach(item => {
+              if (item.latestData.location !== "") {
+                var marker = item.latestData.location.location;
+                var marker12 = marker.substring(0, 11);
+                var marker22 = marker.substring(12, 24);
+                this.marker1 = new BMap.Point(marker12, marker22);
+                // 之前直接写 var polygon = new BMap.Polygon(item.latestData),返回的
+                // 全部是不在围栏内
+                //所以以下的数据处理是很是重要的
+                var  polArry = [];
+                item.latestData.fence.forEach(item1 => {
+                  var p = new BMap.Point(item1.lng, item1.lat);
+                  polArry.push(p);
+                });
+                var polygon = new BMap.Polygon(polArry);
                 if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
                   console.log("目前在电子围栏");
                 } else {
-                  console.log("目前不在电子围栏内")
+                  console.log("目前不在电子围栏内");
                   this.outAlert.push(item);
                 }
-                }
-            })
-            console.log(this.outAlert);
-            if (this.outAlert.length !== 0) {
-              // alert(this.content);
-              for (var i=0;i<this.outAlert.length;i++) {
-                this.alertContent += this.outAlert[i].productName+" "
               }
-              this.alertContent+="不在其对应的电子围栏内"
-              alert(this.alertContent)
+            });
+            this.alertContent = "";
+            if (this.outAlert.length !== 0) {
+              for (var i = 0; i < this.outAlert.length; i++) {
+                this.alertContent += this.outAlert[i].productName + " ";
+              }
+              this.alertContent += "不在其对应的电子围栏内";
+              alert(this.alertContent);
             }
             window.sessionStorage.setItem(
               "productList1",
@@ -271,7 +271,7 @@ export default {
                   this.productList1[i].latestData.body > 37 ||
                   this.productList1[i].latestData.body < 35
                 ) {
-                  console.log("体温");
+              
                   obj.alertData.push({ alert: "温度报警" });
                 }
               }
@@ -280,19 +280,19 @@ export default {
                   this.productList1[i].latestData.heartRate > 100 ||
                   this.productList1[i].latestData.heartRate < 60
                 ) {
-                  console.log("心率");
+         
                   obj.alertData.push({ alert: "心率报警" });
                 }
               }
               this.alertMessage.push(obj);
             }
-            console.log(this.alertMessage);
+            // console.log(this.alertMessage);
             for (var i = 0; i < this.alertMessage.length; i++) {
               if (this.alertMessage[i].alertData.length != 0) {
                 this.latestAlert.push(this.alertMessage[i]);
               }
             }
-            console.log(this.latestAlert);
+            // console.log(this.latestAlert);
           });
         } else {
           this.$message.error(res.msg);
