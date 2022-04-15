@@ -308,7 +308,7 @@ export default {
       this.ring = r;
       console.log(this.ring);
     },
-    btnClick0() {
+    btnClick1() {
       this.$popup({
         btnText: "详情",
         content: this.content,
@@ -318,9 +318,9 @@ export default {
         }
       });
     },
-    btnClick1() {
+    btnClick0() {
       this.$alarm({
-        btnText: "查看详情",
+        btnText: "详情",
         content: "温度或心率警报",
         click: () => {
           // 点击按钮事件

@@ -7,7 +7,7 @@
          v-show="show"
          key="1">
       <h1 style = "margin-top: 30px; color: red">{{title}}</h1>
-      <p>{{content}}</p>
+      <p style = "color:#e65141">{{content}}</p>
      <audio
 		          ref="audio"
 		          src="@/assets/audio/报警.mp3"
@@ -71,7 +71,7 @@ export default {
     /* position: absolute; */
   height: 200px;
   width: 400px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(210, 206, 206, 0.5);
   border-radius: 8px;
   position: fixed;
   bottom: 100px;
@@ -83,7 +83,7 @@ export default {
   button {
       margin-top: 20px;
     border-radius: 10px;
-    background-color: rgb(112, 86, 86);
+    background-color: rgb(226, 219, 219);
     width: 80px;
     height: 30px;
     font-size: 18px;
