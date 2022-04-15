@@ -94,7 +94,7 @@ export default {
   methods: {
     initWebSocket() {
       this.websock = new WebSocket("ws://smartwatch.ahusmart.com/api/v1/ws"); //这个连接ws://固定，后面的根据自己的IP和端口进行改变，我设置监听的就是8081
-      // this.websock.onmessage = this.websocketonmessage;
+      this.websock.onmessage = this.websocketonmessage;
       this.websock.onerror = this.websocketonerror;
       this.websock.onopen = this.websocketonopen;
       this.websock.onclose = this.websocketclose;
@@ -116,6 +116,7 @@ export default {
       // 数据接收
       console.log(e);
       this.sosMessage = JSON.parse(e.data).content;
+      console.log(this.sosMessage)
     },
     // websocketclose (e) {  // 关闭连接
     // 	console.log('已关闭连接', e)

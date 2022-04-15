@@ -105,7 +105,9 @@ export default {
         subjectCount().then((res)=>{
           if (res.msg = "ok") {
 var subjectCount = res.data.subjectCount
+var total = res.data.total;
 window.sessionStorage.setItem("subjectNum",JSON.stringify(subjectCount))
+window.sessionStorage.setItem("total",JSON.stringify(total))
           } else {
             this.$message.error(res.msg)
           }

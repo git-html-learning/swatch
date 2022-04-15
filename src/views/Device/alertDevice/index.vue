@@ -123,7 +123,7 @@
         :page-sizes="[6, 12, 24, 48, total]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="1200"
+        :total="total"
       ></el-pagination>
     </el-card>
   </div>
@@ -167,6 +167,7 @@ export default {
         asc: 0,
         unRead: 1,
       },
+      total: 1200,
     };
   },
   watch: {
@@ -179,21 +180,13 @@ export default {
       immediate: true,
     },
   },
-  computed: {
-    //翻页的总数目
-    total() {
-      return this.tableData.filter(
-        (data) =>
-          !this.search ||
-          data.deviceName.toLowerCase().includes(this.search.toLowerCase())
-      ).length;
-    },
-  },
   mounted() {
     this.requireAlerts();
   },
   methods: {
     requireAlerts() {
+      this.total =parseInt(window.sessionStorage.getItem("total")) ;
+      console.log(this.total)
       //判断本页是否已加载
       if (this.pageNum.includes(this.currentPage)) {
         return;

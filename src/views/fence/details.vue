@@ -6,6 +6,8 @@
         <div class="body">
             <el-table :data="fenceList"
             stripe 
+                 :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
+                 cell-style="color: #81a7ac"
                       style="width: 100%;margin-top: 50px;">
               <el-table-column prop="fence.fenceName"
                                label="电子围栏"
