@@ -43,12 +43,12 @@
             :cell-style="tableCellStyle"
           >
             <!-- 搜索设备名 -->
-            <el-table-column align="center"  prop="productName" label="设备名称">
+            <el-table-column align="center"  prop="productName" label="手环名称">
               <template slot="header" slot-scope="scope">
                 <!-- 不点击显示产品名称，搜索框绑定一个点击事件，点击一下，show变成false -->
                 <div v-show="show">
                   <el-row type="flex" justify="center">
-                    <el-col :span="23">产品名称</el-col>
+                    <el-col :span="23">手环名称</el-col>
                     <el-col :span="1">
                       <i class="el-icon-search" @click="show = !show"></i>
                     </el-col>
@@ -57,7 +57,7 @@
                 <!-- 点击显示搜索框 -->
                 <div v-show="!show">
                   <el-input
-                    placeholder="请输入产品名"
+                    placeholder="请输入手环名"
                     label
                     suffix-icon="el-icon-search"
                     size="mini"
@@ -153,7 +153,7 @@ export default {
 
       loading: true,
 
-      diglogTitle: "产品详情",
+      diglogTitle: "手环详情",
       condition: 0,
       detail: {},
       search: "",
@@ -331,7 +331,7 @@ this.currentPage=1,
       this.deleteId = row.extraInfo.deviceId;
       // console.log(this.DeleteKey)
       // console.log(this.deleteId)
-      this.$confirm("此操作将永久删除该产品, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该手环, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"

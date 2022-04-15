@@ -405,6 +405,7 @@ export default {
       console.log(polArry);
       var polygon = new BMap.Polygon(polArry, this.styleOptions);
       this.map.clearOverlays(); //清除地图覆盖物
+      this.addPiont();
       this.map.addOverlay(polygon);
       var pointArray = [];
       pointArray = pointArray.concat(polygon.getPath());
