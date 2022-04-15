@@ -39,7 +39,6 @@ export function EditUser(payload) {
     data: {
       ...payload,
       "Wechat": null,
-      "extraInfo": null
     }
   })
 }

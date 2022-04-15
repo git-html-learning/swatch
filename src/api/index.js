@@ -316,7 +316,7 @@ export function DeviceNewDatas(payload) {
 }
 
 //查看指定用户的所有产品设备的报警消息
-export function UserAllalert(payload) {
+export function UserAllalert (payload) {
   return request({
     url: '/api/v1/userAlertInfos',
     method: 'post',
@@ -425,6 +425,15 @@ export function allDeviceStatus(data) {
   })
 }
 
+//查询某个时间之后多个产品的设备最新数据
+export function getDeviceDatas(data) {
+  return request({
+    url: '/api/v1/batchProductData',   
+    method: 'post',
+    data
+  })
+}
+
 
 //电信云注册设备
 export function cloudDevcieRegister(simId,deviceType,deviceName) {
@@ -437,7 +446,7 @@ export function cloudDevcieRegister(simId,deviceType,deviceName) {
 //电信云删除设备
 export function cloudDevcieDelete(deviceId) {
   return request({
-    url: 'http://dianxinzhuce.ahusmart.com/delete?DeviceId='+deviceId,   
+    url: 'http://dianxinzhuce.ahusmart.com/delete?deviceId='+deviceId,   
     method: 'delete',
   })
 }

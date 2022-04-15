@@ -13,20 +13,39 @@
             <el-input v-model="ruleForm.simId" clearable class="Input" placeholder="请在手环上查找"></el-input>
           </el-form-item>
 
-          <el-form-item label="协议类型" prop="protocolType">
+
+          <!-- <el-form-item label="协议类型" prop="protocolType">
             <el-select class="Input" v-model="ruleForm.protocolType" placeholder="请选择协议类型">
               <el-option label="TCP" value="TCP"></el-option>
               <el-option label="MODBUS" value="MODBUS"></el-option>
               <el-option label="MQTT" value="MQTT"></el-option>
               <el-option label="HTTP" value="HTTP"></el-option>
             </el-select>
-          </el-form-item>
+          </el-form-item> -->
 
-          <el-form-item label="产品类型" prop="productType">
+          <!-- <el-form-item label="产品类型" prop="productType">
             <el-select class="Input" v-model="ruleForm.productType" placeholder="请选择产品类型">
               <el-option label="直接连接设备" :value="2"></el-option>
               <el-option label="连接网关设备" :value="1"></el-option>
             </el-select>
+          </el-form-item> -->
+                    <el-form-item label="电子围栏选择" prop="extraInfo.fence">
+            <el-select class="Input" v-model="ruleForm.extraInfo.fence" placeholder="请选择电子围栏">
+                <el-option
+      v-for="item in options"
+      :key="item.fence.fenceName"
+      :label="item.fence.fenceName"
+      :value="item.fence.fenceName">
+    </el-option>
+            </el-select>        
+                  <el-tooltip  placement="bottom" effect="light">
+                    <div slot="content">电子围栏说明：<br><br>
+                       电子围栏是用户自己创建,<br><br>
+                       用于监控是否手环位置是否超出围栏，
+                       <br><br>
+                       建议提前建立电子围栏之后再创建手环。</div>
+ <i class = "el-icon-warning-outline" style ="color: orange;font-size: 20px;margin-left: 10px;" ></i>
+</el-tooltip>
           </el-form-item>
 
           <el-form-item label="产品标识符" prop="typeIdentify">
@@ -56,6 +75,7 @@
 
 
 <script>
+
 // 同步注册，云平台注册产品等于电信云注册设备
 import { CreateProduct, cloudDevcieRegister, CreateDevice } from "@/api/index";
 export default {
@@ -64,9 +84,11 @@ export default {
       extraIndex: 0,
       ruleForm: {
         productName: "",
-        protocolType: "",
-        productType: "",
-        extraInfo: {},
+        protocolType: "TCP",
+        productType: 2,
+        extraInfo: {
+          fence: "-"
+        },
         typeIdentify: "",
         description: "",
         simId: ""
@@ -127,9 +149,9 @@ export default {
         productName: [
           { required: true, message: "请输入您的产品名称", trigger: "blur" }
         ],
-        productType: [
-          { required: true, message: "产品类型为必选项", trigger: "blur" }
-        ],
+        // productType: [
+        //   { required: true, message: "产品类型为必选项", trigger: "blur" }
+        // ],
         simId: [{ required: true, message: "必填项", trigger: "blur" }],
         typeIdentify: [
           {
@@ -137,14 +159,18 @@ export default {
             message: "可以快速帮助用户识别同一种产品组合",
             trigger: "blur"
           }
-        ]
+        ],
+        options: [],
       }
     };
   },
-  //   created() {
-  // this.ceshi();
-  //   },
+    created() {
+  this.dataPrepare();
+    },
   methods: {
+    dataPrepare() {
+ this.options = JSON.parse(window.sessionStorage.getItem("fenceList"))
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid || this.ruleForm.description == "") {
@@ -157,6 +183,7 @@ export default {
             if (res.msg == "ok") {
               this.ruleForm.extraInfo.deviceId = res.result.deviceId;
               this.ruleForm.extraInfo.nickname =  this.ruleForm.simId;
+              console.log(this.ruleForm)
               CreateProduct(this.ruleForm)
                 .then(res => {
                   if (res.code == 200) {

@@ -6,7 +6,7 @@
     <div class="main-container">
       <!-- 页面的主要内容区域-->
       <div :class="{'fixed-header':fixedHeader}">
-        <navbar  @handleRing = "handleRing" />
+        <navbar @handleRing="handleRing" />
         <!-- 表示右上方的 navbar,  面包屑的功能也在这个组件内  -->
       </div>
       <app-main />
@@ -17,7 +17,8 @@
 <script>
 import { Navbar, Sidebar, AppMain } from "./components";
 import ResizeMixin from "./mixin/ResizeHandler";
-
+import { allProductKey, getDeviceDatas } from "@/api/index";
+import { UserDetail } from "@/api/admin";
 export default {
   name: "Layout",
   components: {
@@ -25,20 +26,48 @@ export default {
     Sidebar,
     AppMain
   },
-    data() {
-return {
-  ring: [false,false],
-}
+  data() {
+    return {
+      ring: [false, false],
+      timer: "",
+      alertMessage: [],
+      latestAlert: [],
+      content: "SOS报警",
+      sosMessage: "",
+      marker1: "",
+      fenceList: [],
+      alertContent: "",
+    };
+  },
+  mounted() {
+    this.initWebSocket(); //页面渲染的时候，对ws进行初始化
+    this.timer = setInterval(this.deviceData, 60000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
+  created() {
+    this.deviceData();
+  },
+  //监听有没有报警信息  利用ws
+  watch: {
+    ring() {
+      if (this.ring[0] == true) {
+        this.btnClick0();
+      } else if (this.ring[1] == true) {
+        this.btnClick1();
+      }
     },
- watch: {
- ring() {
-   if (this.ring[0] == true) {
-  this.btnClick0();
-   }
-   else if (this.ring[1] == true) {
-  this.btnClick1();
-   }
- }
+    latestAlert() {
+      if (this.latestAlert.length != 0) {
+        this.btnClick1();
+      }
+    },
+    sosMessage() {
+      if (this.sosMessage == "SOS") {
+        this.btnClick0();
+      }
+    }
   },
   mixins: [ResizeMixin],
   computed: {
@@ -46,7 +75,7 @@ return {
       return this.$store.state.app.sidebar;
       //是否展示左侧sidebar，通过cookie获得
     },
-  
+
     device() {
       return this.$store.state.app.device;
     },
@@ -63,32 +92,239 @@ return {
     }
   },
   methods: {
+    initWebSocket() {
+      this.websock = new WebSocket("ws://smartwatch.ahusmart.com/api/v1/ws"); //这个连接ws://固定，后面的根据自己的IP和端口进行改变，我设置监听的就是8081
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onclose = this.websocketclose;
+    },
+    websocketonopen() {
+      // 连接建立之后执行send方法发送数据，这个和自己的后端沟通好需要传什么数据，我的是要进行token验证
+      let data = {
+        type: "REGISTER",
+        data: "message"
+      };
+      this.websock.send(JSON.stringify(data));
+      this.websock.send("connection");
+    },
+    websocketonerror() {
+      //连接错误
+      console.log("WebSocket连接失败");
+    },
+    websocketonmessage(e) {
+      // 数据接收
+      console.log(e);
+      this.sosMessage = JSON.parse(e.data).content;
+    },
+    // websocketclose (e) {  // 关闭连接
+    // 	console.log('已关闭连接', e)
+    // },
+    //获取手环信息函数，因为需要不断检测判定体温和心率判断是否报警，所以要不断请求
+    // 10s请求一次
+    deviceData() {
+      this.outAlert = [];
+      UserDetail().then(res => {
+        console.log(res);
+        this.fenceList = res.data.extraInfo.fence;
+        var fenceData = res.data;
+        window.sessionStorage.setItem(
+          "fenceList",
+          JSON.stringify(this.fenceList)
+        );
+        // console.log(fenceList)
+        window.sessionStorage.setItem("fenceData", JSON.stringify(fenceData));
+      });
+      allProductKey().then(res => {
+        if (res.msg == "ok") {
+          this.productNameList = res.data.productKeys;
+          console.log(this.productNameList);
+          getDeviceDatas({
+            username: "智能手环测试",
+            pkList: this.productNameList,
+            startTime: 100000
+          }).then(res => {
+            console.log(res);
+            this.productList1 = res.data;
+            // console.log(this.productList1);
+            // this.loading = false;
+
+            this.productList1.forEach(item => {
+              item.deviceName = [];
+              item.latestData = {};
+              if (item.deviceData !== null) {
+                for (var i = 0; i < item.deviceData.length; i++) {
+                  item.deviceName.push(item.deviceData[i].deviceName);
+                }
+                if (item.extraInfo.fence !== "-") {
+                  console.log(this.fenceList);
+                  for (var i = 0; i < this.fenceList.length; i++) {
+                    if (
+                      item.extraInfo.fence == this.fenceList[i].fence.fenceName
+                    ) {
+                      console.log("找到了");
+                      item.latestData.fence = this.fenceList[i].fence.data;
+                    }
+                  }
+                } else {
+                  item.latestData.fence = "-";
+                }
+                if (item.deviceName.includes("BA")) {
+                  item.latestData.body =
+                    item.deviceData[
+                      item.deviceName.indexOf("BA")
+                    ].extraInfo.body;
+                  item.latestData.skin =
+                    item.deviceData[
+                      item.deviceName.indexOf("BA")
+                    ].extraInfo.skin;
+                }
+                if (item.deviceName.includes("C2")) {
+                  item.latestData.heartRate =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPHeart;
+                  item.latestData.bpHigh =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPHigh;
+                  item.latestData.bpLow =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPLow;
+                }
+                if (item.deviceName.includes("F6")) {
+                  item.latestData.stepNum =
+                    item.deviceData[
+                      item.deviceName.indexOf("F6")
+                    ].extraInfo.StepNum;
+                  item.latestData.heart =
+                    item.deviceData[
+                      item.deviceName.indexOf("F6")
+                    ].extraInfo.timeStamp;
+                }
+                if (item.deviceName.includes("A4")) {
+                  item.latestData.location =
+                    item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
+                }
+              } else {
+                item.latestData = {
+                  body: "-",
+                  skin: "-",
+                  heartRate: "-",
+                  bpHigh: "-",
+                  bpLow: "-",
+                  stepNum: "-",
+                  location: "",
+                  heart: "-",
+                  fence: "-"
+                };
+          
+              }
+
+              // console.log(item.deviceData.length)
+            });
+            console.log(this.productList1);
+            this.productList1.forEach(item=>{
+                    if (item.latestData.location !== "") {
+                    var marker = item.latestData.location.location;
+                var marker1 = marker.substring(0, 11);
+                var marker2 = marker.substring(12, 24);
+                console.log(marker1);
+                console.log(marker2);
+                this.marker1 = new BMap.Point(marker1, marker2);
+                var polygon = new BMap.Polygon(item.latestData.fence);
+                console.log(this.marker1)
+                console.log(polygon)
+                if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
+                  console.log("目前在电子围栏");
+                } else {
+                  console.log("目前不在电子围栏内")
+                  this.outAlert.push(item);
+                }
+                }
+            })
+            console.log(this.outAlert);
+            if (this.outAlert.length !== 0) {
+              // alert(this.content);
+              for (var i=0;i<this.outAlert.length;i++) {
+                this.alertContent += this.outAlert[i].productName+" "
+              }
+              this.alertContent+="不在其对应的电子围栏内"
+              alert(this.alertContent)
+            }
+            window.sessionStorage.setItem(
+              "productList1",
+              JSON.stringify(this.productList1)
+            );
+            //判断点是否在电子围栏内
+
+            this.alertMessage = [];
+            this.latestAlert = [];
+            for (var i = 0; i < this.productList1.length; i++) {
+              var obj = {
+                productName: this.productList1[i].productName,
+                alertData: []
+              };
+              if (this.productList1[i].latestData.body !== "-") {
+                if (
+                  this.productList1[i].latestData.body > 37 ||
+                  this.productList1[i].latestData.body < 35
+                ) {
+                  console.log("体温");
+                  obj.alertData.push({ alert: "温度报警" });
+                }
+              }
+              if (this.productList1[i].latestData.heartRate !== "-") {
+                if (
+                  this.productList1[i].latestData.heartRate > 100 ||
+                  this.productList1[i].latestData.heartRate < 60
+                ) {
+                  console.log("心率");
+                  obj.alertData.push({ alert: "心率报警" });
+                }
+              }
+              this.alertMessage.push(obj);
+            }
+            console.log(this.alertMessage);
+            for (var i = 0; i < this.alertMessage.length; i++) {
+              if (this.alertMessage[i].alertData.length != 0) {
+                this.latestAlert.push(this.alertMessage[i]);
+              }
+            }
+            console.log(this.latestAlert);
+          });
+        } else {
+          this.$message.error(res.msg);
+        }
+      });
+    },
     handleClickOutside() {
       this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
     },
     handleRing(r) {
       this.ring = r;
-      console.log(this.ring)
+      console.log(this.ring);
     },
-        btnClick0() {
+    btnClick0() {
       this.$popup({
-        btnText: '确定',
+        btnText: "详情",
+        content: this.content,
         click: () => {
           // 点击按钮事件
-          //   this.$router.push('……')
-          console.log("点击按钮了！")
-        },
-      })
+          this.$router.push({ path: "/device/alertData" });
+        }
+      });
     },
-       btnClick1() {
+    btnClick1() {
       this.$alarm({
-        btnText: '确定',
+        btnText: "查看详情",
+        content: "温度或心率警报",
         click: () => {
           // 点击按钮事件
-          //   this.$router.push('……')
-          console.log("点击按钮了！")
-        },
-      })
+          this.$router.push({ path: "/products/index" });
+        }
+      });
     }
   }
 };

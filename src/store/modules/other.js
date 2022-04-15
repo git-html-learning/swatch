@@ -38,12 +38,12 @@ const mutations = {
   RES_productNums: (state, payload) => {
     state.productNums = []
     state.productNums.push(...payload)
-    localStorage.setItem('productNums', JSON.stringify(state.productNums))
+    window.localStorage.setItem('productNums', JSON.stringify(state.productNums))
   },
   //设备列表
   RES_deviceNums: (state, payload) => {
     state.deviceNums = payload
-    window.Storage.setItem('deviceNums', JSON.stringify(state.deviceNums))
+    window.localStorage.setItem('deviceNums', JSON.stringify(state.deviceNums))
   },
   //在线设备列表
   RES_statusNums: (state, payload) => {
@@ -56,7 +56,6 @@ const mutations = {
   //选择时间段
   selectDate: (state, payload) => {
     state.selectDate = payload
-
   },
 
 }
@@ -192,5 +191,4 @@ export default {
   state,
   mutations,
   actions
-
 }

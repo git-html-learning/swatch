@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <div class="title title-bg">
-      <span style="position: absolute; left: 49%;">海工智能</span>
+      <span style="position: absolute; left: 48%;">海工智能</span>
       <span style="position: absolute;left:80%; font-size: 15px;">{{date}}</span>
       <span>
         <el-tooltip>
@@ -20,7 +20,7 @@
         <div class="statistic statistic1">
           <div class="title-di">
             <span style="font-size: 20px; font-weight: 700; margin-left: 30px;">|</span>
-            设备统计
+            手环统计
           </div>
           <div class="body">
             <el-row type="flex" justify>
@@ -29,7 +29,7 @@
               </el-col>
               <el-col :span="6">
                 <h2 style="margin-top: 50px; color: #71919a;">{{productNum}}</h2>
-                <p style="font-size: 13px; color: #71919a;">全部产品</p>
+                <p style="font-size: 13px; color: #71919a;">全部手环</p>
               </el-col>
               <el-col :span="4" :offset="2">
                 <img src="@/assets/img/设备.png" style="margin-top: 60px;" alt  @click = "viewDevice"/>
@@ -44,7 +44,7 @@
         <div class="statistic statistic2">
           <div class="title-di">
             <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
-            设备汇总
+            手环状态
           </div>
           <div id="body1"></div>
         </div>
@@ -111,7 +111,12 @@
         <div class="alarm">
           <div class="title-di">
             <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
-           报警统计
+           未读报警统计   
+            <router-link to="/device/alertData">
+            <i class = "el-icon-s-fold"></i>
+            <!-- <span style = "margin-left: 20px; color: blue;font-size: 15px;"> 详情页</span> -->
+      
+            </router-link>
           </div>
           <div id="pie"></div>
         </div>
@@ -127,13 +132,13 @@ import {
   allDeviceStatus,
   ProductNum,
   ProductOne,
-    NewDeviceDataOne,
 } from "@/api/index";
 import * as echarts from "echarts";
 export default {
   name: "key16",
   created() {
     this.prepare();
+    this.deviceData();
   },
   components: {
     vueSeamlessScroll
@@ -142,125 +147,18 @@ export default {
     return {
       productNum: "暂无数据", //  产品数量
       productList: [], //产品key的列表
+      productList1: [],
       deviceList: [],
       deviceNum: "暂无数据", //设备数量
       onlineNum: "", //在线设备数量
       offlineNum: "", //离线设备数量
       point: [],
-      center: { lng: 117.183992, lat: 31.77341 }, // 中心点坐标
-      zoom: 12,
+      center: { lng: 117.192342, lat: 31.770919 }, // 中心点坐标
+      zoom: 13,
       mapStyle: {
         style: "light"
       },
       listData: [
-        {
-          name: "scc测试71820",
-          deviceNum: "862451050071820"
-        },
-        {
-          name: "scc测试70429",
-          deviceNum: "863659043270429"
-        },
-        {
-          name: "scc测试2",
-          deviceNum: "862451050077835"
-        },
-        {
-          name: "scc测试93238",
-          deviceNum: "862451050093238"
-        },
-        {
-          name: "sos版本",
-          deviceNum: "863659046968953"
-        },
-        {
-          name: "ribenjinggong",
-          deviceNum: "866349045431677"
-        },
-        {
-          name: "Lora手环",
-          deviceNum: "	4049873200083509"
-        },
-        {
-          name: "B2318_测试89301",
-          deviceNum: "862451050089301"
-        },
-        {
-          name: "通辽",
-          deviceNum: "862451050237025"
-        },
-        {
-          name: "805p 62651",
-          deviceNum: "863659042562651"
-        },
-        {
-          name: "53035",
-          deviceNum: "861410044753035"
-        },
-        {
-          name: "86027",
-          deviceNum: "865462047986027"
-        },
-        {
-          name: "125k805c",
-          deviceNum: "860411049516436"
-        },
-        {
-          name: "G805",
-          deviceNum: "860411049552043"
-        },
-        {
-          name: "vscc测试15477",
-          deviceNum: "869149041415477"
-        },
-        {
-          name: "scc测试09900",
-          deviceNum: "869149049009900"
-        },
-        {
-          name: "scc测试12856",
-          deviceNum: "869149048912856"
-        },
-        {
-          name: "scc测试09579",
-          deviceNum: "869149049009579"
-        },
-        {
-          name: "805p 62651",
-          deviceNum: "863659042562651"
-        },
-        {
-          name: "53035",
-          deviceNum: "861410044753035"
-        },
-        {
-          name: "86027",
-          deviceNum: "865462047986027"
-        },
-        {
-          name: "125k805c",
-          deviceNum: "860411049516436"
-        },
-        {
-          name: "G805",
-          deviceNum: "860411049552043"
-        },
-        {
-          name: "vscc测试15477",
-          deviceNum: "869149041415477"
-        },
-        {
-          name: "scc测试09900",
-          deviceNum: "869149049009900"
-        },
-        {
-          name: "scc测试12856",
-          deviceNum: "869149048912856"
-        },
-        {
-          name: "scc测试09579",
-          deviceNum: "869149049009579"
-        }
       ],
       classOption: {
         step: 0.5
@@ -286,30 +184,8 @@ export default {
     this.map.setMapStyle(this.mapStyle);
     // 开启鼠标滚轮缩放
     this.map.enableScrollWheelZoom(true);
-    var markerArr = [
-      {
-        title: "当前设备位置",
-        point: "117.183992,31.77341",
-        address: "(117.183992,31.77341)"
-      },
-      // {
-      //   title: "设备名：2",
-      //   point: "104.000092,30.672099",
-      //   address: "104.000092,30.672099"
-      // },
-      // {
-      //   title: "设备名：3",
-      //   point: "104.061895,30.556204",
-      //   address: "104.061895,30.556204"
-      // }
-    ];
-    // 绘制点
-    for (var i = 0; i < markerArr.length; i++) {
-      var p0 = markerArr[i].point.split(",")[0];
-      var p1 = markerArr[i].point.split(",")[1];
-      var maker = this.addMarker(new window.BMap.Point(p0, p1), i);
-      this.addInfoWindow(maker, markerArr[i], i);
-    }
+  console.log(this.productList1);
+
     //获取当前的时间，每一秒钟刷新一次
     // let _this = this;  //声明一个变量指向vue实例this,保证作用域一致
     setInterval(this.timer, 1000);
@@ -321,15 +197,68 @@ export default {
     }
   },
   methods: {
+    deviceData() {
+      this.productList1 = JSON.parse(window.sessionStorage.getItem("productList1"))
+      var online = [];
+      var offline = [];
+            var positionList = [];
+            for (var i=0;i<this.productList1.length;i++) {
+              if (this.productList1[i].latestData.heart == "-") {
+               offline.push(this.productList1[i])
+              } else {
+                if (Math.round(new Date() / 1000)- this.productList1[i].latestData.heart <=7200) {
+                  online.push(this.productList1[i])
+                } else {
+                    offline.push(this.productList1[i])
+                }
+              }
+              if (this.productList1[i].latestData.location !== "") {
+                this.productList1[i].latestData.location.productName = this.productList1[i].productName;
+              positionList.push(this.productList1[i].latestData.location)
+              }
+            }
+            console.log(positionList)
+            var markerArr = new Array(positionList.length).fill({})
+            for (var i=0;i<positionList.length;i++) {
+              markerArr[i].point = positionList[i].location;
+              markerArr[i].address = positionList[i].desc;
+              markerArr[i].title = positionList[i].productName;
+            }
+            console.log(markerArr)
+            //测试
+    //             var markerArr = [
+    //   {
+    //     title: "当前设备位置1",
+    //     point: "117.182676,31.761464",
+    //     address: "(117.183992,31.77341)"
+    //   },
+    //     {
+    //     title: "当前设备位置2",
+    //     point: "117.1863981,31.7696790",
+    //     address: "(117.183992,31.77341)"
+    //   },
+    // ];
+    // 绘制点
+    for (var i = 0; i < markerArr.length; i++) {
+      var p0 = markerArr[i].point.split(",")[0];
+      var p1 = markerArr[i].point.split(",")[1];
+      var maker = this.addMarker(new window.BMap.Point(p0, p1), i);
+      this.addInfoWindow(maker, markerArr[i], i);
+    }
+    this.onlineNum = online.length
+    this.offlineNum = offline.length
+    },
     prepare() {
+      var productAll = JSON.parse(window.localStorage.getItem("productNums"));
+      console.log(productAll)
       allProductKey().then(res => {
         this.productNum = res.data.productKeys.length;
         alldeviceKey().then(res => {
           this.deviceNum = res.data.deviceKeys.length;
           allDeviceStatus().then(res => {
             // console.log(res);
-            this.onlineNum = res.data.status.online;
-            this.offlineNum = res.data.status.offline;
+            // this.onlineNum = res.data.status.online;
+            // this.offlineNum = res.data.status.offline;
             this.echarts();
           });
         });
@@ -393,7 +322,7 @@ export default {
           {
             data: [
               {
-                value: this.deviceNum,
+                value: this.productNum,
                 itemStyle: {
                   color: "#62a0e6"
                 }
@@ -419,7 +348,11 @@ export default {
 
       option && myChart.setOption(option);
 
-
+var num1 = window.sessionStorage.getItem("num1")
+var num2 = window.sessionStorage.getItem("num2")
+var num3 = window.sessionStorage.getItem("num3")
+var num4 = window.sessionStorage.getItem("num4")
+var num5 = window.sessionStorage.getItem("num5")
       var chartDom1 = document.getElementById('pie');
 var myChart1= echarts.init(chartDom1);
 var option1;
@@ -441,9 +374,11 @@ option1 = {
       type: 'pie',
       radius: '50%',
       data: [
-        { value: 0, name: '脱落' },
-        { value: 0, name: '关机' },
-        { value: 0, name: '低电' },
+        { value: num1, name: '低电量' },
+        { value: num2, name: '关机' },
+        { value: num3, name: '摘掉设备' },
+        { value: num4, name: '震动报警' },
+        { value: num5, name: '表带破坏' },
       ],
       emphasis: {
         itemStyle: {
@@ -485,7 +420,12 @@ option1 && myChart1.setOption(option1);
       var marker = new BMap.Marker(point, {
         icon: myIcon
       });
-      this.map.addOverlay(marker);
+      //不理解，但确实可以解决报错问题
+           setTimeout(()=>{
+                                        this.map.addOverlay(marker);
+                                    },300)
+
+      // this.map.addOverlay(marker);
       return marker;
     },
     // 添加信息窗口

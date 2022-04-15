@@ -14,39 +14,41 @@
           </el-row>
         </el-col>
         <el-col :span="7">
-          <el-row :gutter="13" type="flex" align="middle" justify="end" style = "line-height: 20px;margin-top: 15px;">
+          <el-row
+            :gutter="13"
+            type="flex"
+            align="middle"
+            justify="end"
+            style="line-height: 20px;margin-top: 15px;"
+          >
             <el-col :span="2" :offset="10">
-              <el-badge :value="massage" :max="99" class="item" >
+              <el-badge :value="message" :max="99" class="item">
                 <router-link to="/device/alertData">
-                  <svg-icon icon-class="消息" 
-                />
+                  <svg-icon icon-class="消息" />
                 </router-link>
               </el-badge>
             </el-col>
-            <el-col :span="8" class="row" style = "cursor: pointer;">
-                <el-dropdown trigger="hover">
-              <svg-icon icon-class="用户" style="font-size: 15px" />
-              {{ name }}
-                     <el-dropdown-menu slot="dropdown">
-                                     <el-dropdown-item @click.native="userCenter">
-                 <span class="el-icon-user">个人中心</span>
+            <el-col :span="8" class="row" style="cursor: pointer;">
+              <el-dropdown trigger="hover">
+                <!-- <svg-icon icon-class="用户" style="font-size: 15px" /> -->
+                <i class = "el-icon-user"></i>
+                {{ name }}
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item @click.native="userCenter">
+                    <span class="el-icon-user">个人中心</span>
                   </el-dropdown-item>
                   <el-dropdown-item @click.native="logout">
-                    <span style="color: red" class="el-icon-switch-button"
-                      >注销</span
-                    >
-          
+                    <span style="color: red" class="el-icon-switch-button">注销</span>
                   </el-dropdown-item>
-           
                 </el-dropdown-menu>
               </el-dropdown>
             </el-col>
-          <el-col :span = "2">
-            <img src = "@/assets/img/警报1.png" alt = "警报1" @click = "openBell"/>
-          </el-col>
-          <el-col :span = "3">
-     <img src = "@/assets/img/sos1.png" alt = "sos1" @click = "openSos"/>
-          </el-col>
+            <el-col :span="2">
+              <img src="@/assets/img/警报1.png" alt="警报1" @click="openBell" />
+            </el-col>
+            <el-col :span="3">
+              <img src="@/assets/img/sos1.png" alt="sos1" @click="openSos" />
+            </el-col>
           </el-row>
         </el-col>
       </el-row>
@@ -59,32 +61,32 @@ import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
 import Hamburger from "@/components/Hamburger";
 import { getName } from "@/utils/auth";
-import { UnReadAlertNums } from "@/api/index";
+import { UnReadAlertNums, UserAllalert } from "@/api/index";
 export default {
   components: {
     Breadcrumb,
-    Hamburger,
+    Hamburger
   },
   data() {
     return {
-      massage: 0,
-      ring: [false,false],
+      message: 0,
+      ring: [false, false]
     };
   },
   computed: {
     ...mapGetters(["sidebar", "avatar"]),
     name() {
       return getName("name");
-    },
+    }
   },
   mounted() {
     this.alertMsg();
   },
   watch: {
-ring(r) {
-console.log(r);
-this.$emit("handleRing",r)
-}
+    ring(r) {
+      console.log(r);
+      this.$emit("handleRing", r);
+    }
   },
   methods: {
     toggleSideBar() {
@@ -95,24 +97,109 @@ this.$emit("handleRing",r)
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     },
     userCenter() {
-     this.$router.push({ path: "/user/index" });
+      this.$router.push({ path: "/user/index" });
     },
     alertMsg() {
-      UnReadAlertNums().then((res) => {
-        this.massage = res.data;
+      UnReadAlertNums().then(res => {
+        this.message = res.data;
+        var payload = {
+          asc: 0,
+          pageIndex: 1,
+          pageSize: 1
+        };
+        console.log(payload)
+        UserAllalert(payload).then(res => {
+          console.log(res)
+          var total = res.data.total;
+          window.sessionStorage.setItem("alertNum", total);
+          payload = {
+            asc: 0,
+            pageIndex: 1,
+            pageSize: total
+          };
+          console.log(payload)
+          UserAllalert(payload).then(res => {
+            console.log(res)
+            var alertInfo = res.data.alertInfo;
+            console.log(alertInfo)
+            //统计不同主题的设备数量
+            // 目前定为： 低电量 num1
+            // 关机 num2
+            // 摘掉设备 num3
+            // 震动报警 num4
+            // 表带破坏 num5
+            var alert1 = [];
+            var alert2 = [];
+            var alert3 = [];
+            var alert4 = [];
+            var alert5 = [];
+            var num1 = 0;
+            var num2 = 0;
+            var num3 = 0;
+            var num4 = 0;
+            var num5 = 0;
+            for (var i = 0; i < alertInfo.length; i++) {
+              if (alertInfo[i].subject == "低电量") {
+                alert1.push(alertInfo[i]);
+              }
+              if (alertInfo[i].subject == "关机") {
+                alert2.push(alertInfo[i]);
+              }
+              if (alertInfo[i].subject == "摘掉设备") {
+                alert3.push(alertInfo[i]);
+              }
+              if (alertInfo[i].subject == "震动报警") {
+                alert4.push(alertInfo[i]);
+              }
+              if (alertInfo[i].subject == "表带破坏") {
+                alert5.push(alertInfo[i]);
+              }
+            }
+            if (alert1 == []) {
+              num1 = 0;
+            } else {
+              num1 = alert1.length;
+            }
+            if (alert2 == []) {
+              num2 = 0;
+            } else {
+              num2 = alert2.length;
+            }
+            if (alert3 == []) {
+              num3 = 0;
+            } else {
+              num3 = alert3.length;
+            }
+            if (alert4 == []) {
+              num4 = 0;
+            } else {
+              num4 = alert4.length;
+            }
+            if (alert5 == []) {
+              num5 = 0;
+            } else {
+              num5 = alert5.length;
+            }
+            window.sessionStorage.setItem("num1", num1);
+            window.sessionStorage.setItem("num2", num2);
+            window.sessionStorage.setItem("num3", num3);
+            window.sessionStorage.setItem("num4", num4);
+            window.sessionStorage.setItem("num5", num5);
+          });
+        });
       });
     },
     openBell() {
-      this.ring.splice(0,1,!this.ring[0])
-      this.ring.splice(1,1,false)
-      console.log(this.ring)
+      this.ring.splice(0, 1, !this.ring[0]);
+      this.ring.splice(1, 1, false);
+      console.log(this.ring);
     },
     openSos() {
-         this.ring.splice(1,1,!this.ring[1])
-      this.ring.splice(0,1,false)
-      console.log(this.ring)
+      this.ring.splice(1, 1, !this.ring[1]);
+      this.ring.splice(0, 1, false);
+      console.log(this.ring);
     }
-  },
+  }
 };
 </script>
 
@@ -173,7 +260,6 @@ this.$emit("handleRing",r)
         }
       }
     }
-
 
     .avatar-container {
       margin-right: 30px;

@@ -83,19 +83,19 @@ export const constantRoutes = [
     }, ]
   },
   
-  // {
-  //   path: '/devices',
-  //   component: Layout,
-  //   children: [{
-  //     path: 'index',
-  //     name: 'Device',
-  //     component: () => import('@/views/Device/index'),
-  //     meta: {
-  //       title: '设备管理',
-  //       icon: '设备'
-  //     }
-  //   }]
-  // },
+  {
+    path: '/devices',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'Device',
+      component: () => import('@/views/Device/index'),
+      meta: {
+        title: '设备管理',
+        icon: '设备'
+      }
+    }]
+  },
   {
     path: '/fence',
     component: Layout,
@@ -182,7 +182,7 @@ export const constantRoutes = [
       hidden: true,
       component: () => import('@/views/Device/alertDevice/index'),
       meta: {
-        title: '今日报警信息',
+        title: '报警信息',
         icon: '设备'
       }
     }, ]

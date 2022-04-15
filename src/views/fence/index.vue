@@ -1,41 +1,70 @@
 <template>
-
   <el-container>
     <!-- 头部 -->
-    <el-header>
-      <el-page-header @back="goBack" content="电子围栏绘制">
-      </el-page-header>
+    <el-header style = "margin-top: 30px; height: 40px;">
+      <!-- <el-page-header @back="goBack" content="电子围栏绘制"></el-page-header> -->
+           <span style = "font-size: 20px; margin-left: 20px; color: #a38972" >电子围栏绘制与管理</span>
     </el-header>
 
     <!-- 中间 -->
     <el-main>
       <!-- 地图 -->
       <div id="map-container"></div>
+      <div id="mask" v-if = "maskShow">
+        <div id = "box">
+     <p id = "name" v-for = "(item,index) in this.fenceList" :key = "index">
+   <!-- {{item.da}} -->
+
+         <el-input placeholder="请输入电子围栏名字" v-model="input[index]" style = "width: 300px;">
+  </el-input>
+  <el-button type="primary"  @click = "nameShow(item,index)">确定</el-button>
+ 
+  
+     </p>
+      <el-button type="primary" @click = "maskFalse">取消</el-button>
+        </div>
+
+
+
+      </div>
+     
 
       <!-- 左侧操作区 -->
       <div class="s-control-l">
         <v-region @values="regionChange" class="form-control"></v-region>
         <el-button type="primary" size="small" style="margin-left:20px;" @click="drawRegion">绘制区域</el-button>
+        
       </div>
 
       <!-- 右侧操作区 -->
       <div class="s-control-r">
         <el-form :inline="true" class="demo-form-inline">
-          <el-form-item label="" style="margin-right:30px;">
-            <el-input v-model.lazy="keyword" placeholder="请输入地名" prefix-icon="el-icon-search" clearable>
-            <!-- v-model.lazy指失焦后绑定数字 -->
+          <el-form-item label style="margin-right:30px;">
+            <el-input
+              v-model.lazy="keyword"
+              placeholder="请输入地名"
+              prefix-icon="el-icon-search"
+              clearable
+            >
+              <!-- v-model.lazy指失焦后绑定数字 -->
             </el-input>
           </el-form-item>
-          <el-form-item label="">
+          <el-form-item label>
             <el-radio-group v-model="radioSelect" size="mini">
-              <el-radio-button label="none"><span class="s-icon s-icon-select"></span></el-radio-button>
-              <el-radio-button label="circle"><span class="s-icon s-icon-circle"></span>
+              <el-radio-button label="none">
+                <span class="s-icon s-icon-select"></span>
               </el-radio-button>
-              <el-radio-button label="polygon"><span class="s-icon s-icon-polygon"></span>
+              <el-radio-button label="circle">
+                <span class="s-icon s-icon-circle"></span>
               </el-radio-button>
-              <el-radio-button label="rectangle"><span class="s-icon s-icon-rectangle"></span>
+              <el-radio-button label="polygon">
+                <span class="s-icon s-icon-polygon"></span>
               </el-radio-button>
-               <el-radio-button label="polyline"><span class="s-icon s-icon-polyline"></span>
+              <el-radio-button label="rectangle">
+                <span class="s-icon s-icon-rectangle"></span>
+              </el-radio-button>
+              <el-radio-button label="polyline">
+                <span class="s-icon s-icon-polyline"></span>
               </el-radio-button>
             </el-radio-group>
           </el-form-item>
@@ -48,22 +77,37 @@
     <!-- 尾部 -->
     <el-footer>
       <el-row type="flex" class="row-bg" justify="end" style="margin:14px 0 0 0;">
-          <el-button type="primary" size="small" style="margin-left:20px;" @click="drawSelection">绘制已存在围栏</el-button>
-        <el-button type="" size="small" style="margin-left:20px;" @click="reset">清除</el-button>
+          <el-select v-model="selectedValue" placeholder="请选择"
+                    @change="changeFence(selectedValue)">
+    <el-option
+      v-for="item in options"
+      :key="item.fence.fenceName"
+      :label="item.fence.fenceName"
+      :value="item.fence.data">
+    </el-option>
+  </el-select>
+        <el-button
+          type="primary"
+          size="small"
+          style="margin-left:20px;"
+          @click="drawSelection"
+        >绘制已存在围栏</el-button>
+        <el-button type size="small" style="margin-left:20px;" @click="reset">清除</el-button>
         <el-button type="primary" size="small" style="margin-left:20px;" @click="saveHurdle">保存</el-button>
-      
       </el-row>
     </el-footer>
   </el-container>
-
 </template>
 
 <script>
 import { Message } from "element-ui";
-import {OtherUserDetail} from "@/api/admin";
+import { OtherUserDetail } from "@/api/admin";
+import {
+UserDetail,
+EditUser
+} from "@/api/admin";
 export default {
   name: "index",
-
   data() {
     return {
       pointsStrArr: [],
@@ -77,7 +121,7 @@ export default {
         fillColor: "#5E87DB", // 填充颜色。当参数为空时，圆形没有填充颜色
         strokeWeight: 2, // 边线宽度，以像素为单位
         strokeOpacity: 1, // 边线透明度，取值范围0-1
-        fillOpacity: 0.2, // 填充透明度，取值范围0-1
+        fillOpacity: 0.2 // 填充透明度，取值范围0-1
       },
       labelOptions: {
         borderRadius: "2px",
@@ -86,26 +130,37 @@ export default {
         color: "#703A04",
         fontSize: "12px",
         letterSpacing: "0",
-        padding: "5px",
+        padding: "5px"
       },
       map: null, // 百度地图
       drawingManager: null, // 鼠标绘制工具
       localSearch: null, // 地区检索
       region: {}, // 行政区域
-      localPoint:[
-        {lat: 40.72389848370573,lng: 117.03627987721553},
-        {lat: 40.72389848370573,lng: 117.16506095512597},
-        {lat: 40.59079133845712,lng: 117.16506095512597},
-        {lat: 40.59079133845712,lng: 117.03627987721553},
-           {lat: 40.72389848370573,lng: 117.03627987721553},
+      localPoint: [
+        { lat: 40.72389848370573, lng: 117.03627987721553 },
+        { lat: 40.72389848370573, lng: 117.16506095512597 },
+        { lat: 40.59079133845712, lng: 117.16506095512597 },
+        { lat: 40.59079133845712, lng: 117.03627987721553 },
+        { lat: 40.72389848370573, lng: 117.03627987721553 }
       ],
       localMarker1: 117.03627987721553,
       localMarker2: 40.723898483709,
       marker: null,
       marker1: null,
+      maskShow: false,
+      input: [],
+      fenceList: null,
+      lastFencedata: [],
+      date: "",
+      selectedValue: "",
+      value: "",
+      options: [],
+      outAlert: [],
     };
   },
-
+created() {
+ this.getFenceData();
+},
   watch: {
     // 绘制类型变更
     radioSelect(nval, oval) {
@@ -123,7 +178,7 @@ export default {
     keyword(nval, oval) {
       this.localSearch.clearResults();
       this.localSearch.search(nval);
-    },
+    }
   },
 
   mounted() {
@@ -131,7 +186,7 @@ export default {
     this.map = new BMap.Map("map-container", {
       enableMapClick: false,
       minZoom: 5,
-      maxZoom: 15,
+      maxZoom: 15
     });
     // 设置中心点坐标和地图级别
     this.map.centerAndZoom(
@@ -154,8 +209,8 @@ export default {
         drawingModes: [
           BMAP_DRAWING_RECTANGLE,
           BMAP_DRAWING_POLYGON,
-          BMAP_DRAWING_CIRCLE,
-        ],
+          BMAP_DRAWING_CIRCLE
+        ]
       },
       enableSorption: true, // 是否开启边界吸附功能
       sorptionDistance: 20, // 边界吸附距离
@@ -168,25 +223,44 @@ export default {
       polylineOptions: this.styleOptions, // 线的样式
       polygonOptions: this.styleOptions, // 多边形的样式
       rectangleOptions: this.styleOptions, // 矩形的样式
-      labelOptions: this.labelOptions, // label的样式
+      labelOptions: this.labelOptions // label的样式
     });
 
     // 实例化地区检索
     this.localSearch = new BMap.LocalSearch(this.map, {
-      renderOptions: { map: this.map, panel: "search-result" },
+      renderOptions: { map: this.map, panel: "search-result" }
     });
 
     // 加载围栏数据
     this.loadHurdle();
 
     //绘制点
-   this.marker= new BMap.Marker(new BMap.Point(this.localMarker1,this.localMarker2));
-   this.marker1 = new BMap.Point(this.localMarker1,this.localMarker2);
-   console.log(this.marker);
+    this.marker = new BMap.Marker(
+      new BMap.Point(this.localMarker1, this.localMarker2)
+    );
+    this.marker1 = new BMap.Point(this.localMarker1, this.localMarker2);
+    console.log(this.marker);
     this.map.addOverlay(this.marker);
+        setInterval(this.timer, 1000);
+  },
+    //在vue实例销毁之前清除定时器
+  beforeDestroy() {
+    if (this.date) {
+      clearInterval(this.timer);
+    }
   },
 
   methods: {
+    getFenceData() {
+      this.options = JSON.parse(window.sessionStorage.getItem("fenceList"))
+// UserDetail().then((res)=>{
+//   if (res.msg == "ok") {
+// this.options = res.data.extraInfo.fence
+//   } else {
+//     this.$message.error(res.msg)
+//   }
+// })
+    },
     // 清除地图覆盖物
     clearOverlays() {
       this.map.clearOverlays();
@@ -226,21 +300,23 @@ export default {
         this.drawingManager.getDrawingMode() === drawingType
       ) {
         this.drawingManager.close();
+        
       } else {
         this.drawingManager.setDrawingMode(drawingType);
-        this.drawingManager.open();
+        this.drawingManager.open();      
       }
+   
     },
 
     // 绘制行政区域
     drawRegion() {
       if (!this.region.value) {
-        this.$message.error('未选择任何行政区');
+        this.$message.error("未选择任何行政区");
         return;
-      }
+      } 
       this.radioSelect = "none";
       var bdary = new BMap.Boundary();
-      bdary.get(this.region.value, (rs) => {
+      bdary.get(this.region.value, rs => {
         //获取行政区域
         // this.map.clearOverlays(); //清除地图覆盖物
         var count = rs.boundaries.length; //行政区域的点有多少个
@@ -250,8 +326,9 @@ export default {
         }
         var pointArray = [];
         for (var i = 0; i < count; i++) {
-          // console.log(rs.boundaries[i]);
           var ply = new BMap.Polygon(rs.boundaries[i], this.styleOptions); //建立多边形覆盖物
+          console.log(ply)
+          ply.name = this.region.value;
           var str = JSON.stringify(ply.ia); //将BMap获取的行政区边界经纬度转为字符串
           this.map.addOverlay(ply); //添加覆盖物
           pointArray = pointArray.concat(ply.getPath());
@@ -263,7 +340,7 @@ export default {
 
     // 返回
     goBack() {
-      console.log("返回")
+      console.log("返回");
     },
 
     // 切换地区
@@ -273,23 +350,31 @@ export default {
     },
 
     // 加载围栏数据
-    async loadHurdle() {
-
-    },
+    async loadHurdle() {},
 
     // 保存围栏数据
     saveHurdle() {
       var overlays = this.map.getOverlays();
+      console.log(overlays)
+      this.fenceList = overlays.slice(1)
+      console.log(this.fenceList)
+      console.log(this.fenceList.length)
+      this.input = new Array(this.fenceList.length).fill('')
+      console.log(this.input)
+this.lastFencedata =[];
+
+      // console.log(overlays);
       this.pointsStrArr = [];
-      overlays.forEach((item) => {
+      this.fenceList.forEach(item => {
         console.log(item.ja);
         if (item.getPath) {
           var pointsStr = this.pointsToStr(item.getPath());
           pointsStr && this.pointsStrArr.push(pointsStr);
         }
       });
+      this.maskShow = true;
       if (this.pointsStrArr.length == 0) {
-        this.$message.error( "操作失败，您没用绘制任何有效区域");
+        this.$message.error("操作失败，您没用绘制任何有效区域");
         return;
       }
 
@@ -297,52 +382,159 @@ export default {
       const data = JSON.stringify(this.pointsStrArr);
       // console.log(data);
       // console.log(pointsStrArr);
-      alert(data);
+      // alert(data);
     },
 
     // 坐标点数组转字符串
     pointsToStr(points) {
       if (!points) return "";
       var str = "";
-      points.forEach((item) => {
+      points.forEach(item => {
         str += item.lng + "," + item.lat + ";";
       });
       return str.slice(0, -1);
     },
     //清空当前的围栏
     reset() {
-      console.log("清除当前围栏")
+      this.maskShow = false;
+      console.log("清除当前围栏");
       this.pointsStrArr = [];
-       this.map.clearOverlays(); //清除地图覆盖物
-       //这里本意是去除画了但不想要的围栏，但是这样操作之后会把点也给清除掉，所以在后面还需要再把点画上
-       this.marker= new BMap.Marker(new BMap.Point(this.localMarker1,this.localMarker2));
-       this.marker1 = new BMap.Point(this.localMarker1,this.localMarker2);
-    this.map.addOverlay(this.marker);
+      this.map.clearOverlays(); //清除地图覆盖物
+      //这里本意是去除画了但不想要的围栏，但是这样操作之后会把点也给清除掉，所以在后面还需要再把点画上
+      this.marker = new BMap.Marker(
+        new BMap.Point(this.localMarker1, this.localMarker2)
+      );
+      this.marker1 = new BMap.Point(this.localMarker1, this.localMarker2);
+      this.map.addOverlay(this.marker);
+    },
+    maskFalse() {
+this.maskShow = false;
     },
     //绘制选择的围栏，这里用本地数据测试
     drawSelection() {
- let polArry = [];
-       this.localPoint.forEach(item => {
-            let p = new BMap.Point(item.lng,item.lat);
-            polArry.push(p);
-        });
-console.log( polArry)
- var polygon = new BMap.Polygon(polArry,this.styleOptions);
-        this.map.addOverlay(polygon);
-var pointArray = [];
-pointArray = pointArray.concat(polygon.getPath());
- this.map.setViewport(pointArray); //调整视野
-  this.isInside(polygon);
+      let polArry = [];
+      this.localPoint.forEach(item => {
+        let p = new BMap.Point(item.lng, item.lat);
+        polArry.push(p);
+      });
+      console.log(polArry);
+      var polygon = new BMap.Polygon(polArry, this.styleOptions);
+      this.map.addOverlay(polygon);
+      var pointArray = [];
+      pointArray = pointArray.concat(polygon.getPath());
+      this.map.setViewport(pointArray); //调整视野
+      this.isInside(polygon);
+      console.log(polygon)
     },
     //判断点是否在已绘制的区域内
     isInside(p) {
- if(BMapLib.GeoUtils.isPointInPolygon(this.marker1,p)){
-　alert("目前在电子围栏");　　　　　　　
-        }else{    
-  alert("目前不在电子围栏内")
+      console.log(this.marker1)
+      console.log(p)
+      if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, p)) {
+        alert("目前在电子围栏");
+      } else {
+        alert("目前不在电子围栏内");
+      }
+    },
+    //确定围栏的名字
+    nameShow(item,index) {
+      console.log(this.date)
+      console.log(index)
+      console.log(this.input)
+      console.log(this.input[index])
+      if (this.input[index] =='') {
+        
+alert("电子围栏名字不能为空")
+      } else {
+      this.fenceList[index].name = this.input[index]
+      this.fenceList[index].updateAt = this.date
+      this.lastFencedata.push(this.fenceList[index])
+      this.fenceList.splice(index,1)
+      this.input.splice(index,1)
+      console.log(this.lastFencedata)
+      console.log(this.fenceList)
+      console.log(this.input)
+      if (this.fenceList.length == 0) {
+        //现在开始处理数据，把用户extraInfo的数据修改
+
+        this.maskShow = false;
+          this.map.clearOverlays(); 
+    // var obj = [];
+     console.log(this.lastFencedata)
+          UserDetail().then((res)=>{
+            console.log(res)
+                  var fenceData = res.data;
+       var obj = res.data.extraInfo.fence;
+              for (var i=0; i< this.lastFencedata.length;i++) {
+         var name =  this.lastFencedata[i].name;
+          this.lastFencedata[i].description= {}
+          this.lastFencedata[i].description.fence= {}
+          this.lastFencedata[i].description.fence.data= this.lastFencedata[i].ja
+          this.lastFencedata[i].description.fence.updateAt =  this.lastFencedata[i].updateAt
+       this.lastFencedata[i].description.fence.fenceName = this.lastFencedata[i].name
+      //  var obj1 = JSON.parse(JSON.stringify(this.lastFencedata[i].description).replace(/name/g,name))
+      //  console.log(obj1)
+       obj.push(this.lastFencedata[i].description)
+       }
+       console.log(obj)
+      fenceData.extraInfo.fence = obj;
+      console.log(fenceData) 
+      EditUser(fenceData).then((res)=>{
+        console.log(res)
+        if (res.msg == "ok") {
+          this.$message.success("创建成功")
         }
-    }  
-  },
+      })
+          })
+      }
+      }
+
+     
+    },
+
+      //将时间改成常见格式
+    timer() {
+      let year = new Date().getFullYear(); //获取当前时间的年份
+      let month =
+        new Date().getMonth + 1 < 10
+          ? "0" + (new Date().getMonth() + 1)
+          : new Date().getMonth() + 1; //获取当前的月份
+      let Day =
+        new Date().getDate() < 10
+          ? "0" + new Date().getDate()
+          : new Date().getDate(); //获取当前时间的天数、
+      let hours =
+        new Date().getHours() < 10
+          ? "0" + new Date().getHours()
+          : new Date().getHours(); //获取当前的小时数
+      let minutes =
+        new Date().getMinutes() < 10
+          ? "0" + new Date().getMinutes()
+          : new Date().getMinutes(); //获取当前时间的分数
+      let seconds =
+        new Date().getSeconds() < 10
+          ? "0" + new Date().getSeconds()
+          : new Date().getSeconds(); //获取当前时间的秒数
+      //拼接格式化当前时间
+      this.date =
+        year +
+        "年" +
+        month +
+        "月" +
+        Day +
+        "日" +
+        hours +
+        ":" +
+        minutes +
+        ":" +
+        seconds;
+    },
+changeFence(value) {
+  console.log(value);
+  this.localPoint = value;
+},
+
+  }
 };
 </script>
 
@@ -366,10 +558,38 @@ pointArray = pointArray.concat(polygon.getPath());
 }
 
 #map-container {
+  position: relative;
   width: 100%;
   height: 600px;
 }
+#mask {
+  position: absolute;
+  background-color: #fff;
+    width: 100%;
+  height: 600px;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+  z-index: 100;
+  /* display: none; */
+}
+#box {
+ position: absolute;
+  top: 100px;
+  left: 20px;
+}
+#name {
+  z-index: 999;
+  background-color: #fff;
+ 
+  opacity: 1;
+  border: 1px solid rgb(182, 179, 179);
+  color: black;
 
+
+}
+
+  
 #search-result {
   width: 400px;
 }
@@ -380,7 +600,7 @@ pointArray = pointArray.concat(polygon.getPath());
   position: absolute;
   left: 30px;
   top: 30px;
-  z-index: 100;
+  z-index: 10;
 }
 
 .s-control-r {
@@ -389,7 +609,7 @@ pointArray = pointArray.concat(polygon.getPath());
   position: absolute;
   right: 30px;
   top: 30px;
-  z-index: 100;
+  z-index: 10;
 }
 
 .s-search {
@@ -431,9 +651,9 @@ pointArray = pointArray.concat(polygon.getPath());
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAJFBMVEUAAAD///////////////////////////////////////////+0CY3pAAAAC3RSTlMAGjFNX32CoLPO5hUiNAEAAAABYktHRAsf18TAAAAAqklEQVRYw2NgGAWkg1mrIKAAtxJ2qJKVUP7q3RDQgFsLB1TJLjprURQUFPTGr2ULUIkQkhYBIGmNX8tmIMmIoQUvGGJayPA+SVqcjY2Ns/Fr2QZUYkL3BEOyloqOjt27Ozo6AnBrYe2AqGlHCO3eTTgnoqkZ1TKqZVTLqJZRLaNaRrWMahnVMqploLSQ0egdxJ1EMjoj9OkljfB+JRmd90GaxsgYVBkFpAAAyZJmP55ExscAAAAASUVORK5CYII=);
 }
 .s-icon.s-icon-polyline {
-  background-image: url('~@/assets/img/折线1.png')
+  background-image: url("~@/assets/img/折线1.png");
 }
 .el-radio-button.is-active .s-icon.s-icon-polyline {
-  background-image: url('~@/assets/img/折线2.png')
+  background-image: url("~@/assets/img/折线2.png");
 }
 </style>

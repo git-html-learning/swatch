@@ -14,14 +14,15 @@
     <div class="pop"
          v-show="show"
          key="2">
-      <!-- <h1>{{title}}</h1>
-      <p>{{content}}</p> -->
+      <!-- <h1>{{title}}</h1> -->
+    
      <audio
 		          ref="audio"
 		          src="@/assets/audio/报警.mp3"
               loop
 		        ></audio>
       <img src="@/assets/img/sos.png" alt=""> <br>
+        <p style = "font-szie: 24px; color: #ff412b">{{content}}</p>
       <button @click="btnClick">{{btnText}}</button>
 
     </div>
@@ -68,7 +69,7 @@ export default {
 
 .fade-enter,
 .fade-leave-active {
-  opacity: 0;
+  opacity: 0.5;
 }
 .fade-enter-active,
 .fade-leave-active {
