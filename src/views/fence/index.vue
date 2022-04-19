@@ -156,7 +156,7 @@ export default {
   created() {
     this.getFenceData();
       this.productList1 = JSON.parse(
-        window.sessionStorage.getItem("productList1")
+        window.localStorage.getItem("productList1")
       );
   },
   watch: {

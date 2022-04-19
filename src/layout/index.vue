@@ -257,7 +257,7 @@ export default {
               this.alertContent += "不在其对应的电子围栏内";
               alert(this.alertContent);
             }
-            window.sessionStorage.setItem(
+            window.localStorage.setItem(
               "productList1",
               JSON.stringify(this.productList1)
             );

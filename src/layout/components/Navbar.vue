@@ -43,12 +43,12 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </el-col>
-            <el-col :span="2">
+            <!-- <el-col :span="2">
               <img src="@/assets/img/警报1.png" alt="警报1" @click="openBell" />
             </el-col>
             <el-col :span="3">
               <img src="@/assets/img/sos1.png" alt="sos1" @click="openSos" />
-            </el-col>
+            </el-col> -->
           </el-row>
         </el-col>
       </el-row>
@@ -106,7 +106,7 @@ export default {
           if (res.msg = "ok") {
 var subjectCount = res.data.subjectCount
 var total = res.data.total;
-window.sessionStorage.setItem("subjectNum",JSON.stringify(subjectCount))
+window.localStorage.setItem("subjectNum",JSON.stringify(subjectCount))
 window.sessionStorage.setItem("total",JSON.stringify(total))
           } else {
             this.$message.error(res.msg)

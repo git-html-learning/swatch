@@ -192,7 +192,7 @@ export default {
   },
   methods: {
     deviceData() {
-      this.productList1 = JSON.parse(window.sessionStorage.getItem("productList1"))
+      this.productList1 = JSON.parse(window.localStorage.getItem("productList1"))
       console.log(this.productList1)
       var online = [];
       var offline = [];
@@ -348,7 +348,7 @@ var num2 = 0
 var num3 = 0
 var num4 = 0
 var num5 = 0
-var subjectNum =JSON.parse(window.sessionStorage.getItem("subjectNum")) 
+var subjectNum =JSON.parse(window.localStorage.getItem("subjectNum")) 
 if(subjectNum.低电量 !==undefined) {
  num1 = subjectNum.低电量
 }
