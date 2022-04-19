@@ -21,14 +21,14 @@
             justify="end"
             style="line-height: 20px;margin-top: 15px;"
           >
-            <el-col :span="2" :offset="10">
+            <el-col :span="6" :offset="10">
               <el-badge :value="message" :max="99" class="item">
                 <router-link to="/device/alertData">
                   <svg-icon icon-class="消息" />
                 </router-link>
               </el-badge>
             </el-col>
-            <el-col :span="8" class="row" style="cursor: pointer;">
+            <el-col :span="10" class="row" style="cursor: pointer;">
               <el-dropdown trigger="hover">
                 <!-- <svg-icon icon-class="用户" style="font-size: 15px" /> -->
                 <i class="el-icon-user"></i>
@@ -43,6 +43,8 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </el-col>
+            <el-col :span="8"></el-col>
+
             <!-- <el-col :span="2">
               <img src="@/assets/img/警报1.png" alt="警报1" @click="openBell" />
             </el-col>
