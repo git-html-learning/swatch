@@ -21,14 +21,14 @@
             justify="end"
             style="line-height: 20px;margin-top: 15px;"
           >
-            <el-col :span="6" :offset="10">
+            <el-col :span="4" :offset="10">
               <el-badge :value="message" :max="99" class="item">
                 <router-link to="/device/alertData">
                   <svg-icon icon-class="消息" />
                 </router-link>
               </el-badge>
             </el-col>
-            <el-col :span="10" class="row" style="cursor: pointer;">
+            <el-col :span="12" class="row" style="cursor: pointer;">
               <el-dropdown trigger="hover">
                 <!-- <svg-icon icon-class="用户" style="font-size: 15px" /> -->
                 <i class="el-icon-user"></i>
