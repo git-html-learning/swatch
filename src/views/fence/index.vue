@@ -149,11 +149,15 @@ export default {
       selectedValue: "",
       value: "",
       options: [],
-      outAlert: []
+      outAlert: [],
+      productList1: [],
     };
   },
   created() {
     this.getFenceData();
+      this.productList1 = JSON.parse(
+        window.sessionStorage.getItem("productList1")
+      );
   },
   watch: {
     // 绘制类型变更
@@ -345,7 +349,16 @@ export default {
     saveHurdle() {
       var overlays = this.map.getOverlays();
       console.log(overlays);
-      this.fenceList = overlays.slice(1);
+      console.log(overlays.length)
+      console.log(this.productList1.length)
+      var num = [];
+      this.productList1.forEach(item=>{
+        if(item.latestData.location !=="") {
+          num.push(item)
+        }
+      })
+      console.log(num.length)
+      this.fenceList = overlays.slice(num.length,3);
       console.log(this.fenceList);
       console.log(this.fenceList.length);
       this.input = new Array(this.fenceList.length).fill("");
@@ -521,10 +534,8 @@ export default {
     },
     //绘制手环的坐标的函数
     addPiont() {
-      var productList1 = JSON.parse(
-        window.sessionStorage.getItem("productList1")
-      );
-      productList1.forEach(item => {
+    
+      this.productList1.forEach(item => {
       
         if (item.latestData.location !== "") {
                    var marker = item.latestData.location.location;

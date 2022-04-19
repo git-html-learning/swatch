@@ -442,6 +442,15 @@ export function getDeviceDatas(data) {
 }
 
 
+//查询指定设备的历史数据
+export function historyData(data) {
+  return request({
+    url: '/api/v1/historyData',   
+    method: 'post',
+    data
+  })
+}
+
 //电信云注册设备
 export function cloudDevcieRegister(simId,deviceType,deviceName) {
   return request({

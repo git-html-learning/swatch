@@ -60,12 +60,12 @@ export default {
     },
     latestAlert() {
       if (this.latestAlert.length != 0) {
-        this.btnClick1();
+        this.btnClick0();
       }
     },
     sosMessage() {
       if (this.sosMessage == "SOS") {
-        this.btnClick0();
+        this.btnClick1();
       }
     }
   },
@@ -91,10 +91,12 @@ export default {
       };
     }
   },
-  methods: {
+  methods: { 
     initWebSocket() {
-      this.websock = new WebSocket("ws://smartwatch.ahusmart.com/api/v1/ws"); //这个连接ws://固定，后面的根据自己的IP和端口进行改变，我设置监听的就是8081
+      this.websock = new WebSocket("wss://smartwatch.ahusmart.com/api/v1/ws"); //这个连接ws://固定，后面的根据自己的IP和端口进行改变，我设置监听的就是8081
+      console.log(this.websock)
       this.websock.onmessage = this.websocketonmessage;
+    
       this.websock.onerror = this.websocketonerror;
       this.websock.onopen = this.websocketonopen;
       this.websock.onclose = this.websocketclose;
@@ -138,6 +140,7 @@ export default {
       });
       allProductKey().then(res => {
         if (res.msg == "ok") {
+          console.log(res)
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
           getDeviceDatas({
@@ -145,9 +148,8 @@ export default {
             pkList: this.productNameList,
             startTime: 100000
           }).then(res => {
-            // console.log(res);
+            console.log(res);
             this.productList1 = res.data;
-            // console.log(this.productList1);
             // this.loading = false;
 
             this.productList1.forEach(item => {
@@ -222,7 +224,7 @@ export default {
 
               // console.log(item.deviceData.length)
             });
-            // console.log(this.productList1);
+            console.log(this.productList1);
             this.productList1.forEach(item => {
               if (item.latestData.location !== "") {
                 var marker = item.latestData.location.location;

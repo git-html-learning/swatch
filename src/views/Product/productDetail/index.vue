@@ -51,7 +51,7 @@
           </el-input>
         </el-col>
         <el-col :span="24" style="text-align: center;margin-top: 20px;">
-          <e-button class="pan-btn tiffany-btn" @click="detail">查看手环详情</e-button>
+          <el-button class="pan-btn tiffany-btn" @click="detail">查看手环详情</el-button>
           <!-- <router-link class="pan-btn tiffany-btn" to="/pageDetail/index"> </router-link> -->
         </el-col>
       </el-row>
@@ -215,6 +215,8 @@ export default {
     },
     detail() {
       this.$router.push({path: '/pageDetail/index'})
+      // console.log(this.product)
+      window.sessionStorage.setItem("whichProduct",JSON.stringify(this.product))
     }
   },
   props: ["productdetail", "condition"]

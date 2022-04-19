@@ -193,6 +193,7 @@ export default {
   methods: {
     deviceData() {
       this.productList1 = JSON.parse(window.sessionStorage.getItem("productList1"))
+      console.log(this.productList1)
       var online = [];
       var offline = [];
             var positionList = [];
