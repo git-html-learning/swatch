@@ -36,15 +36,20 @@ export default {
       sosMessage: "",
       marker1: null,
       fenceList: [],
-      alertContent: ""
+      alertContent: "",
+      date: ""
     };
   },
   mounted() {
     this.initWebSocket(); //页面渲染的时候，对ws进行初始化
     this.timer = setInterval(this.deviceData, 60000);
+    setInterval(this.timer1, 1000);
   },
   beforeDestroy() {
     clearInterval(this.timer);
+    if (this.date) {
+      clearInterval(this.timer1);
+    }
   },
   created() {
     this.deviceData();
@@ -59,7 +64,7 @@ export default {
       }
     },
     latestAlert() {
-      if (this.latestAlert.length != 0) {
+      if (this.latestAlert.length !== 0) {
         this.btnClick0();
       }
     },
@@ -91,12 +96,12 @@ export default {
       };
     }
   },
-  methods: { 
+  methods: {
     initWebSocket() {
       this.websock = new WebSocket("wss://smartwatch.ahusmart.com/api/v1/ws"); //这个连接ws://固定，后面的根据自己的IP和端口进行改变，我设置监听的就是8081
-      console.log(this.websock)
+      console.log(this.websock);
       this.websock.onmessage = this.websocketonmessage;
-    
+
       this.websock.onerror = this.websocketonerror;
       this.websock.onopen = this.websocketonopen;
       this.websock.onclose = this.websocketclose;
@@ -118,13 +123,17 @@ export default {
       // 数据接收
       console.log(e);
       this.sosMessage = JSON.parse(e.data).content;
-      console.log(this.sosMessage)
+      console.log(this.sosMessage);
     },
     // websocketclose (e) {  // 关闭连接
     // 	console.log('已关闭连接', e)
     // },
     //获取手环信息函数，因为需要不断检测判定体温和心率判断是否报警，所以要不断请求
     // 10s请求一次
+    timer1() {
+      this.date = Math.round(new Date().getTime() / 1000);
+      // console.log(this.date)
+    },
     deviceData() {
       this.outAlert = [];
       UserDetail().then(res => {
@@ -140,7 +149,7 @@ export default {
       });
       allProductKey().then(res => {
         if (res.msg == "ok") {
-          console.log(res)
+          console.log(res);
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
           getDeviceDatas({
@@ -170,6 +179,7 @@ export default {
                 } else {
                   item.latestData.fence = "-";
                 }
+                console.log(item);
                 if (item.deviceName.includes("BA")) {
                   item.latestData.body =
                     item.deviceData[
@@ -228,12 +238,12 @@ export default {
             this.productList1.forEach(item => {
               if (item.latestData.location !== "") {
                 var marker = item.latestData.location.location;
-               var array=marker.split(",");
+                var array = marker.split(",");
                 this.marker1 = new BMap.Point(array[0], array[1]);
                 // 之前直接写 var polygon = new BMap.Polygon(item.latestData),返回的
                 // 全部是不在围栏内
                 //所以以下的数据处理是很是重要的
-                var  polArry = [];
+                var polArry = [];
                 item.latestData.fence.forEach(item1 => {
                   var p = new BMap.Point(item1.lng, item1.lat);
                   polArry.push(p);
@@ -270,22 +280,30 @@ export default {
                 productName: this.productList1[i].productName,
                 alertData: []
               };
-              if (this.productList1[i].latestData.body !== "-") {
-                if (
-                  this.productList1[i].latestData.body > 37 ||
-                  this.productList1[i].latestData.body < 35
-                ) {
-              
-                  obj.alertData.push({ alert: "温度报警" });
-                }
-              }
-              if (this.productList1[i].latestData.heartRate !== "-") {
-                if (
-                  this.productList1[i].latestData.heartRate > 100 ||
-                  this.productList1[i].latestData.heartRate < 60
-                ) {
-         
-                  obj.alertData.push({ alert: "心率报警" });
+              //温度和心率报警
+              this.date = Math.round(new Date().getTime() / 1000);
+              // console.log(this.productList1[i].latestData.heart);
+              if (this.productList1[i].latestData.heart !== "-") {
+                // console.log(this.date - this.productList1[i].latestData.heart);
+                if (this.date - this.productList1[i].latestData.heart <= 7200) {
+                  // console.log("wer")
+                  if (this.productList1[i].latestData.body !== "-") {
+                    if (
+                      this.productList1[i].latestData.body > 37 ||
+                      this.productList1[i].latestData.body < 35
+                    ) {
+                      obj.alertData.push({ alert: "温度报警" });
+                    }
+                  }
+                  if (this.productList1[i].latestData.heartRate !== "-") {
+                    //  console.log(this.productList1)
+                    if (
+                      this.productList1[i].latestData.heartRate > 100 ||
+                      this.productList1[i].latestData.heartRate < 60
+                    ) {
+                      obj.alertData.push({ alert: "心率报警" });
+                    }
+                  }
                 }
               }
               this.alertMessage.push(obj);

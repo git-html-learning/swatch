@@ -292,24 +292,24 @@ this.currentPage=1,
                 productName: this.productList1[i].productName,
                 alertData: []
               };
-              if (this.productList1[i].latestData.body !== "-") {
-                if (
-                  this.productList1[i].latestData.body > 37 ||
-                  this.productList1[i].latestData.body < 35
-                ) {
-                  console.log("体温");
-                  obj.alertData.push({ alert: "温度报警" });
-                }
-              }
-              if (this.productList1[i].latestData.heartRate !== "-") {
-                if (
-                  this.productList1[i].latestData.heartRate > 100 ||
-                  this.productList1[i].latestData.heartRate < 60
-                ) {
-                  console.log("心率");
-                  obj.alertData.push({ alert: "心率报警" });
-                }
-              }
+              // if (this.productList1[i].latestData.body !== "-") {
+              //   if (
+              //     this.productList1[i].latestData.body > 37 ||
+              //     this.productList1[i].latestData.body < 35
+              //   ) {
+              //     console.log("体温");
+              //     obj.alertData.push({ alert: "温度报警" });
+              //   }
+              // }
+              // if (this.productList1[i].latestData.heartRate !== "-") {
+              //   if (
+              //     this.productList1[i].latestData.heartRate > 100 ||
+              //     this.productList1[i].latestData.heartRate < 60
+              //   ) {
+              //     console.log("心率");
+              //     obj.alertData.push({ alert: "心率报警" });
+              //   }
+              // }
               this.alertMessage.push(obj);
             }
             console.log(this.alertMessage);
