@@ -4,6 +4,12 @@
     <!-- viewMoreproduct的值为true时，弹框显示，false弹框隐藏 -->
     <!-- .sync是同步动态双向的来表示visible的值,关闭窗口的时候，弹框隐藏了，visible的值发生了变化 -->
     <!-- visible.sync的原理，用于子组件修改父组件中的值，实现双向绑定功能。 -->
+    <div
+      id="background"
+      style="position: absolute; z-index: -1; width:100%; height:100%; top:0px; left:0px;   background-color: rgba(227, 241, 247,0.1)"
+    >
+      <!-- <img src="./主页背景.png" width="100%" height="100%" /> -->
+    </div>
     <el-dialog :title="diglogTitle" :visible.sync="viewMoreproduct" :before-close="detailproduct">
       <!-- before-close：关闭前的回调，会暂停 Dialog 的关闭 -->
 
@@ -14,7 +20,7 @@
         <!-- Card 组件包括header和body部分，header部分需要有显式具名 slot 分发，同时也是可选的。 -->
         <div slot="header" style="margin-bottom: 50px">
           <el-col :span="3" class="text-center">
-            <router-link class="pan-btn green-btn" to="/product/createProduct">创建手环</router-link>
+            <router-link class="btn" to="/product/createProduct">创建手环</router-link>
           </el-col>
         </div>
         <!-- data绑定的数据是搜索筛选的数据 -->
@@ -78,7 +84,7 @@
             <el-table-column align="center" label="电子围栏"  prop="extraInfo.fence" ></el-table-column>
 
             <!-- 按钮 -->
-            <el-table-column align="center" label="操作" >
+            <el-table-column align="center" label="操作" min-width = "120">
               <template slot-scope="scope">
                 <el-button
                   type="success"
@@ -420,10 +426,19 @@ this.currentPage=1,
 };
 </script>
 
-<style scoped>
+<style lang= "scss" scoped>
 .mixin-components-container {
   padding: 10px;
   /* min-height: calc(100vh - 84px); */
+}
+.box-card {
+                           z-index:50;
+          /* background-color: rgba(0,0,0,.1); */
+          background-color: transparent;
+            background-size: 100% 100%;
+            backdrop-filter: blur(15px);
+             box-shadow: 3px 3px 10px  rgba(93, 93, 93,0.5);
+            border-radius: 15px;
 }
 .component-item {
   min-height: 100px;
@@ -432,9 +447,35 @@ this.currentPage=1,
   margin: 5px auto;
   text-align: center;
 }
-/deep/ .el-dialog {
-  /* transform: scale(0.65, 0.85); */
-  /* margin-top: 0; */
-  /* padding-left: 20%; */
+.btn {
+  padding: 15px 20px;
+  line-height: 50px;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #00a29a;
+  color: #fff;
 }
+.btn:hover {
+  background-color: #fff;
+  color: #00a29a;
+  border-radius: 0px;
+  border-bottom: 2px solid #00a29a;
+  border-top: 2px solid #00a29a;
+}
+::v-deep .el-table__expanded-cell {
+  background-color: transparent !important;
+}
+
+::v-deep .el-table th,
+::v-deep .el-table tr,
+::v-deep .el-table td {
+  background-color: transparent;
+}
+.el-table::before {
+	 left: 0;
+	 bottom: 0;
+	 width: 100%;
+	 height: 0px;
+}
+
 </style>

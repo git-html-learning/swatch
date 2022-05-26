@@ -240,6 +240,15 @@ export function alertNums(payload) {
 }
 
 
+//根据时间段查询用户报警信息
+export function alertbyTime(data) {
+  return request({
+    url: '/api/v1/userAlertInfos/byTime',
+    method: 'post',
+    data
+  })
+}
+
 
 //获取指定设备模板
 export function deviceTemplate(payload) {
@@ -303,6 +312,25 @@ export function NewDeviceDataOne(payload) {
     }
   })
 }
+
+
+//查看设备指定数量的记录
+export function historyDataNum(productKey,deviceKey) {
+  return request({
+    url: '/api/v1/recentData',
+    method: 'post',
+    data: {
+ 
+        productKey: productKey,
+        deviceKey: deviceKey,
+        num:10, 
+        asc:0
+
+    }
+  })
+}
+
+
 // 获取多设备最新一条数据
 export function DeviceNewDatas(payload) {
   return request({
@@ -386,6 +414,20 @@ export function DeleteAlerts(payload) {
     data: {
       "alertIds":payload
 
+    }
+  })
+}
+
+
+//获取设备报警时间分布
+export function alarmDistribution(nowTime) {
+  return request({
+    url: '/api/v1/alertDistribution',
+    method: 'post',
+    data: {
+        "startTime":100,
+        "endTime":nowTime,
+        "interval":"day"
     }
   })
 }

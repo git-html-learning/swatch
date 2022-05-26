@@ -1,9 +1,15 @@
 <template>
     <div class="layout">
+            <div
+      id="background"
+      style="position: absolute; z-index: -1; width:100%; height:100%; top:0px; left:0px;   background-color: rgba(227, 241, 247,0.3)"
+    >
+      <!-- <img src="./主页背景.png" width="100%" height="100%" /> -->
+    </div>
     <el-header>
       <el-page-header @back="goBack" content="电子围栏列表"></el-page-header>
     </el-header>
-        <div class="body">
+        <el-card class="body">
             <el-table :data="fenceList"
             stripe 
                  :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
@@ -30,7 +36,7 @@
           </template>
         </el-table-column>
             </el-table>
-        </div>
+        </el-card>
        
     </div>
 </template>
@@ -87,10 +93,18 @@ this.$router.push({ path: '/fence/index' })
 }
 </script>
 
-<style scoped>
+<style lang = "scss" scoped>
     .layout {
 padding: 20px 30px;
 height: 80vh;
 width: 100%;
+}
+.body {
+                           z-index:50;
+          background-color: rgba(255,255,255,.1);
+            background-size: 100% 100%;
+            backdrop-filter: blur(15px);
+             box-shadow: 2px 2px 10px  rgba(93, 93, 93,0.5);
+            border-radius: 15px;
 }
 </style>

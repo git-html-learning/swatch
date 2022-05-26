@@ -37,7 +37,7 @@ export default {
       marker1: null,
       fenceList: [],
       alertContent: "",
-      date: ""
+      date: "",
     };
   },
   mounted() {
@@ -150,6 +150,7 @@ export default {
       allProductKey().then(res => {
         if (res.msg == "ok") {
           console.log(res);
+     
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
           getDeviceDatas({
@@ -158,6 +159,7 @@ export default {
             startTime: 100000
           }).then(res => {
             console.log(res);
+
             this.productList1 = res.data;
             // this.loading = false;
 

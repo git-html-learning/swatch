@@ -16,20 +16,20 @@
             <!-- {{item.da}} -->
 
             <el-input placeholder="请输入电子围栏名字" v-model="input[index]" style="width: 300px;"></el-input>
-            <el-button type="primary" @click="nameShow(item,index)">确定</el-button>
+            <el-button type="primary" @click="nameShow(item,index)" style = "background-color: #00a29a">确定</el-button>
           </p>
-          <el-button type="primary" @click="maskFalse">取消</el-button>
+          <el-button type="primary" @click="maskFalse" style = "background-color: #00a29a">取消</el-button>
         </div>
       </div>
 
       <!-- 左侧操作区 -->
-      <div class="s-control-l">
+      <div class="s-control-l" style = "margin-left: 7%;">
         <v-region @values="regionChange" class="form-control"></v-region>
-        <el-button type="primary" size="small" style="margin-left:20px;" @click="drawRegion">绘制区域</el-button>
+        <el-button type="success" size="small" style="margin-left:20px; background-color: #00a29a" @click="drawRegion">绘制区域</el-button>
       </div>
 
       <!-- 右侧操作区 -->
-      <div class="s-control-r">
+      <div class="s-control-r" style = "float: right; margin-right: 7%;">
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item label style="margin-right:30px;">
             <el-input
@@ -42,7 +42,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label>
-            <el-radio-group v-model="radioSelect" size="mini">
+            <el-radio-group v-model="radioSelect" size="mini" fill = "#00a29a">
               <el-radio-button label="none">
                 <span class="s-icon s-icon-select"></span>
               </el-radio-button>
@@ -67,7 +67,7 @@
     </el-main>
 
     <!-- 尾部 -->
-    <el-footer class="footer">
+    <el-footer class="footer" style = "float: right; margin-right: 8%;">
       <el-row type="flex" class="row-bg" justify="end" style="margin:14px 0 0 0;">
         <el-select
           v-model="selectedValue"
@@ -84,11 +84,11 @@
         <el-button
           type="primary"
           size="small"
-          style="margin-left:20px;"
+          style="margin-left:20px; background-color: #00a29a"
           @click="drawSelection"
-        >绘制电子围栏</el-button>
+        >绘制已有电子围栏</el-button>
         <el-button type size="small" style="margin-left:20px;" @click="reset">清除</el-button>
-        <el-button type="primary" size="small" style="margin-left:20px;" @click="saveHurdle">保存</el-button>
+        <el-button type="primary" size="small" style="margin-left:20px;background-color: #00a29a" @click="saveHurdle">保存</el-button>
       </el-row>
     </el-footer>
   </el-container>
@@ -581,8 +581,11 @@ export default {
 
 #map-container {
   position: relative;
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
   height: 600px;
+ border-radius: 15px;
+
 }
 #mask {
   position: absolute;

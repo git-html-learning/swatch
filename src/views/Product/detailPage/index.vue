@@ -25,7 +25,7 @@
         <div v-if = "!show1">
           <p style = "text-align: center; margin-top: 100px;"> 
                 <img src="@/assets/img/无数据2.png" alt=""> <br>
-          当前没有历史数据
+          近两天没有历史数据
           </p>
         </div>
       </el-card>
@@ -36,7 +36,7 @@
                 <div v-if = "!show2">
           <p style = "text-align: center; margin-top: 100px;"> 
                 <img src="@/assets/img/暂无数据.png" alt=""> <br>
-          当前没有历史数据
+          近一天没有历史数据
           </p>
         </div>
         </el-card>
@@ -46,7 +46,7 @@
                 <div v-if = "!show3">
           <p style = "text-align: center; margin-top: 100px;"> 
                 <img src="@/assets/img/暂无数据.png" alt=""> <br>
-          当前没有历史数据
+          近一天没有历史数据
           </p>
         </div>
         </el-card>
@@ -168,7 +168,7 @@ export default {
                     this.polylinePath.push(item1.position);
                   });
                 } else {
-                  this.$message.error(res.msg)
+                  console.log(res.msg)
                   this.show1 = false
                 }
               });
@@ -215,7 +215,7 @@ export default {
                   // console.log(this.wenduList)
                   this.echarts1();
                 } else {
-                  this.$message.error(res.msg);
+                  console.log(res.msg);
                    this.show2 = false
                 }
               });
@@ -272,7 +272,7 @@ export default {
                   // console.log(this.wenduList)
                   this.echarts2();
                 } else {
-                  this.$message.error(res.msg);
+                  console.log(res.msg);
                    this.show3 = false
                 }
               });

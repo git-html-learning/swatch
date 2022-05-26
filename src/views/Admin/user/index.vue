@@ -102,7 +102,7 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('userData')"
+            <el-button type="primary" @click="submitForm('userData')" style = "background-color:#00a098 "
               >更新用户信息</el-button
             >
           </el-form-item>
@@ -261,6 +261,12 @@ export default {
   width: 70%;
   min-height: 200px;
   text-align: center;
+                         z-index:50;
+          background-color: rgba(255,255,255,.1);
+            background-size: 100% 100%;
+            backdrop-filter: blur(15px);
+             box-shadow: 2px 2px 10px  rgba(93, 93, 93,0.5);
+            border-radius: 15px;
   .form {
     padding: 30px;
   }
@@ -268,6 +274,7 @@ export default {
 @media (max-width: 768px)  {
 .content{
   width: 80%;
+
 }
 }
 </style>

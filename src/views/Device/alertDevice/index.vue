@@ -4,7 +4,7 @@
       <div slot="header">
         <el-row type="flex" justify="end">
           <el-col :span="20">
-            <h3>今日报警信息</h3>
+            <h3>报警信息统计</h3>
           </el-col>
           <el-col :span="2">
             <el-button type="danger" size="mini" @click="deleteRead" plain
