@@ -43,26 +43,13 @@ export const constantRoutes = [
       name: 'Home',
       component: () => import('@/views/Home/index'),
       meta: {
-        title: '主页',                // 设置该路由在侧边栏和面包屑中展示的名字
+        title: '首页',                // 设置该路由在侧边栏和面包屑中展示的名字
         icon: '主页'                  // 设置该路由的图标
       }
     }]
   }, 
   
-  {
-    path: '/products',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'Product',
-      component: () => import('@/views/Product/index'),
-      meta: {
-        title: '产品管理',
-        icon: '产品'
-      },
-    },
-  ]
-  },
+ 
   {
     path: '/pageDetail',
     component: Layout,
@@ -125,22 +112,36 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        name: '主页',
+        name: '围栏管理',
         component: () => import('@/views/fence/index'),
         meta: {
-          title:'主页',
+          title:'围栏管理',
         }
       },
       {
         path: 'details',
-        name: '详情页',
+        name: '围栏列表',
         component: ()=>import('@/views/fence/details'),
         meta: {
-          title:'详情页',
+          title:'围栏列表',
         },
       },
   
     ]
+  },
+  {
+    path: '/products',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'Product',
+      component: () => import('@/views/Product/index'),
+      meta: {
+        title: '产品管理',
+        icon: '产品'
+      },
+    },
+  ]
   },
   {
     path: '/device',

@@ -9,22 +9,15 @@ $yellow:#FEC171;
 $panGreen: #30B08F;
 
 // sidebar
-$menuText:#82a1a8;
-$menuActiveText:#4AB7BD;
-$subMenuActiveText:#30B08F; // https://github.com/ElemeFE/element/issues/12951
+$menuText:#bfcbd9;
+$menuActiveText:#409EFF;
+$subMenuActiveText:#f4f4f5; // https://github.com/ElemeFE/element/issues/12951
 
-// $menuBg:#304156;   //菜单整体颜色
-// $menuHover:#263445;    //菜单悬浮变色
+$menuBg:#304156;
+$menuHover:#263445;
 
-// $subMenuBg:#1f2d3d;    //子菜单背景
-// $subMenuHover:#001528;    //子菜单悬浮背景
-
-
-$menuBg:rgba(227, 241, 247,0.1);//侧边栏背景/hover/标题颜色 -高亮深紫蓝
-$menuHover:#f2f4ff;
-
-$subMenuBg:#fff;//展开里面背景色/hover颜色
-$subMenuHover:#f2f4ff;
+$subMenuBg:#1f2d3d;
+$subMenuHover:#001528;
 
 
 $sideBarWidth: 198px;

@@ -9,11 +9,12 @@
     :style="{width: '100%', height: '100%'}"
   >
       <el-carousel class = "carousel" :autoplay="autoplay">
-      <el-carousel-item   id="chart">
-
+      <el-carousel-item  >
+        <!-- <p class = "title">wer</p> -->
+<div  id="chart" style = "margin-top: 30px;"></div>
       </el-carousel-item>
-        <el-carousel-item id="chart1">
-      心率
+        <el-carousel-item >
+<div id="chart1"  style = "margin-top: 30px;"></div>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -210,7 +211,7 @@ export default {
                 type: "category",
                 boundaryGap: false,
                 name: "时间",
-                axisLine: { show: true, lineStyle: { color: "#61a0a8" } },
+                axisLine: { show: true, lineStyle: { color: "#fff" } },
                 axisLabel: {
                   //   interval: "auto",
                   formatter: function(value) {
@@ -246,10 +247,19 @@ export default {
         var chartDom = document.getElementById("chart");
         var myChart = echarts.init(chartDom);
         var option;
-        var colors = ["#6ac2bb", "#c66e5c", "#5EBEFC", "#2EF7F3", "#FFFFFF"];
+        var colors = ["#e935d3", "#3172ef", "#5EBEFC", "#2EF7F3", "#FFFFFF"];
         var legendData = ["体温", "手腕温度"];
         option = {
+        
           baseOption: {
+
+        grid:{
+                    x:25,
+                    y:45,
+                    x2:5,
+                    y2:20,
+                    borderWidth:3
+                },
             timeline: {
               symbol: "diamond",
               show: true,
@@ -269,15 +279,12 @@ export default {
               },
 
               checkpointStyle: { symbolSize: 8 },
-              // axisType: "value",
-              // autoPlay: true,
-              // playInterval: 5000,
               tooltip: {
                 show: true
               },
 
               label: {
-                  color: "#4A95FF",
+                  color: "#fff",
                 fontSize: 8,
                 position: 10,
               //   formatter: function(s) {
@@ -320,10 +327,10 @@ export default {
             },
             color: colors,
             grid: {
-              left: "2%",
-              top: "15%",
-              bottom: "25%",
-              right: "7%",
+              left: "5%",
+              right: "8%",
+              top: "12%",
+              bottom: "21%",
               containLabel: true
             },
             legend: {
@@ -341,8 +348,8 @@ export default {
                 name: "单位:°C",
                 axisTick: { show: false },
                 splitLine: { show: false },
-                axisLabel: { textStyle: { color: "#9aa8d4", fontSize: 10 } },
-                axisLine: { show: true, lineStyle: { color: "#61a0a8" } }
+                axisLabel: { textStyle: { color: "#fff", fontSize: 13 } },
+                axisLine: { show: true, lineStyle: { color: "#fff" } }
               }
             ]
           },
@@ -389,7 +396,6 @@ export default {
           //       }
           //   }
           item.forEach(item1 => {
-            console.log(item1)
             heartRate.name = item1.date;
             heartRate.value = item1.extraInfo.BPHeart;
             bphigh.name = item1.date;
@@ -417,7 +423,7 @@ export default {
                 type: "category",
                 boundaryGap: false,
                 name: "时间",
-                axisLine: { show: true, lineStyle: { color: "#61a0a8" } },
+                axisLine: { show: true, lineStyle: { color: "#fff" } },
                 axisLabel: {
                   //   interval: "auto",
                   formatter: function(value) {
@@ -458,7 +464,7 @@ export default {
         var chartDom1 = document.getElementById("chart1");
         var myChart1 = echarts.init(chartDom1);
         var option1;
-        var colors = ["#00a098", "#fa9981", "#78b8d5", "#2EF7F3", "#FFFFFF"];
+        var colors = ["#d92279", "#f5eb45", "#78b8d5", "#2EF7F3", "#FFFFFF"];
         var legendData = ["心率", "收缩压","舒张压"];
         option1 = {
           baseOption: {
@@ -529,11 +535,11 @@ export default {
             yAxis: [
               {
                 type: "value",
-                name: "单位:°C",
+                name: "单位:  次/分",
                 axisTick: { show: false },
                 splitLine: { show: false },
-                axisLabel: { textStyle: { color: "#9aa8d4", fontSize: 10 } },
-                axisLine: { show: true, lineStyle: { color: "#61a0a8" } }
+                axisLabel: { textStyle: { color: "#9aa8d4", fontSize: 13 } },
+                axisLine: { show: true, lineStyle: { color: "#fff" } }
               }
             ]
           },
@@ -546,13 +552,25 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang = "scss" scoped>
 #chart {
   width: 100%;
   height: 98%;
 }
 .carousel {
      width: 100%;
-  height: 110%;
+  height: 120%;
+  .title {
+       height: 10%;
+    width: 100%;
+  }
+  #chart {
+    height: 90%;
+    width: 100%;
+  }
+    #chart1 {
+    height: 90%;
+    width: 100%;
+  }
 }
 </style>

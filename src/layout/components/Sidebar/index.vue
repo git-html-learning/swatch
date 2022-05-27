@@ -57,12 +57,11 @@ export default {
 <style scoped>
   .box {
     padding-top: 10px;
-    margin-left: 2px;
                 z-index:50;
           background-color: transparent;
             background-size: 100% 100%;
             backdrop-filter: blur(15px);
              /* box-shadow: 1px 1px 10px  rgba(93, 93, 93,0.5); */
-            border-radius: 15px;
+            border-top-right-radius: 15px;
   }
 </style>
