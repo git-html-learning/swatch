@@ -173,14 +173,7 @@ export default {
           console.log(item);
           var body1 = [];
           var skin1 = [];
-          var body = {
-            name: "",
-            value: ""
-          };
-          var skin = {
-            name: "",
-            value: ""
-          };
+  
           //   var time = {
           //       value: index,
           //       tooltip: {
@@ -188,20 +181,26 @@ export default {
           //       }
           //   }
           item.forEach(item1 => {
-            body.name = item1.date;
-            body.value = item1.extraInfo.body;
-            skin.name = item1.date;
-            skin.value = item1.extraInfo.skin;
+                    var body = {
+            name: item1.date,
+            value: item1.extraInfo.body
+          };
+          var skin = {
+            name: item1.date,
+            value: item1.extraInfo.skin
+          };
+    
             //   body.push(item1.extraInfo.body)
             //   skin.push(item1.extraInfo.skin)
             body1.push(body);
             skin1.push(skin);
           });
+          console.log(body1)
           bodyList.push(body1);
           skinList.push(skin1);
         });
-        //   console.log(bodyList)
-        //   console.log(skinList)
+          console.log(bodyList)
+          console.log(skinList)
         // console.log(timelineData)
 
         for (var i = 0; i < this.dataList.length; i++) {
@@ -377,18 +376,7 @@ export default {
           var heartRate1 = [];
           var bphigh1 = [];
           var bplow1 = [];
-          var heartRate = {
-            name: "",
-            value: ""
-          };
-          var bphigh = {
-            name: "",
-            value: ""
-          };
-                var bplow = {
-            name: "",
-            value: ""
-          };
+     
           //   var time = {
           //       value: index,
           //       tooltip: {
@@ -396,12 +384,19 @@ export default {
           //       }
           //   }
           item.forEach(item1 => {
-            heartRate.name = item1.date;
-            heartRate.value = item1.extraInfo.BPHeart;
-            bphigh.name = item1.date;
-            bphigh.value = item1.extraInfo.BPHigh;
-        bplow.name = item1.date;
-            bplow.value = item1.extraInfo.BPLow;
+                 var heartRate = {
+            name: item1.date,
+            value:  item1.extraInfo.BPHeart
+          };
+          var bphigh = {
+            name:  item1.date,
+            value: item1.extraInfo.BPHigh
+          };
+                var bplow = {
+            name: item1.date,
+            value: item1.extraInfo.BPLow
+          };
+
             //   body.push(item1.extraInfo.body)
             //   skin.push(item1.extraInfo.skin)
             heartRate1.push(heartRate);

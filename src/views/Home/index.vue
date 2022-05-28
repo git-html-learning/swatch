@@ -7,8 +7,8 @@
       <!-- <img src="./主页背景.png" width="100%" height="100%" /> -->
     </div>
     <div class="title title-bg">
-      <span style="position: absolute; left: 48%;">海工智能</span>
-      <span style="position: absolute;left:80%; font-size: 18px;">{{date}}</span>
+      <span style="position: absolute; left: 45%; font-size: 40px;">海工智能</span>
+      <span style="position: absolute;left:80%; font-size: 21px;">{{date}}</span>
     </div>
     <div class="content">
       <div class="left">
@@ -138,8 +138,8 @@
           :header-row-style = "{color: '#fff',fontSize: '17px','border-bottom':'solid 1px #000'}"
           :cell-style = "{border: 'none'}"
   >
-            <el-table-column prop="productName" label="设备" align="center" ></el-table-column>
-            <el-table-column prop="fence" label="手环名" align="center"></el-table-column>
+            <el-table-column prop="productName" label="手环" align="center" ></el-table-column>
+            <el-table-column prop="fence" label="电子围栏" align="center"></el-table-column>
             <el-table-column prop = "status" label = "状态" align="center">
               <template slot-scope="scope">
                            <el-tag
@@ -199,7 +199,7 @@
           </div>
             <div class = "alertbody" v-if= "alertShow" style = "text-align: center;">
       
-          <el-card v-for = "(item,index) in alertInfo" :key = "index" style = "height: 45px;  margin: 5px 20px; background-color: transparent">
+          <el-card v-for = "(item,index) in alertInfo" :key = "index" style = "height: 45px;  margin: 5px 20px; background-color: transparent;border: 1px solid rgba(27, 240, 241,0.1)">
 
   <el-row>
    <el-col :span = "3" style = "line-height: 40px; text-align: center; margin-top: -12px;">
@@ -481,18 +481,18 @@ export default {
       console.log(startTime)
       console.log(total)
       this.alertInfo = []
-      // var obj = {
-      //   startTime: startTime,
-      //   endTime: endTime,
-      //   asc: 1,
-      //   num: total
-      // }
-           var obj = {
-        startTime: 1650297600,
-        endTime: 1650383999,
+      var obj = {
+        startTime: startTime,
+        endTime: endTime,
         asc: 1,
         num: total
       }
+      //      var obj = {
+      //   startTime: 1650297600,
+      //   endTime: 1650383999,
+      //   asc: 1,
+      //   num: total
+      // }
 alertbyTime(obj).then((res)=>{
   console.log(res)
   if (res.msg == "未找到记录") {
