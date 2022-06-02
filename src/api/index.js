@@ -323,7 +323,7 @@ export function historyDataNum(productKey,deviceKey) {
  
         productKey: productKey,
         deviceKey: deviceKey,
-        num:10, 
+        num:20, 
         asc:0
 
     }

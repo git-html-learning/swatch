@@ -37,9 +37,13 @@
                   <el-dropdown-item @click.native="userCenter">
                     <span class="el-icon-user">个人中心</span>
                   </el-dropdown-item>
+                      <el-dropdown-item @click.native="monitor">
+                    <span  class="el-icon-switch-button">退回监控大屏</span>
+                  </el-dropdown-item>
                   <el-dropdown-item @click.native="logout">
                     <span style="color: red" class="el-icon-switch-button">注销</span>
                   </el-dropdown-item>
+              
                 </el-dropdown-menu>
               </el-dropdown>
             </el-col>
@@ -50,7 +54,7 @@
             </el-col>
             <el-col :span="3">
               <img src="@/assets/img/sos1.png" alt="sos1" @click="openSos" />
-            </el-col> -->
+            </el-col>-->
           </el-row>
         </el-col>
       </el-row>
@@ -63,7 +67,7 @@ import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
 import Hamburger from "@/components/Hamburger";
 import { getName } from "@/utils/auth";
-import { UnReadAlertNums, UserAllalert,subjectCount } from "@/api/index";
+import { UnReadAlertNums, UserAllalert, subjectCount } from "@/api/index";
 export default {
   components: {
     Breadcrumb,
@@ -98,22 +102,28 @@ export default {
       await this.$store.dispatch("user/logout");
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     },
+    monitor() {
+      this.$router.push({ path: "/homePage" });
+    },
     userCenter() {
       this.$router.push({ path: "/user/index" });
     },
     alertMsg() {
       UnReadAlertNums().then(res => {
         this.message = res.data;
-        subjectCount().then((res)=>{
-          if (res.msg = "ok") {
-var subjectCount = res.data.subjectCount
-var total = res.data.total;
-window.localStorage.setItem("subjectNum",JSON.stringify(subjectCount))
-window.sessionStorage.setItem("total",JSON.stringify(total))
-          } else {
-            this.$message.error(res.msg)
-          }
-        })
+        // subjectCount().then(res => {
+        //   if ((res.msg = "ok")) {
+        //     var subjectCount = res.data.subjectCount;
+        //     var total = res.data.total;
+        //     window.localStorage.setItem(
+        //       "subjectNum",
+        //       JSON.stringify(subjectCount)
+        //     );
+        //     window.sessionStorage.setItem("total", JSON.stringify(total));
+        //   } else {
+        //     this.$message.error(res.msg);
+        //   }
+        // });
       });
     },
     openBell() {

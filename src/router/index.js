@@ -33,21 +33,21 @@ import Layout from '@/layout'
 export const constantRoutes = [
 // hidden 设置 true 的时候该路由不会在侧边栏出现 如401，login等页面，或者如一些编辑页面
 
-  {
-    //  redirect: '/permission/index', 重定向地址，在面包屑中点击会重定向去的地址
-    path: '/',
-    component: Layout,
-    redirect: '/home',
-    children: [{
-      path: 'home',
-      name: 'Home',
-      component: () => import('@/views/Home/index'),
-      meta: {
-        title: '首页',                // 设置该路由在侧边栏和面包屑中展示的名字
-        icon: '主页'                  // 设置该路由的图标
-      }
-    }]
-  }, 
+  // {
+  //   //  redirect: '/permission/index', 重定向地址，在面包屑中点击会重定向去的地址
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/home',
+  //   children: [{
+  //     path: 'home',
+  //     name: 'Home',
+  //     component: () => import('@/views/Home/index'),
+  //     meta: {
+  //       title: '首页',                // 设置该路由在侧边栏和面包屑中展示的名字
+  //       icon: '主页'                  // 设置该路由的图标
+  //     }
+  //   }]
+  // }, 
   
  
   {
@@ -89,19 +89,6 @@ export const constantRoutes = [
   ]
   },
   
-  // {
-  //   path: '/devices',
-  //   component: Layout,
-  //   children: [{
-  //     path: 'index',
-  //     name: 'Device',
-  //     component: () => import('@/views/Device/index'),
-  //     meta: {
-  //       title: '设备管理',
-  //       icon: '设备'
-  //     }
-  //   }]
-  // },
   {
     path: '/fence',
     component: Layout,
@@ -228,6 +215,12 @@ export const constantRoutes = [
   {
     path: '/login',
     component: () => import('@/views/login/index'),
+    hidden: true
+  },
+
+  {
+    path: '/homePage',
+    component: () => import('@/views/homePage/index'),
     hidden: true
   },
 

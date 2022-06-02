@@ -1,4 +1,7 @@
+
 import Vue from 'vue'
+	
+
 import Antd from 'ant-design-vue';
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
@@ -31,6 +34,13 @@ import Popup from "./components/popup/index"
  Vue.prototype.$popup = Popup.install
 //报警组件全局注册
  import alarm from "./components/alarm/index"
+//  import VueAwesomeSwiper  from "vue-awesome-swiper";
+
+//  import 'swiper/dist/css/swiper.css';
+ 
+//  Vue.use(VueAwesomeSwiper);
+
+
  Vue.prototype.$alarm = alarm.install
 Vue.use(jsonView)
 Vue.use(Antd);

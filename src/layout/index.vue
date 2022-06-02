@@ -135,193 +135,190 @@ export default {
       // console.log(this.date)
     },
     deviceData() {
-      this.outAlert = [];
-      UserDetail().then(res => {
-        // console.log(res);
-        this.fenceList = res.data.extraInfo.fence;
-        var fenceData = res.data;
-        window.sessionStorage.setItem(
-          "fenceList",
-          JSON.stringify(this.fenceList)
-        );
-        // console.log(fenceList)
-        window.sessionStorage.setItem("fenceData", JSON.stringify(fenceData));
-      });
-      allProductKey().then(res => {
-        if (res.msg == "ok") {
-          console.log(res);
+      // this.outAlert = [];
+      // UserDetail().then(res => {
+      //   this.fenceList = res.data.extraInfo.fence;
+      //   var fenceData = res.data;
+      //   window.sessionStorage.setItem(
+      //     "fenceList",
+      //     JSON.stringify(this.fenceList)
+      //   );
+      //   window.sessionStorage.setItem("fenceData", JSON.stringify(fenceData));
+      // });
+      // allProductKey().then(res => {
+      //   if (res.msg == "ok") {
+      //     console.log(res);
      
-          this.productNameList = res.data.productKeys;
-          // console.log(this.productNameList);
-          getDeviceDatas({
-            username: "智能手环测试",
-            pkList: this.productNameList,
-            startTime: 100000
-          }).then(res => {
-            console.log(res);
+      //     this.productNameList = res.data.productKeys;
+      //     // console.log(this.productNameList);
+      //     getDeviceDatas({
+      //       username: "智能手环测试",
+      //       pkList: this.productNameList,
+      //       startTime: 100000
+      //     }).then(res => {
+      //       console.log(res);
 
-            this.productList1 = res.data;
-            // this.loading = false;
+      //       this.productList1 = res.data;
 
-            this.productList1.forEach(item => {
-              item.deviceName = [];
-              item.latestData = {};
-              if (item.deviceData !== null) {
-                for (var i = 0; i < item.deviceData.length; i++) {
-                  item.deviceName.push(item.deviceData[i].deviceName);
-                }
-                if (item.extraInfo.fence !== "-") {
-                  for (var i = 0; i < this.fenceList.length; i++) {
-                    if (
-                      item.extraInfo.fence == this.fenceList[i].fence.fenceName
-                    ) {
-                      item.latestData.fence = this.fenceList[i].fence.data;
-                    }
-                  }
-                } else {
-                  item.latestData.fence = "-";
-                }
-                console.log(item);
-                if (item.deviceName.includes("BA")) {
-                  item.latestData.body =
-                    item.deviceData[
-                      item.deviceName.indexOf("BA")
-                    ].extraInfo.body;
-                  item.latestData.skin =
-                    item.deviceData[
-                      item.deviceName.indexOf("BA")
-                    ].extraInfo.skin;
-                }
-                if (item.deviceName.includes("C2")) {
-                  item.latestData.heartRate =
-                    item.deviceData[
-                      item.deviceName.indexOf("C2")
-                    ].extraInfo.BPHeart;
-                  item.latestData.bpHigh =
-                    item.deviceData[
-                      item.deviceName.indexOf("C2")
-                    ].extraInfo.BPHigh;
-                  item.latestData.bpLow =
-                    item.deviceData[
-                      item.deviceName.indexOf("C2")
-                    ].extraInfo.BPLow;
-                }
-                if (item.deviceName.includes("F6")) {
-                  item.latestData.stepNum =
-                    item.deviceData[
-                      item.deviceName.indexOf("F6")
-                    ].extraInfo.StepNum;
-                  item.latestData.heart =
-                    item.deviceData[
-                      item.deviceName.indexOf("F6")
-                    ].extraInfo.timeStamp;
-                }
-                if (item.deviceName.includes("A4")) {
-                  item.latestData.location =
-                    item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
-                }
-              } else {
-                item.latestData = {
-                  body: "-",
-                  skin: "-",
-                  heartRate: "-",
-                  bpHigh: "-",
-                  bpLow: "-",
-                  stepNum: "-",
-                  location: "",
-                  heart: "-",
-                  fence: "-"
-                };
-              }
+      //       this.productList1.forEach(item => {
+      //         item.deviceName = [];
+      //         item.latestData = {};
+      //         if (item.deviceData !== null) {
+      //           for (var i = 0; i < item.deviceData.length; i++) {
+      //             item.deviceName.push(item.deviceData[i].deviceName);
+      //           }
+      //           if (item.extraInfo.fence !== "-") {
+      //             for (var i = 0; i < this.fenceList.length; i++) {
+      //               if (
+      //                 item.extraInfo.fence == this.fenceList[i].fence.fenceName
+      //               ) {
+      //                 item.latestData.fence = this.fenceList[i].fence.data;
+      //               }
+      //             }
+      //           } else {
+      //             item.latestData.fence = "-";
+      //           }
+      //           console.log(item);
+      //           if (item.deviceName.includes("BA")) {
+      //             item.latestData.body =
+      //               item.deviceData[
+      //                 item.deviceName.indexOf("BA")
+      //               ].extraInfo.body;
+      //             item.latestData.skin =
+      //               item.deviceData[
+      //                 item.deviceName.indexOf("BA")
+      //               ].extraInfo.skin;
+      //           }
+      //           if (item.deviceName.includes("C2")) {
+      //             item.latestData.heartRate =
+      //               item.deviceData[
+      //                 item.deviceName.indexOf("C2")
+      //               ].extraInfo.BPHeart;
+      //             item.latestData.bpHigh =
+      //               item.deviceData[
+      //                 item.deviceName.indexOf("C2")
+      //               ].extraInfo.BPHigh;
+      //             item.latestData.bpLow =
+      //               item.deviceData[
+      //                 item.deviceName.indexOf("C2")
+      //               ].extraInfo.BPLow;
+      //           }
+      //           if (item.deviceName.includes("F6")) {
+      //             item.latestData.stepNum =
+      //               item.deviceData[
+      //                 item.deviceName.indexOf("F6")
+      //               ].extraInfo.StepNum;
+      //             item.latestData.heart =
+      //               item.deviceData[
+      //                 item.deviceName.indexOf("F6")
+      //               ].extraInfo.timeStamp;
+      //           }
+      //           if (item.deviceName.includes("A4")) {
+      //             item.latestData.location =
+      //               item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
+      //           }
+      //         } else {
+      //           item.latestData = {
+      //             body: "-",
+      //             skin: "-",
+      //             heartRate: "-",
+      //             bpHigh: "-",
+      //             bpLow: "-",
+      //             stepNum: "-",
+      //             location: "",
+      //             heart: "-",
+      //             fence: "-"
+      //           };
+      //         }
 
-              // console.log(item.deviceData.length)
-            });
-            console.log(this.productList1);
-            this.productList1.forEach(item => {
-              if (item.latestData.location !== "") {
-                var marker = item.latestData.location.location;
-                var array = marker.split(",");
-                this.marker1 = new BMap.Point(array[0], array[1]);
-                // 之前直接写 var polygon = new BMap.Polygon(item.latestData),返回的
-                // 全部是不在围栏内
-                //所以以下的数据处理是很是重要的
-                var polArry = [];
-                item.latestData.fence.forEach(item1 => {
-                  var p = new BMap.Point(item1.lng, item1.lat);
-                  polArry.push(p);
-                });
-                var polygon = new BMap.Polygon(polArry);
-                // console.log(polygon)
-                // console.log(this.marker1)
-                if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
-                  console.log("目前在电子围栏");
-                } else {
-                  console.log("目前不在电子围栏内");
-                  this.outAlert.push(item);
-                }
-              }
-            });
-            this.alertContent = "";
-            if (this.outAlert.length !== 0) {
-              for (var i = 0; i < this.outAlert.length; i++) {
-                this.alertContent += this.outAlert[i].productName + " ";
-              }
-              this.alertContent += "不在其对应的电子围栏内";
-              alert(this.alertContent);
-            }
-            window.localStorage.setItem(
-              "productList1",
-              JSON.stringify(this.productList1)
-            );
-            //判断点是否在电子围栏内
+      //         // console.log(item.deviceData.length)
+      //       });
+      //       console.log(this.productList1);
+      //       this.productList1.forEach(item => {
+      //         if (item.latestData.location !== "") {
+      //           var marker = item.latestData.location.location;
+      //           var array = marker.split(",");
+      //           this.marker1 = new BMap.Point(array[0], array[1]);
+      //           // 之前直接写 var polygon = new BMap.Polygon(item.latestData),返回的
+      //           // 全部是不在围栏内
+      //           //所以以下的数据处理是很是重要的
+      //           var polArry = [];
+      //           item.latestData.fence.forEach(item1 => {
+      //             var p = new BMap.Point(item1.lng, item1.lat);
+      //             polArry.push(p);
+      //           });
+      //           var polygon = new BMap.Polygon(polArry);
+      //           // console.log(polygon)
+      //           // console.log(this.marker1)
+      //           if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
+      //             console.log("目前在电子围栏");
+      //           } else {
+      //             console.log("目前不在电子围栏内");
+      //             this.outAlert.push(item);
+      //           }
+      //         }
+      //       });
+      //       this.alertContent = "";
+      //       if (this.outAlert.length !== 0) {
+      //         for (var i = 0; i < this.outAlert.length; i++) {
+      //           this.alertContent += this.outAlert[i].productName + " ";
+      //         }
+      //         this.alertContent += "不在其对应的电子围栏内";
+      //         alert(this.alertContent);
+      //       }
+      //       window.localStorage.setItem(
+      //         "productList1",
+      //         JSON.stringify(this.productList1)
+      //       );
+      //       //判断点是否在电子围栏内
 
-            this.alertMessage = [];
-            this.latestAlert = [];
-            for (var i = 0; i < this.productList1.length; i++) {
-              var obj = {
-                productName: this.productList1[i].productName,
-                alertData: []
-              };
-              //温度和心率报警
-              this.date = Math.round(new Date().getTime() / 1000);
-              // console.log(this.productList1[i].latestData.heart);
-              if (this.productList1[i].latestData.heart !== "-") {
-                // console.log(this.date - this.productList1[i].latestData.heart);
-                if (this.date - this.productList1[i].latestData.heart <= 7200) {
-                  // console.log("wer")
-                  if (this.productList1[i].latestData.body !== "-") {
-                    if (
-                      this.productList1[i].latestData.body > 37 ||
-                      this.productList1[i].latestData.body < 35
-                    ) {
-                      obj.alertData.push({ alert: "温度报警" });
-                    }
-                  }
-                  if (this.productList1[i].latestData.heartRate !== "-") {
-                    //  console.log(this.productList1)
-                    if (
-                      this.productList1[i].latestData.heartRate > 100 ||
-                      this.productList1[i].latestData.heartRate < 60
-                    ) {
-                      obj.alertData.push({ alert: "心率报警" });
-                    }
-                  }
-                }
-              }
-              this.alertMessage.push(obj);
-            }
-            // console.log(this.alertMessage);
-            for (var i = 0; i < this.alertMessage.length; i++) {
-              if (this.alertMessage[i].alertData.length != 0) {
-                this.latestAlert.push(this.alertMessage[i]);
-              }
-            }
-            // console.log(this.latestAlert);
-          });
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
+      //       this.alertMessage = [];
+      //       this.latestAlert = [];
+      //       for (var i = 0; i < this.productList1.length; i++) {
+      //         var obj = {
+      //           productName: this.productList1[i].productName,
+      //           alertData: []
+      //         };
+      //         //温度和心率报警
+      //         this.date = Math.round(new Date().getTime() / 1000);
+      //         // console.log(this.productList1[i].latestData.heart);
+      //         if (this.productList1[i].latestData.heart !== "-") {
+      //           // console.log(this.date - this.productList1[i].latestData.heart);
+      //           if (this.date - this.productList1[i].latestData.heart <= 7200) {
+      //             // console.log("wer")
+      //             if (this.productList1[i].latestData.body !== "-") {
+      //               if (
+      //                 this.productList1[i].latestData.body > 37 ||
+      //                 this.productList1[i].latestData.body < 35
+      //               ) {
+      //                 obj.alertData.push({ alert: "温度报警" });
+      //               }
+      //             }
+      //             if (this.productList1[i].latestData.heartRate !== "-") {
+      //               //  console.log(this.productList1)
+      //               if (
+      //                 this.productList1[i].latestData.heartRate > 100 ||
+      //                 this.productList1[i].latestData.heartRate < 60
+      //               ) {
+      //                 obj.alertData.push({ alert: "心率报警" });
+      //               }
+      //             }
+      //           }
+      //         }
+      //         this.alertMessage.push(obj);
+      //       }
+      //       // console.log(this.alertMessage);
+      //       for (var i = 0; i < this.alertMessage.length; i++) {
+      //         if (this.alertMessage[i].alertData.length != 0) {
+      //           this.latestAlert.push(this.alertMessage[i]);
+      //         }
+      //       }
+      //       // console.log(this.latestAlert);
+      //     });
+      //   } else {
+      //     this.$message.error(res.msg);
+      //   }
+      // });
     },
     handleClickOutside() {
       this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
