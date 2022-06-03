@@ -4,35 +4,49 @@
       <!-- <div
       style="position: absolute; z-index: -1; width:100%; height:100%; top:0px; left:0px; background: transparent;"
       >-->
-      <div class="col-sm-12 col-md-12 pd title-info">海工智能</div>
+      <div class="col-sm-12 col-md-12 pd title-info">户外管理数据展示</div>
       <div class="analysis-filter">
         <span style="padding-top: -10px;">{{date}}</span>
         <span style="margin-left: 20px; margin-top: 10px;">
-               <el-tooltip class="item" effect="light" content="进入操作详情页" placement="top-start">
-    <svg
-            t="1653901052248"
-            @click="skip"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="6899"
-            width="20"
-            height="20"
-          >
-            <path
-              d="M768 64H384c-35.2 0-64 28.8-64 64s28.8 64 64 64h384c35.2 0 64 28.8 64 64v512c0 35.2-28.8 64-64 64H384c-35.2 0-64 28.8-64 64s28.8 64 64 64h384c105.6 0 192-86.4 192-192V256c0-105.6-86.4-192-192-192z"
-              fill="#e6e6e6"
-              p-id="6900"
-            />
-            <path
-              d="M350.08 647.68c-24.96 24.96-24.96 65.92 0 90.24s65.92 24.96 90.24 0L621.44 556.8c3.84-3.2 5.76-7.68 8.32-12.16 1.28-2.56 3.84-5.12 5.12-8.32 6.4-16 6.4-33.28 0-49.28-1.28-2.56-3.84-5.12-5.12-7.68-2.56-4.48-4.48-8.96-8.32-12.8L440.32 285.44a63.744 63.744 0 0 0-90.24 0 63.744 63.744 0 0 0 0 90.24L421.76 448H128c-35.2 0-64 28.8-64 64s28.8 64 64 64h293.76l-71.68 71.68z"
-              fill="#e6e6e6"
-              p-id="6901"
-            />
-          </svg>
-    </el-tooltip> 
-         
+ <el-dropdown trigger="hover">
+      
+        <svg
+              t="1653901052248"
+          
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="6899"
+              width="20"
+              height="20"
+            >
+              <path
+                d="M768 64H384c-35.2 0-64 28.8-64 64s28.8 64 64 64h384c35.2 0 64 28.8 64 64v512c0 35.2-28.8 64-64 64H384c-35.2 0-64 28.8-64 64s28.8 64 64 64h384c105.6 0 192-86.4 192-192V256c0-105.6-86.4-192-192-192z"
+                fill="#e6e6e6"
+                p-id="6900"
+              />
+              <path
+                d="M350.08 647.68c-24.96 24.96-24.96 65.92 0 90.24s65.92 24.96 90.24 0L621.44 556.8c3.84-3.2 5.76-7.68 8.32-12.16 1.28-2.56 3.84-5.12 5.12-8.32 6.4-16 6.4-33.28 0-49.28-1.28-2.56-3.84-5.12-5.12-7.68-2.56-4.48-4.48-8.96-8.32-12.8L440.32 285.44a63.744 63.744 0 0 0-90.24 0 63.744 63.744 0 0 0 0 90.24L421.76 448H128c-35.2 0-64 28.8-64 64s28.8 64 64 64h293.76l-71.68 71.68z"
+                fill="#e6e6e6"
+                p-id="6901"
+              />
+            </svg>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item     @click.native="skip">
+                    <span >进入具体页</span>
+                  </el-dropdown-item>
+                      <el-dropdown-item @click.native="logout">
+                    <span  style="color: red"> 注销</span>
+                  </el-dropdown-item>
+                  </el-dropdown-menu>
+                  </el-dropdown>
+
+
+
+          <!-- <el-tooltip class="item" effect="light" content="进入操作详情页" placement="top-start">
+          
+          </el-tooltip> -->
         </span>
       </div>
     </div>
@@ -936,12 +950,12 @@ export default {
       total: 0,
       carouselData: [],
       alertShow: false,
-      center: { lng: 117.192342, lat: 31.770919 }, // 中心点坐标
+      center: { lng: 117.200804, lat: 31.774661 }, // 中心点坐标
       mapStyle: {
         style: "bluish"
       },
       map: null,
-      zoom: 6,
+      zoom: 9,
       alertInfo: [],
       length: 0,
       judge: [],
@@ -1261,6 +1275,7 @@ export default {
             if (this.productList2.length !== 0) {
               this.productList2.forEach(item => {
                 console.log(item);
+                console.log(item.latestData.heart);
                 if (this.date1 - item.latestData.heart <= 7200) {
                   item.extraInfo.status = "在线";
                   online.push(item);
@@ -1269,52 +1284,86 @@ export default {
                 }
               });
               var positionList = [];
-            //   if (this.productList2[i].latestData.location !== "") {
-            //     this.productList2[
-            //       i
-            //     ].latestData.location.productName = this.productList2[
-            //       i
-            //     ].productName;
-            //     console.log(this.productList2[i].latestData.location);
-            //     positionList.push(this.productList2[i].latestData.location);
-            //   }
-            this.productList2.forEach(item=>{
-                         item.latestData.location.productName = item.productName;
-                         positionList.push(item.latestData.location)
-            })
+              //   if (this.productList2[i].latestData.location !== "") {
+              //     this.productList2[
+              //       i
+              //     ].latestData.location.productName = this.productList2[
+              //       i
+              //     ].productName;
+              //     console.log(this.productList2[i].latestData.location);
+              //     positionList.push(this.productList2[i].latestData.location);
+              //   }
+              this.productList2.forEach(item => {
+                item.latestData.location.productName = item.productName;
+                positionList.push(item.latestData.location);
+              });
             }
+
             positionList.push({
-              location: "103.317754,29.543963",
-              desc: "成都市 峨眉山风景区 天门市",
-              productName: "new1"
+               productName: "名称：new1",
+
+                location: "117.2153254,31.799062",
+
+               desc:
+                  "安徽省 合肥市 蜀山区 融创中心",
+
+
+              })
+              positionList.push({
+                productName: "名称：1",
+
+                location: "117.235478,31.78763",
+
+               desc: "安徽省 合肥市 金寨南路 正大广场 ",
+
+              })
+                  positionList.push({
+                productName: "名称：2",
+
+                location: "117.394874,31.726622",
+
+               desc: "安徽省 合肥市 包河区 环湖北路观景平台北侧 合肥滨湖国家森林公园 ",
+
+                tel: "028-81067120"
+              })
+                                positionList.push({
+                productName: "名称：手环测试3",
+
+                location: "117.490076,31.939863",
+
+               desc: "安徽省 肥东县 圣泉中学（民族乡校区）",
+
+                tel: "028-81067120"
+              })
+                                            positionList.push({
+                productName: "名称：122",
+
+                location: "117.092612,31.951966",
+
+               desc: "安徽省 合肥市 瑶海区 东方大道与文中路交口西北方向 合肥京东方医院 ",
+
+                tel: "028-81067120"
+              })
+            console.log(positionList);
+            var markerArr = [];
+            positionList.forEach(item => {
+              var obj = {
+                           title: item.productName,
+                point: item.location,
+                address: item.desc,
+     
+              };
+              markerArr.push(obj);
             });
-            
-            positionList.push({
-              location: "115.755477,28.765809",
-              desc: "江西省 南昌市 梅岭国家森林公园 新屋里",
-              productName: "new1"
-            });
-            positionList.push({
-              location: "115.755477,28.765809",
-              desc: "湖北省 武汉市 楚水景区 丽江园",
-              productName: "2"
-            });
-            console.log(positionList)
-            var markerArr =[]
-positionList.forEach(item=>{
-    var obj = {
-        point: item.location,
-        address: item.desc,
-        title: item.productName,
-    }
-    markerArr.push(obj)
-})
             // for (var i = 0; i < positionList.length; i++) {
             //   markerArr[i].point = positionList[i].location;
             //   markerArr[i].address = positionList[i].desc;
             //   markerArr[i].title = positionList[i].productName;
             // }
             console.log(markerArr);
+
+            console.log(markerArr)
+
             for (var i = 0; i < markerArr.length; i++) {
               var p0 = markerArr[i].point.split(",")[0];
               var p1 = markerArr[i].point.split(",")[1];
@@ -1377,21 +1426,8 @@ positionList.forEach(item=>{
         }
       });
       console.log(this.productList1);
-      subjectCount().then(res => {
-        if ((res.msg = "ok")) {
-          this.subjectNum = res.data.subjectCount;
-          this.total = res.data.total;
-          window.localStorage.setItem(
-            "subjectNum",
-            JSON.stringify(this.subjectNum)
-          );
-          window.sessionStorage.setItem("total", JSON.stringify(this.total));
-          this.echarts();
-        } else {
-          this.$message.error(res.msg);
-        }
-      });
-      var total = JSON.parse(window.sessionStorage.getItem("total"));
+
+      // var total = JSON.parse(window.sessionStorage.getItem("total"));
       var startTime = Math.floor(
         new Date(new Date().setHours(0, 0, 0, 0)).getTime() / 1000
       );
@@ -1403,14 +1439,15 @@ positionList.forEach(item=>{
         startTime: startTime,
         endTime: endTime,
         asc: 1,
-        num: total
+        num: 50
       };
-      //        var obj = {
-      //     startTime: 1650297600,
-      //     endTime: 1650383999,
-      //     asc: 1,
-      //     num: total
-      //   }
+      console.log(obj);
+        //      var obj = {
+        //   startTime: 1650297600,
+        //   endTime: 1650383999,
+        //   asc: 1,
+        //   num:50
+        // }
       alertbyTime(obj).then(res => {
         console.log(res);
         if (res.msg == "未找到记录") {
@@ -1437,6 +1474,21 @@ positionList.forEach(item=>{
         console.log(this.judge);
         //从productKey得到productName
         this.length = this.alertInfo.length;
+      });
+      subjectCount().then(res => {
+        console.log(res);
+        if ((res.msg = "ok")) {
+          this.subjectNum = res.data.subjectCount;
+          this.total = res.data.total;
+          window.localStorage.setItem(
+            "subjectNum",
+            JSON.stringify(this.subjectNum)
+          );
+          window.sessionStorage.setItem("total", JSON.stringify(this.total));
+          this.echarts();
+        } else {
+          this.$message.error(res.msg);
+        }
       });
     },
     echarts() {
@@ -1657,7 +1709,7 @@ positionList.forEach(item=>{
             clockwise: false, //饼图的扇区是否是顺时针排布
             minAngle: 20, //最小的扇区角度（0 ~ 360）
             center: ["35%", "50%"], //饼图的中心（圆心）坐标
-            radius: [50, 75], //饼图的半径
+            radius: [45, 70], //饼图的半径
             avoidLabelOverlap: true, ////是否启用防止标签重叠
             itemStyle: {
               //图形样式
@@ -1739,6 +1791,27 @@ positionList.forEach(item=>{
       this.points = points;
     },
     // 添加标注
+    // addMarker(point, index) {
+    //   var myIcon = new BMap.Icon(
+    //     "http://api.map.baidu.com/img/markers.png",
+    //     new BMap.Size(23, 25),
+    //     {
+    //       offset: new BMap.Size(10, 25),
+    //       imageOffset: new BMap.Size(0, 0 - index * 25)
+    //     }
+    //   );
+    //   var marker = new BMap.Marker(point, {
+    //     icon: myIcon
+    //   });
+    //   //不理解，但确实可以解决报错问题
+    //   setTimeout(() => {
+    //     this.map.addOverlay(marker);
+    //   }, 300);
+
+    //   // this.map.addOverlay(marker);
+    //   return marker;
+    // },
+
     addMarker(point, index) {
       var myIcon = new BMap.Icon(
         "http://api.map.baidu.com/img/markers.png",
@@ -1751,14 +1824,10 @@ positionList.forEach(item=>{
       var marker = new BMap.Marker(point, {
         icon: myIcon
       });
-      //不理解，但确实可以解决报错问题
-      setTimeout(() => {
-        this.map.addOverlay(marker);
-      }, 300);
-
-      // this.map.addOverlay(marker);
+      this.map.addOverlay(marker);
       return marker;
     },
+
     // 添加信息窗口
     addInfoWindow(marker, poi) {
       //pop弹窗标题
@@ -1792,7 +1861,11 @@ positionList.forEach(item=>{
       };
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
-    }
+    },
+       logout() {
+     this.$store.dispatch("user/logout");
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+    },
   }
 };
 </script>

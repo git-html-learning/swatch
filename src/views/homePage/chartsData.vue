@@ -11,11 +11,10 @@
     <el-carousel indicator-position="outside" :interval = "5000">
     <el-carousel-item v-for="(item,index) in productList" :key="index">
       <!-- <h3>{{ item }}</h3> -->
-  <div class="title">最新温度心率统计
+  <!-- <div class="title">最新温度心率统计
       <span>({{item.productName}})</span>
-  </div>
-      <div class = "item.productName" style = "width: 100%; height: calc(100% - 40px); ">
-          {{index}}
+  </div> -->
+      <div class = "item.productName" style = "width: 100%; height: 100%; ">
       </div>
     </el-carousel-item>
   </el-carousel>el-carousel

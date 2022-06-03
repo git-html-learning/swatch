@@ -22,7 +22,7 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">智能手环管理平台</h3>
+        <h3 class="title">户外安全管理平台</h3>
       </div>
 
       <el-form-item prop="username">

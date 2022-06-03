@@ -38,7 +38,7 @@
                     <span class="el-icon-user">个人中心</span>
                   </el-dropdown-item>
                       <el-dropdown-item @click.native="monitor">
-                    <span  class="el-icon-switch-button">退回监控大屏</span>
+                    <span  class="el-icon-s-grid">退回监控大屏</span>
                   </el-dropdown-item>
                   <el-dropdown-item @click.native="logout">
                     <span style="color: red" class="el-icon-switch-button">注销</span>
