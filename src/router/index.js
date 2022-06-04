@@ -49,46 +49,6 @@ export const constantRoutes = [
   //   }]
   // }, 
   
- 
-  {
-    path: '/pageDetail',
-    component: Layout,
-    hidden: true,
-    children: [{
-      path: 'index',
-      name: 'Product',
-      component: () => import('@/views/Product/detailPage/index'),
-      meta: {
-        title: '手环详情页',
-        icon: '产品'
-      },
-    },
-  ]
-  },
- 
-  {
-    path: '/product',
-    component: Layout,
-    redirect: '/products/index',
-    hidden: true,
-    meta: {
-      title: '手环管理',
-      icon: '设备'
-    },
-    children: [{
-      path: 'createProduct',
-      name: 'CreateProduct',
-      hidden: true,
-      component: () => import('@/views/Product/createProduct/index'),
-      meta: {
-        title: '创建手环',
-        icon: '产品'
-      }
-    }, 
-
-  ]
-  },
-  
   {
     path: '/fence',
     component: Layout,
@@ -119,15 +79,34 @@ export const constantRoutes = [
   {
     path: '/products',
     component: Layout,
-    children: [{
+    children: [
+      {
       path: 'index',
       name: 'Product',
       component: () => import('@/views/Product/index'),
       meta: {
-        title: '产品管理',
+        title: '手环管理',
         icon: '产品'
       },
     },
+    {
+          path: 'createProduct',
+          name: 'CreateProduct',
+          hidden: true,
+          component: () => import('@/views/Product/createProduct/index'),
+          meta: {
+            title: '创建手环',
+          }
+        }, 
+        {
+          path: 'pageDetail',
+          name: 'pageDetail',
+          hidden: true,
+          component: () => import('@/views/Product/detailPage/index'),
+          meta: {
+            title: '手环详情页',
+          }
+        }
   ]
   },
   {

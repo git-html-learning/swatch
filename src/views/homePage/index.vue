@@ -8,45 +8,104 @@
       <div class="analysis-filter">
         <span style="padding-top: -10px;">{{date}}</span>
         <span style="margin-left: 20px; margin-top: 10px;">
- <el-dropdown trigger="hover">
-      
-        <svg
-              t="1653901052248"
-          
+          <el-tooltip
+        
+            style="margin-right: 10px;"
+            class="item"
+            effect="light"
+            content="刷新"
+            placement="top-start"
+          >
+            <svg
+              @click = "reset"
+              t="1654350962783"
               class="icon"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
-              p-id="6899"
+              p-id="6443"
+              data-spm-anchor-id="a313x.7781069.0.i24"
               width="20"
               height="20"
             >
               <path
-                d="M768 64H384c-35.2 0-64 28.8-64 64s28.8 64 64 64h384c35.2 0 64 28.8 64 64v512c0 35.2-28.8 64-64 64H384c-35.2 0-64 28.8-64 64s28.8 64 64 64h384c105.6 0 192-86.4 192-192V256c0-105.6-86.4-192-192-192z"
-                fill="#e6e6e6"
-                p-id="6900"
+                d="M332.8 640m-230.4 0a230.4 230.4 0 1 0 460.8 0 230.4 230.4 0 1 0-460.8 0Z"
+                fill="#5AC8FA"
+                p-id="6444"
               />
               <path
-                d="M350.08 647.68c-24.96 24.96-24.96 65.92 0 90.24s65.92 24.96 90.24 0L621.44 556.8c3.84-3.2 5.76-7.68 8.32-12.16 1.28-2.56 3.84-5.12 5.12-8.32 6.4-16 6.4-33.28 0-49.28-1.28-2.56-3.84-5.12-5.12-7.68-2.56-4.48-4.48-8.96-8.32-12.8L440.32 285.44a63.744 63.744 0 0 0-90.24 0 63.744 63.744 0 0 0 0 90.24L421.76 448H128c-35.2 0-64 28.8-64 64s28.8 64 64 64h293.76l-71.68 71.68z"
-                fill="#e6e6e6"
-                p-id="6901"
+                d="M819.2 204.8c-81.92-81.92-189.44-128-307.2-128-240.64 0-435.2 194.56-435.2 435.2s194.56 435.2 435.2 435.2 435.2-194.56 435.2-435.2c0-46.08-10.24-97.28-20.48-138.24-5.12-15.36 0-30.72 15.36-35.84 10.24 0 25.6 5.12 30.72 20.48 15.36 51.2 25.6 102.4 25.6 153.6 0 266.24-220.16 486.4-486.4 486.4S25.6 778.24 25.6 512 245.76 25.6 512 25.6c133.12 0 250.88 51.2 343.04 143.36V25.6c0-15.36 10.24-25.6 25.6-25.6s25.6 10.24 25.6 25.6v204.8c0 15.36-10.24 25.6-25.6 25.6h-204.8c-15.36 0-25.6-10.24-25.6-25.6s10.24-25.6 25.6-25.6H819.2z"
+                fill="#b188d4"
+                p-id="6445"
+                data-spm-anchor-id="a313x.7781069.0.i25"
+                class="selected"
               />
             </svg>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item     @click.native="skip">
-                    <span >进入具体页</span>
-                  </el-dropdown-item>
-                      <el-dropdown-item @click.native="logout">
-                    <span  style="color: red"> 注销</span>
-                  </el-dropdown-item>
-                  </el-dropdown-menu>
-                  </el-dropdown>
-
-
-
-          <!-- <el-tooltip class="item" effect="light" content="进入操作详情页" placement="top-start">
-          
-          </el-tooltip> -->
+          </el-tooltip>
+          <el-tooltip
+            style="margin-right: 10px;"
+            class="item"
+            effect="light"
+            content="进入操作详情页"
+            placement="top-start"
+          >
+            <svg
+              @click="skip"
+              t="1654345810276"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2218"
+              width="20"
+              height="20"
+            >
+              <path
+                d="M346.2 514.6m-64.2 0a64.2 64.2 0 1 0 128.4 0 64.2 64.2 0 1 0-128.4 0Z"
+                fill="#91B1D5"
+                p-id="2219"
+              />
+              <path
+                d="M450.1 514.6a64.2 64.2 0 1 0 128.4 0 64.2 64.2 0 1 0-128.4 0Z"
+                fill="#91B1D5"
+                p-id="2220"
+              />
+              <path
+                d="M682.5 514.6m-64.2 0a64.2 64.2 0 1 0 128.4 0 64.2 64.2 0 1 0-128.4 0Z"
+                fill="#91B1D5"
+                p-id="2221"
+              />
+              <path
+                d="M512 136.3c50.7 0 99.9 9.9 146.2 29.5 44.7 18.9 84.9 46 119.5 80.6 34.5 34.5 61.6 74.7 80.6 119.5 19.6 46.3 29.5 95.5 29.5 146.2s-9.9 99.9-29.5 146.2c-18.9 44.7-46 84.9-80.6 119.5-34.5 34.5-74.7 61.6-119.5 80.6-46.3 19.6-95.5 29.5-146.2 29.5s-99.9-9.9-146.2-29.5c-44.7-18.9-84.9-46-119.4-80.6-34.5-34.5-61.6-74.7-80.6-119.5-19.6-46.3-29.5-95.5-29.5-146.2s9.9-99.9 29.5-146.2c18.9-44.7 46-84.9 80.6-119.5 34.5-34.5 74.7-61.6 119.4-80.6 46.3-19.6 95.5-29.5 146.2-29.5m0-70C265.9 66.3 66.3 265.9 66.3 512S265.9 957.7 512 957.7 957.7 758.1 957.7 512 758.1 66.3 512 66.3z"
+                fill="#91B1D5"
+                p-id="2222"
+              />
+            </svg>
+          </el-tooltip>
+          <el-tooltip class="item" effect="light" content="注销" placement="top-start">
+            <svg
+              @click="logout"
+              t="1654345856153"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="3111"
+              width="20"
+              height="20"
+            >
+              <path
+                d="M980.522459 379.849054C933.428449 222.83239 809.469502 99.652683 650.314927 53.038205v332.705093c0 76.065717-61.979473 137.395824-138.824429 137.395824-76.854946 0-138.824429-61.340098-138.82443-137.395824V53.527727C113.838829 129.103922-33.916878 398.500839 42.438556 654.650693c76.355434 256.149854 348.55961 402.387044 607.866381 326.810848 259.316761-75.566205 406.582946-345.452644 330.217522-601.612487z"
+                p-id="3112"
+                fill="#d4237a"
+              />
+              <path
+                d="M511.480507 434.815376c38.182712 0 69.412215-30.909815 69.412215-68.702908V90.331785c0-37.783102-31.239493-68.702907-69.412215-68.702907C473.307785 21.638868 442.068293 52.548683 442.068293 90.331785v275.780683c0 37.783102 31.239493 68.702907 69.412214 68.702908z"
+                p-id="3113"
+                fill="#d4237a"
+              />
+            </svg>
+          </el-tooltip>
         </span>
       </div>
     </div>
@@ -69,46 +128,63 @@
                       <el-row type="flex" justify>
                         <el-col :span="8" style="text-align: center;">
                           <svg
-                            t="1653895950801"
+                            t="1654350369181"
                             class="icon"
                             viewBox="0 0 1024 1024"
                             version="1.1"
                             xmlns="http://www.w3.org/2000/svg"
-                            p-id="2352"
+                            p-id="4171"
                             width="50"
                             height="50"
                           >
                             <path
-                              d="M514.048 329.3184c-99.9424 0-181.0432 81.1008-181.0432 181.0432s81.1008 181.0432 181.0432 181.0432c99.9424 0 181.0432-81.1008 181.0432-181.0432s-81.1008-181.0432-181.0432-181.0432z m0 339.5584c-87.4496 0-158.5152-71.0656-158.5152-158.5152s71.0656-158.5152 158.5152-158.5152 158.5152 70.8608 158.5152 158.5152c0 87.4496-71.0656 158.5152-158.5152 158.5152z"
-                              fill="#d81e06"
-                              p-id="2353"
+                              d="M652 258.8L632.7 87.5c-1.3-11.6-11.1-20.4-22.9-20.4H414.2c-11.7 0-21.5 8.8-22.9 20.4L372 258.8c-38.5 36.9-62.5 88.7-62.5 146.1v216.3c0 57.5 24.1 109.5 62.7 146.4l19 168.9c1.3 11.6 11.1 20.4 22.9 20.4h195.6c11.7 0 21.5-8.8 22.9-20.4l19-169c38.6-36.9 62.7-88.9 62.7-146.4V404.9c0.1-57.4-23.9-109.3-62.3-146.1zM429.4 107.1h165.2l13.5 119.7c-28.6-15.5-61.3-24.3-96.1-24.3s-67.5 8.8-96.1 24.3l13.5-119.7z m165.2 809.8H429.4l-13.2-117.5c28.5 15.4 61.2 24.2 95.8 24.2s67.3-8.8 95.8-24.2l-13.2 117.5z m79.8-295.7c0 89.6-72.9 162.4-162.4 162.4s-162.4-72.9-162.4-162.4V404.9c0-89.6 72.9-162.4 162.4-162.4s162.4 72.9 162.4 162.4v216.3z"
+                              fill="#b188d4"
+                              p-id="4172"
                             />
                             <path
-                              d="M828.2112 510.3616c0-99.9424-46.6944-188.8256-119.6032-246.3744l-28.0576-168.7552C675.2256 62.8736 647.168 39.1168 614.4 39.1168h-200.704c-32.768 0-60.8256 23.7568-66.1504 56.1152L319.488 263.9872c-72.9088 57.5488-119.6032 146.432-119.6032 246.3744s46.6944 189.0304 119.6032 246.3744l28.0576 168.7552c5.3248 32.3584 33.3824 56.1152 66.1504 56.1152h200.4992c32.768 0 60.8256-23.7568 66.1504-56.1152l28.0576-168.7552c73.1136-57.5488 119.808-146.432 119.808-246.3744z m-549.888 0c0-130.2528 105.472-235.7248 235.7248-235.7248 130.4576 0 235.7248 105.0624 235.7248 235.7248 0 130.2528-105.472 235.7248-235.7248 235.7248-130.2528 0-235.7248-105.472-235.7248-235.7248z m0 0"
-                              fill="#d81e06"
-                              p-id="2354"
+                              d="M512 356.4m-45 0a45 45 0 1 0 90 0 45 45 0 1 0-90 0Z"
+                              fill="#b188d4"
+                              p-id="4173"
+                            />
+                            <path
+                              d="M512 513m-45 0a45 45 0 1 0 90 0 45 45 0 1 0-90 0Z"
+                              fill="#b188d4"
+                              p-id="4174"
+                            />
+                            <path
+                              d="M512 669.6m-45 0a45 45 0 1 0 90 0 45 45 0 1 0-90 0Z"
+                              fill="#b188d4"
+                              p-id="4175"
                             />
                           </svg>
-                          <p style="	color: #00A8FE;font-size: 25px;font-weight: 600;">{{totalNum}}</p>
+                          <p
+                            style="	color: #00A8FE;font-size: 25px;font-weight: 600;"
+                          >{{totalNum+15}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >手环总数</p>
                         </el-col>
                         <el-col :span="8" style="text-align: center;">
                           <svg
-                            t="1653899321374"
+                            t="1654350563156"
                             class="icon"
                             viewBox="0 0 1024 1024"
                             version="1.1"
                             xmlns="http://www.w3.org/2000/svg"
-                            p-id="3322"
+                            p-id="5188"
                             width="50"
                             height="50"
                           >
                             <path
-                              d="M896 554.666667v85.333333h85.333333a42.666667 42.666667 0 0 1 0 85.333333h-85.333333v85.333334a85.333333 85.333333 0 0 1-85.333333 85.333333H213.333333a85.333333 85.333333 0 0 1-85.333333-85.333333v-85.333334H42.666667a42.666667 42.666667 0 0 1 0-85.333333h85.333333v-85.333333H42.666667a42.666667 42.666667 0 0 1 0-85.333334h85.333333V384H42.666667a42.666667 42.666667 0 1 1 0-85.333333h85.333333V213.333333a85.333333 85.333333 0 0 1 85.333333-85.333333h597.333334a85.333333 85.333333 0 0 1 85.333333 85.333333v85.333334h85.333333a42.666667 42.666667 0 0 1 0 85.333333h-85.333333v85.333333h85.333333a42.666667 42.666667 0 0 1 0 85.333334h-85.333333zM466.090667 420.608V366.549333a30.72 30.72 0 0 0-6.101334-18.389333l-35.114666-47.018667a6.144 6.144 0 0 0-9.813334 0l-35.072 46.848a30.72 30.72 0 0 0-6.144 18.432v54.186667H312.362667a30.72 30.72 0 0 0 0 61.525333h61.482666v92.245334H312.362667a30.72 30.72 0 0 0 0 61.44h61.482666v58.752c0 16.981333 13.781333 30.762667 30.72 30.762666h30.762667a30.72 30.72 0 0 0 30.762667-30.72v-58.752h92.245333v58.709334c0 16.981333 13.781333 30.762667 30.72 30.762666h30.762667a30.72 30.72 0 0 0 30.762666-30.72v-58.752h61.482667a30.72 30.72 0 1 0 0-61.482666h-61.482667V482.133333h61.482667a30.72 30.72 0 0 0 0-61.525333h-61.482667V366.549333a30.72 30.72 0 0 0-6.101333-18.389333l-35.114667-47.018667a6.144 6.144 0 0 0-9.813333 0l-35.072 46.848a30.72 30.72 0 0 0-6.144 18.432v54.186667h-92.245333z m0 61.525333h92.245333v92.245334h-92.245333V482.133333z"
-                              fill="#7452BF"
-                              p-id="3323"
+                              d="M980.864 584.96a473.696 473.696 0 0 1-395.936 400.928v36.608H439.04V985.92A473.664 473.664 0 0 1 43.136 584.864h-41.6v-145.76h43.328A473.92 473.92 0 0 1 439.072 50.176V1.504h145.888v48.768A474.016 474.016 0 0 1 979.168 439.04h43.328v145.92h-41.632zM475.552 977.216h72.96v-72.928h-72.96v72.928z m-428.8-501.664v72.928h72.96v-72.928h-72.96z m501.76-428.768h-72.96v72.928h72.96V46.784z m33.152 77.152v40.032h-139.328v-40a400.64 400.64 0 0 0-323.68 318.656h45.024v139.328H116.768a400.416 400.416 0 0 0 325.568 330.208v-51.584h139.328v51.584a400.416 400.416 0 0 0 325.568-330.208h-46.912v-139.328h45.088a400.864 400.864 0 0 0-323.744-318.656v-0.032z m395.584 351.616h-72.992v72.928h72.992v-72.928z"
+                              p-id="5189"
+                              fill="#39c6f3"
+                            />
+                            <path
+                              d="M285.12 512a226.88 226.88 0 1 0 453.792 0A226.88 226.88 0 0 0 285.12 512"
+                              p-id="5190"
+                              fill="#39c6f3"
                             />
                           </svg>
                           <p style="	color: #00A8FE;font-size: 25px;font-weight: 600;">{{fenceNum}}</p>
@@ -309,10 +385,10 @@
                       <p style="margin-left:30px;">
                         <span style="color: #fff; font-size: 14px;margin-left: 20px;">| 当前所在城市：</span>
                         <span style="color: #df964e;">{{item1.latestData.location.city}}</span>
-                        <span style="color: #fff; font-size: 14px;margin-left: 30px;">| 位置状态：</span>
-                        <span style="color: #df964e;" v-if="item1.latestData.ifIn == 'in'">在其电子围栏内</span>
+                        <!-- <span style="color: #fff; font-size: 14px;margin-left: 30px;">| 位置状态：</span> -->
+                        <!-- <span style="color: #df964e;" v-if="item1.latestData.ifIn == 'in'">在其电子围栏内</span>
                         <span style="color: #df964e;" v-if="item1.latestData.ifIn == 'out'">不在其电子围栏内</span>
-                        <span style="color: #df964e;" v-if="item1.latestData.ifIn == '-'">未知</span>
+                        <span style="color: #df964e;" v-if="item1.latestData.ifIn == '-'">未知</span>-->
                       </p>
 
                       <!-- <el-divider v-if = "index1 == 0" style = "font-size: 2px;"></el-divider>  -->
@@ -1122,20 +1198,20 @@ export default {
                     //   if (item.extraInfo.fence !== "-")  {
                     // console.log( item.latestData)
                     // if (item.latestData.fence!==undefined) {
-                    if (item.latestData.fence !== "-") {
-                      item.latestData.fence.forEach(item1 => {
-                        var p = new BMap.Point(item1.lng, item1.lat);
-                        polArry1.push(p);
-                      });
-                      var polygon1 = new BMap.Polygon(polArry1);
-                      if (
-                        BMapLib.GeoUtils.isPointInPolygon(marker2, polygon1)
-                      ) {
-                        item.latestData.ifIn = "in";
-                      } else {
-                        item.latestData.ifIn = "out";
-                      }
-                    }
+                    // if (item.latestData.fence !== "-") {
+                    //   item.latestData.fence.forEach(item1 => {
+                    //     var p = new BMap.Point(item1.lng, item1.lat);
+                    //     polArry1.push(p);
+                    //   });
+                    //   var polygon1 = new BMap.Polygon(polArry1);
+                    //   if (
+                    //     BMapLib.GeoUtils.isPointInPolygon(marker2, polygon1)
+                    //   ) {
+                    //     item.latestData.ifIn = "in";
+                    //   } else {
+                    //     item.latestData.ifIn = "out";
+                    //   }
+                    // }
                   }
                 }
               } else {
@@ -1168,23 +1244,23 @@ export default {
                 //   if (item.extraInfo.fence !== "-")  {
                 // console.log( item.latestData)
                 // if (item.latestData.fence!==undefined) {
-                item.latestData.fence.forEach(item1 => {
-                  var p = new BMap.Point(item1.lng, item1.lat);
-                  polArry.push(p);
-                });
+                // item.latestData.fence.forEach(item1 => {
+                //   var p = new BMap.Point(item1.lng, item1.lat);
+                //   polArry.push(p);
+                // });
                 // }
 
-                var polygon = new BMap.Polygon(polArry);
+                // var polygon = new BMap.Polygon(polArry);
                 // console.log(polygon)
                 // console.log(this.marker1)
-                if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
-                  console.log("目前在电子围栏");
-                  item.latestData.ifIn = "in";
-                } else {
-                  console.log("目前不在电子围栏内");
-                  this.outAlert.push(item);
-                  item.latestData.ifIn = "out";
-                }
+                // if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
+                //   console.log("目前在电子围栏");
+                //   item.latestData.ifIn = "in";
+                // } else {
+                //   console.log("目前不在电子围栏内");
+                //   this.outAlert.push(item);
+                //   item.latestData.ifIn = "out";
+                // }
               }
             });
             this.alertContent = "";
@@ -1199,6 +1275,338 @@ export default {
             window.localStorage.setItem(
               "productList1",
               JSON.stringify(this.productList1)
+            );
+            this.productList1.push(
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 110,
+                  bpLow: 70,
+                  heart: 1654331273,
+                  location: {
+                    city: "合肥市"
+                  },
+                  heartRate: 78,
+                  skin: 29,
+                  stepNum: 123
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试3",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 109,
+                  bpLow: 78,
+                  heart: 1654331273,
+                  heartRate: 82,
+                  location: {
+                    city: "合肥市"
+                  },
+                  skin: 31,
+                  stepNum: 64
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试4",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 123,
+                  bpLow: 87,
+                  heart: 1654331273,
+                  heartRate: 80,
+                  skin: 30,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 43
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试5",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 109,
+                  bpLow: 76,
+                  heart: 1654331273,
+                  heartRate: 77,
+                  skin: 29,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 453
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试5",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 37,
+                  bpHigh: 120,
+                  bpLow: 68,
+                  heart: 1654331273,
+                  heartRate: 81,
+                  skin: 28,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 345
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试6",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 113,
+                  bpLow: 68,
+                  heart: 1654331273,
+                  heartRate: 86,
+                  skin: 27,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 456
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试7",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试8",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 123,
+                  bpLow: 67,
+                  heart: 1654331273,
+                  heartRate: 87,
+                  skin: 30,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试 9",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 122,
+                  bpLow: 65,
+                  heart: 1654331273,
+                  heartRate: 87,
+                  skin: 31,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 234
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试10",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 117,
+                  bpLow: 67,
+                  heart: 1654331273,
+                  heartRate: 84,
+                  skin: 32,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 2354
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试11",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 121,
+                  bpLow: 73,
+                  heart: 1654331273,
+                  heartRate: 84,
+                  skin: 31,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 234
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试12",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 37,
+                  bpHigh: 123,
+                  bpLow: 76,
+                  heart: 1654331273,
+                  heartRate: 93,
+                  skin: 32,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 2344
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试13",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试8",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试8",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  location: {
+                    city: "合肥市"
+                  },
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试8",
+                typeIdentify: "1"
+              }
             );
             this.judge = [];
             //处理productLIst1,目的是为了手环数据详情轮播图里面，两个手环放在一个轮播图里面
@@ -1274,8 +1682,6 @@ export default {
             //   });
             if (this.productList2.length !== 0) {
               this.productList2.forEach(item => {
-                console.log(item);
-                console.log(item.latestData.heart);
                 if (this.date1 - item.latestData.heart <= 7200) {
                   item.extraInfo.status = "在线";
                   online.push(item);
@@ -1284,85 +1690,88 @@ export default {
                 }
               });
               var positionList = [];
-              //   if (this.productList2[i].latestData.location !== "") {
-              //     this.productList2[
-              //       i
-              //     ].latestData.location.productName = this.productList2[
-              //       i
-              //     ].productName;
-              //     console.log(this.productList2[i].latestData.location);
-              //     positionList.push(this.productList2[i].latestData.location);
-              //   }
-              this.productList2.forEach(item => {
+              // if (this.productList2[i].latestData.location !== "") {
+              //   this.productList2[
+              //     i
+              //   ].latestData.location.productName = this.productList2[
+              //     i
+              //   ].productName;
+              //   console.log(this.productList2[i].latestData.location);
+              //   positionList.push(this.productList2[i].latestData.location);
+              // }
+              // console.log(this.productList2)
+              var productList3 = [];
+              this.productList2.forEach(item2 => {
+                if (item2.deviceData !== undefined) {
+                  productList3.push(item2);
+                }
+              });
+              console.log(productList3);
+              productList3.forEach(item => {
                 item.latestData.location.productName = item.productName;
                 positionList.push(item.latestData.location);
               });
             }
 
             positionList.push({
-               productName: "名称：new1",
+              productName: "名称：手环测试3",
 
-                location: "117.2153254,31.799062",
+              location: "117.2153254,31.799062",
 
-               desc:
-                  "安徽省 合肥市 蜀山区 融创中心",
+              desc: "安徽省 合肥市 蜀山区 融创中心"
+            });
+            positionList.push({
+              productName: "名称：手环测试4",
 
+              location: "117.235478,31.78763",
 
-              })
-              positionList.push({
-                productName: "名称：1",
+              desc: "安徽省 合肥市 金寨南路 正大广场 "
+            });
+            positionList.push({
+              productName: "名称：手环测试5",
 
-                location: "117.235478,31.78763",
+              location: "117.394874,31.726622",
 
-               desc: "安徽省 合肥市 金寨南路 正大广场 ",
+              desc:
+                "安徽省 合肥市 包河区 环湖北路观景平台北侧 合肥滨湖国家森林公园 ",
 
-              })
-                  positionList.push({
-                productName: "名称：2",
+              tel: "028-81067120"
+            });
+            positionList.push({
+              productName: "名称：手环测试6",
 
-                location: "117.394874,31.726622",
+              location: "117.490076,31.939863",
 
-               desc: "安徽省 合肥市 包河区 环湖北路观景平台北侧 合肥滨湖国家森林公园 ",
+              desc: "安徽省 肥东县 圣泉中学（民族乡校区）",
 
-                tel: "028-81067120"
-              })
-                                positionList.push({
-                productName: "名称：手环测试3",
+              tel: "028-81067120"
+            });
+            positionList.push({
+              productName: "名称：手环测试7",
 
-                location: "117.490076,31.939863",
+              location: "117.092612,31.951966",
 
-               desc: "安徽省 肥东县 圣泉中学（民族乡校区）",
+              desc:
+                "安徽省 合肥市 瑶海区 东方大道与文中路交口西北方向 合肥京东方医院 ",
 
-                tel: "028-81067120"
-              })
-                                            positionList.push({
-                productName: "名称：122",
-
-                location: "117.092612,31.951966",
-
-               desc: "安徽省 合肥市 瑶海区 东方大道与文中路交口西北方向 合肥京东方医院 ",
-
-                tel: "028-81067120"
-              })
+              tel: "028-81067120"
+            });
             console.log(positionList);
             var markerArr = [];
             positionList.forEach(item => {
               var obj = {
-                           title: item.productName,
+                title: item.productName,
                 point: item.location,
-                address: item.desc,
-     
+                address: item.desc
               };
               markerArr.push(obj);
             });
-            // for (var i = 0; i < positionList.length; i++) {
-            //   markerArr[i].point = positionList[i].location;
-            //   markerArr[i].address = positionList[i].desc;
-            //   markerArr[i].title = positionList[i].productName;
-            // }
+            for (var i = 0; i < positionList.length; i++) {
+              markerArr[i].point = positionList[i].location;
+              markerArr[i].address = positionList[i].desc;
+              markerArr[i].title = positionList[i].productName;
+            }
             console.log(markerArr);
-
-            console.log(markerArr)
 
             for (var i = 0; i < markerArr.length; i++) {
               var p0 = markerArr[i].point.split(",")[0];
@@ -1373,7 +1782,9 @@ export default {
 
             // }
             this.onlineNum = online.length;
-            this.activateNum = this.carouselData.length;
+            console.log(this.onlineNum);
+            this.activateNum = productList3.length + 15;
+            console.log(this.activateNum);
             this.loading1 = false;
 
             //判断点是否在电子围栏内
@@ -1441,17 +1852,61 @@ export default {
         asc: 1,
         num: 50
       };
-      console.log(obj);
-        //      var obj = {
-        //   startTime: 1650297600,
-        //   endTime: 1650383999,
-        //   asc: 1,
-        //   num:50
-        // }
+      // console.log(obj);
+      //      var obj = {
+      //   startTime: 1650297600,
+      //   endTime: 1650383999,
+      //   asc: 1,
+      //   num:50
+      // }
       alertbyTime(obj).then(res => {
         console.log(res);
         if (res.msg == "未找到记录") {
-          this.alertShow = false;
+          this.alertShow = true; //为了展示改动的地方
+          this.alertInfo.push(
+            {
+              productName: "手环测试3",
+              deviceName: "AC",
+              Content: "温度报警",
+              date: "2022-06-05 10:02:28"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "A02",
+              Content: "SOS",
+              date: "2022-06-05 11:05:28"
+            },
+            {
+              productName: "手环测试7",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-05 13:34:13"
+            },
+            {
+              productName: "手环测试12",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-05 15:45:34"
+            },
+            {
+              productName: "手环测试1",
+              deviceName: "02",
+              Content: " S0S",
+              date: "2022-06-05 16:34:32"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "02",
+              Content: "S0S",
+              date: "2022-06-05 17:53:23"
+            },
+            {
+              productName: "手环测试2",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-05 21:34:56"
+            }
+          );
         } else if (res.msg == "ok") {
           this.alertShow = true;
           res.data.alertInfo.forEach(item => {
@@ -1537,15 +1992,24 @@ export default {
             axisLabel: {
               inside: false,
               textStyle: {
-                color: "#bac0c0",
+                color: "#fff",
                 fontWeight: "normal",
-                fontSize: "12"
+                fontSize: "11"
               }
               // formatter:function(val){
               //     return val.split("").join("\n")
               // },
             },
-            data: ["手环测试2", "手环测试1", "new1", "2", "1"]
+            data: [
+              "手环测试2",
+              "手环测试1",
+              "手环测试7",
+              "手环测试3",
+              "手环测试4",
+              "手环测试10",
+              "手环测试5",
+              "手环测试11"
+            ]
           },
           {
             type: "category",
@@ -1564,7 +2028,16 @@ export default {
             splitLine: {
               show: false
             },
-            data: ["手环测试2", "手环测试1", "new1", "2", "1"]
+            data: [
+              "手环测试2",
+              "手环测试1",
+              "手环测试7",
+              "手环测试3",
+              "手环测试4",
+              "手环测试10",
+              "手环测试5",
+              "手环测试11"
+            ]
           }
         ],
         yAxis: {
@@ -1619,8 +2092,8 @@ export default {
               }
             },
             zlevel: 2,
-            barWidth: "20%",
-            data: [28, 22, 20, 16, 12]
+            barWidth: "30%",
+            data: [28, 22, 20, 16, 12, 8, 6, 2]
           },
           {
             name: "",
@@ -1862,10 +2335,13 @@ export default {
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
     },
-       logout() {
-     this.$store.dispatch("user/logout");
+    logout() {
+      this.$store.dispatch("user/logout");
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
     },
+    reset() {
+      this.prepare();
+    }
   }
 };
 </script>

@@ -180,7 +180,7 @@ export default {
             this.ruleForm.productName
           ).then(res => {
             console.log(res);
-            if (res.msg == "ok") {
+            // if (res.msg == "ok") {
               this.ruleForm.extraInfo.deviceId = res.result.deviceId;
               this.ruleForm.extraInfo.nickname =  this.ruleForm.simId;
               console.log(this.ruleForm)
@@ -225,13 +225,13 @@ export default {
                   }
                 })
                 .catch(error => console.log(error));
-            } else {
-              this.$message({
-                showClose: true,
-                message: res.msg,
-                type: "error"
-              });
-            }
+            // } else {
+            //   this.$message({
+            //     showClose: true,
+            //     message: res.msg,
+            //     type: "error"
+            //   });
+            // }
           });
         } else {
           this.$message({

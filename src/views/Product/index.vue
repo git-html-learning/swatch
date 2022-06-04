@@ -20,7 +20,7 @@
         <!-- Card 组件包括header和body部分，header部分需要有显式具名 slot 分发，同时也是可选的。 -->
         <div slot="header" style="margin-bottom: 50px">
           <el-col :span="3" class="text-center">
-            <router-link class="btn" to="/product/createProduct">创建手环</router-link>
+            <router-link class="btn" to="/products/createProduct">创建手环</router-link>
           </el-col>
         </div>
         <!-- data绑定的数据是搜索筛选的数据 -->
@@ -49,7 +49,7 @@
             :cell-style="tableCellStyle"
           >
             <!-- 搜索设备名 -->
-            <el-table-column align="center"  prop="productName" label="手环名称">
+            <el-table-column align="center" prop="productName" label="手环名称">
               <template slot="header" slot-scope="scope">
                 <!-- 不点击显示产品名称，搜索框绑定一个点击事件，点击一下，show变成false -->
                 <div v-show="show">
@@ -75,16 +75,16 @@
 
             <!-- <el-table-column align="center" label="IMEI" prop="extraInfo.nickname"></el-table-column> -->
             <!-- 表头 -->
-            <el-table-column align="center" label="体温"   prop="latestData.body"></el-table-column>
-            <el-table-column align="center" label="手腕温度"  prop="latestData.skin"></el-table-column>
-            <el-table-column align="center" label="心率"   prop="latestData.heartRate"></el-table-column>
-            <el-table-column align="center" label="收缩压"   prop="latestData.bpHigh"></el-table-column>
-            <el-table-column align="center" label="舒张压"   prop="latestData.bpLow"></el-table-column>
-            <el-table-column align="center" label="步数"  prop="latestData.stepNum"></el-table-column>
-            <el-table-column align="center" label="电子围栏"  prop="extraInfo.fence" ></el-table-column>
+            <el-table-column align="center" label="体温" prop="latestData.body"></el-table-column>
+            <el-table-column align="center" label="手腕温度" prop="latestData.skin"></el-table-column>
+            <el-table-column align="center" label="心率" prop="latestData.heartRate"></el-table-column>
+            <el-table-column align="center" label="收缩压" prop="latestData.bpHigh"></el-table-column>
+            <el-table-column align="center" label="舒张压" prop="latestData.bpLow"></el-table-column>
+            <el-table-column align="center" label="步数" prop="latestData.stepNum"></el-table-column>
+            <el-table-column align="center" label="电子围栏" prop="extraInfo.fence"></el-table-column>
 
             <!-- 按钮 -->
-            <el-table-column align="center" label="操作" min-width = "120">
+            <el-table-column align="center" label="操作" min-width="120">
               <template slot-scope="scope">
                 <el-button
                   type="success"
@@ -290,8 +290,294 @@ export default {
               // console.log(item.deviceData.length)
             });
             console.log(this.productList1);
-this.currentPage=1,
-            this.alertMessage = [];
+            this.productList1.push(
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 110,
+                  bpLow: 70,
+                  heart: 1654331273,
+                  heartRate: 78,
+                  skin: 29,
+                  stepNum: 123
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试3",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 109,
+                  bpLow: 78,
+                  heart: 1654331273,
+                  heartRate: 82,
+                  skin: 31,
+                  stepNum: 64
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试4",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 123,
+                  bpLow: 87,
+                  heart: 1654331273,
+                  heartRate: 80,
+                  skin: 30,
+                  stepNum: 43
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试5",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 109,
+                  bpLow: 76,
+                  heart: 1654331273,
+                  heartRate: 77,
+                  skin: 29,
+                  stepNum: 453
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试5",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 37,
+                  bpHigh: 120,
+                  bpLow: 68,
+                  heart: 1654331273,
+                  heartRate: 81,
+                  skin: 28,
+                  stepNum: 345
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试6",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 113,
+                  bpLow: 68,
+                  heart: 1654331273,
+                  heartRate: 86,
+                  skin: 27,
+                  stepNum: 456
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试7",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试8",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 123,
+                  bpLow: 67,
+                  heart: 1654331273,
+                  heartRate: 87,
+                  skin: 30,
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试9",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 122,
+                  bpLow: 65,
+                  heart: 1654331273,
+                  heartRate: 87,
+                  skin: 31,
+                  stepNum: 234
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试10",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 117,
+                  bpLow: 67,
+                  heart: 1654331273,
+                  heartRate: 84,
+                  skin: 32,
+                  stepNum: 2354
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试11",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 35,
+                  bpHigh: 121,
+                  bpLow: 73,
+                  heart: 1654331273,
+                  heartRate: 84,
+                  skin: 31,
+                  stepNum: 234
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试12",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 37,
+                  bpHigh: 123,
+                  bpLow: 76,
+                  heart: 1654331273,
+                  heartRate: 93,
+                  skin: 32,
+                  stepNum: 2344
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试13",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试14",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试15",
+                typeIdentify: "1"
+              },
+              {
+                extraInfo: {
+                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
+                  fence: "-",
+                  nickname: "223334455666778"
+                },
+                latestData: {
+                  body: 36,
+                  bpHigh: 114,
+                  bpLow: 77,
+                  heart: 1654331273,
+                  heartRate: 79,
+                  skin: 29,
+                  stepNum: 0
+                },
+                productKey: "c9810br4s1fe4r7jpjng",
+                productName: "手环测试16",
+                typeIdentify: "1"
+              }
+            );
+            (this.currentPage = 1), (this.alertMessage = []);
             this.latestAlert = [];
             for (var i = 0; i < this.productList1.length; i++) {
               var obj = {
@@ -432,13 +718,13 @@ this.currentPage=1,
   /* min-height: calc(100vh - 84px); */
 }
 .box-card {
-                           z-index:50;
-          /* background-color: rgba(0,0,0,.1); */
-          background-color: transparent;
-            background-size: 100% 100%;
-            backdrop-filter: blur(15px);
-             box-shadow: 3px 3px 10px  rgba(93, 93, 93,0.5);
-            border-radius: 15px;
+  z-index: 50;
+  /* background-color: rgba(0,0,0,.1); */
+  background-color: transparent;
+  background-size: 100% 100%;
+  backdrop-filter: blur(15px);
+  box-shadow: 3px 3px 10px rgba(93, 93, 93, 0.5);
+  border-radius: 15px;
 }
 .component-item {
   min-height: 100px;
@@ -472,10 +758,9 @@ this.currentPage=1,
   background-color: transparent;
 }
 .el-table::before {
-	 left: 0;
-	 bottom: 0;
-	 width: 100%;
-	 height: 0px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
 }
-
 </style>

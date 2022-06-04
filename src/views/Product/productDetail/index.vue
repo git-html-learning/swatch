@@ -44,9 +44,17 @@
         <el-col :span="12" :offset="0" v-for="(item, index) in product.extraInfo" :key="index">
           <el-input placeholder="请输入内容" v-model="product.extraInfo[index]">
             <template slot="prepend">
-              {{
-              index
-              }}
+           <span v-if = "index == 'deviceId'">
+设备ID
+           </span>
+                      <span v-if = "index == 'fence'">
+
+围栏
+           </span>
+                      <span v-if = "index == 'nickname'">
+手环编号
+           </span>
+                     <!-- {{index}} -->
             </template>
           </el-input>
         </el-col>
@@ -214,7 +222,7 @@ export default {
       // });
     },
     detail() {
-      this.$router.push({path: '/pageDetail/index'})
+      this.$router.push({path: '/products/pageDetail'})
       // console.log(this.product)
       window.sessionStorage.setItem("whichProduct",JSON.stringify(this.product))
     }

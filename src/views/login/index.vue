@@ -22,7 +22,7 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">户外安全管理平台</h3>
+        <h3 class="title">户外赛事智能安全保障平台</h3>
       </div>
 
       <el-form-item prop="username">
@@ -67,7 +67,7 @@
         type="primary"
         style="width: 100%; margin-bottom: 30px"
         @click.native.prevent="handleLogin"
-        >Login</el-button
+        >登录</el-button
       >
     </el-form>
   </div>

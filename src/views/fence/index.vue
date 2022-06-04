@@ -27,6 +27,19 @@
         <v-region @values="regionChange" class="form-control"></v-region>
         <el-button type="success" size="small" style="margin-left:20px; background-color: #00a29a" @click="drawRegion">绘制区域</el-button>
       </div>
+            <!-- 教程 --> 
+        <div class = "manual">
+          <p>    绘制电子围栏</p>
+      <p> 可以选择两种方式：</p>
+           <p>   1. 利用左上角绘制行政区域  </p>
+       <p> 2. 利用右上角自定义区域 </p>
+          <p>       绘制完成时候点击右下角的保存按钮，
+          给绘制的围栏命名并提交  </p>
+          <p>    注:</p>
+          <p> 如果在绘制过程中出错，可以选择清
+          除按钮，
+          清除已经绘制的围栏</p>
+        </div>
 
       <!-- 右侧操作区 -->
       <div class="s-control-r" style = "float: right; margin-right: 7%;">
@@ -38,6 +51,7 @@
               prefix-icon="el-icon-search"
               clearable
             >
+  
               <!-- v-model.lazy指失焦后绑定数字 -->
             </el-input>
           </el-form-item>
@@ -69,6 +83,8 @@
     <!-- 尾部 -->
     <el-footer class="footer" style = "float: right; margin-right: 8%;">
       <el-row type="flex" class="row-bg" justify="end" style="margin:14px 0 0 0;">
+      <span style = "color: #04424d;">显示已有电子围栏：</span>
+       
         <el-select
           v-model="selectedValue"
           placeholder="请选择电子围栏"
@@ -81,12 +97,12 @@
             :value="item.fence.data"
           ></el-option>
         </el-select>
-        <el-button
+        <!-- <el-button
           type="primary"
           size="small"
           style="margin-left:20px; background-color: #00a29a"
-          @click="drawSelection"
-        >绘制已有电子围栏</el-button>
+       
+        >绘制已有电子围栏</el-button> -->
         <el-button type size="small" style="margin-left:20px;" @click="reset">清除</el-button>
         <el-button type="primary" size="small" style="margin-left:20px;background-color: #00a29a" @click="saveHurdle">保存</el-button>
       </el-row>
@@ -350,7 +366,7 @@ export default {
       var overlays = this.map.getOverlays();
       console.log(overlays);
       console.log(overlays.length)
-      console.log(this.productList1.length)
+      // console.log(this.productList1.length)
       var num = [];
       this.productList1.forEach(item=>{
         if(item.latestData.location !=="") {
@@ -409,21 +425,9 @@ export default {
       this.maskShow = false;
     },
     //绘制选择的围栏，这里用本地数据测试
-    drawSelection() {
-      var polArry = [];
-      this.localPoint.forEach(item => {
-        var p = new BMap.Point(item.lng, item.lat);
-        polArry.push(p);
-      });
-      console.log(polArry);
-      var polygon = new BMap.Polygon(polArry, this.styleOptions);
-      this.map.clearOverlays(); //清除地图覆盖物
-      this.addPiont();
-      this.map.addOverlay(polygon);
-      var pointArray = [];
-      pointArray = pointArray.concat(polygon.getPath());
-      this.map.setViewport(pointArray); //调整视野
-    },
+    // drawSelection() {
+
+    // },
     //判断点是否在已绘制的区域内
     // isInside(p) {
     //   if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, p)) {
@@ -531,6 +535,19 @@ export default {
     changeFence(value) {
       console.log(value);
       this.localPoint = value;
+            var polArry = [];
+      this.localPoint.forEach(item => {
+        var p = new BMap.Point(item.lng, item.lat);
+        polArry.push(p);
+      });
+      console.log(polArry);
+      var polygon = new BMap.Polygon(polArry, this.styleOptions);
+      this.map.clearOverlays(); //清除地图覆盖物
+      this.addPiont();
+      this.map.addOverlay(polygon);
+      var pointArray = [];
+      pointArray = pointArray.concat(polygon.getPath());
+      this.map.setViewport(pointArray); //调整视野
     },
     //绘制手环的坐标的函数
     addPiont() {
@@ -623,6 +640,19 @@ export default {
   left: 30px;
   top: 30px;
   z-index: 10;
+}
+.manual {
+  position: absolute;
+  right: 5%;
+  top: 100px;
+  z-index: 10;
+  padding: 30px;
+   height: 300px;
+   width: 300px;
+   background-color: rgba(255,255,255,0.7);
+   color: #484647;
+   font-size:14px;
+   line-height: 18px;
 }
 
 .s-control-r {

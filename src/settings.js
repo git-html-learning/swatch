@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '智能手环管理平台',
+  title: '户外赛事智能安全保障平台',
 
   /**
    * @type {boolean} true | false
