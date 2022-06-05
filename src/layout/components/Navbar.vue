@@ -21,11 +21,11 @@
             justify="end"
             style="line-height: 20px;margin-top: 15px;"
           >
-            <el-col :span="4" :offset="10">
+            <el-col :span="4" :offset="10" >
               <el-badge :value="message" :max="99" class="item">
-                <router-link to="/device/alertData">
-                  <svg-icon icon-class="消息" />
-                </router-link>
+                <!-- <router-link to="/device/alertData"> -->
+                  <svg-icon icon-class="消息" @click = "alert" style = "cursor: hand"  />
+                <!-- </router-link> -->
               </el-badge>
             </el-col>
             <el-col :span="18" class="row" style="cursor: pointer;">
@@ -135,7 +135,10 @@ export default {
       this.ring.splice(1, 1, !this.ring[1]);
       this.ring.splice(0, 1, false);
       console.log(this.ring);
-    }
+    },
+    alert() {
+     this.$router.push({ path: "/alert/index" });
+    },
   }
 };
 </script>

@@ -263,14 +263,14 @@ export default {
 
   methods: {
     getFenceData() {
-      this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
-      // UserDetail().then((res)=>{
-      //   if (res.msg == "ok") {
-      // this.options = res.data.extraInfo.fence
-      //   } else {
-      //     this.$message.error(res.msg)
-      //   }
-      // })
+      // this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
+      UserDetail().then((res)=>{
+        if (res.msg == "ok") {
+      this.options = res.data.extraInfo.fence
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
     },
     // 清除地图覆盖物
     clearOverlays() {
@@ -401,6 +401,7 @@ export default {
       // console.log(data);
       // console.log(pointsStrArr);
       // alert(data);
+          this.getFenceData()
     },
 
     // 坐标点数组转字符串

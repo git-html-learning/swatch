@@ -52,6 +52,7 @@ export const constantRoutes = [
   {
     path: '/fence',
     component: Layout,
+    redirect: 'noRedirect',
     meta: {
       title: '电子围栏',
       icon:'轴承'
@@ -109,72 +110,85 @@ export const constantRoutes = [
         }
   ]
   },
+  // {
+  //   path: '/device',
+  //   component: Layout,
+  //   redirect: '/devices/index',
+  //   hidden: true,
+  //   meta: {
+  //     title: '设备管理',
+  //     icon: '设备'
+  //   },
+  //   children: [{
+  //     path: 'createMoreDevice',
+  //     name: 'CreateMoreDevice',
+  //     hidden: true,
+  //     component: () => import('@/views/Device/createDevice/createMoreDevice/index'),
+  //     meta: {
+  //       title: '批量创建设备',
+  //       icon: '设备'
+  //     }
+  //   }, {
+  //     path: 'createTemplate',
+  //     name: 'CreateTemplate',
+  //     hidden: true,
+  //     component: () => import('@/views/Device/createDevice/createTemplate/index'),
+  //     meta: {
+  //       title: '添加模板',
+  //       icon: '设备'
+  //     }
+  //   }, {
+  //     path: 'handDevice',
+  //     name: 'HandDevice',
+  //     hidden: true,
+  //     component: () => import('@/views/Device/createDevice/handDevice/index'),
+  //     meta: {
+  //       title: '手动添加设备',
+  //       icon: '设备'
+  //     }
+  //   }, {
+  //     path: 'templateDevice',
+  //     name: 'TemplateDevice',
+  //     hidden: true,
+  //     component: () => import('@/views/Device/createDevice/templateDevice/index'),
+  //     meta: {
+  //       title: '模板创建设备',
+  //       icon: '设备'
+  //     }
+  //   }, {
+  //     path: 'deleteTemplate',
+  //     name: 'DeleteTemplate',
+  //     hidden: true,
+  //     component: () => import('@/views/Device/createDevice/deleteTemplate/index'),
+  //     meta: {
+  //       title: '模板创建设备',
+  //       icon: '设备'
+  //     }
+  //   }, {
+  //     path: 'alertData',
+  //     name: 'AlertData',
+  //     hidden: true,
+  //     component: () => import('@/views/Device/alertDevice/index'),
+  //     meta: {
+  //       title: '报警信息',
+  //       icon: '设备'
+  //     }
+  //   }, ]
+  // },
   {
-    path: '/device',
+    path: '/alert',
     component: Layout,
-    redirect: '/devices/index',
-    hidden: true,
-    meta: {
-      title: '设备管理',
-      icon: '设备'
-    },
     children: [{
-      path: 'createMoreDevice',
-      name: 'CreateMoreDevice',
-      hidden: true,
-      component: () => import('@/views/Device/createDevice/createMoreDevice/index'),
-      meta: {
-        title: '批量创建设备',
-        icon: '设备'
-      }
-    }, {
-      path: 'createTemplate',
-      name: 'CreateTemplate',
-      hidden: true,
-      component: () => import('@/views/Device/createDevice/createTemplate/index'),
-      meta: {
-        title: '添加模板',
-        icon: '设备'
-      }
-    }, {
-      path: 'handDevice',
-      name: 'HandDevice',
-      hidden: true,
-      component: () => import('@/views/Device/createDevice/handDevice/index'),
-      meta: {
-        title: '手动添加设备',
-        icon: '设备'
-      }
-    }, {
-      path: 'templateDevice',
-      name: 'TemplateDevice',
-      hidden: true,
-      component: () => import('@/views/Device/createDevice/templateDevice/index'),
-      meta: {
-        title: '模板创建设备',
-        icon: '设备'
-      }
-    }, {
-      path: 'deleteTemplate',
-      name: 'DeleteTemplate',
-      hidden: true,
-      component: () => import('@/views/Device/createDevice/deleteTemplate/index'),
-      meta: {
-        title: '模板创建设备',
-        icon: '设备'
-      }
-    }, {
-      path: 'alertData',
-      name: 'AlertData',
-      hidden: true,
+      path: 'index',
+      name: 'alert',
       component: () => import('@/views/Device/alertDevice/index'),
       meta: {
         title: '报警信息',
-        icon: '设备'
-      }
-    }, ]
-  },
-
+        icon: '调试'
+      },
+      // hidden: true,
+    }]
+  }, 
   
   {
     path: '/user',
@@ -184,10 +198,10 @@ export const constantRoutes = [
       name: 'Admin',
       component: () => import('@/views/Admin/index'),
       meta: {
-        title: '个人中心',
+        title: '管理员信息',
         icon: '管理员'
       },
-      hidden: true,
+      // hidden: true,
     }]
   }, 
   

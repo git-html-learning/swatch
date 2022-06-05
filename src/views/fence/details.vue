@@ -6,11 +6,16 @@
     >
       <!-- <img src="./主页背景.png" width="100%" height="100%" /> -->
     </div>
+
     <el-header>
       <el-page-header @back="goBack" content="电子围栏列表"></el-page-header>
     </el-header>
         <el-card class="body">
             <el-table :data="fenceList"
+                  v-loading="loading"
+                element-loading-text="数据加载中"
+                element-loading-spinner="el-icon-loading"
+                element-loading-background="#fff"
             stripe 
                  :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
                       style="width: 100%;margin-top: 50px;color: #81a7ac">
@@ -53,19 +58,70 @@ export default {
         return {
             fenceList: [],   //用于table的显示数组
             fenceData:{},    //用于修改用户信息，本页面主要用于删除设备
-        }
+       dialogVisible: true,
+       loading: true,
+             center: { lng: 117.200804, lat: 31.774661 }, // 中心点坐标
+      mapStyle: {
+        style: "bluish"
+      },
+      map: null,
+      zoom: 9,
+
+       }
+    },
+    mounted() {
+    this.map = new BMap.Map("mapBody", {
+      enableMapClick: false,
+      minZoom: 5,
+      maxZoom: 15
+    });
+    // 设置中心点坐标和地图级别
+    this.map.centerAndZoom(
+      new BMap.Point(this.center.lng, this.center.lat),
+      this.zoom
+    );
+// map.centerAndZoom(new BMap.Point(116.404, 39.915), 12); // 初始化地图,设置中心点坐标和地图级别
+// map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
+// console.log(map)
+//  this.map = new BMap.Map("map", {
+//       enableMapClick: false,
+//       minZoom: 5,
+//       maxZoom: 20
+//     }); // 创建Map实例
+   
+//     this.map.centerAndZoom(
+//       new BMap.Point(117.200804, 31.774661),
+//       6
+//     ); // 初始化地图,用城市名设置地图中心点
+//       console.log(this.map)
+    // //   console.log(this.map)
+    // this.map.setMapStyle(this.mapStyle);
+    // // map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+    // // map.setCurrentCity("洛阳");   // 设置地图显示的城市 此项是必须设置的
+    // this.map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+   
     },
     methods: {
         userData() {
-            // UserDetail().then((res)=>{
-            //     console.log(res)
-            //     this.fenceList = res.data.extraInfo.fence
-            //     console.log(this.fenceList)
-            //     this.fenceData = res.data;
-            //     console.log(this.fenceData)
-            // })
-            this.fenceList = JSON.parse(window.sessionStorage.getItem('fenceList'))
-            this.fenceData = JSON.parse(window.sessionStorage.getItem('fenceData'))
+            UserDetail().then((res)=>{
+                console.log(res)
+                if(res.msg == "ok" ) {
+this.fenceList = res.data.extraInfo.fence
+ this.fenceData = res.data;
+ this.loading = false;
+                } else {
+                  this.$message.error(res.msg)
+                }
+                // this.fenceList = res.data.extraInfo.fence
+                // console.log(this.fenceList)
+                // this.fenceData = res.data;
+                // console.log(this.fenceData)
+            })
+            // this.fenceList = JSON.parse(window.sessionStorage.getItem('fenceList'))
+            // this.fenceData = JSON.parse(window.sessionStorage.getItem('fenceData'))
+            //         console.log(this.fenceData)
+    
+
         },
                 deleteItem(i,index) {
 
@@ -82,13 +138,15 @@ console.log(this.fenceData)
         EditUser(this.fenceData).then((res)=>{
          if (res.msg == "ok") {
              this.$message.success("删除成功")
+             this.userData();
          }
         })
       })
     },
     goBack() {
 this.$router.push({ path: '/fence/index' })
-    }
+    },
+
     }
 }
 </script>

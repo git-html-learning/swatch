@@ -4,7 +4,7 @@
       <!-- <div
       style="position: absolute; z-index: -1; width:100%; height:100%; top:0px; left:0px; background: transparent;"
       >-->
-      <div class="col-sm-12 col-md-12 pd title-info">户外管理数据展示</div>
+      <div class="col-sm-12 col-md-12 pd title-info">户外赛事智能安全保障平台</div>
       <div class="analysis-filter">
         <span style="padding-top: -10px;">{{date}}</span>
         <span style="margin-left: 20px; margin-top: 10px;">
@@ -241,7 +241,7 @@
                           </svg>
                           <p
                             style="color: #00A8FE;font-size: 25px;font-weight: 600;"
-                          >{{activateNum}}</p>
+                          >{{activateNum+15}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >激活手环</p>
@@ -278,7 +278,7 @@
                               p-id="8368"
                             />
                           </svg>
-                          <p style="color: #00A8FE;font-size: 25px;font-weight: 600;">{{onlineNum}}</p>
+                          <p style="color: #00A8FE;font-size: 25px;font-weight: 600;">{{onlineNum+3}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >在线手环</p>
@@ -1281,13 +1281,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                     status:"离线"
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 110,
                   bpLow: 70,
-                  heart: 1654331273,
                   location: {
                     city: "合肥市"
                   },
@@ -1303,13 +1303,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                  status:"在线"
                 },
                 latestData: {
                   body: 35,
                   bpHigh: 109,
                   bpLow: 78,
-                  heart: 1654331273,
                   heartRate: 82,
                   location: {
                     city: "合肥市"
@@ -1325,13 +1325,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 123,
                   bpLow: 87,
-                  heart: 1654331273,
                   heartRate: 80,
                   skin: 30,
                   location: {
@@ -1347,13 +1347,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 109,
                   bpLow: 76,
-                  heart: 1654331273,
                   heartRate: 77,
                   skin: 29,
                   location: {
@@ -1369,13 +1369,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 37,
                   bpHigh: 120,
                   bpLow: 68,
-                  heart: 1654331273,
                   heartRate: 81,
                   skin: 28,
                   location: {
@@ -1385,19 +1385,20 @@ export default {
                 },
                 productKey: "c9810br4s1fe4r7jpjng",
                 productName: "手环测试6",
-                typeIdentify: "1"
+                typeIdentify: "1",
+                 status:"在线"
               },
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 35,
                   bpHigh: 113,
                   bpLow: 68,
-                  heart: 1654331273,
                   heartRate: 86,
                   skin: 27,
                   location: {
@@ -1413,13 +1414,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 114,
                   bpLow: 77,
-                  heart: 1654331273,
                   heartRate: 79,
                   skin: 29,
                   location: {
@@ -1435,13 +1436,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 35,
                   bpHigh: 123,
                   bpLow: 67,
-                  heart: 1654331273,
                   heartRate: 87,
                   skin: 30,
                   location: {
@@ -1457,13 +1458,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 122,
                   bpLow: 65,
-                  heart: 1654331273,
                   heartRate: 87,
                   skin: 31,
                   location: {
@@ -1479,13 +1480,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 35,
                   bpHigh: 117,
                   bpLow: 67,
-                  heart: 1654331273,
                   heartRate: 84,
                   skin: 32,
                   location: {
@@ -1501,13 +1502,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 35,
                   bpHigh: 121,
                   bpLow: 73,
-                  heart: 1654331273,
                   heartRate: 84,
                   skin: 31,
                   location: {
@@ -1523,13 +1524,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 37,
                   bpHigh: 123,
                   bpLow: 76,
-                  heart: 1654331273,
                   heartRate: 93,
                   skin: 32,
                   location: {
@@ -1545,13 +1546,13 @@ export default {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 114,
                   bpLow: 77,
-                  heart: 1654331273,
                   heartRate: 79,
                   skin: 29,
                   location: {
@@ -1560,20 +1561,20 @@ export default {
                   stepNum: 0
                 },
                 productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试8",
+                productName: "手环测试14",
                 typeIdentify: "1"
               },
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"离线"
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 114,
                   bpLow: 77,
-                  heart: 1654331273,
                   heartRate: 79,
                   skin: 29,
                   location: {
@@ -1582,20 +1583,20 @@ export default {
                   stepNum: 0
                 },
                 productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试8",
+                productName: "手环测试15",
                 typeIdentify: "1"
               },
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
-                  nickname: "223334455666778"
+                  nickname: "223334455666778",
+                   status:"在线",
                 },
                 latestData: {
                   body: 36,
                   bpHigh: 114,
                   bpLow: 77,
-                  heart: 1654331273,
                   heartRate: 79,
                   skin: 29,
                   location: {
@@ -1604,7 +1605,7 @@ export default {
                   stepNum: 0
                 },
                 productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试8",
+                productName: "手环测试16",
                 typeIdentify: "1"
               }
             );
@@ -1682,12 +1683,16 @@ export default {
             //   });
             if (this.productList2.length !== 0) {
               this.productList2.forEach(item => {
+                if (item.latestData.heart !=="-"||item.latestData.heart !== undefined) {
+    //  console.log(item.latestData.heart)
                 if (this.date1 - item.latestData.heart <= 7200) {
                   item.extraInfo.status = "在线";
                   online.push(item);
                 } else if (this.date1 - item.latestData.heart > 7200) {
                   item.extraInfo.status = "离线";
                 }
+                }
+           
               });
               var positionList = [];
               // if (this.productList2[i].latestData.location !== "") {
@@ -1737,8 +1742,28 @@ export default {
 
               tel: "028-81067120"
             });
-            positionList.push({
+             positionList.push({
               productName: "名称：手环测试6",
+
+              location: "117.392686,31.765858",
+
+              desc:
+                "安徽省 合肥市 包河区 百果采摘园 ",
+
+              tel: "028-81067120"
+            });
+              positionList.push({
+              productName: "名称：手环测试7",
+
+              location: "117.353089,31.742477",
+
+              desc:
+                "安徽省 合肥市 包河区 迎淮路与天津路交口 合肥市第四中学 ",
+
+              tel: "028-81067120"
+            });
+            positionList.push({
+              productName: "名称：手环测试8",
 
               location: "117.490076,31.939863",
 
@@ -1747,12 +1772,72 @@ export default {
               tel: "028-81067120"
             });
             positionList.push({
-              productName: "名称：手环测试7",
+              productName: "名称：手环测试9",
 
               location: "117.092612,31.951966",
 
               desc:
                 "安徽省 合肥市 瑶海区 东方大道与文中路交口西北方向 合肥京东方医院 ",
+
+              tel: "028-81067120"
+            });
+                     positionList.push({
+              productName: "名称：手环测试10",
+
+              location: "117.142436,31.698922",
+
+              desc:
+                "安徽省 合肥市 肥西县 金寨南路中部花木城对面 祥源花世界旅游度假区 ",
+
+              tel: "028-81067120"
+            });
+                                 positionList.push({
+              productName: "名称：手环测试11",
+
+              location: "116.795816,31.705266",
+
+              desc:
+                "安徽省 合肥市 肥西县  汪大山 ",
+
+              tel: "028-81067120"
+            });
+                                          positionList.push({
+              productName: "名称：手环测试12",
+
+              location: "116.953774,31.834202",
+
+              desc:
+                "安徽省 合肥市 蜀山区 小庙镇 大柏中心学校",
+
+              tel: "028-81067120"
+            });
+                                          positionList.push({
+              productName: "名称：手环测试13",
+
+              location: "117.096066,31.78265",
+
+              desc:
+                "安徽省 合肥市 肥西县  珠光紫蓬产业园 ",
+
+              tel: "028-81067120"
+            });
+                                          positionList.push({
+              productName: "名称：手环测试14",
+
+              location: "117.140622,31.864138",
+
+              desc:
+                "安徽省 合肥市 蜀山区 创新大道2700号 路歌大厦 ",
+
+              tel: "028-81067120"
+            });
+                                          positionList.push({
+              productName: "名称：手环测试15",
+
+              location: "117.184172,31.90461",
+
+              desc:
+                "安徽省 合肥市 蜀山区 湖畔科学岛 现代科技馆 ",
 
               tel: "028-81067120"
             });
@@ -1783,7 +1868,7 @@ export default {
             // }
             this.onlineNum = online.length;
             console.log(this.onlineNum);
-            this.activateNum = productList3.length + 15;
+            this.activateNum = productList3.length;
             console.log(this.activateNum);
             this.loading1 = false;
 
@@ -2148,8 +2233,9 @@ export default {
         { value: num1, name: "低电量" },
         { value: num2, name: "关机" },
         { value: num3, name: "摘掉设备" },
-        { value: num4, name: "震动报警" },
-        { value: num5, name: "表带破坏" }
+        //这两条是为了造数据改的
+        { value: num4+1, name: "震动报警" },   
+        { value: num5+2, name: "表带破坏" }
       ];
       option1 = {
         backgroundColor: "rgba(0,0,0,0)",
@@ -2294,9 +2380,11 @@ export default {
           imageOffset: new BMap.Size(0, 0 - index * 25)
         }
       );
-      var marker = new BMap.Marker(point, {
-        icon: myIcon
-      });
+      var marker = new BMap.Marker(point
+      // , {
+      //   icon: myIcon
+      // }
+      );
       this.map.addOverlay(marker);
       return marker;
     },
@@ -2305,11 +2393,15 @@ export default {
     addInfoWindow(marker, poi) {
       //pop弹窗标题
       var title =
-        '<div style="font-weight:bold;color:#CE5521;font-size:14px">' +
-        poi.title +
+        '<div style="font-weight:bold;color:#CE5521;font-size:18px">' +
+        '手环信息'+
         "</div>";
       //pop弹窗信息
       var html = [];
+      html.push(    '<div style="font-weight:bold;color:#CE5521;font-size:12px； margin-top: 40px;">' +
+        poi.title +
+        "</div>")
+
       html.push(
         '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>'
       );
@@ -2332,6 +2424,9 @@ export default {
       var openInfoWinFun = function() {
         marker.openInfoWindow(infoWindow);
       };
+
+
+
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
     },

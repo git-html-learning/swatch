@@ -9,7 +9,7 @@
     <el-card :body-style="{ padding: '10px', height: '100%' }" class = "box">
       <div slot="header">
         <el-row type="flex" justify="">
-          <el-col :span="23"> <span>个人信息与更新</span></el-col>
+          <el-col :span="23"> <span>管理员信息与更新</span></el-col>
           <el-col :span="1">
             <el-button
               type="primary"
