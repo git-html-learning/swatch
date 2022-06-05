@@ -782,8 +782,8 @@ export default {
             name: "报警数",
             type: "bar",
             data: [num1, num2, num3, num4, num5],
-            barWidth: 40, //柱子宽度
-            barGap: 0.5, //柱子之间间距
+            barWidth: 48, //柱子宽度
+            barGap: 0.3, //柱子之间间距
             itemStyle: {
               normal: {
                 color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [

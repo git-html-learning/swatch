@@ -9,7 +9,6 @@
         <span style="padding-top: -10px;">{{date}}</span>
         <span style="margin-left: 20px; margin-top: 10px;">
           <el-tooltip
-        
             style="margin-right: 10px;"
             class="item"
             effect="light"
@@ -17,7 +16,7 @@
             placement="top-start"
           >
             <svg
-              @click = "reset"
+              @click="reset"
               t="1654350962783"
               class="icon"
               viewBox="0 0 1024 1024"
@@ -278,7 +277,9 @@
                               p-id="8368"
                             />
                           </svg>
-                          <p style="color: #00A8FE;font-size: 25px;font-weight: 600;">{{onlineNum+3}}</p>
+                          <p
+                            style="color: #00A8FE;font-size: 25px;font-weight: 600;"
+                          >{{onlineNum+3}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >在线手环</p>
@@ -293,7 +294,72 @@
               <el-col :span="24">
                 <div class="alert">
                   <div class="col-info">
-                    <div class="title">报警统计</div>
+                    <div class="title">
+                     <span> 报警统计</span>
+    <span style = "margin-left: 15px; line-height: 25px;">
+                   <router-link to="/alert/index">
+                  <svg
+                    t="1654419730805"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="2110"
+                    width="16"
+                    height="16"
+                  >
+                    <path
+                      d="M182.044444 256m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2111"
+                    />
+                    <path
+                      d="M182.044444 199.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2112"
+                    />
+                    <path
+                      d="M182.044444 512m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2113"
+                    />
+                    <path
+                      d="M182.044444 455.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2114"
+                    />
+                    <path
+                      d="M182.044444 768m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2115"
+                    />
+                    <path
+                      d="M182.044444 711.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2116"
+                    />
+                    <path d="M381.155556 256h512" fill="#00c1ea" p-id="2117" />
+                    <path
+                      d="M893.155556 284.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2118"
+                    />
+                    <path d="M381.155556 512h512" fill="#00c1ea" p-id="2119" />
+                    <path
+                      d="M893.155556 540.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2120"
+                    />
+                    <path d="M381.155556 768h512" fill="#00c1ea" p-id="2121" />
+                    <path
+                      d="M893.155556 796.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2122"
+                    />
+                  </svg>
+                </router-link>
+                </span>
+                     </div>
                   </div>
                   <div id="pie"></div>
                 </div>
@@ -307,7 +373,74 @@
           </el-col>
           <el-col :span="6">
             <div class="ringMessage">
-              <div class="title">已激活手环数据详情</div>
+              <div class="title">
+                <span>  已激活手环数据详情</span>
+              
+                <span style = "margin-left: 15px; margin-top: 10px;">
+                   <router-link to="/products/index">
+                  <svg
+                    t="1654419730805"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="2110"
+                    width="16"
+                    height="16"
+                  >
+                    <path
+                      d="M182.044444 256m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2111"
+                    />
+                    <path
+                      d="M182.044444 199.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2112"
+                    />
+                    <path
+                      d="M182.044444 512m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2113"
+                    />
+                    <path
+                      d="M182.044444 455.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2114"
+                    />
+                    <path
+                      d="M182.044444 768m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2115"
+                    />
+                    <path
+                      d="M182.044444 711.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2116"
+                    />
+                    <path d="M381.155556 256h512" fill="#00c1ea" p-id="2117" />
+                    <path
+                      d="M893.155556 284.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2118"
+                    />
+                    <path d="M381.155556 512h512" fill="#00c1ea" p-id="2119" />
+                    <path
+                      d="M893.155556 540.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2120"
+                    />
+                    <path d="M381.155556 768h512" fill="#00c1ea" p-id="2121" />
+                    <path
+                      d="M893.155556 796.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2122"
+                    />
+                  </svg>
+                </router-link>
+                </span>
+               
+              </div>
               <div class="content">
                 <el-carousel indicator-position="outside" height="45vh">
                   <el-carousel-item v-for="(item,index) in carouselData" :key="index">
@@ -408,7 +541,71 @@
           <el-row type="flex" justify :gutter="20">
             <el-col :span="9">
               <div class="ranking">
-                <div class="title">报警手环排名</div>
+                <div class="title">报警手环排名
+                       <span style = "margin-left: 15px; margin-top: 10px;">
+                   <router-link to="/alert/index">
+                  <svg
+                    t="1654419730805"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="2110"
+                    width="16"
+                    height="16"
+                  >
+                    <path
+                      d="M182.044444 256m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2111"
+                    />
+                    <path
+                      d="M182.044444 199.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2112"
+                    />
+                    <path
+                      d="M182.044444 512m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2113"
+                    />
+                    <path
+                      d="M182.044444 455.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2114"
+                    />
+                    <path
+                      d="M182.044444 768m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2115"
+                    />
+                    <path
+                      d="M182.044444 711.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2116"
+                    />
+                    <path d="M381.155556 256h512" fill="#00c1ea" p-id="2117" />
+                    <path
+                      d="M893.155556 284.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2118"
+                    />
+                    <path d="M381.155556 512h512" fill="#00c1ea" p-id="2119" />
+                    <path
+                      d="M893.155556 540.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2120"
+                    />
+                    <path d="M381.155556 768h512" fill="#00c1ea" p-id="2121" />
+                    <path
+                      d="M893.155556 796.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2122"
+                    />
+                  </svg>
+                </router-link>
+                </span>
+                </div>
                 <div id="ranking"></div>
               </div>
             </el-col>
@@ -423,6 +620,69 @@
                 <div class="title">
                   今日报警
                   <span v-if="length !==0">({{length}}条)</span>
+                       <span style = "margin-left: 15px; margin-top: 10px;">
+                   <router-link to="/alert/index">
+                  <svg
+                    t="1654419730805"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="2110"
+                    width="16"
+                    height="16"
+                  >
+                    <path
+                      d="M182.044444 256m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2111"
+                    />
+                    <path
+                      d="M182.044444 199.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2112"
+                    />
+                    <path
+                      d="M182.044444 512m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2113"
+                    />
+                    <path
+                      d="M182.044444 455.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2114"
+                    />
+                    <path
+                      d="M182.044444 768m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
+                      fill="#00c1ea"
+                      p-id="2115"
+                    />
+                    <path
+                      d="M182.044444 711.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
+                      fill="#00c1ea"
+                      p-id="2116"
+                    />
+                    <path d="M381.155556 256h512" fill="#00c1ea" p-id="2117" />
+                    <path
+                      d="M893.155556 284.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2118"
+                    />
+                    <path d="M381.155556 512h512" fill="#00c1ea" p-id="2119" />
+                    <path
+                      d="M893.155556 540.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2120"
+                    />
+                    <path d="M381.155556 768h512" fill="#00c1ea" p-id="2121" />
+                    <path
+                      d="M893.155556 796.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
+                      fill="#00c1ea"
+                      p-id="2122"
+                    />
+                  </svg>
+                </router-link>
+                </span>
                 </div>
                 <div class="body" v-if="!alertShow" style="text-align: center;">
                   <svg
@@ -1031,7 +1291,7 @@ export default {
         style: "bluish"
       },
       map: null,
-      zoom: 9,
+      zoom: 10,
       alertInfo: [],
       length: 0,
       judge: [],
@@ -1282,7 +1542,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                     status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 36,
@@ -1304,7 +1564,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                  status:"在线"
+                  status: "在线"
                 },
                 latestData: {
                   body: 35,
@@ -1321,34 +1581,13 @@ export default {
                 productName: "手环测试4",
                 typeIdentify: "1"
               },
+
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 123,
-                  bpLow: 87,
-                  heartRate: 80,
-                  skin: 30,
-                  location: {
-                    city: "合肥市"
-                  },
-                  stepNum: 43
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试5",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
-                  nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 36,
@@ -1370,7 +1609,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 37,
@@ -1386,14 +1625,14 @@ export default {
                 productKey: "c9810br4s1fe4r7jpjng",
                 productName: "手环测试6",
                 typeIdentify: "1",
-                 status:"在线"
+                status: "在线"
               },
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 35,
@@ -1415,7 +1654,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 36,
@@ -1437,7 +1676,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 35,
@@ -1459,7 +1698,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 36,
@@ -1481,7 +1720,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 35,
@@ -1503,7 +1742,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 35,
@@ -1525,7 +1764,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 37,
@@ -1547,7 +1786,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 36,
@@ -1569,7 +1808,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"离线"
+                  status: "离线"
                 },
                 latestData: {
                   body: 36,
@@ -1591,7 +1830,7 @@ export default {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
                   fence: "-",
                   nickname: "223334455666778",
-                   status:"在线",
+                  status: "在线"
                 },
                 latestData: {
                   body: 36,
@@ -1683,16 +1922,18 @@ export default {
             //   });
             if (this.productList2.length !== 0) {
               this.productList2.forEach(item => {
-                if (item.latestData.heart !=="-"||item.latestData.heart !== undefined) {
-    //  console.log(item.latestData.heart)
-                if (this.date1 - item.latestData.heart <= 7200) {
-                  item.extraInfo.status = "在线";
-                  online.push(item);
-                } else if (this.date1 - item.latestData.heart > 7200) {
-                  item.extraInfo.status = "离线";
+                if (
+                  item.latestData.heart !== "-" ||
+                  item.latestData.heart !== undefined
+                ) {
+                  //  console.log(item.latestData.heart)
+                  if (this.date1 - item.latestData.heart <= 7200) {
+                    item.extraInfo.status = "在线";
+                    online.push(item);
+                  } else if (this.date1 - item.latestData.heart > 7200) {
+                    item.extraInfo.status = "离线";
+                  }
                 }
-                }
-           
               });
               var positionList = [];
               // if (this.productList2[i].latestData.location !== "") {
@@ -1719,21 +1960,21 @@ export default {
             }
 
             positionList.push({
-              productName: "名称：手环测试3",
+              productName: "手环测试3",
 
               location: "117.2153254,31.799062",
 
               desc: "安徽省 合肥市 蜀山区 融创中心"
             });
             positionList.push({
-              productName: "名称：手环测试4",
+              productName: "手环测试4",
 
               location: "117.235478,31.78763",
 
               desc: "安徽省 合肥市 金寨南路 正大广场 "
             });
             positionList.push({
-              productName: "名称：手环测试5",
+              productName: "手环测试5",
 
               location: "117.394874,31.726622",
 
@@ -1742,28 +1983,26 @@ export default {
 
               tel: "028-81067120"
             });
-             positionList.push({
-              productName: "名称：手环测试6",
+            positionList.push({
+              productName: "手环测试6",
 
               location: "117.392686,31.765858",
 
-              desc:
-                "安徽省 合肥市 包河区 百果采摘园 ",
-
-              tel: "028-81067120"
-            });
-              positionList.push({
-              productName: "名称：手环测试7",
-
-              location: "117.353089,31.742477",
-
-              desc:
-                "安徽省 合肥市 包河区 迎淮路与天津路交口 合肥市第四中学 ",
+              desc: "安徽省 合肥市 包河区 百果采摘园 ",
 
               tel: "028-81067120"
             });
             positionList.push({
-              productName: "名称：手环测试8",
+              productName: "手环测试7",
+
+              location: "117.353089,31.742477",
+
+              desc: "安徽省 合肥市 包河区 迎淮路与天津路交口 合肥市第四中学 ",
+
+              tel: "028-81067120"
+            });
+            positionList.push({
+              productName: "手环测试8",
 
               location: "117.490076,31.939863",
 
@@ -1772,7 +2011,7 @@ export default {
               tel: "028-81067120"
             });
             positionList.push({
-              productName: "名称：手环测试9",
+              productName: "手环测试9",
 
               location: "117.092612,31.951966",
 
@@ -1781,8 +2020,8 @@ export default {
 
               tel: "028-81067120"
             });
-                     positionList.push({
-              productName: "名称：手环测试10",
+            positionList.push({
+              productName: "手环测试10",
 
               location: "117.142436,31.698922",
 
@@ -1791,53 +2030,48 @@ export default {
 
               tel: "028-81067120"
             });
-                                 positionList.push({
-              productName: "名称：手环测试11",
+            positionList.push({
+              productName: "手环测试11",
 
               location: "116.795816,31.705266",
 
-              desc:
-                "安徽省 合肥市 肥西县  汪大山 ",
+              desc: "安徽省 合肥市 肥西县  汪大山 ",
 
               tel: "028-81067120"
             });
-                                          positionList.push({
-              productName: "名称：手环测试12",
+            positionList.push({
+              productName: "手环测试12",
 
               location: "116.953774,31.834202",
 
-              desc:
-                "安徽省 合肥市 蜀山区 小庙镇 大柏中心学校",
+              desc: "安徽省 合肥市 蜀山区 小庙镇 大柏中心学校",
 
               tel: "028-81067120"
             });
-                                          positionList.push({
-              productName: "名称：手环测试13",
+            positionList.push({
+              productName: "手环测试13",
 
               location: "117.096066,31.78265",
 
-              desc:
-                "安徽省 合肥市 肥西县  珠光紫蓬产业园 ",
+              desc: "安徽省 合肥市 肥西县  珠光紫蓬产业园 ",
 
               tel: "028-81067120"
             });
-                                          positionList.push({
-              productName: "名称：手环测试14",
+            positionList.push({
+              productName: "手环测试14",
 
               location: "117.140622,31.864138",
 
-              desc:
-                "安徽省 合肥市 蜀山区 创新大道2700号 路歌大厦 ",
+              desc: "安徽省 合肥市 蜀山区 创新大道2700号 路歌大厦 ",
 
               tel: "028-81067120"
             });
-                                          positionList.push({
-              productName: "名称：手环测试15",
+            positionList.push({
+              productName: "手环测试15",
 
               location: "117.184172,31.90461",
 
-              desc:
-                "安徽省 合肥市 蜀山区 湖畔科学岛 现代科技馆 ",
+              desc: "安徽省 合肥市 蜀山区 湖畔科学岛 现代科技馆 ",
 
               tel: "028-81067120"
             });
@@ -1859,9 +2093,10 @@ export default {
             console.log(markerArr);
 
             for (var i = 0; i < markerArr.length; i++) {
+            //  console.log(markerArr)
               var p0 = markerArr[i].point.split(",")[0];
               var p1 = markerArr[i].point.split(",")[1];
-              var maker = this.addMarker(new window.BMap.Point(p0, p1), i);
+              var maker = this.addMarker(new window.BMap.Point(p0, p1), markerArr[i].title);
               this.addInfoWindow(maker, markerArr[i], i);
             }
 
@@ -2161,14 +2396,14 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "#00c0e9"
+                    color: "#0086fb"
                   },
                   {
                     offset: 1,
-                    color: "#3b73cf"
+                    color: "#6565a6"
                   }
                 ]),
-                barBorderRadius: 50,
+                barBorderRadius: 20,
                 borderWidth: 0
               },
               emphasis: {
@@ -2177,7 +2412,7 @@ export default {
               }
             },
             zlevel: 2,
-            barWidth: "30%",
+            barWidth: "35%",
             data: [28, 22, 20, 16, 12, 8, 6, 2]
           },
           {
@@ -2197,8 +2432,8 @@ export default {
                 }
               }
             },
-            barWidth: "20%",
-            data: [30, 30, 30, 30, 30]
+            barWidth: "30%",
+            data: [30, 30, 30, 30, 30,30,30,30]
           }
         ]
       };
@@ -2234,8 +2469,8 @@ export default {
         { value: num2, name: "关机" },
         { value: num3, name: "摘掉设备" },
         //这两条是为了造数据改的
-        { value: num4+1, name: "震动报警" },   
-        { value: num5+2, name: "表带破坏" }
+        { value: num4 + 1, name: "震动报警" },
+        { value: num5 + 2, name: "表带破坏" }
       ];
       option1 = {
         backgroundColor: "rgba(0,0,0,0)",
@@ -2258,7 +2493,7 @@ export default {
             color: [],
             fontStyle: "normal",
             fontFamily: "微软雅黑",
-            fontSize: 12
+            fontSize: 15
           }
         },
         series: [
@@ -2268,7 +2503,7 @@ export default {
             clockwise: false, //饼图的扇区是否是顺时针排布
             minAngle: 20, //最小的扇区角度（0 ~ 360）
             center: ["35%", "50%"], //饼图的中心（圆心）坐标
-            radius: [45, 70], //饼图的半径
+            radius: [50, 80], //饼图的半径
             avoidLabelOverlap: true, ////是否启用防止标签重叠
             itemStyle: {
               //图形样式
@@ -2303,7 +2538,7 @@ export default {
             silent: true,
             minAngle: 20, //最小的扇区角度（0 ~ 360）
             center: ["35%", "50%"], //饼图的中心（圆心）坐标
-            radius: [0, 40], //饼图的半径
+            radius: [0, 48], //饼图的半径
             itemStyle: {
               //图形样式
               normal: {
@@ -2371,21 +2606,38 @@ export default {
     //   return marker;
     // },
 
-    addMarker(point, index) {
+    addMarker(point, title) {
       var myIcon = new BMap.Icon(
-        "http://api.map.baidu.com/img/markers.png",
+       
+			require("@/assets/img/手环标记.png"),
         new BMap.Size(23, 25),
-        {
-          offset: new BMap.Size(10, 25),
-          imageOffset: new BMap.Size(0, 0 - index * 25)
+        // {
+        //   offset: new BMap.Size(10, 25),
+        //   imageOffset: new BMap.Size(0, 0 - index * 25)
+        // }
+      );
+
+      var marker = new BMap.Marker(
+        point
+        , {
+          icon: myIcon
         }
       );
-      var marker = new BMap.Marker(point
-      // , {
-      //   icon: myIcon
-      // }
-      );
+      var labelopts = {
+			position: point, // 指定文本标注所在的地理位置
+			offset: new BMap.Size(-30, -30) // 设置文本偏移量
+		};
+		var label = new BMap.Label(title, labelopts);
+		label.setStyle({ 
+			color : "#181b40", 
+			fontSize : "14px", 
+			backgroundColor :"0.05",
+			backgroundColor:"rgba(255,255,255,0.7)",
+			border :"0", 
+			fontWeight :"bold" 
+		});
       this.map.addOverlay(marker);
+      this.map.addOverlay(label); 
       return marker;
     },
 
@@ -2394,13 +2646,15 @@ export default {
       //pop弹窗标题
       var title =
         '<div style="font-weight:bold;color:#CE5521;font-size:18px">' +
-        '手环信息'+
+        "手环信息" +
         "</div>";
       //pop弹窗信息
       var html = [];
-      html.push(    '<div style="font-weight:bold;color:#CE5521;font-size:12px； margin-top: 40px;">' +
-        poi.title +
-        "</div>")
+      html.push(
+        '<div style="font-weight:bold;color:#CE5521;font-size:12px； margin-top: 40px;">' +
+          poi.title +
+          "</div>"
+      );
 
       html.push(
         '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>'
@@ -2424,8 +2678,6 @@ export default {
       var openInfoWinFun = function() {
         marker.openInfoWindow(infoWindow);
       };
-
-
 
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
@@ -2514,7 +2766,7 @@ export default {
           text-align: left;
         }
         #pie {
-          height: 60%;
+          height: calc(100% - 40px);
           width: 100%;
         }
       }

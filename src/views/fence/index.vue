@@ -647,7 +647,7 @@ export default {
   right: 5%;
   top: 100px;
   z-index: 10;
-  padding: 30px;
+  padding: 20px;
    height: 300px;
    width: 300px;
    background-color: rgba(255,255,255,0.7);
