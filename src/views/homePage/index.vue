@@ -2644,27 +2644,48 @@ export default {
     // 添加信息窗口
     addInfoWindow(marker, poi) {
       //pop弹窗标题
+      // console.log(poi)
       var title =
         '<div style="font-weight:bold;color:#CE5521;font-size:18px">' +
         "手环信息" +
         "</div>";
       //pop弹窗信息
       var html = [];
-      html.push(
-        '<div style="font-weight:bold;color:#CE5521;font-size:12px； margin-top: 40px;">' +
-          poi.title +
-          "</div>"
-      );
+      // html.push(
+      //   '<div style="font-weight:bold;color:#CE5521;font-size:12px； margin-top: 40px;">' +
+      //     poi.title +
+      //     "</div>"
+      // );
 
       html.push(
-        '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>'
+        '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif; margin-top: 10px;"><tbody>'
       );
-      html.push("<tr>");
+       html.push("<tr style = 'height: 25px;'>");
+      html.push(
+        '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">名称:</td>'
+      );
+      html.push(
+        '<td style="vertical-align:top;line-height:18px;color: #d2562a;">' + 
+          poi.title +
+          " </td>"
+      );
+      html.push("</tr>");
+         html.push("<tr style = 'height: 25px;'>");
+      html.push(
+        '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">坐标:</td>'
+      );
+      html.push(
+        '<td style="vertical-align:top;line-height:18px;color: #d2562a;">' + '('+
+          poi.point +')'+
+          " </td>"
+      );
+      html.push("</tr>");
+     html.push("<tr style = 'height: 25px;'>");
       html.push(
         '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">地址:</td>'
       );
       html.push(
-        '<td style="vertical-align:top;line-height:16px">' +
+        '<td style="vertical-align:top;line-height:18px;color: #d2562a;">' +
           poi.address +
           " </td>"
       );
