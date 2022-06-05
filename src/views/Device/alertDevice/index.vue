@@ -1,5 +1,11 @@
 <template>
   <div class="content">
+                <div
+      id="background"
+      style="position: absolute; z-index: -1; width:100%; height:100%; top:0px; left:0px;   background-color: rgba(227, 241, 247,0.3)"
+    >
+      <!-- <img src="./主页背景.png" width="100%" height="100%" /> -->
+    </div>
     <el-card :body-style="{ padding: '0px' }">
       <div slot="header">
         <el-row type="flex" justify="end">
@@ -49,6 +55,8 @@
         v-loading="loading"
         element-loading-text="数据加载中"
         element-loading-spinner="el-icon-loading"
+             :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
+               :cell-style="tableCellStyle"
       >
         <el-table-column type="selection" align="center"></el-table-column>
         <el-table-column
@@ -298,6 +306,14 @@ export default {
         });
       }
     },
+    tableCellStyle(row) {
+      console.log(row)
+      if(row.row.unRead == true ) {
+         return "color: #6c6e72; background-color: rgb(240, 239, 235)";
+      } else {
+return "color: #6c6e72; background-color: #fff";
+      }
+    }
   },
 };
 </script>
@@ -305,11 +321,11 @@ export default {
 <style lang="less" >
 .content {
   .warning-row {
-    background: #f0ede3;
+    background-color: rgb(240, 239, 235);
   }
 
   .el-table .success-row {
-    background: #d1f7bf;
+    background-color: #d1f7bf;
   }
   margin: 10px;
   .el-pagination {
