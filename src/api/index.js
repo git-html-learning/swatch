@@ -513,8 +513,11 @@ export function cloudDevcieDelete(deviceId) {
 //手环新下发通道
 export function sendMessage(deviceId,message) {
   return request({
-    url: 'http://dianxinzhuce.ahusmart.com/commandlwm?deviceId='+deviceId+'&msg='+message,
-    method: 'get',
-
+    url: 'https://api.ahusmart.com/api/v1/newDownRaw?deviceType=smartWatch&bodyType=json&timeout=2 ' ,
+    method: 'post',
+  data: {
+    "deviceId":deviceId,
+    "command":message
+  } 
   })
 }
