@@ -99,6 +99,15 @@ export const constantRoutes = [
             title: '创建手环',
           }
         }, 
+        // {
+        //   path: 'message',
+        //   name: 'message',
+        //   hidden: true,
+        //   component: () => import('@/views/Product/productMessage/index'),
+        //   meta: {
+        //     title: '发送消息',
+        //   }
+        // }, 
         {
           path: 'pageDetail',
           name: 'pageDetail',

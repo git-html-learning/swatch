@@ -2614,27 +2614,6 @@ export default {
       }
       this.points = points;
     },
-    // 添加标注
-    // addMarker(point, index) {
-    //   var myIcon = new BMap.Icon(
-    //     "http://api.map.baidu.com/img/markers.png",
-    //     new BMap.Size(23, 25),
-    //     {
-    //       offset: new BMap.Size(10, 25),
-    //       imageOffset: new BMap.Size(0, 0 - index * 25)
-    //     }
-    //   );
-    //   var marker = new BMap.Marker(point, {
-    //     icon: myIcon
-    //   });
-    //   //不理解，但确实可以解决报错问题
-    //   setTimeout(() => {
-    //     this.map.addOverlay(marker);
-    //   }, 300);
-
-    //   // this.map.addOverlay(marker);
-    //   return marker;
-    // },
 
     addMarker(point, i) {
       if(i.status == "离线") {

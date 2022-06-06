@@ -508,3 +508,13 @@ export function cloudDevcieDelete(deviceId) {
     method: 'delete',
   })
 }
+
+
+//手环新下发通道
+export function sendMessage(deviceId,message) {
+  return request({
+    url: 'http://dianxinzhuce.ahusmart.com/commandlwm?deviceId='+deviceId+'&msg='+message,
+    method: 'get',
+
+  })
+}

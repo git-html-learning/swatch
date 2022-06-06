@@ -306,7 +306,7 @@ export default {
       }
     },
     tableCellStyle(row) {
-      console.log(row)
+      // console.log(row)
       if(row.row.unRead == true ) {
          return "color: #6c6e72; background-color: rgb(240, 239, 235)";
       } else {

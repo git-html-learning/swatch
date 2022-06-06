@@ -15,12 +15,30 @@
 
       <product-detail @beforeClose="closeDialog" :condition="condition" :productdetail="detail" />
     </el-dialog>
+
+    <!-- <el-dialog
+  title="提示"
+  :visible.sync="Visible"
+  width="50%">
+
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="Visible = false">取 消</el-button>
+    <el-button type="primary" @click="sendSure">确 定</el-button>
+  </span>
+    </el-dialog>-->
+
     <el-row>
       <el-card class="box-card">
         <!-- Card 组件包括header和body部分，header部分需要有显式具名 slot 分发，同时也是可选的。 -->
         <div slot="header" style="margin-bottom: 50px">
           <el-col :span="3" class="text-center">
             <router-link class="btn" to="/products/createProduct">创建手环</router-link>
+          </el-col>
+          <el-col :span="3" class="text-center">
+            <el-button class="btn1" @click="sendMessage">下发消息</el-button>
+          </el-col>
+          <el-col :span="12">
+            <el-input style = "margin-top: 6px;" v-show="visible" v-model="input" placeholder="下发消息"></el-input>
           </el-col>
         </div>
         <!-- data绑定的数据是搜索筛选的数据 -->
@@ -47,7 +65,9 @@
             element-loading-spinner="el-icon-loading"
             :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
             :cell-style="tableCellStyle"
+            @selection-change="handleSelectionChange"
           >
+            <el-table-column type="selection" width="40"></el-table-column>
             <!-- 搜索设备名 -->
             <el-table-column align="center" prop="productName" label="手环名称">
               <template slot="header" slot-scope="scope">
@@ -142,7 +162,8 @@ import {
   getDeviceDatas,
   allProductKey,
   NewDeviceDataOne,
-  ProductOne
+  ProductOne,
+  sendMessage
 } from "@/api/index";
 import productDetail from "./productDetail";
 export default {
@@ -179,7 +200,10 @@ export default {
       //用于设备注册的7个数据
       tableShow: true,
       timer: "",
-      date: ""
+      date: "",
+      visible: true,
+      multipleSelection: [],
+      input: ""
     };
   },
   computed: {
@@ -688,7 +712,38 @@ export default {
       } else {
         return "color: #6f9199";
       }
-    }
+    },
+    handleSelectionChange(val, index) {
+      this.multipleSelection = val;
+      console.log(this.multipleSelection);
+    },
+    sendMessage() {
+      var multipleSelection1 = [];
+console.log(this.multipleSelection)
+if (this.multipleSelection.length == 0) {
+  this.$message.info("当前没有选中手环")
+} else {
+console.log("3wr")
+this.multipleSelection.forEach(item=>{
+  console.log(item)
+  if (item.productName == "手环测试1" || item.productName == "手环测试2") {
+    multipleSelection1.push(item.extraInfo.deviceId)
+  }
+})
+console.log(multipleSelection1)
+if (multipleSelection1.length == 0) {
+  this.$mesasge.success("发送成功")
+} else {
+  multipleSelection1.forEach(item1=>{
+    sendMessage(item1,this.input).then((res)=>{
+      console.log(res)
+
+    })
+    this.$message.success("发送成功")
+  })
+}
+}
+    },
   }
 };
 </script>
@@ -728,6 +783,22 @@ export default {
   border-radius: 0px;
   border-bottom: 2px solid #00a29a;
   border-top: 2px solid #00a29a;
+}
+.btn1 {
+  padding: 15px 20px;
+  line-height: 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #b188d4;
+  color: #fff;
+}
+.btn1:hover {
+  background-color: #fff;
+  color: #b188d4;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid #b188d4;
+  border-top: 2px solid #b188d4;
 }
 ::v-deep .el-table__expanded-cell {
   background-color: transparent !important;
