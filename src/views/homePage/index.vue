@@ -2261,6 +2261,50 @@ export default {
           this.alertShow = true;
           res.data.alertInfo.forEach(item => {
             this.alertInfo.push(item);
+              this.alertInfo.push(
+            {
+              productName: "手环测试3",
+              deviceName: "AC",
+              Content: "温度报警",
+              date: "2022-06-06 10:02:28"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "A02",
+              Content: "SOS",
+              date: "2022-06-06 11:05:28"
+            },
+            {
+              productName: "手环测试7",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 13:34:13"
+            },
+            {
+              productName: "手环测试12",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 15:45:34"
+            },
+            {
+              productName: "手环测试1",
+              deviceName: "02",
+              Content: " S0S",
+              date: "2022-06-06 16:34:32"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "02",
+              Content: "S0S",
+              date: "2022-06-06 17:53:23"
+            },
+            {
+              productName: "手环测试2",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 19:34:56"
+            }
+          );
           });
         } else {
           this.$message.error(res.msg);
