@@ -344,7 +344,7 @@ export default {
         content: "温度或心率警报",
         click: () => {
           // 点击按钮事件
-          this.$router.push({ path: "/products/index" });
+          this.$router.push({ path: "/home" });
         }
       });
     }

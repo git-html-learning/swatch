@@ -33,21 +33,21 @@ import Layout from '@/layout'
 export const constantRoutes = [
 // hidden 设置 true 的时候该路由不会在侧边栏出现 如401，login等页面，或者如一些编辑页面
 
-  // {
-  //   //  redirect: '/permission/index', 重定向地址，在面包屑中点击会重定向去的地址
-  //   path: '/',
-  //   component: Layout,
-  //   redirect: '/home',
-  //   children: [{
-  //     path: 'home',
-  //     name: 'Home',
-  //     component: () => import('@/views/Home/index'),
-  //     meta: {
-  //       title: '首页',                // 设置该路由在侧边栏和面包屑中展示的名字
-  //       icon: '主页'                  // 设置该路由的图标
-  //     }
-  //   }]
-  // }, 
+  {
+    //  redirect: '/permission/index', 重定向地址，在面包屑中点击会重定向去的地址
+    path: '/',
+    component: Layout,
+    redirect: '/home',
+    children: [{
+      path: 'home',
+      name: 'Home',
+      component: () => import('@/views/Product/index'),
+      meta: {
+        title: '首页',                // 设置该路由在侧边栏和面包屑中展示的名字
+        icon: '主页'                  // 设置该路由的图标
+      }
+    }]
+  }, 
   
   {
     path: '/fence',
@@ -81,15 +81,15 @@ export const constantRoutes = [
     path: '/products',
     component: Layout,
     children: [
-      {
-      path: 'index',
-      name: 'Product',
-      component: () => import('@/views/Product/index'),
-      meta: {
-        title: '手环管理',
-        icon: '产品'
-      },
-    },
+    //   {
+    //   path: 'index',
+    //   name: 'Product',
+    //   component: () => import('@/views/Product/index'),
+    //   meta: {
+    //     title: '手环管理',
+    //     icon: '产品'
+    //   },
+    // },
     {
           path: 'createProduct',
           name: 'CreateProduct',

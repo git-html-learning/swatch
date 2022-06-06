@@ -377,7 +377,7 @@
                 <span>  已激活手环数据详情</span>
               
                 <span style = "margin-left: 15px; margin-top: 10px;">
-                   <router-link to="/products/index">
+                   <router-link to="/home">
                   <svg
                     t="1654419730805"
                     class="icon"
@@ -1331,7 +1331,7 @@ export default {
   },
   methods: {
     skip() {
-      this.$router.push({ path: "/products/index" });
+      this.$router.push({ path: "/home" });
     },
     timer() {
       let year = new Date().getFullYear(); //获取当前时间的年份

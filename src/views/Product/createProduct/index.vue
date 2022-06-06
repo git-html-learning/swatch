@@ -215,7 +215,7 @@ export default {
                         console.log(res);
                       });
                     }
-                    this.$router.push("/products/index");
+                    this.$router.push("home");
                   } else {
                     this.$message({
                       showClose: true,

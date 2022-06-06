@@ -882,7 +882,7 @@ export default {
       return openInfoWinFun;
     },
     viewProduct() {
-      this.$router.push({ path: "/products/index" });
+      this.$router.push({ path: "/home" });
     },
     viewDevice() {
       this.$router.push({ path: "/devices/index" });

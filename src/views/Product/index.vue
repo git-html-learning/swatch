@@ -722,8 +722,8 @@ export default {
 console.log(this.multipleSelection)
 if (this.multipleSelection.length == 0) {
   this.$message.info("当前没有选中手环")
+  this.input = ""
 } else {
-console.log("3wr")
 this.multipleSelection.forEach(item=>{
   console.log(item)
   if (item.productName == "手环测试1" || item.productName == "手环测试2") {
@@ -733,6 +733,7 @@ this.multipleSelection.forEach(item=>{
 console.log(multipleSelection1)
 if (multipleSelection1.length == 0) {
   this.$mesasge.success("发送成功")
+  this.input = ""
 } else {
   multipleSelection1.forEach(item1=>{
     sendMessage(item1,this.input).then((res)=>{
@@ -740,6 +741,7 @@ if (multipleSelection1.length == 0) {
 
     })
     this.$message.success("发送成功")
+    this.input = ""
   })
 }
 }
