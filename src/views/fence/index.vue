@@ -558,14 +558,7 @@ export default {
         if (item.latestData.location !== "") {
                    var marker = item.latestData.location.location;
                var array=marker.split(",");
-          // this.localMarker1 = item.latestData.location.location.substring(
-          //   0,
-          //   11
-          // );
-          // this.localMarker2 = item.latestData.location.location.substring(
-          //   12,
-          //   24
-          // );
+
 
           this.marker1 = new BMap.Marker(
             new BMap.Point(array[0], array[1])

@@ -79,6 +79,7 @@ export default {
       this.activeIndex = val;
       this.$router.push({ name: val });
     },
+
   },
 };
 </script>

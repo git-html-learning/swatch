@@ -55,7 +55,6 @@
         v-loading="loading"
         element-loading-text="数据加载中"
         element-loading-spinner="el-icon-loading"
-             :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
                :cell-style="tableCellStyle"
       >
         <el-table-column type="selection" align="center"></el-table-column>

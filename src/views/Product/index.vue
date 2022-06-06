@@ -294,7 +294,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏1",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -313,7 +313,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "合肥市庐阳区",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -332,7 +332,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏3",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -351,26 +351,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 109,
-                  bpLow: 76,
-                  heart: 1654331273,
-                  heartRate: 77,
-                  skin: 29,
-                  stepNum: 453
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试5",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "合肥市蜀山区",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -408,7 +389,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "翡翠湖区域围栏",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -427,7 +408,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "合肥市庐阳区",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -446,7 +427,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "合肥市蜀山区",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -465,7 +446,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏1",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -484,7 +465,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏1",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -503,7 +484,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "合肥市",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -541,7 +522,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏2",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -560,7 +541,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏2",
                   nickname: "223334455666778"
                 },
                 latestData: {
@@ -700,7 +681,7 @@ export default {
       ) {
         return "color: red";
       } else if (
-        (row.latestData.heartRate > 100 || row.latestData.heartRate < 60) &&
+        (row.latestData.heartRate > 110 || row.latestData.heartRate < 60) &&
         columnIndex === 3
       ) {
         return "color: red";

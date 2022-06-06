@@ -159,7 +159,7 @@
                           </svg>
                           <p
                             style="	color: #00A8FE;font-size: 25px;font-weight: 600;"
-                          >{{totalNum+15}}</p>
+                          >{{totalNum+14}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >手环总数</p>
@@ -240,7 +240,7 @@
                           </svg>
                           <p
                             style="color: #00A8FE;font-size: 25px;font-weight: 600;"
-                          >{{activateNum+15}}</p>
+                          >{{activateNum+14}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >激活手环</p>
@@ -447,6 +447,7 @@
                     <div v-for="(item1,index1) in item" :key="index1" style="height: 45%;">
                       <p
                         style="color: #fff; font-size: 20px; font-weight: bold;margin-left: 30px; "
+                 
                       >
                         <span
                           class="index0"
@@ -461,6 +462,7 @@
 	color: rgba(255, 255, 255, 1);
     margin-left: 40px;
     line-height: 40px;"
+    
                         >{{item1.productName}}</span>
                         <span style="margin-left: 20px;">
                           <el-tag
@@ -473,6 +475,9 @@
               "
                             disable-transitions
                           >{{item1.extraInfo.status}}</el-tag>
+                        </span>
+                        <span style = "float: right; margin-right: 20px; margin-top: 10px;"  @click = "enterDetails(item1)">
+<svg t="1654498195562" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3526" width="15" height="15"><path d="M877.714 877.714V585.143H1024V1024H0V0h438.857v146.286H146.286v731.428z" p-id="3527" fill="#f9f28b"></path><path d="M301.422 577.829L456.63 732.89l383.415-383.414L1021.074 512V0H512l172.91 194.34z" p-id="3528" fill="#f9f28b"></path></svg>
                         </span>
                       </p>
 
@@ -1540,7 +1545,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏1",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1562,7 +1567,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "合肥市庐阳区",
                   nickname: "223334455666778",
                   status: "在线"
                 },
@@ -1585,7 +1590,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏3",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1607,7 +1612,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "合肥市蜀山区",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1652,7 +1657,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                 fence: "翡翠湖区域围栏",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1674,7 +1679,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                fence: "合肥市庐阳区",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1696,7 +1701,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                 fence: "合肥市蜀山区",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1718,9 +1723,9 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏1",
                   nickname: "223334455666778",
-                  status: "离线"
+                  status: "在线"
                 },
                 latestData: {
                   body: 35,
@@ -1740,7 +1745,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏1",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1762,7 +1767,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                 fence: "合肥市",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1806,7 +1811,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                   fence: "测试围栏2",
                   nickname: "223334455666778",
                   status: "离线"
                 },
@@ -1828,7 +1833,7 @@ export default {
               {
                 extraInfo: {
                   deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
+                  fence: "测试围栏2",
                   nickname: "223334455666778",
                   status: "在线"
                 },
@@ -1955,6 +1960,7 @@ export default {
               console.log(productList3);
               productList3.forEach(item => {
                 item.latestData.location.productName = item.productName;
+                item.latestData.location.status= item.extraInfo.status;
                 positionList.push(item.latestData.location);
               });
             }
@@ -1964,14 +1970,16 @@ export default {
 
               location: "117.2153254,31.799062",
 
-              desc: "安徽省 合肥市 蜀山区 融创中心"
+              desc: "安徽省 合肥市 蜀山区 融创中心",
+              status: "离线"
             });
             positionList.push({
               productName: "手环测试4",
 
               location: "117.235478,31.78763",
 
-              desc: "安徽省 合肥市 金寨南路 正大广场 "
+              desc: "安徽省 合肥市 金寨南路 正大广场 ",
+              status:"在线"
             });
             positionList.push({
               productName: "手环测试5",
@@ -1981,7 +1989,8 @@ export default {
               desc:
                 "安徽省 合肥市 包河区 环湖北路观景平台北侧 合肥滨湖国家森林公园 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试6",
@@ -1990,7 +1999,8 @@ export default {
 
               desc: "安徽省 合肥市 包河区 百果采摘园 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试7",
@@ -1999,7 +2009,8 @@ export default {
 
               desc: "安徽省 合肥市 包河区 迎淮路与天津路交口 合肥市第四中学 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试8",
@@ -2008,7 +2019,8 @@ export default {
 
               desc: "安徽省 肥东县 圣泉中学（民族乡校区）",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试9",
@@ -2018,7 +2030,8 @@ export default {
               desc:
                 "安徽省 合肥市 瑶海区 东方大道与文中路交口西北方向 合肥京东方医院 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试10",
@@ -2028,7 +2041,8 @@ export default {
               desc:
                 "安徽省 合肥市 肥西县 金寨南路中部花木城对面 祥源花世界旅游度假区 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试11",
@@ -2037,7 +2051,8 @@ export default {
 
               desc: "安徽省 合肥市 肥西县  汪大山 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "在线"
             });
             positionList.push({
               productName: "手环测试12",
@@ -2046,7 +2061,8 @@ export default {
 
               desc: "安徽省 合肥市 蜀山区 小庙镇 大柏中心学校",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试13",
@@ -2055,7 +2071,8 @@ export default {
 
               desc: "安徽省 合肥市 肥西县  珠光紫蓬产业园 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试14",
@@ -2064,7 +2081,8 @@ export default {
 
               desc: "安徽省 合肥市 蜀山区 创新大道2700号 路歌大厦 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
             });
             positionList.push({
               productName: "手环测试15",
@@ -2073,7 +2091,18 @@ export default {
 
               desc: "安徽省 合肥市 蜀山区 湖畔科学岛 现代科技馆 ",
 
-              tel: "028-81067120"
+              tel: "028-81067120",
+               status: "离线"
+            });
+                        positionList.push({
+              productName: "手环测试16",
+
+              location: "117.107241,32.009784",
+
+              desc: "安徽省 合肥市 长丰县岗集镇合淮路与绕城高速交口 中国非物质文化遗产园",
+
+              tel: "028-81067120",
+               status: "在线"
             });
             console.log(positionList);
             var markerArr = [];
@@ -2089,6 +2118,7 @@ export default {
               markerArr[i].point = positionList[i].location;
               markerArr[i].address = positionList[i].desc;
               markerArr[i].title = positionList[i].productName;
+              markerArr[i].status = positionList[i].status;
             }
             console.log(markerArr);
 
@@ -2096,7 +2126,7 @@ export default {
             //  console.log(markerArr)
               var p0 = markerArr[i].point.split(",")[0];
               var p1 = markerArr[i].point.split(",")[1];
-              var maker = this.addMarker(new window.BMap.Point(p0, p1), markerArr[i].title);
+              var maker = this.addMarker(new window.BMap.Point(p0, p1), markerArr[i]);
               this.addInfoWindow(maker, markerArr[i], i);
             }
 
@@ -2188,43 +2218,43 @@ export default {
               productName: "手环测试3",
               deviceName: "AC",
               Content: "温度报警",
-              date: "2022-06-05 10:02:28"
+              date: "2022-06-06 10:02:28"
             },
             {
               productName: "手环测试5",
               deviceName: "A02",
               Content: "SOS",
-              date: "2022-06-05 11:05:28"
+              date: "2022-06-06 11:05:28"
             },
             {
               productName: "手环测试7",
               deviceName: "02",
               Content: "SOS取消",
-              date: "2022-06-05 13:34:13"
+              date: "2022-06-06 13:34:13"
             },
             {
               productName: "手环测试12",
               deviceName: "02",
               Content: "SOS取消",
-              date: "2022-06-05 15:45:34"
+              date: "2022-06-06 15:45:34"
             },
             {
               productName: "手环测试1",
               deviceName: "02",
               Content: " S0S",
-              date: "2022-06-05 16:34:32"
+              date: "2022-06-06 16:34:32"
             },
             {
               productName: "手环测试5",
               deviceName: "02",
               Content: "S0S",
-              date: "2022-06-05 17:53:23"
+              date: "2022-06-06 17:53:23"
             },
             {
               productName: "手环测试2",
               deviceName: "02",
               Content: "SOS取消",
-              date: "2022-06-05 21:34:56"
+              date: "2022-06-06 19:34:56"
             }
           );
         } else if (res.msg == "ok") {
@@ -2606,16 +2636,21 @@ export default {
     //   return marker;
     // },
 
-    addMarker(point, title) {
-      var myIcon = new BMap.Icon(
+    addMarker(point, i) {
+      if(i.status == "离线") {
+              var myIcon = new BMap.Icon(
        
-			require("@/assets/img/手环标记.png"),
+			require("@/assets/img/手环标记红.png"),
         new BMap.Size(23, 25),
-        // {
-        //   offset: new BMap.Size(10, 25),
-        //   imageOffset: new BMap.Size(0, 0 - index * 25)
-        // }
       );
+      }    if (i.status == "在线") {
+                   var myIcon = new BMap.Icon(
+       
+			require("@/assets/img/手环标记绿.png"),
+        new BMap.Size(23, 25),
+      );
+      }
+
 
       var marker = new BMap.Marker(
         point
@@ -2627,7 +2662,7 @@ export default {
 			position: point, // 指定文本标注所在的地理位置
 			offset: new BMap.Size(-30, -30) // 设置文本偏移量
 		};
-		var label = new BMap.Label(title, labelopts);
+		var label = new BMap.Label(i.title, labelopts);
 		label.setStyle({ 
 			color : "#181b40", 
 			fontSize : "14px", 
@@ -2646,7 +2681,7 @@ export default {
       //pop弹窗标题
       // console.log(poi)
       var title =
-        '<div style="font-weight:bold;color:#CE5521;font-size:18px">' +
+        '<div style="font-weight:bold;color:#CE5521;font-size:18px；background:transparent !important;">' +
         "手环信息" +
         "</div>";
       //pop弹窗信息
@@ -2658,14 +2693,24 @@ export default {
       // );
 
       html.push(
-        '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif; margin-top: 10px;"><tbody>'
+        '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif; margin-top: 10px;background:transparent !important;"><tbody>'
       );
+             html.push("<tr style = 'height: 25px;'>");
+      html.push(
+        '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">状态:</td>'
+      );
+      html.push(
+        '<td style="vertical-align:top;line-height:18px;">' + 
+          poi.status +
+          " </td>"
+      );
+      html.push("</tr>");
        html.push("<tr style = 'height: 25px;'>");
       html.push(
         '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">名称:</td>'
       );
       html.push(
-        '<td style="vertical-align:top;line-height:18px;color: #d2562a;">' + 
+        '<td style="vertical-align:top;line-height:18px;">' + 
           poi.title +
           " </td>"
       );
@@ -2675,7 +2720,7 @@ export default {
         '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">坐标:</td>'
       );
       html.push(
-        '<td style="vertical-align:top;line-height:18px;color: #d2562a;">' + '('+
+        '<td style="vertical-align:top;line-height:18px;">' + '('+
           poi.point +')'+
           " </td>"
       );
@@ -2685,7 +2730,7 @@ export default {
         '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">地址:</td>'
       );
       html.push(
-        '<td style="vertical-align:top;line-height:18px;color: #d2562a;">' +
+        '<td style="vertical-align:top;line-height:18px;">' +
           poi.address +
           " </td>"
       );
@@ -2709,7 +2754,15 @@ export default {
     },
     reset() {
       this.prepare();
-    }
+    },
+enterDetails(val) {
+  console.log(val)
+         window.sessionStorage.setItem(
+          "whichProduct",
+          JSON.stringify(val)
+        );
+          this.$router.push({ path: "/products/pageDetail" });
+}
   }
 };
 </script>
@@ -2844,6 +2897,7 @@ export default {
             border: 1px solid #e8bc25;
             font-size: 10px;
           }
+
           /* background-color: rgb(146, 72, 72); */
           .card {
             height: 60px;
@@ -2976,4 +3030,5 @@ export default {
     }
   }
 }
+
 </style>

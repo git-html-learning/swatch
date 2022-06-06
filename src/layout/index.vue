@@ -298,7 +298,7 @@ export default {
                   if (this.productList1[i].latestData.heartRate !== "-") {
                     //  console.log(this.productList1)
                     if (
-                      this.productList1[i].latestData.heartRate > 100 ||
+                      this.productList1[i].latestData.heartRate > 110 ||
                       this.productList1[i].latestData.heartRate < 60
                     ) {
                       obj.alertData.push({ alert: "心率报警" });

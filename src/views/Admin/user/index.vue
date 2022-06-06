@@ -91,7 +91,6 @@
           </el-form-item>
 
           <el-form-item
-            v-show="showcheck"
             :label="user.checkpassword"
             prop="checkpassword"
           >
