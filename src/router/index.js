@@ -37,7 +37,7 @@ export const constantRoutes = [
     //  redirect: '/permission/index', 重定向地址，在面包屑中点击会重定向去的地址
     path: '/',
     component: Layout,
-    redirect: '/home',
+    redirect: '/homePage',
     children: [{
       path: 'home',
       name: 'Home',
