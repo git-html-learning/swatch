@@ -334,7 +334,7 @@ export default {
         content: this.content,
         click: () => {
           // 点击按钮事件
-          this.$router.push({ path: "/device/alertData" });
+          this.$router.push({ path: "/alert/index" });
         }
       });
     },

@@ -246,7 +246,7 @@
           <div class="title-di">
             <span style="font-size: 20px; font-weight: 700;margin-left: 30px;">|</span>
             未读报警统计
-            <router-link to="/device/alertData">
+            <router-link to="/alert/index">
               <i class="el-icon-s-fold"></i>
               <!-- <span style = "margin-left: 20px; color: blue;font-size: 15px;"> 详情页</span> -->
             </router-link>
