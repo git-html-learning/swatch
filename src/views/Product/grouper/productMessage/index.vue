@@ -30,7 +30,8 @@ this.prepare();
         },
         methods: {
 prepare() {
-          UserDetail().then(res => {
+  var username = window.sessionStorage.getItem("username")
+          UserDetail(username.then(res => {
         console.log(res);
         if (res.msg == "ok") {
           this.detail = res.data.extraInfo.group;

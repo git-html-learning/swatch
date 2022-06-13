@@ -1,6 +1,9 @@
 
 import Vue from 'vue'
-	
+import axios from 'axios'
+import VueAxios from "vue-axios";
+ 
+Vue.use(VueAxios, axios)
 
 import Antd from 'ant-design-vue';
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets

@@ -264,7 +264,8 @@ export default {
   methods: {
     getFenceData() {
       // this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
-      UserDetail().then((res)=>{
+     var username = window.sessionStorage.getItem("username")
+     UserDetail(username).then((res)=>{
         if (res.msg == "ok") {
       this.options = res.data.extraInfo.fence
         } else {
@@ -366,7 +367,6 @@ export default {
       var overlays = this.map.getOverlays();
       console.log(overlays);
       console.log(overlays.length)
-      // console.log(this.productList1.length)
       var num = [];
       this.productList1.forEach(item=>{
         if(item.latestData.location !=="") {
@@ -461,10 +461,16 @@ export default {
           this.map.clearOverlays();
           // var obj = [];
           console.log(this.lastFencedata);
-          UserDetail().then(res => {
+               var username = window.sessionStorage.getItem("username")
+          UserDetail(username).then(res => {
             console.log(res);
             var fenceData = res.data;
-            var obj = res.data.extraInfo.fence;
+            // res.data.extraInfo.fence = [];  //一开始
+            // console.log(res.data.extraInfo.fence)
+            if(res.data.extraInfo.fence == undefined) {
+              res.data.extraInfo.fence = [];
+            }
+             var obj = res.data.extraInfo.fence;
             for (var i = 0; i < this.lastFencedata.length; i++) {
               var name = this.lastFencedata[i].name;
               this.lastFencedata[i].description = {};
@@ -480,6 +486,8 @@ export default {
               ].description.fence.fenceName = this.lastFencedata[i].name;
               //  var obj1 = JSON.parse(JSON.stringify(this.lastFencedata[i].description).replace(/name/g,name))
               //  console.log(obj1)
+              // console.log(this.lastFencedata)
+              console.log(this.lastFencedata[i].description)
               obj.push(this.lastFencedata[i].description);
             }
             console.log(obj);

@@ -76,6 +76,7 @@
 
 <script>
 // import { validUsername } from '@/utils/validate'
+import { AdminLogin } from "@/api/admin";
 
 export default {
   name: "Login",
@@ -96,7 +97,7 @@ export default {
     };
     return {
       loginForm: {
-        username: "智能手环测试",
+        username: "admin",
         password: "123456",
       },
 
@@ -140,13 +141,28 @@ export default {
             .dispatch("user/login", this.loginForm)
             .then((res) => {
               if (res.code == 200) {
+                window.sessionStorage.setItem("username",this.loginForm.username)
                 this.$message({
                   showClose: true,
                   message: "登录成功",
                   type: "success",
                 });
+                var adminData = {
+                  username:"弘恩科技",
+                  password:"hongenkj&ahu@2020"
+                }
+                AdminLogin(adminData).then((res)=>{
+                  if (res.msg == "ok") {
+                    console.log(res.data.token)
+                       window.sessionStorage.setItem(
+          "adminToken",
+          res.data.token
+        );
+                  }
+                })
                 this.$router.push({ path:  "/homePage" });
                 this.loading = false;
+                 this.$store .dispatch("user/login", this.loginForm)
               } else {
                 this.$message({
                   showClose: true,

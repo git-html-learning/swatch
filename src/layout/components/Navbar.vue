@@ -110,7 +110,11 @@ export default {
     },
     alertMsg() {
       UnReadAlertNums().then(res => {
+        console.log(res)
         this.message = res.data;
+        if(res.msg == "未找到记录") {
+          this.message = 0
+        }
         // subjectCount().then(res => {
         //   if ((res.msg = "ok")) {
         //     var subjectCount = res.data.subjectCount;

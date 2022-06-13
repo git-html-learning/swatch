@@ -43,7 +43,7 @@ export const constantRoutes = [
       name: 'Home',
       component: () => import('@/views/Product/index'),
       meta: {
-        title: '首页',                // 设置该路由在侧边栏和面包屑中展示的名字
+        title: '手环管理',                // 设置该路由在侧边栏和面包屑中展示的名字
         icon: '主页'                  // 设置该路由的图标
       }
     }]
@@ -81,15 +81,6 @@ export const constantRoutes = [
     path: '/products',
     component: Layout,
     children: [
-    //   {
-    //   path: 'index',
-    //   name: 'Product',
-    //   component: () => import('@/views/Product/index'),
-    //   meta: {
-    //     title: '手环管理',
-    //     icon: '产品'
-    //   },
-    // },
     {
           path: 'createProduct',
           name: 'CreateProduct',
@@ -99,15 +90,7 @@ export const constantRoutes = [
             title: '创建手环',
           }
         }, 
-        // {
-        //   path: 'message',
-        //   name: 'message',
-        //   hidden: true,
-        //   component: () => import('@/views/Product/productMessage/index'),
-        //   meta: {
-        //     title: '发送消息',
-        //   }
-        // }, 
+ 
         {
           path: 'pageDetail',
           name: 'pageDetail',
@@ -119,71 +102,7 @@ export const constantRoutes = [
         }
   ]
   },
-  // {
-  //   path: '/device',
-  //   component: Layout,
-  //   redirect: '/devices/index',
-  //   hidden: true,
-  //   meta: {
-  //     title: '设备管理',
-  //     icon: '设备'
-  //   },
-  //   children: [{
-  //     path: 'createMoreDevice',
-  //     name: 'CreateMoreDevice',
-  //     hidden: true,
-  //     component: () => import('@/views/Device/createDevice/createMoreDevice/index'),
-  //     meta: {
-  //       title: '批量创建设备',
-  //       icon: '设备'
-  //     }
-  //   }, {
-  //     path: 'createTemplate',
-  //     name: 'CreateTemplate',
-  //     hidden: true,
-  //     component: () => import('@/views/Device/createDevice/createTemplate/index'),
-  //     meta: {
-  //       title: '添加模板',
-  //       icon: '设备'
-  //     }
-  //   }, {
-  //     path: 'handDevice',
-  //     name: 'HandDevice',
-  //     hidden: true,
-  //     component: () => import('@/views/Device/createDevice/handDevice/index'),
-  //     meta: {
-  //       title: '手动添加设备',
-  //       icon: '设备'
-  //     }
-  //   }, {
-  //     path: 'templateDevice',
-  //     name: 'TemplateDevice',
-  //     hidden: true,
-  //     component: () => import('@/views/Device/createDevice/templateDevice/index'),
-  //     meta: {
-  //       title: '模板创建设备',
-  //       icon: '设备'
-  //     }
-  //   }, {
-  //     path: 'deleteTemplate',
-  //     name: 'DeleteTemplate',
-  //     hidden: true,
-  //     component: () => import('@/views/Device/createDevice/deleteTemplate/index'),
-  //     meta: {
-  //       title: '模板创建设备',
-  //       icon: '设备'
-  //     }
-  //   }, {
-  //     path: 'alertData',
-  //     name: 'AlertData',
-  //     hidden: true,
-  //     component: () => import('@/views/Device/alertDevice/index'),
-  //     meta: {
-  //       title: '报警信息',
-  //       icon: '设备'
-  //     }
-  //   }, ]
-  // },
+
   {
     path: '/alert',
     component: Layout,
@@ -207,7 +126,7 @@ export const constantRoutes = [
       name: 'Admin',
       component: () => import('@/views/Admin/index'),
       meta: {
-        title: '管理员信息',
+        title: '用户信息',
         icon: '管理员'
       },
       // hidden: true,

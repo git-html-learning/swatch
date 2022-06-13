@@ -12,12 +12,11 @@ import {
 
 
 
-//获取当前用户信息
-export function UserDetail(payload) {
+//获取单个用户信息
+export function UserDetail(name) {
   return request({
-    url: '/api/v1/user/' + getName(),
+    url: '/api/v1/user/' + name,
     method: 'get',
-
   })
 }
 
@@ -26,47 +25,35 @@ export function OtherUserDetail(payload) {
   return request({
     url: '/api/v1/user/' + payload.username,
     method: 'get',
-
   })
 }
 
 
 //普通用户修改用户信息，不需要管理员token
-export function EditUser(payload) {
+export function EditUser(data) {
   return request({
     url: '/api/v1/user',
     method: 'put',
-    data: {
-      ...payload,
-      "Wechat": null,
-    }
+    data
   })
 }
 
 
 //注册用户
-export function RegisterUser(payload) {
+export function RegisterUser(data) {
   return request({
     url: '/session',
     method: 'put',
-    data: {
-      ...payload,
-      "extralInfo": {
-        "wePush": false, // 默认不开通微信推送权限
-        "adminPassword": "admin123" // 默认管理员密码为admin123
-      } //可为空
-    }
+data
   })
 }
 
 //管理员登录，需要保存管理员token
-export function AdminLogin(payload) {
+export function AdminLogin(data) {
   return adminRequest({
     url: '/admin',
     method: 'post',
-    data: {
-      ...payload
-    }
+data
   })
 }
 
@@ -81,10 +68,13 @@ export function AdminUsers(payload) {
 }
 
 //删除用户
-export function DeleteUsers(payload) {
+export function DeleteUsers(payload,token) {
   return adminRequest({
     url: '/api/v1/admin/user/' + payload,
     method: 'delete',
+    headers: {
+     token: token
+    }
   })
 }
 //编辑用户信息，需要带管理员token

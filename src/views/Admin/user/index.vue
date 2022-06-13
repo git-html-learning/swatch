@@ -205,7 +205,8 @@ export default {
   },
   methods: {
     async requireUserData() {
-      let user = await UserDetail();
+      var username = window.sessionStorage.getItem("username")
+      let user = await UserDetail(username);
       this.userData = user.data;
       //这个是为了验证密码
       this.$set(this.userData, "checkpassword", "");

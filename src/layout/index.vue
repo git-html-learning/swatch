@@ -135,9 +135,11 @@ export default {
       // console.log(this.date)
     },
     deviceData() {
-      console.log('1')
+      // console.log('1')
       this.outAlert = [];
-      UserDetail().then(res => {
+      var username = window.sessionStorage.getItem("username")
+      UserDetail(username).then(res => {
+        console.log(res)
         this.fenceList = res.data.extraInfo.fence;
         var fenceData = res.data;
         window.sessionStorage.setItem(
@@ -152,15 +154,16 @@ export default {
      
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
+           var username = window.sessionStorage.getItem("username")
           getDeviceDatas({
-            username: "智能手环测试",
+            username: username,
             pkList: this.productNameList,
             startTime: 100000
           }).then(res => {
             console.log(res);
 
             this.productList1 = res.data;
-
+console.log(this.productList1)
             this.productList1.forEach(item => {
               item.deviceName = [];
               item.latestData = {};

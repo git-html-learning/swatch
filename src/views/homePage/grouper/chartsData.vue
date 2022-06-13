@@ -46,7 +46,7 @@ if (item.latestData.body !== "-") {
         productKey: item.productKey,
         deviceKey:""
     }
-    item.devcieData.forEach(item1=>{
+    item.deviceData.forEach(item1=>{
         if (item1.deviceName == "BA") {
             obj.deviceKey = data.deviceKey
         }

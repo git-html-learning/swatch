@@ -105,7 +105,8 @@ polygon: [],
 
   methods: {
     userData() {
-      UserDetail().then(res => {
+      var username = window.sessionStorage.getItem("username")
+      UserDetail(username).then(res => {
         console.log(res);
         if (res.msg == "ok") {
           this.fenceList = res.data.extraInfo.fence;

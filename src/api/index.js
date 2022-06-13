@@ -15,22 +15,14 @@ export function login(data) {
 
 
 //创建产品
-export function CreateProduct(payload) {
+export function CreateProduct(data) {
   return request({
     url: '/api/v1/product',
     method: 'post',
     headers: {
-
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    data: {
-      "productName": payload.productName,
-      "protocolType": payload.protocolType,
-      "productType": payload.productType,
-      "extraInfo": payload.extraInfo,
-      "typeIdentify": payload.typeIdentify,
-      "description": payload.description
-    },
+    data
   })
 }
 
@@ -496,7 +488,7 @@ export function historyData(data) {
 //电信云注册设备
 export function cloudDevcieRegister(simId,deviceType,deviceName) {
   return request({
-    url: 'http://dianxinzhuce.ahusmart.com/register?simId='+simId+'&deviceType='+deviceType+'&deviceName='+deviceName,   
+    url: 'https://dianxinzhuce.ahusmart.com/register?simId='+simId+'&deviceType='+deviceType+'&deviceName='+deviceName,   
     method: 'get',
   })
 }
@@ -504,7 +496,7 @@ export function cloudDevcieRegister(simId,deviceType,deviceName) {
 //电信云删除设备
 export function cloudDevcieDelete(deviceId) {
   return request({
-    url: 'http://dianxinzhuce.ahusmart.com/delete?deviceId='+deviceId,   
+    url: 'https://dianxinzhuce.ahusmart.com/delete?deviceId='+deviceId,   
     method: 'delete',
   })
 }
@@ -521,3 +513,6 @@ export function sendMessage(deviceId,message) {
   } 
   })
 }
+
+
+
