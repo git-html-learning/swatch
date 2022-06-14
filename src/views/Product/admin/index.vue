@@ -601,7 +601,7 @@ export default {
                   item.latestData.stepNum =
                     item.deviceData[
                       item.deviceName.indexOf("F6")
-                    ].extraInfo.StepNum;
+                    ].extraInfo.stepNum;
                   item.latestData.heart =
                     item.deviceData[
                       item.deviceName.indexOf("F6")
