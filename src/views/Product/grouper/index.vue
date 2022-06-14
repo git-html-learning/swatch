@@ -31,9 +31,9 @@
       <el-card class="box-card">
         <!-- Card 组件包括header和body部分，header部分需要有显式具名 slot 分发，同时也是可选的。 -->
         <div slot="header" style="margin-bottom: 50px">
-          <el-col :span="3" class="text-center">
+          <!-- <el-col :span="3" class="text-center">
             <router-link class="btn" to="/products/createProduct">创建用户</router-link>
-          </el-col>
+          </el-col> -->
           <el-col :span="3" class="text-center">
             <el-button class="btn1" @click="sendMessage">下发消息</el-button>
           </el-col>

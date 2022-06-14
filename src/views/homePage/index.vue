@@ -6,6 +6,7 @@
 <script>
 import grouper from './grouper'
 import admin from './admin'
+import loading from './loading'
 import { getName } from "@/utils/auth";
 import { UserDetail } from "@/api/admin";
 import { user} from "@/api/user";
@@ -14,7 +15,8 @@ export default {
  components: {
      grouper,
      admin,
-     user
+     user,
+     loading
  },
 //  computed: {
 //      name() {
@@ -23,7 +25,7 @@ export default {
 //  },
  data() {
      return {
-         currentRole: "admin"
+         currentRole: "loading"
      }
  },
  created() {
@@ -37,10 +39,12 @@ UserDetail(username).then((res)=>{
         this.currentRole="admin"
     } else if (res.data.extraInfo.role == "grouper") {
         this.currentRole = "grouper"
-    } else if (res.data.extraInfo.role == "user") {
+    } 
+    // else if (res.data.extraInfo.role == "user") {
+    //     this.currentRole = "user"
+    // } 
+    else {
         this.currentRole = "user"
-    } else {
-        this.currentRole = "error"
     }
 })
  },

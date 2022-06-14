@@ -8,8 +8,8 @@ Vue.use(VueAxios, axios)
 import Antd from 'ant-design-vue';
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 import echarts from 'echarts'
 import '@/styles/index.scss' // global css
@@ -56,7 +56,7 @@ Vue.use(BaiduMap, {
 })
 
 // set ElementUI lang to EN
-Vue.use(ElementUI)
+Vue.use(ElementUI);
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 

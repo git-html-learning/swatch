@@ -8,7 +8,7 @@
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px">
           <el-row type="flex" justify>
             <el-col :span="12">
-              <el-form-item prop="productName" label="用户名">
+              <el-form-item prop="productName" label="手环名">
                 <el-input v-model="ruleForm.productName" clearable class="Input" placeholder="必填项"></el-input>
               </el-form-item>
               <el-form-item
@@ -17,7 +17,7 @@
                 :rules="[
           {
             required: true,
-            message: 'simid必填',
+            message: '必填项',
             trigger: 'blur',
           },
         ]"
@@ -49,7 +49,7 @@
                   placeholder="请在手环上查找"
                 ></el-input>
               </el-form-item>
-              <el-form-item
+              <!-- <el-form-item
                 prop="extraInfo.age"
                 label="年龄"
                 :rules="[
@@ -66,8 +66,8 @@
                   class="Input"
                   placeholder="必填项"
                 ></el-input>
-              </el-form-item>
-              <el-form-item
+              </el-form-item> -->
+              <!-- <el-form-item
                 prop="extraInfo.gender"
                 label="性别"
                 :rules="[
@@ -78,12 +78,6 @@
           },
         ]"
               >
-                <!-- <el-input
-                  v-model="ruleForm.extraInfo.gender"
-                  clearable
-                  class="Input"
-                  placeholder="必填项"
-                ></el-input>-->
                 <el-select v-model="ruleForm.extraInfo.gender" class="select" placeholder="请选择">
                   <el-option label="男" value="male"></el-option>
                   <el-option label="女" value="female"></el-option>
@@ -136,10 +130,10 @@
                   class="Input"
                   placeholder="必填项"
                 ></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-row :gutter="10">
+              </el-form-item> -->
+            <!-- </el-col>
+            <el-col :span="12"> -->
+              <!-- <el-row :gutter="10">
                 <el-col :span="8">
                   <el-form-item
                     prop="extraInfo.connect1.user"
@@ -184,9 +178,9 @@
                     ></el-input>
                   </el-form-item>
                 </el-col>
-              </el-row>
+              </el-row> -->
 
-              <el-row :gutter="10">
+              <!-- <el-row :gutter="10">
                 <el-col :span="8">
                   <el-form-item prop="extraInfo.connect2.user" label="紧急联系人2 ">
                     <el-input
@@ -207,8 +201,8 @@
                     ></el-input>
                   </el-form-item>
                 </el-col>
-              </el-row>
-              <el-form-item prop="extraInfo.blood" label="血型">
+              </el-row> -->
+              <!-- <el-form-item prop="extraInfo.blood" label="血型">
                 <el-select class="select" v-model="ruleForm.extraInfo.blood">
                   <el-option label="A型" value="A"></el-option>
                   <el-option label="B型" value="B"></el-option>
@@ -217,15 +211,15 @@
                   <el-option label="Rh型" value="Rh"></el-option>
                   <el-option label="不了解" value="unknow"></el-option>
                 </el-select>
-              </el-form-item>
-              <el-form-item prop="extraInfo.allergy" label="过敏史">
+              </el-form-item> -->
+              <!-- <el-form-item prop="extraInfo.allergy" label="过敏史">
                 <el-input
                   v-model="ruleForm.extraInfo.allergy"
                   clearable
                   class="Input"
                   placeholder="选填项"
                 ></el-input>
-              </el-form-item>
+              </el-form-item> -->
 
               <el-form-item label="电子围栏选择" prop="extraInfo.fence">
                 <el-select class="Input" v-model="ruleForm.extraInfo.fence" placeholder="请选择电子围栏">
@@ -269,10 +263,10 @@
           </el-row>
           <el-row style="margin-top: 50px; ">
             <el-form-item>
-              <el-col :span="12" style="text-align: right">
+              <el-col :span="5" style="text-align: right">
                 <el-button type="primary" @click="submitForm('ruleForm')">创建</el-button>
               </el-col>
-              <el-col :span="12" style="text-align: left">
+              <el-col :span="4" style="text-align: left">
                 <el-button type="danger" @click="back">取消</el-button>
               </el-col>
             </el-form-item>
@@ -299,24 +293,26 @@ export default {
       ruleForm: {
         productName: "",
         typeIdentify: "",
+        protocolType:"TCP",
+        productType:1,
         extraInfo: {
           role: "user",
           fence: "-",
           simId: "",
-          age: "",
-          gender: "",
-          idNumber: "",
-          phone: "",
-          blood: "",
-          allergy: "",
-          connect1: {
-            user: "",
-            phone: ""
-          },
-          connect2: {
-            user: "",
-            phone: ""
-          }
+          // age: "",
+          // gender: "",
+          // idNumber: "",
+          // phone: "",
+          // blood: "",
+          // allergy: "",
+          // connect1: {
+          //   user: "",
+          //   phone: ""
+          // },
+          // connect2: {
+          //   user: "",
+          //   phone: ""
+          // }
         },
         // typeIdentify: "",
         description: ""
@@ -419,7 +415,7 @@ export default {
                 }
               };
               console.log(productRegister);
-              //云平台注册
+              //1. 云平台注册
               CreateProduct(productRegister).then(res2 => {
                 console.log(res2);
                 if (res2.msg == "ok") {
@@ -447,7 +443,7 @@ export default {
                       }
                     );
                   }
-
+                 //和产品名相同的用户注册
                   RegisterUser({
                     username: this.ruleForm.productName,
                     password: "123456"
@@ -460,6 +456,7 @@ export default {
                       // console.log(register)
                       // console.log(stringify(register))
                       // console.log(qs.stringify(register))
+                      //修改用户信息
                       var adminToken = window.sessionStorage.getItem(
                         "adminToken"
                       );
@@ -475,22 +472,24 @@ export default {
                           },
                           data: {  username: this.ruleForm.productName,
                             password: "123456",
-                            phone: this.ruleForm.extraInfo.phone,
+                            // phone: this.ruleForm.extraInfo.phone,
+                              // protocolType: this.ruleForm.protocolType,
+                              //  productType: this.ruleForm.protocolType,
                             extraInfo: {
                               description: this.ruleForm.description,
-                              age: this.ruleForm.extraInfo.age,
-                              gender: this.ruleForm.extraInfo.gender,
-                              allergy: this.ruleForm.extraInfo.allergy,
-                              blood: this.ruleForm.extraInfo.blood,
-                              idNumber: this.ruleForm.extraInfo.idNumber,
-                              connect1: {
-                                user: this.ruleForm.extraInfo.connect1.user,
-                                phone: this.ruleForm.extraInfo.connect1.phone
-                              },
-                              connect2: {
-                                user: this.ruleForm.extraInfo.connect2.user,
-                                phone: this.ruleForm.extraInfo.connect2.phone
-                              },
+                              // age: this.ruleForm.extraInfo.age,
+                              // gender: this.ruleForm.extraInfo.gender,
+                              // allergy: this.ruleForm.extraInfo.allergy,
+                              // blood: this.ruleForm.extraInfo.blood,
+                              // idNumber: this.ruleForm.extraInfo.idNumber,
+                              // connect1: {
+                              //   user: this.ruleForm.extraInfo.connect1.user,
+                              //   phone: this.ruleForm.extraInfo.connect1.phone
+                              // },
+                              // connect2: {
+                              //   user: this.ruleForm.extraInfo.connect2.user,
+                              //   phone: this.ruleForm.extraInfo.connect2.phone
+                              // },
                               role: "user"}}
                           
                         })

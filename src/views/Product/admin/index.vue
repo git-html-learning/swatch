@@ -895,6 +895,7 @@ export default {
             }
             var obj = {
               name: this.groupName,
+              productKey: this.grouper.productKey,
               users: []
             };
             this.grouperMessage.groups.push(obj);

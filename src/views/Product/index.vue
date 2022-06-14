@@ -6,11 +6,13 @@
 <script>
 import grouperProduct from './grouper'
 import adminProduct from './admin'
+import loading from './loading'
 export default {
     name:"product",
     components: {
         grouperProduct,
-        adminProduct
+        adminProduct,
+        loading
     },
     computed: {
         role() {
@@ -19,7 +21,7 @@ export default {
     },
     data() {
         return {
-currentRole: "grouperProduct"
+currentRole: "loading"
         }
     },
     created() {

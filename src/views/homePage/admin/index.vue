@@ -119,40 +119,239 @@
         <el-col :span="6">
           <div class="left">
             <div class="top">
-              <div class="title" style = "position: absolute; top: 0px; left: 32%;
-               color: #00f6ff; font-size: 23px; line-height: 40px; height: 40px;">
-                <img src="@/assets/img/icon01.png" alt="" style = "margin-top:10px;">
-                         用户统计
+              <div
+                class="title"
+                style="text-align: center;
+               color: #00f6ff; font-size: 23px; line-height: 60px; height: 60px;"
+              >
+                <img src="@/assets/img/icon01.png" alt style="margin-top:10px;" />
+                用户统计
               </div>
-              <div style = "padding-top: 50px; z-index: 60;"> 
-                  <div style = "height: 60px; width: 70%; margin-top: 8px; margin-left: 15%; ">
-  <el-row type="flex" justify="" style = "height: 50px;">
-      <el-col :span="1" style = "width: 60px;background-color: #073afa; text-align: center; ">
-        <svg style = "text-align: center;" t="1655106448711" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2466" width="45" height="45"><path d="M677.8 734.2H346.4c-66.4 0-120.4-54-120.4-120.4V410.6c0-66.4 54-120.4 120.4-120.4h331.4c66.4 0 120.4 54 120.4 120.4v203.3c-0.1 66.3-54 120.3-120.4 120.3z m-331.4-384c-33.3 0-60.4 27.1-60.4 60.4v203.3c0 33.3 27.1 60.4 60.4 60.4h331.4c33.3 0 60.4-27.1 60.4-60.4V410.6c0-33.3-27.1-60.4-60.4-60.4H346.4z" fill="#f4ea2a" p-id="2467"></path><path d="M670.1 291h-60v-47.6c0-10.2-15.7-21.6-36.7-21.6H450.7c-21 0-36.7 11.4-36.7 21.6V291h-60v-47.6c0-22.9 11.4-44.9 31.2-60.2 17.8-13.8 41.1-21.4 65.5-21.4h122.7c24.4 0 47.7 7.6 65.5 21.4 19.8 15.3 31.2 37.3 31.2 60.2V291zM572.7 861.9H450c-24.4 0-47.7-7.6-65.5-21.3-19.8-15.3-31.2-37.2-31.2-60.1V733h60v47.5c0 10.1 15.7 21.4 36.7 21.4h122.7c21 0 36.7-11.3 36.7-21.4V733h60v47.5c0 22.9-11.4 44.8-31.2 60.1-17.9 13.7-41.1 21.3-65.5 21.3z" fill="#f4ea2a" p-id="2468"></path><path d="M369.7 512.6m-50.4 0a50.4 50.4 0 1 0 100.8 0 50.4 50.4 0 1 0-100.8 0Z" fill="#f4ea2a" p-id="2469"></path><path d="M511.3 512.6m-50.4 0a50.4 50.4 0 1 0 100.8 0 50.4 50.4 0 1 0-100.8 0Z" fill="#f4ea2a" p-id="2470"></path><path d="M652.9 512.6m-50.4 0a50.4 50.4 0 1 0 100.8 0 50.4 50.4 0 1 0-100.8 0Z" fill="#f4ea2a" p-id="2471"></path></svg>
-      </el-col>
-<el-col :span="6" style = "width: 200px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;">
-<!-- <p st>用户总数</p>
-<p>10</p> -->
-</el-col>
-  </el-row>
-
-
-  
-                  </div>
-                  <div style = "height: 100px;"></div>
-                  <div style = "height: 100px;"></div>
-                  <div style = "height: 100px;"></div>
+              <div style=" z-index: 60;">
+                <div style="height: 60px; width: 70%; margin-top: 8px; margin-left: 15%; ">
+                  <el-row type="flex" justify style="height: 50px;">
+                    <el-col
+                      :span="1"
+                      style="width: 60px;background-color: #073afa; text-align: center; "
+                    >
+                      <svg
+                        style="text-align: center; height: 50px;"
+                        t="1655106448711"
+                        class="icon"
+                        viewBox="0 0 1024 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="2466"
+                        width="45"
+                        height="45"
+                      >
+                        <path
+                          d="M677.8 734.2H346.4c-66.4 0-120.4-54-120.4-120.4V410.6c0-66.4 54-120.4 120.4-120.4h331.4c66.4 0 120.4 54 120.4 120.4v203.3c-0.1 66.3-54 120.3-120.4 120.3z m-331.4-384c-33.3 0-60.4 27.1-60.4 60.4v203.3c0 33.3 27.1 60.4 60.4 60.4h331.4c33.3 0 60.4-27.1 60.4-60.4V410.6c0-33.3-27.1-60.4-60.4-60.4H346.4z"
+                          fill="#f4ea2a"
+                          p-id="2467"
+                        />
+                        <path
+                          d="M670.1 291h-60v-47.6c0-10.2-15.7-21.6-36.7-21.6H450.7c-21 0-36.7 11.4-36.7 21.6V291h-60v-47.6c0-22.9 11.4-44.9 31.2-60.2 17.8-13.8 41.1-21.4 65.5-21.4h122.7c24.4 0 47.7 7.6 65.5 21.4 19.8 15.3 31.2 37.3 31.2 60.2V291zM572.7 861.9H450c-24.4 0-47.7-7.6-65.5-21.3-19.8-15.3-31.2-37.2-31.2-60.1V733h60v47.5c0 10.1 15.7 21.4 36.7 21.4h122.7c21 0 36.7-11.3 36.7-21.4V733h60v47.5c0 22.9-11.4 44.8-31.2 60.1-17.9 13.7-41.1 21.3-65.5 21.3z"
+                          fill="#f4ea2a"
+                          p-id="2468"
+                        />
+                        <path
+                          d="M369.7 512.6m-50.4 0a50.4 50.4 0 1 0 100.8 0 50.4 50.4 0 1 0-100.8 0Z"
+                          fill="#f4ea2a"
+                          p-id="2469"
+                        />
+                        <path
+                          d="M511.3 512.6m-50.4 0a50.4 50.4 0 1 0 100.8 0 50.4 50.4 0 1 0-100.8 0Z"
+                          fill="#f4ea2a"
+                          p-id="2470"
+                        />
+                        <path
+                          d="M652.9 512.6m-50.4 0a50.4 50.4 0 1 0 100.8 0 50.4 50.4 0 1 0-100.8 0Z"
+                          fill="#f4ea2a"
+                          p-id="2471"
+                        />
+                      </svg>
+                    </el-col>
+                    <el-col
+                      :span="6"
+                      style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
+                    >
+                      <span style="font-size: 15px; height: 25px; line-height: 25px;">全部用户</span>
+                      <br />
+                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{allUser}}</span>
+                    </el-col>
+                  </el-row>
+                </div>
+                <div style="height: 60px; width: 70%; margin-top: 8px; margin-left: 15%; ">
+                  <el-row type="flex" justify style="height: 50px;">
+                    <el-col
+                      :span="1"
+                      style="width: 60px;background-color: #073afa; text-align: center; "
+                    >
+                      <svg
+                        style="text-align: center; height: 50px;"
+                        t="1655109160158"
+                        class="icon"
+                        viewBox="0 0 1024 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="4316"
+                        width="40"
+                        height="40"
+                      >
+                        <path
+                          d="M952 318.494H73.6c-27.2 59.2-41.6 124.8-41.6 193.6s14.4 134.4 41.6 193.6h876.8c27.2-59.2 41.6-124.8 41.6-193.6s-14.4-134.4-40-193.6z"
+                          fill="#9DE8F7"
+                          p-id="4317"
+                        />
+                        <path
+                          d="M1024 512.094c0-283.2-228.8-512-512-512s-512 228.8-512 512c0 249.6 179.2 457.6 416 502.4l0.032 0.032c13.376 2.56 32.48 5.776 53.024 7.712 11.36 0.912 22.8 1.456 34.272 1.664 1.536 0 3.072 0.016 4.592-0.016 38.784-0.784 89.44-9.248 105.36-12.064C847.44 966.494 1024 759.822 1024 512.094z m-88-225.6h-78.4c-48-104-118.4-177.6-174.4-222.4 108.8 41.6 198.4 121.6 252.8 222.4z m-342.4-248c14.4 8 152 89.6 228.8 248h-180.8c-28.8-120-72-211.2-94.4-252.8 16 1.6 32 3.2 46.4 4.8z m16 248H416c32-129.6 80-222.4 96-251.2 16 28.8 64 121.6 97.6 251.2z m-132.8-252.8c-22.4 41.6-65.6 132.8-94.4 252.8h-180.8c76.8-158.4 216-240 228.8-248 14.4-1.6 30.4-3.2 46.4-4.8z m-136 30.4c-54.4 44.8-126.4 118.4-172.8 222.4H88c54.4-100.8 144-180.8 252.8-222.4z m-308.8 448c0-68.8 14.4-134.4 41.6-193.6H952c25.6 59.2 40 124.8 40 193.6s-14.4 134.4-41.6 193.6H73.6c-27.2-59.2-41.6-124.8-41.6-193.6z m56 225.6h76.8c46.4 102.4 115.2 176 171.2 220.8-105.6-41.6-193.6-121.6-248-220.8z m337.6 246.4c-28.8-17.6-153.6-97.6-225.6-246.4h176c19.2 83.2 51.2 168 100.8 252.8-16-1.6-33.6-3.2-51.2-6.4z m-16-246.4h204.8c-19.2 81.6-52.8 164.8-102.4 248-49.6-84.8-83.2-168-102.4-248z m136 252.8c49.6-84.8 81.6-171.2 100.8-252.8h176c-70.4 148.8-196.8 230.4-224 246.4-17.6 3.2-35.2 4.8-52.8 6.4z m142.4-32c54.4-46.4 124.8-118.4 171.2-220.8H936c-54.4 99.2-142.4 179.2-248 220.8z"
+                          fill
+                          p-id="4318"
+                        />
+                        <path
+                          d="M105.6 507.198c0-19.2 3.2-35.2 8-49.6 4.8-9.6 11.2-17.6 17.6-25.6 8-8 16-12.8 24-17.6 11.2-4.8 25.6-8 41.6-8 28.8 0 51.2 8 67.2 25.6 17.6 17.6 25.6 41.6 25.6 72s-8 54.4-25.6 72c-16 17.6-38.4 25.6-67.2 25.6s-51.2-8-67.2-25.6-24-38.4-24-68.8z m40-1.6c0 22.4 4.8 38.4 14.4 49.6 9.6 11.2 22.4 16 38.4 16s27.2-4.8 38.4-16c9.6-11.2 14.4-27.2 14.4-49.6 0-22.4-4.8-38.4-14.4-49.6s-22.4-16-38.4-16-28.8 4.8-38.4 16c-9.6 11.2-14.4 27.2-14.4 49.6zM446.4 601.598h-36.8v-70.4c0-14.4 0-24-1.6-28.8s-4.8-8-8-9.6c-3.2-3.2-8-3.2-12.8-3.2-6.4 0-12.8 1.6-17.6 4.8-4.8 3.2-8 8-9.6 14.4s-3.2 16-3.2 32v62.4H320v-137.6h33.6v20.8c12.8-16 27.2-24 44.8-24 8 0 16 1.6 22.4 4.8 6.4 3.2 11.2 6.4 14.4 11.2 3.2 4.8 6.4 9.6 6.4 16 1.6 6.4 1.6 14.4 1.6 24l3.2 83.2zM483.2 601.598v-192H520v190.4h-36.8v1.6zM556.8 444.798v-33.6h36.8v33.6h-36.8z m0 156.8v-137.6h36.8v137.6h-36.8zM756.8 601.598H720v-70.4c0-14.4 0-24-1.6-28.8s-4.8-8-8-9.6c-3.2-3.2-8-3.2-12.8-3.2-6.4 0-12.8 1.6-17.6 4.8-4.8 3.2-8 8-9.6 14.4s-3.2 16-3.2 32v62.4h-36.8v-137.6H664v20.8c12.8-16 27.2-24 44.8-24 8 0 16 1.6 22.4 4.8 6.4 3.2 11.2 6.4 14.4 11.2s6.4 9.6 6.4 16c1.6 6.4 1.6 14.4 1.6 24l3.2 83.2zM873.6 556.798l36.8 6.4c-4.8 12.8-12.8 24-22.4 30.4s-22.4 11.2-38.4 11.2c-24 0-41.6-8-52.8-24-9.6-12.8-14.4-28.8-14.4-48 0-22.4 6.4-41.6 17.6-54.4 11.2-12.8 27.2-19.2 44.8-19.2 20.8 0 36.8 6.4 48 20.8 11.2 12.8 17.6 33.6 17.6 62.4h-91.2c0 11.2 3.2 19.2 9.6 25.6s12.8 9.6 20.8 9.6c6.4 0 11.2-1.6 14.4-4.8s8-8 9.6-16z m3.2-36.8c0-11.2-3.2-19.2-8-24s-11.2-8-19.2-8-14.4 3.2-19.2 8c-4.8 6.4-8 14.4-8 24h54.4z"
+                          fill
+                          p-id="4319"
+                        />
+                      </svg>
+                    </el-col>
+                    <el-col
+                      :span="6"
+                      style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
+                    >
+                      <span style="font-size: 15px; height: 25px; line-height: 25px;">在线用户</span>
+                      <br />
+                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{allUser}}</span>
+                    </el-col>
+                  </el-row>
+                </div>
+                <div style="height: 60px; width: 70%; margin-top: 8px; margin-left: 15%; ">
+                  <el-row type="flex" justify style="height: 50px;">
+                    <el-col
+                      :span="1"
+                      style="width: 60px;background-color: #073afa; text-align: center; "
+                    >
+                      <svg
+                        style="text-align: center; height: 50px;"
+                        t="1655108693595"
+                        class="icon"
+                        viewBox="0 0 1098 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="3358"
+                        width="40"
+                        height="40"
+                      >
+                        <path
+                          d="M387.638958 625.365762c-172.41927 0-312.676732-140.208266-312.676732-312.676731S215.170492 0 387.638958 0s312.676732 140.269761 312.676732 312.689031-140.269761 312.676732-312.676732 312.676731z m0-554.17932c-133.160956 0-241.502588 108.341633-241.502588 241.502589s108.341633 241.490289 241.502588 241.490289 241.490289-108.329334 241.490289-241.490289S520.799914 71.186442 387.638958 71.186442z"
+                          p-id="3359"
+                          fill="#fe4b4e"
+                        />
+                        <path
+                          d="M739.684695 1024a35.593221 35.593221 0 0 1-35.593221-35.593221c0-174.485497-141.967019-316.452516-316.452516-316.452516s-316.452516 141.967019-316.452516 316.452516a35.593221 35.593221 0 0 1-71.186442 0c0-213.743811 173.895146-387.638958 387.638958-387.638958s387.626659 173.895146 387.626659 387.638958a35.593221 35.593221 0 0 1-35.580922 35.593221zM664.722468 635.610805a35.593221 35.593221 0 0 1 0-71.186442c133.160956 0 241.490289-108.329334 241.49029-241.49029S797.883424 81.431485 664.722468 81.431485a35.593221 35.593221 0 1 1 0-71.174143c172.394672 0.036897 312.676732 140.245163 312.676732 312.676731S837.11714 635.610805 664.722468 635.610805z"
+                          p-id="3360"
+                          fill="#fe4b4e"
+                        />
+                        <path
+                          d="M1063.098428 1019.252597a35.593221 35.593221 0 0 1-35.593221-35.593221c0-203.203594-149.174215-345.109117-362.819635-345.109117a35.593221 35.593221 0 0 1 0-71.186442c118.562077 0 227.297277 39.860964 306.24437 112.265004a384.281339 384.281339 0 0 1 93.718156 132.078646c22.593209 52.479708 34.043551 110.334066 34.043551 171.951909a35.593221 35.593221 0 0 1-35.593221 35.593221z"
+                          p-id="3361"
+                          fill="#fe4b4e"
+                        />
+                      </svg>
+                    </el-col>
+                    <el-col
+                      :span="6"
+                      style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
+                    >
+                      <span style="font-size: 15px; height: 25px; line-height: 25px;">小组数</span>
+                      <br />
+                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{groupNum}}</span>
+                    </el-col>
+                  </el-row>
+                </div>
+                <div style="height: 60px; width: 70%; margin-top: 8px; margin-left: 15%; ">
+                  <el-row type="flex" justify style="height: 50px;">
+                    <el-col
+                      :span="1"
+                      style="width: 60px;background-color: #073afa; text-align: center; "
+                    >
+                      <svg
+                        style="text-align: center; height: 50px;"
+                        t="1655108403250"
+                        class="icon"
+                        viewBox="0 0 1024 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="2885"
+                        width="40"
+                        height="40"
+                      >
+                        <path
+                          d="M980.864 584.96a473.696 473.696 0 0 1-395.936 400.928v36.608H439.04V985.92A473.664 473.664 0 0 1 43.136 584.864h-41.6v-145.76h43.328A473.92 473.92 0 0 1 439.072 50.176V1.504h145.888v48.768A474.016 474.016 0 0 1 979.168 439.04h43.328v145.92h-41.632zM475.552 977.216h72.96v-72.928h-72.96v72.928z m-428.8-501.664v72.928h72.96v-72.928h-72.96z m501.76-428.768h-72.96v72.928h72.96V46.784z m33.152 77.152v40.032h-139.328v-40a400.64 400.64 0 0 0-323.68 318.656h45.024v139.328H116.768a400.416 400.416 0 0 0 325.568 330.208v-51.584h139.328v51.584a400.416 400.416 0 0 0 325.568-330.208h-46.912v-139.328h45.088a400.864 400.864 0 0 0-323.744-318.656v-0.032z m395.584 351.616h-72.992v72.928h72.992v-72.928z"
+                          p-id="2886"
+                          fill="#00f3e6"
+                        />
+                        <path
+                          d="M285.12 512a226.88 226.88 0 1 0 453.792 0A226.88 226.88 0 0 0 285.12 512"
+                          p-id="2887"
+                          fill="#00f3e6"
+                        />
+                      </svg>
+                    </el-col>
+                    <el-col
+                      :span="6"
+                      style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
+                    >
+                      <span style="font-size: 15px; height: 25px; line-height: 25px;">电子围栏</span>
+                      <br />
+                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{fenceNum}}</span>
+                    </el-col>
+                  </el-row>
+                </div>
               </div>
-
-     
+              <div
+                class="title"
+                style="text-align: center;
+               color: #00f6ff; font-size: 23px; line-height: 80px; height: 80px;"
+              >
+                <img src="@/assets/img/icon05.png" alt style="margin-top:10px;" />
+                今日报警
+              </div>
+              <!-- <p style = "color: #00f6fe;text-align: left; font-size: 18px; margin-left: 30px;"></p> -->
             </div>
-            <div class="bottom"></div>
+            <div class="bottom" v-if="alertShow">
+              <vue-seamless-scroll :data="alertInfo" class="seamless-warp">
+                <div class="cardList" v-for="(item,index) in alertInfo" :key="index">
+                  <p style="color: #fff; font-size: 15px; margin-left: 20px;">
+                    <span>{{index+1}}、</span>
+                    <span style="margin-top: 20px;">{{item.productName}}____{{item.deviceName}}</span>
+                  </p>
+                  <p style="margin-left: 20px;">
+                    <span style="color: #fff; font-size: 15px; line-height: 30px;">报警内容:</span>
+
+                    <span
+                      style="color: #e29755; font-size: 17px;line-height: 30px;"
+                    >{{item.Content}}</span>
+                    <!-- <br /> -->
+                    <span
+                      style="color: #fff; font-size: 15px; float: right; margin-right: 20px;line-height: 30px;"
+                    >{{item.date}}</span>
+                  </p>
+
+                  <div class="divider" style="margin-left: 10%;"></div>
+                </div>
+              </vue-seamless-scroll>
+            </div>
           </div>
         </el-col>
         <el-col :span="12" class="map">
-          <div class="title" style = "position: absolute; top: 30px; left: 40%;
-          color: #00f6ff; font-size: 23px; line-height: 70px; height: 70px;">
-            <img src="@/assets/img/icon03.png" alt="" style = "margin-top:10px;">
+          <div
+            class="title"
+            style="position: absolute; top: 5px; left: 40%;
+          color: #00f6ff; font-size: 23px; line-height: 70px; height: 70px;"
+          >
+            <img src="@/assets/img/icon03.png" alt style="margin-top:10px;" />
             平台数据分布
           </div>
           <div class="map1">
@@ -162,14 +361,48 @@
             <img src="@/assets/img/jt.png" />
           </div>
           <div class="map3">
-            <img src="@/assets/img/map.png"  />
+            <img src="@/assets/img/map.png" />
           </div>
           <div id="mapBody"></div>
         </el-col>
         <el-col :span="6">
           <div class="right">
-                  <div class="top"></div>
-            <div class="bottom"></div>
+            <div class="top" v-if = "productShow">
+                            <div
+                class="title"
+                style="text-align: center;
+               color: #00f6ff; font-size: 23px; line-height: 80px; height: 80px;"
+              >
+                <img src="@/assets/img/icon06.png" alt style="margin-top:10px;" />
+                数据统计
+              </div>
+              <vue-seamless-scroll :data="productList" class="seamless-warp">
+<div class = "cardList" style = "color: #fff; " v-for="(item,index) in productList" :key="index">
+  <p style = "color: #e29755; font-size: 18px;line-height: 30px; margin-left: 20px; height: 20px;" >{{index+1}}、
+  {{item.productName}} </p>
+   <table border="1" 
+cellspacing="0"
+style = "margin-left: 10px; margin-top:0px;">
+     <tr style = "height: 20px; line-height: 20px; background-color:#010d50; border: 1px solid #19308e">
+            <td style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5">温度</td>
+             <td style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center;background-color:#00093c; color: #9d9fa5">{{item.latestData.body}}</td>
+           <td style = "font-size: 15px;padding: 5px 20px; width: 15%; text-align: center;color: #9d9fa5" >心率</td>
+              <td style = "font-size: 15px;padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5" >{{item.latestData.heartRate}}</td>
+           <td   style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5">步数</td>
+                      <td   style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5">{{item.latestData.stepNum}}</td>
+
+     </tr>
+   </table>
+    <!-- <span style = "color: #fff;"> 温度： {{item.latestData.body}}</span>
+    <span style = "color: #fff;">心率： {{item.latestData.heartRate}}</span> -->
+   
+    
+ 
+</div>
+              </vue-seamless-scroll>
+
+            </div>
+            <div id="bottom"></div>
           </div>
         </el-col>
       </el-row>
@@ -181,13 +414,24 @@
 <script>
 import * as echarts from "echarts";
 import "./js/china.js";
+import { alertbyTime, allProductKey, getDeviceDatas } from "@/api/index";
+import { UserDetail } from "@/api/admin";
 // import "./js/area_echarts.js";
 export default {
   name: "admin",
   data() {
     return {
-      date: ""
-    };
+      date: "",
+      alertInfo: [],
+      alertShow: false,
+      productnameList: [],
+      productList: [],
+      judge: [],
+      productShow: false,
+      allUser: 0,
+      fenceNum: 0,
+      groupNum :0,
+          };
   },
   created() {
     this.prepare();
@@ -203,8 +447,264 @@ export default {
   },
   methods: {
     prepare() {
+ 
       console.log("初始数据准备");
-      //    this.echarts();
+       var username = window.sessionStorage.getItem("username")
+       console.log(username)
+UserDetail(username).then(res => {
+  console.log(res)
+  this.fenceNum = res.data.extraInfo.fence.length
+  this.groupNum = res.data.extraInfo.groups.length
+})
+      var startTime = Math.floor(
+        new Date(new Date().setHours(0, 0, 0, 0)).getTime() / 1000
+      );
+      var endTime = Math.floor(
+        new Date(new Date().setHours(23, 59, 59, 999)).getTime() / 1000
+      );
+      this.alertInfo = [];
+      var obj = {
+        startTime: startTime,
+        endTime: endTime,
+        asc: 1,
+        num: 50
+      };
+      // console.log(obj);
+      //      var obj = {
+      //   startTime: 1650297600,
+      //   endTime: 1650383999,
+      //   asc: 1,
+      //   num:50
+      // }
+      alertbyTime(obj).then(res => {
+        console.log(res);
+        if (res.msg == "未找到记录") {
+          this.alertShow = true; //为了展示改动的地方
+          this.alertInfo.push(
+            {
+              productName: "手环测试3",
+              deviceName: "AC",
+              Content: "温度报警",
+              date: "2022-06-06 10:02:28"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "A02",
+              Content: "SOS",
+              date: "2022-06-06 11:05:28"
+            },
+            {
+              productName: "手环测试7",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 13:34:13"
+            },
+            {
+              productName: "手环测试12",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 15:45:34"
+            },
+            {
+              productName: "手环测试1",
+              deviceName: "02",
+              Content: " S0S",
+              date: "2022-06-06 16:34:32"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "02",
+              Content: "S0S",
+              date: "2022-06-06 17:53:23"
+            },
+            {
+              productName: "手环测试2",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 19:34:56"
+            }
+          );
+        } else if (res.msg == "ok") {
+          // this.fenceNum = res.data.
+          this.alertShow = true;
+          res.data.alertInfo.forEach(item => {
+            this.alertInfo.push(item);
+          });
+          this.alertInfo.push(
+            {
+              productName: "手环测试3",
+              deviceName: "AC",
+              Content: "温度报警",
+              date: "2022-06-06 10:02:28"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "A02",
+              Content: "SOS",
+              date: "2022-06-06 11:05:28"
+            },
+            {
+              productName: "手环测试7",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 13:34:13"
+            },
+            {
+              productName: "手环测试12",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 15:45:34"
+            },
+            {
+              productName: "手环测试1",
+              deviceName: "02",
+              Content: " S0S",
+              date: "2022-06-06 16:34:32"
+            },
+            {
+              productName: "手环测试5",
+              deviceName: "02",
+              Content: "S0S",
+              date: "2022-06-06 17:53:23"
+            },
+            {
+              productName: "手环测试2",
+              deviceName: "02",
+              Content: "SOS取消",
+              date: "2022-06-06 19:34:56"
+            }
+          );
+        } else {
+          this.$message.error(res.msg);
+        }
+        console.log(this.alertInfo);
+        //    this.echarts();
+      });
+      allProductKey().then(res => {
+        console.log(res);
+        if (res.msg == "ok") {
+          this.productnameList = res.data.productKeys;
+          var username = window.sessionStorage.getItem("username");
+          getDeviceDatas({
+            username: username,
+            pkList: this.productnameList,
+            startTime: 10000
+          }).then(res => {
+            console.log(res);
+            this.productList = res.data;
+            this.allUser = this.productList.length
+            console.log(this.productList);
+            if (this.productList.length !== 0) {
+              this.productList.forEach(item => {
+                item.deviceName = [];
+                item.latestData = [];
+                if (item.deviceData !== null) {
+                  for (var i = 0; i < item.deviceData.length; i++) {
+                    item.deviceData.push(item.deviceData[i].deviceName);
+                  }
+                  if (item.extraInfo.fence !== "-") {
+                    if (
+                      this.fenceList.length !== 0 ||
+                      this.fenceList !== null
+                    ) {
+                      for (var i = 0; i < this.fenceList.length; i++) {
+                        if (
+                          item.extraInfo.fence ==
+                          this.fenceList[i].fence.fenceName
+                        ) {
+                          item.latestData.fence = this.fenceList[i].fence.data;
+                        }
+                      }
+                    }
+                  } else {
+                    item.latestData.fence="-"
+                  }
+                     if (item.deviceName.includes("BA")) {
+                  item.latestData.body =
+                    item.deviceData[
+                      item.deviceName.indexOf("BA")
+                    ].extraInfo.body;
+                  item.latestData.skin =
+                    item.deviceData[
+                      item.deviceName.indexOf("BA")
+                    ].extraInfo.skin;
+                }
+                if (item.deviceName.includes("C2")) {
+                  item.latestData.heartRate =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPHeart;
+                  item.latestData.bpHigh =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPHigh;
+                  item.latestData.bpLow =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPLow;
+                }
+                if (item.deviceName.includes("F6")) {
+                  item.latestData.stepNum =
+                    item.deviceData[
+                      item.deviceName.indexOf("F6")
+                    ].extraInfo.StepNum;
+                  item.latestData.heart =
+                    item.deviceData[
+                      item.deviceName.indexOf("F6")
+                    ].extraInfo.timeStamp;
+                }
+                if (item.deviceName.includes("A4")) {
+                  item.latestData.location =
+                    item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
+                  if (item.latestData.location !== "-") {
+                    var marker1 = item.latestData.location.location;
+                    var array1 = marker1.split(",");
+                    var marker2 = new BMap.Point(array1[0], array1[1]);
+                    var polArry1 = [];
+                    //   if (item.extraInfo.fence !== "-")  {
+                    // console.log( item.latestData)
+                    // if (item.latestData.fence!==undefined) {
+                    // if (item.latestData.fence !== "-") {
+                    //   item.latestData.fence.forEach(item1 => {
+                    //     var p = new BMap.Point(item1.lng, item1.lat);
+                    //     polArry1.push(p);
+                    //   });
+                    //   var polygon1 = new BMap.Polygon(polArry1);
+                    //   if (
+                    //     BMapLib.GeoUtils.isPointInPolygon(marker2, polygon1)
+                    //   ) {
+                    //     item.latestData.ifIn = "in";
+                    //   } else {
+                    //     item.latestData.ifIn = "out";
+                    //   }
+                    // }
+                  }
+                }
+                }
+                else {
+                item.latestData = {
+                  body: "-",
+                  skin: "-",
+                  heartRate: "-",
+                  bpHigh: "-",
+                  bpLow: "-",
+                  stepNum: "-",
+                  location: "",
+                  heart: "-",
+                  fence: "-",
+                  ifIn: "-"
+                };
+              }
+              
+              });
+              console.log(this.productList)
+              if (this.productList.length !==0) {
+                this.productShow = true
+              }
+            }
+          });
+        }
+      });
     },
     timer() {
       let year = new Date().getFullYear(); //获取当前时间的年份
@@ -253,12 +753,10 @@ export default {
       this.prepare();
     },
     echarts() {
-      
       var myChart = echarts.init(document.getElementById("mapBody"));
 
       var mapName = "china";
       var data = [
-
         { name: "大连", value: 47 },
         { name: "临汾", value: 47 },
         { name: "石嘴山", value: 49 },
@@ -292,7 +790,6 @@ export default {
         { name: "焦作", value: 75 },
         { name: "北京", value: 79 },
 
- 
         { name: "大庆", value: 279 }
       ];
       var geoCoordMap = {
@@ -721,14 +1218,14 @@ export default {
             color: '#fff'
         }
                   },**/
-                      title: {
-        top: 10,
-        text: '',
-        left: 'center',
-        textStyle: {
-            color: '#fff'
-        }
-    },
+        title: {
+          top: 10,
+          text: "",
+          left: "center",
+          textStyle: {
+            color: "#fff"
+          }
+        },
         tooltip: {
           padding: 0,
           enterable: true,
@@ -765,7 +1262,7 @@ export default {
               "</i>" +
               "在线人数：" +
               '<span style="color:#f48225;margin:0 6px;">' +
-             params.value[2] +
+              params.value[2] +
               "</span>" +
               "个" +
               "</p>" +
@@ -778,19 +1275,18 @@ export default {
           }
         },
 
-
         geo: {
-             show: true,
+          show: true,
           map: mapName,
-                  aspectScale: 0.75,
-        layoutCenter: ["50%", "51.5%"], //地图位置
-        layoutSize: '118%',
+          aspectScale: 0.75,
+          layoutCenter: ["50%", "51.5%"], //地图位置
+          layoutSize: "118%",
           label: {
             emphasis: {
               show: false
             },
             normal: {
-              show:false
+              show: false
             }
           },
           // roam: false, //禁止其放大缩小
@@ -803,8 +1299,7 @@ export default {
               areaColor: "#293fff"
             }
           },
-             z: 2,
-             
+          z: 2
         },
         series: [
           {
@@ -825,125 +1320,244 @@ export default {
                 show: true
               }
             },
-                aspectScale: 0.75,
-        layoutCenter: ["50%", "50%"], //地图位置
-        layoutSize: '118%',
+            aspectScale: 0.75,
+            layoutCenter: ["50%", "50%"], //地图位置
+            layoutSize: "118%",
             itemStyle: {
               normal: {
                 color: "#ffeb7b"
               }
             }
           },
-     {
-            type: 'map',
+          {
+            type: "map",
             map: mapName,
             geoIndex: 0,
             aspectScale: 0.75, //长宽比
             showLegendSymbol: false, // 存在legend时显示
             label: {
-                normal: {
-                    show: true
-                },
-                emphasis: {
-                    show: false,
-                    textStyle: {
-                        color: '#fff'
-                    }
+              normal: {
+                show: true
+              },
+              emphasis: {
+                show: false,
+                textStyle: {
+                  color: "#fff"
                 }
+              }
             },
             roam: true,
             itemStyle: {
-                normal: {
-                    areaColor: '#031525',
-                    borderColor: '#3B5077',
-                },
-                emphasis: {
-                    areaColor: '#2B91B7'
-                }
+              normal: {
+                areaColor: "#031525",
+                borderColor: "#3B5077"
+              },
+              emphasis: {
+                areaColor: "#2B91B7"
+              }
             },
             animation: false,
             data: data
-        },
-        {
-            name: '点',
-            type: 'scatter',
-            coordinateSystem: 'geo',
-            zlevel: 6,
-        },
-        // {
-        //     name: 'Top 5',
-        //     type: 'effectScatter',
-        //     coordinateSystem: 'geo',
-        //     data: convertData(data.sort(function(a, b) {
-        //         return b.value - a.value;
-        //     }).slice(0, 10)),
-        //     symbolSize: function(val) {
-        //         return val[2] / 10;
-        //     },
-        //     showEffectOn: 'render',
-        //     rippleEffect: {
-        //         brushType: 'stroke'
-        //     },
-        //     hoverAnimation: true,
-        //     label: {
-        //         normal: {
-        //             formatter: '{b}',
-        //             position: 'left',
-        //             show: false
-        //         }
-        //     },
-        //     itemStyle: {
-        //         normal: {
-        //             color: 'yellow',
-        //             shadowBlur: 10,
-        //             shadowColor: 'yellow'
-        //         }
-        //     },
-        //     zlevel: 1
-        // },
+          },
+          {
+            name: "点",
+            type: "scatter",
+            coordinateSystem: "geo",
+            zlevel: 6
+          }
+          // {
+          //     name: 'Top 5',
+          //     type: 'effectScatter',
+          //     coordinateSystem: 'geo',
+          //     data: convertData(data.sort(function(a, b) {
+          //         return b.value - a.value;
+          //     }).slice(0, 10)),
+          //     symbolSize: function(val) {
+          //         return val[2] / 10;
+          //     },
+          //     showEffectOn: 'render',
+          //     rippleEffect: {
+          //         brushType: 'stroke'
+          //     },
+          //     hoverAnimation: true,
+          //     label: {
+          //         normal: {
+          //             formatter: '{b}',
+          //             position: 'left',
+          //             show: false
+          //         }
+          //     },
+          //     itemStyle: {
+          //         normal: {
+          //             color: 'yellow',
+          //             shadowBlur: 10,
+          //             shadowColor: 'yellow'
+          //         }
+          //     },
+          //     zlevel: 1
+          // },
         ]
       };
       var index = 0; //播放所在下标
-var showTip = setInterval(function() {
-    myChart.dispatchAction({
-        type: 'showTip',
-        seriesIndex: 0,
-        dataIndex: index
-    });
-    index++;
-    if(index >= option.series[0].data.length) {
-        index = 0;
-    }
-},2000)
-myChart.on('mouseover', function(params) {
-    // console.log(params)
-    clearInterval(showTip);
-    myChart.dispatchAction({
-        type: 'showTip',
-        seriesIndex: 0,
-        dataIndex: params.dataIndex,
-    });
-});
-myChart.on('mouseout', function(params) {
-    showTip && clearInterval(showTip);
-    showTip = setInterval(function() {
+      var showTip = setInterval(function() {
         myChart.dispatchAction({
-            type: 'showTip',
-            seriesIndex: 0,
-            dataIndex: index
+          type: "showTip",
+          seriesIndex: 0,
+          dataIndex: index
         });
         index++;
-        if(index >= option.series[0].data.length) {
-            index = 0;
+        if (index >= option.series[0].data.length) {
+          index = 0;
         }
-    }, 2000);
-});
-
+      }, 2000);
+      myChart.on("mouseover", function(params) {
+        // console.log(params)
+        clearInterval(showTip);
+        myChart.dispatchAction({
+          type: "showTip",
+          seriesIndex: 0,
+          dataIndex: params.dataIndex
+        });
+      });
+      myChart.on("mouseout", function(params) {
+        showTip && clearInterval(showTip);
+        showTip = setInterval(function() {
+          myChart.dispatchAction({
+            type: "showTip",
+            seriesIndex: 0,
+            dataIndex: index
+          });
+          index++;
+          if (index >= option.series[0].data.length) {
+            index = 0;
+          }
+        }, 2000);
+      });
 
       myChart.setOption(option);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
+           var chartDom1 = document.getElementById("bottom");
+      var myChart1 = echarts.init(chartDom1);
+    //       option = null;
+    // // Generate data
+    var category = [];
+    var dottedBase = +new Date();
+    dottedBase-=3600 * 24 * 1000*20;
+    var lineData = [];
+    var barData = [];
+var b = [123,32,23,23,23,34,654,64,644,65,445,445,445,443,2,21,221,122,121,23]
+var d = [64,56,755,432,423,43,65,34,65,23,12,32,43,12,43,54,23,54,23]
+    for (var i = 0; i < 20; i++) {
+        var date = new Date(dottedBase += 3600 * 24 * 1000);
+        category.push([
+            date.getFullYear(),
+            date.getMonth() + 1,
+            date.getDate()
+        ].join('-'));
+        // var b = 12;
+        // var d = 34;
+        lineData.push(b[i])
+        barData.push(d[i] + b[i]);
+    }
+
+
+    // option
+   var  option1 = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['处理数', '报警数'],
+            textStyle: {
+                color: '#ccc'
+            }
+        },
+        xAxis: {
+            data: category,
+            axisLine: {
+                lineStyle: {
+                    color: '#ccc'
+                }
+            }
+        },
+        yAxis: {
+            splitLine: {show: false},
+            axisLine: {
+                lineStyle: {
+                    color: '#ccc'
+                }
+            }
+        },
+        series: [{
+            name: 'line',
+            type: 'line',
+            smooth: true,
+            showAllSymbol: true,
+            symbol: 'emptyCircle',
+            symbolSize: 15,
+            data: lineData
+        }, {
+            name: '报警数',
+            type: 'bar',
+            barWidth: 10,
+            itemStyle: {
+                normal: {
+                    barBorderRadius: 5,
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#14c8d4'},
+                            {offset: 1, color: '#43eec6'}
+                        ]
+                    )
+                }
+            },
+            data: barData
+        }, {
+            name: '处理数',
+            type: 'bar',
+            barGap: '-100%',
+            barWidth: 10,
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: 'rgba(20,200,212,0.5)'},
+                            {offset: 0.2, color: 'rgba(20,200,212,0.2)'},
+                            {offset: 1, color: 'rgba(20,200,212,0)'}
+                        ]
+                    )
+                }
+            },
+            z: -12,
+            data: lineData
+        }, {
+            name: 'dotted',
+            type: 'pictorialBar',
+            symbol: 'rect',
+            itemStyle: {
+                normal: {
+                    color: '#0f375f'
+                }
+            },
+            symbolRepeat: true,
+            symbolSize: [12, 4],
+            symbolMargin: 1,
+            z: -10,
+            data: lineData
+        }]
+    };
+    myChart1.setOption(option1);
+      window.addEventListener("resize", function() {
+        myChart1.resize();
+      });
+        // option1 && myChart1.setOption(option1);
     }
   }
 };
@@ -995,22 +1609,50 @@ myChart.on('mouseout', function(params) {
       border-radius: 8px;
 
       // background-color: #fff;
- 
+
       // background-color: #181c41;
       backdrop-filter: blur(20px);
-      box-shadow: 3px 5px 10px rgba(93, 93, 93, 0.5);
+      box-shadow: 1px 1px 10px rgba(93, 93, 93, 0.5);
+      // border-right: 1px solid #fff;
       border-radius: 15px;
       z-index: 5;
       color: #fff;
       .top {
-        height: calc(100% - 200px)
+        height: calc(100% - 360px);
       }
-            .bottom {
-           height: 200px;
-           width: 100%;
-              background: url("../img/footer-bg.png") no-repeat center center;
-       }
-
+      .bottom {
+        height: 330px;
+        width: 100%;
+        background: url("../img/footer-bg.png") no-repeat center center;
+        .seamless-warp {
+          height: 100%;
+          width: 100%;
+          overflow: hidden;
+        }
+        .cardList {
+          height: 90px;
+          width: 100%;
+          text-align: left;
+          /* background-color: rgb(204, 90, 90); */
+        }
+        .divider {
+          margin-top: 5%;
+          width: 80%;
+          margin-left: 10%;
+          height: 2px;
+          padding: 0;
+          margin: 0;
+          background-color: rgb(24, 136, 93);
+          font-family: "Kosugi Maru", sans-serif;
+          background-image: linear-gradient(
+            45deg,
+            rgb(47, 56, 93),
+            rgb(101, 120, 156),
+            rgb(101, 120, 156),
+            rgb(47, 56, 93)
+          );
+        }
+      }
     }
     .map {
       position: relative;
@@ -1063,24 +1705,38 @@ myChart.on('mouseout', function(params) {
 
     .right {
       height: calc(100vh - 120px);
-      width: 98%;
+      width: 93%;
       margin-left: 1%;
       margin: 10px 10px 20px 10px;
       border-radius: 8px;
       //    background: url("../img/footer-bg.png") no-repeat center center;
       background-color: transparent;
       backdrop-filter: blur(20px);
-      box-shadow: 3px 5px 10px rgba(93, 93, 93, 0.5);
+      // box-shadow: 3px 5px 10px rgba(93, 93, 93, 0.5);
+      box-shadow: 1px 1px 10px rgba(93, 93, 93, 0.5);
       border-radius: 15px;
       z-index: 5;
-            .top {
-        height: calc(100% - 200px)；
+      background: url("../img/footer-bg.png") no-repeat center bottom;
+      .top {
+        height: calc(100% - 360px);
+        width: 100%;
+                  .seamless-warp {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+          }
+          .cardList {
+            height: 80px;
+            width: 100%;
+            text-align: left;
+            /* background-color: rgb(204, 90, 90); */
+          }
       }
-            .bottom {
-           height: 200px;
-           width: 100%;
-              background: url("../img/footer-bg.png") no-repeat center center;
-       }
+      #bottom {
+        margin-top: 100px;
+        height: 280px;
+        width: 100%;
+      }
     }
   }
 }

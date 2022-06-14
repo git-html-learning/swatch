@@ -368,11 +368,15 @@ export default {
       console.log(overlays);
       console.log(overlays.length)
       var num = [];
-      this.productList1.forEach(item=>{
-        if(item.latestData.location !=="") {
-          num.push(item)
-        }
-      })
+      console.log(this.productList1)
+    //   if(this.productList1.length!==0||this.productList1.length!==null) {
+    //  this.productList1.forEach(item=>{
+    //     if(item.latestData.location !=="") {
+    //       num.push(item)
+    //     }
+    //   })
+    //   }
+ 
       console.log(num.length)
       this.fenceList = overlays.slice(num.length,3);
       console.log(this.fenceList);
