@@ -52,7 +52,7 @@ export default {
 <style lang="scss" scoped>
 .layout {
   padding: 0px;
-  height: 100%;
+  min-height: 100%;
   background-color: #22284a;
 }
 </style>

@@ -57,6 +57,15 @@ data
   })
 }
 
+//普通用户登录
+export function UserLogin(data) {
+  return adminRequest({
+    url: '/session',
+    method: 'post',
+data
+  })
+}
+
 
 //获取用户列表
 export function AdminUsers(payload) {
@@ -89,3 +98,4 @@ export function AdminEditUser(payload) {
     }
   })
 }
+

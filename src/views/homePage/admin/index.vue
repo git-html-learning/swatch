@@ -316,7 +316,7 @@
                color: #00f6ff; font-size: 23px; line-height: 80px; height: 80px;"
               >
                 <img src="@/assets/img/icon05.png" alt style="margin-top:10px;" />
-                今日报警
+                今日报警（{{alertInfo.length}}条）
               </div>
               <!-- <p style = "color: #00f6fe;text-align: left; font-size: 18px; margin-left: 30px;"></p> -->
             </div>
@@ -394,27 +394,25 @@
                       style="height: 20px; line-height: 20px; background-color:#010d50; border: 1px solid #19308e"
                     >
                       <td
-                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5"
+                        style="font-size: 15px; padding: 5px 20px; width: 10%; text-align: center; color: #9d9fa5"
                       >温度</td>
                       <td
-                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center;background-color:#00093c; color: #9d9fa5"
+                        style="font-size: 15px; padding: 5px 20px; width: 16%; text-align: center;background-color:#00093c; color: #9d9fa5"
                       >{{item.latestData.body}}</td>
                       <td
-                        style="font-size: 15px;padding: 5px 20px; width: 15%; text-align: center;color: #9d9fa5"
+                        style="font-size: 15px;padding: 5px 20px; width: 10%; text-align: center;color: #9d9fa5"
                       >心率</td>
                       <td
-                        style="font-size: 15px;padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5"
+                        style="font-size: 15px;padding: 5px 20px; width: 16%; text-align: center; background-color:#00093c;color: #9d9fa5"
                       >{{item.latestData.heartRate}}</td>
                       <td
-                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5"
+                        style="font-size: 15px; padding: 5px 20px; width: 10%; text-align: center; color: #9d9fa5"
                       >步数</td>
                       <td
-                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5"
+                        style="font-size: 15px; padding: 5px 20px; width: 16%; text-align: center; background-color:#00093c;color: #9d9fa5"
                       >{{item.latestData.stepNum}}</td>
                     </tr>
                   </table>
-                  <!-- <span style = "color: #fff;"> 温度： {{item.latestData.body}}</span>
-                  <span style = "color: #fff;">心率： {{item.latestData.heartRate}}</span>-->
                 </div>
               </vue-seamless-scroll>
             </div>
@@ -514,111 +512,70 @@ export default {
         asc: 1,
         num: 50
       };
-      // console.log(obj);
-      //      var obj = {
-      //   startTime: 1650297600,
-      //   endTime: 1650383999,
-      //   asc: 1,
-      //   num:50
-      // }
       alertbyTime(obj).then(res => {
         console.log(res);
         if (res.msg == "未找到记录") {
-          this.alertShow = true; //为了展示改动的地方
-          this.alertInfo.push(
-            {
-              productName: "手环测试3",
-              deviceName: "AC",
-              Content: "温度报警",
-              date: "2022-06-06 10:02:28"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "A02",
-              Content: "SOS",
-              date: "2022-06-06 11:05:28"
-            },
-            {
-              productName: "手环测试7",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 13:34:13"
-            },
-            {
-              productName: "手环测试12",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 15:45:34"
-            },
-            {
-              productName: "手环测试1",
-              deviceName: "02",
-              Content: " S0S",
-              date: "2022-06-06 16:34:32"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "02",
-              Content: "S0S",
-              date: "2022-06-06 17:53:23"
-            },
-            {
-              productName: "手环测试2",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 19:34:56"
-            }
-          );
+          this.alertShow = false; //为了展示改动的地方
+          // this.alertInfo.push(
+          //   {
+          //     productName: "手环测试3",
+          //     deviceName: "AC",
+          //     Content: "温度报警",
+          //     date: "2022-06-06 10:02:28"
+          //   },
+          //   {
+          //     productName: "手环测试5",
+          //     deviceName: "A02",
+          //     Content: "SOS",
+          //     date: "2022-06-06 11:05:28"
+          //   },
+          //   {
+          //     productName: "手环测试7",
+          //     deviceName: "02",
+          //     Content: "SOS取消",
+          //     date: "2022-06-06 13:34:13"
+          //   },
+          //   {
+          //     productName: "手环测试12",
+          //     deviceName: "02",
+          //     Content: "SOS取消",
+          //     date: "2022-06-06 15:45:34"
+          //   },
+          //   {
+          //     productName: "手环测试1",
+          //     deviceName: "02",
+          //     Content: " S0S",
+          //     date: "2022-06-06 16:34:32"
+          //   },
+          //   {
+          //     productName: "手环测试5",
+          //     deviceName: "02",
+          //     Content: "S0S",
+          //     date: "2022-06-06 17:53:23"
+          //   },
+          //   {
+          //     productName: "手环测试2",
+          //     deviceName: "02",
+          //     Content: "SOS取消",
+          //     date: "2022-06-06 19:34:56"
+          //   }
+          // );
         } else if (res.msg == "ok") {
           // this.fenceNum = res.data.
           this.alertShow = true;
           res.data.alertInfo.forEach(item => {
             this.alertInfo.push(item);
           });
-          this.alertInfo.push(
-            {
-              productName: "手环测试3",
-              deviceName: "AC",
-              Content: "温度报警",
-              date: "2022-06-06 10:02:28"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "A02",
-              Content: "SOS",
-              date: "2022-06-06 11:05:28"
-            },
-            {
-              productName: "手环测试7",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 13:34:13"
-            },
-            {
-              productName: "手环测试12",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 15:45:34"
-            },
-            {
-              productName: "手环测试1",
-              deviceName: "02",
-              Content: " S0S",
-              date: "2022-06-06 16:34:32"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "02",
-              Content: "S0S",
-              date: "2022-06-06 17:53:23"
-            },
-            {
-              productName: "手环测试2",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 19:34:56"
-            }
-          );
+                        if (this.alertInfo.length !== 0) {
+          this.alertInfo.forEach(item => {
+            this.judge.forEach(item1 => {
+              if (item.productKey == item1.productKey) {
+                item.productName = item1.productName;
+              }
+            });
+          });
+        }
+
         } else {
           this.$message.error(res.msg);
         }
@@ -640,123 +597,132 @@ export default {
             this.allUser = this.productList.length;
             console.log(this.productList);
             if (this.productList.length !== 0) {
+              this.judge = [];
               this.productList.forEach(item => {
+                     var jud = {
+                productName: item.productName,
+                productKey: item.productKey
+              };
+              this.judge.push(jud);
+
                 item.deviceName = [];
                 item.latestData = [];
                 console.log(item.deviceData);
-               if (item.deviceData !== null) {
-                for (var i = 0; i < item.deviceData.length; i++) {
-                  item.deviceName.push(item.deviceData[i].deviceName);
-                }
-                if (item.extraInfo.fence !== "-") {
-                  console.log(this.fenceList)
-                   UserDetail(username).then(res => {
-        console.log(res);
-        this.fenceList = res.data.extraInfo.fence;
-              console.log(this.fenceList)
-                  if (this.fenceList.length !== 0 || this.fenceList !== null||this.fenceList!==undefined) {
-                    for (var i = 0; i < this.fenceList.length; i++) {
+                if (item.deviceData !== null) {
+                  for (var i = 0; i < item.deviceData.length; i++) {
+                    item.deviceName.push(item.deviceData[i].deviceName);
+                  }
+                  if (item.extraInfo.fence !== "-") {
+                    console.log(this.fenceList);
+                    UserDetail(username).then(res => {
+                      console.log(res);
+                      this.fenceList = res.data.extraInfo.fence;
+                      console.log(this.fenceList);
                       if (
-                        item.extraInfo.fence ==
-                        this.fenceList[i].fence.fenceName
+                        this.fenceList.length !== 0 ||
+                        this.fenceList !== null ||
+                        this.fenceList !== undefined
                       ) {
-                        item.latestData.fence = this.fenceList[i].fence.data;
+                        for (var i = 0; i < this.fenceList.length; i++) {
+                          if (
+                            item.extraInfo.fence ==
+                            this.fenceList[i].fence.fenceName
+                          ) {
+                            item.latestData.fence = this.fenceList[
+                              i
+                            ].fence.data;
+                          }
+                        }
                       }
-                    }
+                      this.fenceNum = this.fenceList.length;
+                      var fenceData = res.data;
+                      window.sessionStorage.setItem(
+                        "fenceList",
+                        JSON.stringify(this.fenceList)
+                      );
+                      window.sessionStorage.setItem(
+                        "fenceData",
+                        JSON.stringify(fenceData)
+                      );
+                    });
+                  } else {
+                    item.latestData.fence = "-";
                   }
-        this.fenceNum = this.fenceList.length;
-        var fenceData = res.data;
-        window.sessionStorage.setItem(
-          "fenceList",
-          JSON.stringify(this.fenceList)
-        );
-        window.sessionStorage.setItem("fenceData", JSON.stringify(fenceData));
-      });
-
+                  console.log(item);
+                  if (item.deviceName.includes("BA")) {
+                    item.latestData.body =
+                      item.deviceData[
+                        item.deviceName.indexOf("BA")
+                      ].extraInfo.body;
+                    item.latestData.skin =
+                      item.deviceData[
+                        item.deviceName.indexOf("BA")
+                      ].extraInfo.skin;
+                  } else {
+                    item.latestData.body = "-";
+                    item.latestData.skin = "-";
+                  }
+                  if (item.deviceName.includes("C2")) {
+                    item.latestData.heartRate =
+                      item.deviceData[
+                        item.deviceName.indexOf("C2")
+                      ].extraInfo.BPHeart;
+                    item.latestData.bpHigh =
+                      item.deviceData[
+                        item.deviceName.indexOf("C2")
+                      ].extraInfo.BPHigh;
+                    item.latestData.bpLow =
+                      item.deviceData[
+                        item.deviceName.indexOf("C2")
+                      ].extraInfo.BPLow;
+                  } else {
+                    item.latestData.heartRate = "-";
+                    item.latestData.bpHigh = "-";
+                    item.latestData.bpLow = "-";
+                  }
+                  if (item.deviceName.includes("F6")) {
+                    item.latestData.stepNum =
+                      item.deviceData[
+                        item.deviceName.indexOf("F6")
+                      ].extraInfo.stepNum;
+                    item.latestData.heart =
+                      item.deviceData[
+                        item.deviceName.indexOf("F6")
+                      ].extraInfo.timeStamp;
+                  } else {
+                    item.latestData.stepNum = "-";
+                    item.latestData.heart = "-";
+                  }
+                  if (item.deviceName.includes("A4")) {
+                    item.latestData.location =
+                      item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
+                  } else {
+                    item.latestData.location = "-";
+                  }
                 } else {
-                  item.latestData.fence = "-";
+                  item.latestData = {
+                    body: "-",
+                    skin: "-",
+                    heartRate: "-",
+                    bpHigh: "-",
+                    bpLow: "-",
+                    stepNum: "-",
+                    location: "",
+                    heart: "-",
+                    fence: "-",
+                    ifIn: "-"
+                  };
                 }
-                console.log(item);
-                if (item.deviceName.includes("BA")) {
-                  item.latestData.body =
-                    item.deviceData[
-                      item.deviceName.indexOf("BA")
-                    ].extraInfo.body;
-                  item.latestData.skin =
-                    item.deviceData[
-                      item.deviceName.indexOf("BA")
-                    ].extraInfo.skin;
-                }
-                if (item.deviceName.includes("C2")) {
-                  item.latestData.heartRate =
-                    item.deviceData[
-                      item.deviceName.indexOf("C2")
-                    ].extraInfo.BPHeart;
-                  item.latestData.bpHigh =
-                    item.deviceData[
-                      item.deviceName.indexOf("C2")
-                    ].extraInfo.BPHigh;
-                  item.latestData.bpLow =
-                    item.deviceData[
-                      item.deviceName.indexOf("C2")
-                    ].extraInfo.BPLow;
-                }
-                if (item.deviceName.includes("F6")) {
-                  item.latestData.stepNum =
-                    item.deviceData[
-                      item.deviceName.indexOf("F6")
-                    ].extraInfo.stepNum;
-                  item.latestData.heart =
-                    item.deviceData[
-                      item.deviceName.indexOf("F6")
-                    ].extraInfo.timeStamp;
-                }
-                if (item.deviceName.includes("A4")) {
-                  item.latestData.location =
-                    item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
-                  if (item.latestData.location !== "-") {
-                    var marker1 = item.latestData.location.location;
-                    var array1 = marker1.split(",");
-                    var marker2 = new BMap.Point(array1[0], array1[1]);
-                    var polArry1 = [];
-                    //   if (item.extraInfo.fence !== "-")  {
-                    // console.log( item.latestData)
-                    // if (item.latestData.fence!==undefined) {
-                    // if (item.latestData.fence !== "-") {
-                    //   item.latestData.fence.forEach(item1 => {
-                    //     var p = new BMap.Point(item1.lng, item1.lat);
-                    //     polArry1.push(p);
-                    //   });
-                    //   var polygon1 = new BMap.Polygon(polArry1);
-                    //   if (
-                    //     BMapLib.GeoUtils.isPointInPolygon(marker2, polygon1)
-                    //   ) {
-                    //     item.latestData.ifIn = "in";
-                    //   } else {
-                    //     item.latestData.ifIn = "out";
-                    //   }
-                    // }
-                  }
-                }
-              } else {
-                item.latestData = {
-                  body: "-",
-                  skin: "-",
-                  heartRate: "-",
-                  bpHigh: "-",
-                  bpLow: "-",
-                  stepNum: "-",
-                  location: "",
-                  heart: "-",
-                  fence: "-",
-                  ifIn: "-"
-                };
-              }
               });
               console.log(this.productList);
               if (this.productList.length !== 0) {
                 this.productShow = true;
               }
+              
+
+   
+          //  console.log( this.alertInfo)
+
             }
           });
         }
@@ -1723,7 +1689,7 @@ export default {
           overflow: hidden;
         }
         .cardList {
-          height: 90px;
+          height: 80px;
           width: 100%;
           text-align: left;
           /* background-color: rgb(204, 90, 90); */

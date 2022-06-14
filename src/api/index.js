@@ -508,8 +508,11 @@ export function sendMessage(deviceId,message) {
     url: 'https://api.ahusmart.com/api/v1/newDownRaw?deviceType=smartWatch&bodyType=json&timeout=2 ' ,
     method: 'post',
   data: {
+    "function":"msgDown",
     "deviceId":deviceId,
-    "command":message
+    "command":{
+      "msg":message
+    }
   } 
   })
 }
