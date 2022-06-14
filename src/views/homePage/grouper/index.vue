@@ -1395,24 +1395,14 @@ export default {
       this.productList1 = [];
       this.fenceList = [];
       var username = window.sessionStorage.getItem("username");
-      UserDetail(username).then(res => {
-        // console.log(res);
-        this.fenceList = res.data.extraInfo.fence;
-        this.fenceNum = this.fenceList.length;
-        var fenceData = res.data;
-        window.sessionStorage.setItem(
-          "fenceList",
-          JSON.stringify(this.fenceList)
-        );
-        window.sessionStorage.setItem("fenceData", JSON.stringify(fenceData));
-      });
+     
       allProductKey().then(res => {
         if (res.msg == "ok") {
           //   console.log(res);
 
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
-          var username = window.sessionStorage.getItem("username")
+          var username = window.sessionStorage.getItem("username");
           getDeviceDatas({
             username: username,
             pkList: this.productNameList,
@@ -1430,16 +1420,16 @@ export default {
                   item.deviceName.push(item.deviceData[i].deviceName);
                 }
                 if (item.extraInfo.fence !== "-") {
-                  if(this.fenceList.length!==0||this.fenceList!==null) {
-     for (var i = 0; i < this.fenceList.length; i++) {
-                    if (
-                      item.extraInfo.fence == this.fenceList[i].fence.fenceName
-                    ) {
-                      item.latestData.fence = this.fenceList[i].fence.data;
+                  if (this.fenceList.length !== 0 || this.fenceList !== null) {
+                    for (var i = 0; i < this.fenceList.length; i++) {
+                      if (
+                        item.extraInfo.fence ==
+                        this.fenceList[i].fence.fenceName
+                      ) {
+                        item.latestData.fence = this.fenceList[i].fence.data;
+                      }
                     }
                   }
-                  }
-             
                 } else {
                   item.latestData.fence = "-";
                 }
