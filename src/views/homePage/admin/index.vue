@@ -367,8 +367,8 @@
         </el-col>
         <el-col :span="6">
           <div class="right">
-            <div class="top" v-if = "productShow">
-                            <div
+            <div class="top" v-if="productShow">
+              <div
                 class="title"
                 style="text-align: center;
                color: #00f6ff; font-size: 23px; line-height: 80px; height: 80px;"
@@ -377,30 +377,76 @@
                 数据统计
               </div>
               <vue-seamless-scroll :data="productList" class="seamless-warp">
-<div class = "cardList" style = "color: #fff; " v-for="(item,index) in productList" :key="index">
-  <p style = "color: #e29755; font-size: 18px;line-height: 30px; margin-left: 20px; height: 20px;" >{{index+1}}、
-  {{item.productName}} </p>
-   <table border="1" 
-cellspacing="0"
-style = "margin-left: 10px; margin-top:0px;">
-     <tr style = "height: 20px; line-height: 20px; background-color:#010d50; border: 1px solid #19308e">
-            <td style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5">温度</td>
-             <td style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center;background-color:#00093c; color: #9d9fa5">{{item.latestData.body}}</td>
-           <td style = "font-size: 15px;padding: 5px 20px; width: 15%; text-align: center;color: #9d9fa5" >心率</td>
-              <td style = "font-size: 15px;padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5" >{{item.latestData.heartRate}}</td>
-           <td   style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5">步数</td>
-                      <td   style = "font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5">{{item.latestData.stepNum}}</td>
-
-     </tr>
-   </table>
-    <!-- <span style = "color: #fff;"> 温度： {{item.latestData.body}}</span>
-    <span style = "color: #fff;">心率： {{item.latestData.heartRate}}</span> -->
-   
-    
- 
-</div>
+                <div
+                  class="cardList"
+                  style="color: #fff; "
+                  v-for="(item,index) in productList"
+                  :key="index"
+                >
+                  <p
+                    style="color: #e29755; font-size: 18px;line-height: 30px; margin-left: 20px; height: 20px;"
+                  >
+                    {{index+1}}、
+                    {{item.productName}}
+                  </p>
+                  <table border="1" cellspacing="0" style="margin-left: 10px; margin-top:0px;">
+                    <tr
+                      style="height: 20px; line-height: 20px; background-color:#010d50; border: 1px solid #19308e"
+                    >
+                      <td
+                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5"
+                      >温度</td>
+                      <td
+                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center;background-color:#00093c; color: #9d9fa5"
+                      >{{item.latestData.body}}</td>
+                      <td
+                        style="font-size: 15px;padding: 5px 20px; width: 15%; text-align: center;color: #9d9fa5"
+                      >心率</td>
+                      <td
+                        style="font-size: 15px;padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5"
+                      >{{item.latestData.heartRate}}</td>
+                      <td
+                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; color: #9d9fa5"
+                      >步数</td>
+                      <td
+                        style="font-size: 15px; padding: 5px 20px; width: 15%; text-align: center; background-color:#00093c;color: #9d9fa5"
+                      >{{item.latestData.stepNum}}</td>
+                    </tr>
+                  </table>
+                  <!-- <span style = "color: #fff;"> 温度： {{item.latestData.body}}</span>
+                  <span style = "color: #fff;">心率： {{item.latestData.heartRate}}</span>-->
+                </div>
               </vue-seamless-scroll>
+            </div>
+            <div class="top" v-if="!productShow">
+              <div
+                class="title"
+                style="text-align: center;
+               color: #00f6ff; font-size: 23px; line-height: 80px; height: 80px;"
+              >
+                <img src="@/assets/img/icon06.png" alt style="margin-top:10px;" />
+                数据统计
+              </div>
 
+              <div style="text-align: center;">
+                <svg
+                  t="1655173791112"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="6840"
+                  width="120"
+                  height="120"
+                >
+                  <path
+                    d="M560 800l-10.464-416h-75.072L464 800h96z m-14.144-493.984c9.44-9.312 14.144-20.672 14.144-34.016 0-13.6-4.704-24.992-14.144-34.208A46.784 46.784 0 0 0 512 224c-13.12 0-24.448 4.608-33.856 13.792A45.856 45.856 0 0 0 464 272c0 13.344 4.704 24.704 14.144 34.016 9.408 9.312 20.704 13.984 33.856 13.984 13.12 0 24.448-4.672 33.856-13.984zM512 32C246.912 32 32 246.912 32 512c0 265.088 214.912 480 480 480 265.088 0 480-214.912 480-480 0-265.088-214.912-480-480-480z m0 64c229.76 0 416 186.24 416 416s-186.24 416-416 416S96 741.76 96 512 282.24 96 512 96z"
+                    p-id="6841"
+                    fill="#4e8e8f"
+                  />
+                </svg>
+                <p style="color: #4e8e8f; font-size: 30px; ">当前手环为空</p>
+              </div>
             </div>
             <div id="bottom"></div>
           </div>
@@ -430,8 +476,8 @@ export default {
       productShow: false,
       allUser: 0,
       fenceNum: 0,
-      groupNum :0,
-          };
+      groupNum: 0
+    };
   },
   created() {
     this.prepare();
@@ -447,15 +493,14 @@ export default {
   },
   methods: {
     prepare() {
- 
       console.log("初始数据准备");
-       var username = window.sessionStorage.getItem("username")
-       console.log(username)
-UserDetail(username).then(res => {
-  console.log(res)
-  this.fenceNum = res.data.extraInfo.fence.length
-  this.groupNum = res.data.extraInfo.groups.length
-})
+      var username = window.sessionStorage.getItem("username");
+      console.log(username);
+      UserDetail(username).then(res => {
+        console.log(res);
+        this.fenceNum = res.data.extraInfo.fence.length;
+        this.groupNum = res.data.extraInfo.groups.length;
+      });
       var startTime = Math.floor(
         new Date(new Date().setHours(0, 0, 0, 0)).getTime() / 1000
       );
@@ -592,34 +637,47 @@ UserDetail(username).then(res => {
           }).then(res => {
             console.log(res);
             this.productList = res.data;
-            this.allUser = this.productList.length
+            this.allUser = this.productList.length;
             console.log(this.productList);
             if (this.productList.length !== 0) {
               this.productList.forEach(item => {
                 item.deviceName = [];
                 item.latestData = [];
-                if (item.deviceData !== null) {
-                  for (var i = 0; i < item.deviceData.length; i++) {
-                    item.deviceData.push(item.deviceData[i].deviceName);
-                  }
-                  if (item.extraInfo.fence !== "-") {
-                    if (
-                      this.fenceList.length !== 0 ||
-                      this.fenceList !== null
-                    ) {
-                      for (var i = 0; i < this.fenceList.length; i++) {
-                        if (
-                          item.extraInfo.fence ==
-                          this.fenceList[i].fence.fenceName
-                        ) {
-                          item.latestData.fence = this.fenceList[i].fence.data;
-                        }
+                console.log(item.deviceData);
+               if (item.deviceData !== null) {
+                for (var i = 0; i < item.deviceData.length; i++) {
+                  item.deviceName.push(item.deviceData[i].deviceName);
+                }
+                if (item.extraInfo.fence !== "-") {
+                  console.log(this.fenceList)
+                   UserDetail(username).then(res => {
+        console.log(res);
+        this.fenceList = res.data.extraInfo.fence;
+              console.log(this.fenceList)
+                  if (this.fenceList.length !== 0 || this.fenceList !== null||this.fenceList!==undefined) {
+                    for (var i = 0; i < this.fenceList.length; i++) {
+                      if (
+                        item.extraInfo.fence ==
+                        this.fenceList[i].fence.fenceName
+                      ) {
+                        item.latestData.fence = this.fenceList[i].fence.data;
                       }
                     }
-                  } else {
-                    item.latestData.fence="-"
                   }
-                     if (item.deviceName.includes("BA")) {
+        this.fenceNum = this.fenceList.length;
+        var fenceData = res.data;
+        window.sessionStorage.setItem(
+          "fenceList",
+          JSON.stringify(this.fenceList)
+        );
+        window.sessionStorage.setItem("fenceData", JSON.stringify(fenceData));
+      });
+
+                } else {
+                  item.latestData.fence = "-";
+                }
+                console.log(item);
+                if (item.deviceName.includes("BA")) {
                   item.latestData.body =
                     item.deviceData[
                       item.deviceName.indexOf("BA")
@@ -680,8 +738,7 @@ UserDetail(username).then(res => {
                     // }
                   }
                 }
-                }
-                else {
+              } else {
                 item.latestData = {
                   body: "-",
                   skin: "-",
@@ -695,11 +752,10 @@ UserDetail(username).then(res => {
                   ifIn: "-"
                 };
               }
-              
               });
-              console.log(this.productList)
-              if (this.productList.length !==0) {
-                this.productShow = true
+              console.log(this.productList);
+              if (this.productList.length !== 0) {
+                this.productShow = true;
               }
             }
           });
@@ -1438,126 +1494,163 @@ UserDetail(username).then(res => {
       window.addEventListener("resize", function() {
         myChart.resize();
       });
-           var chartDom1 = document.getElementById("bottom");
+      var chartDom1 = document.getElementById("bottom");
       var myChart1 = echarts.init(chartDom1);
-    //       option = null;
-    // // Generate data
-    var category = [];
-    var dottedBase = +new Date();
-    dottedBase-=3600 * 24 * 1000*20;
-    var lineData = [];
-    var barData = [];
-var b = [123,32,23,23,23,34,654,64,644,65,445,445,445,443,2,21,221,122,121,23]
-var d = [64,56,755,432,423,43,65,34,65,23,12,32,43,12,43,54,23,54,23]
-    for (var i = 0; i < 20; i++) {
-        var date = new Date(dottedBase += 3600 * 24 * 1000);
-        category.push([
-            date.getFullYear(),
-            date.getMonth() + 1,
-            date.getDate()
-        ].join('-'));
+      //       option = null;
+      // // Generate data
+      var category = [];
+      var dottedBase = +new Date();
+      dottedBase -= 3600 * 24 * 1000 * 20;
+      var lineData = [];
+      var barData = [];
+      var b = [
+        123,
+        32,
+        23,
+        23,
+        23,
+        34,
+        654,
+        64,
+        644,
+        65,
+        445,
+        445,
+        445,
+        443,
+        2,
+        21,
+        221,
+        122,
+        121,
+        23
+      ];
+      var d = [
+        64,
+        56,
+        755,
+        432,
+        423,
+        43,
+        65,
+        34,
+        65,
+        23,
+        12,
+        32,
+        43,
+        12,
+        43,
+        54,
+        23,
+        54,
+        23
+      ];
+      for (var i = 0; i < 20; i++) {
+        var date = new Date((dottedBase += 3600 * 24 * 1000));
+        category.push(
+          [date.getFullYear(), date.getMonth() + 1, date.getDate()].join("-")
+        );
         // var b = 12;
         // var d = 34;
-        lineData.push(b[i])
+        lineData.push(b[i]);
         barData.push(d[i] + b[i]);
-    }
+      }
 
-
-    // option
-   var  option1 = {
+      // option
+      var option1 = {
         tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow"
+          }
         },
         legend: {
-            data: ['处理数', '报警数'],
-            textStyle: {
-                color: '#ccc'
-            }
+          data: ["处理数", "报警数"],
+          textStyle: {
+            color: "#ccc"
+          }
         },
         xAxis: {
-            data: category,
-            axisLine: {
-                lineStyle: {
-                    color: '#ccc'
-                }
+          data: category,
+          axisLine: {
+            lineStyle: {
+              color: "#ccc"
             }
+          }
         },
         yAxis: {
-            splitLine: {show: false},
-            axisLine: {
-                lineStyle: {
-                    color: '#ccc'
-                }
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              color: "#ccc"
             }
+          }
         },
-        series: [{
-            name: 'line',
-            type: 'line',
+        series: [
+          {
+            name: "line",
+            type: "line",
             smooth: true,
             showAllSymbol: true,
-            symbol: 'emptyCircle',
+            symbol: "emptyCircle",
             symbolSize: 15,
             data: lineData
-        }, {
-            name: '报警数',
-            type: 'bar',
+          },
+          {
+            name: "报警数",
+            type: "bar",
             barWidth: 10,
             itemStyle: {
-                normal: {
-                    barBorderRadius: 5,
-                    color: new echarts.graphic.LinearGradient(
-                        0, 0, 0, 1,
-                        [
-                            {offset: 0, color: '#14c8d4'},
-                            {offset: 1, color: '#43eec6'}
-                        ]
-                    )
-                }
+              normal: {
+                barBorderRadius: 5,
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "#14c8d4" },
+                  { offset: 1, color: "#43eec6" }
+                ])
+              }
             },
             data: barData
-        }, {
-            name: '处理数',
-            type: 'bar',
-            barGap: '-100%',
+          },
+          {
+            name: "处理数",
+            type: "bar",
+            barGap: "-100%",
             barWidth: 10,
             itemStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(
-                        0, 0, 0, 1,
-                        [
-                            {offset: 0, color: 'rgba(20,200,212,0.5)'},
-                            {offset: 0.2, color: 'rgba(20,200,212,0.2)'},
-                            {offset: 1, color: 'rgba(20,200,212,0)'}
-                        ]
-                    )
-                }
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: "rgba(20,200,212,0.5)" },
+                  { offset: 0.2, color: "rgba(20,200,212,0.2)" },
+                  { offset: 1, color: "rgba(20,200,212,0)" }
+                ])
+              }
             },
             z: -12,
             data: lineData
-        }, {
-            name: 'dotted',
-            type: 'pictorialBar',
-            symbol: 'rect',
+          },
+          {
+            name: "dotted",
+            type: "pictorialBar",
+            symbol: "rect",
             itemStyle: {
-                normal: {
-                    color: '#0f375f'
-                }
+              normal: {
+                color: "#0f375f"
+              }
             },
             symbolRepeat: true,
             symbolSize: [12, 4],
             symbolMargin: 1,
             z: -10,
             data: lineData
-        }]
-    };
-    myChart1.setOption(option1);
+          }
+        ]
+      };
+      myChart1.setOption(option1);
       window.addEventListener("resize", function() {
         myChart1.resize();
       });
-        // option1 && myChart1.setOption(option1);
+      // option1 && myChart1.setOption(option1);
     }
   }
 };
@@ -1720,17 +1813,17 @@ var d = [64,56,755,432,423,43,65,34,65,23,12,32,43,12,43,54,23,54,23]
       .top {
         height: calc(100% - 360px);
         width: 100%;
-                  .seamless-warp {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-          }
-          .cardList {
-            height: 80px;
-            width: 100%;
-            text-align: left;
-            /* background-color: rgb(204, 90, 90); */
-          }
+        .seamless-warp {
+          height: 100%;
+          width: 100%;
+          overflow: hidden;
+        }
+        .cardList {
+          height: 80px;
+          width: 100%;
+          text-align: left;
+          /* background-color: rgb(204, 90, 90); */
+        }
       }
       #bottom {
         margin-top: 100px;
