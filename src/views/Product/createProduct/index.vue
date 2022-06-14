@@ -284,7 +284,7 @@
 <script>
 // 同步注册，云平台注册产品等于电信云注册设备
 import { CreateProduct, cloudDevcieRegister, CreateDevice } from "@/api/index";
-import { RegisterUser, EditUser } from "@/api/admin";
+import { RegisterUser, EditUser, } from "@/api/admin";
 import qs from 'qs';
 export default {
   data() {
@@ -456,7 +456,7 @@ export default {
                       // console.log(register)
                       // console.log(stringify(register))
                       // console.log(qs.stringify(register))
-                      //修改用户信息
+                      //修改用户信息， 将同名的手环的pk放在用户信息里
                       var adminToken = window.sessionStorage.getItem(
                         "adminToken"
                       );
@@ -477,6 +477,7 @@ export default {
                               //  productType: this.ruleForm.protocolType,
                             extraInfo: {
                               description: this.ruleForm.description,
+                              productKey: this.productKey,
                               // age: this.ruleForm.extraInfo.age,
                               // gender: this.ruleForm.extraInfo.gender,
                               // allergy: this.ruleForm.extraInfo.allergy,
