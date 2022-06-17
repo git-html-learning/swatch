@@ -996,13 +996,6 @@ textStyle: {
         toolbox: {
           show: true,
           feature: {
-            // dataZoom: {
-            //   yAxisIndex: "none"
-            // },
-            // dataView: { readOnly: false },
-            // magicType: { type: ["line", "bar"] },
-            // restore: {},
-            // saveAsImage: {}
           }
         },
 
@@ -1056,16 +1049,6 @@ textStyle: {
                  }  
         },
         series:
-          // {
-          //   name: 'Highest',
-          //   type: 'line',
-          //   data: [10, 11, 13, 11, 12, 12, 9]
-          // },
-          // {
-          //   name: 'Lowest',
-          //   type: 'line',
-          //   data: [1, -2, 2, 5, 3, 2, 0]
-          // }
           this.wenduList
       };
 

@@ -203,7 +203,7 @@ export default {
       date: "",
       visible: true,
       multipleSelection: [],
-      input: ""
+      input: "",
     };
   },
   computed: {

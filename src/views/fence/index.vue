@@ -119,8 +119,8 @@ export default {
   data() {
     return {
       pointsStrArr: [],
-      center: { lng: 117.1863981, lat: 31.7696726 }, // 中心点坐标
-      zoom: 11, // 缩放级别
+      center: { lng: 117.932682, lat: 31.194548 }, // 中心点坐标
+      zoom: 7, // 缩放级别
 
       keyword: "",
       radioSelect: "none",
@@ -174,6 +174,7 @@ export default {
       this.productList1 = JSON.parse(
         window.localStorage.getItem("productList1")
       );
+      console.log(this.productList1)
   },
   watch: {
     // 绘制类型变更
@@ -369,16 +370,16 @@ export default {
       console.log(overlays.length)
       var num = [];
       console.log(this.productList1)
-    //   if(this.productList1.length!==0||this.productList1.length!==null) {
-    //  this.productList1.forEach(item=>{
-    //     if(item.latestData.location !=="") {
-    //       num.push(item)
-    //     }
-    //   })
-    //   }
+      if(this.productList1.length!==0||this.productList1!==null) {
+     this.productList1.forEach(item=>{
+        if(item.latestData.location !=="-") {
+          num.push(item)
+        }
+      })
+      }
  
       console.log(num.length)
-      this.fenceList = overlays.slice(num.length,3);
+      this.fenceList = overlays.slice(num.length,overlays.length);
       console.log(this.fenceList);
       console.log(this.fenceList.length);
       this.input = new Array(this.fenceList.length).fill("");
@@ -546,14 +547,14 @@ export default {
         seconds;
     },
     changeFence(value) {
-      console.log(value);
+      // console.log(value);
       this.localPoint = value;
             var polArry = [];
       this.localPoint.forEach(item => {
         var p = new BMap.Point(item.lng, item.lat);
         polArry.push(p);
       });
-      console.log(polArry);
+      // console.log(polArry);
       var polygon = new BMap.Polygon(polArry, this.styleOptions);
       this.map.clearOverlays(); //清除地图覆盖物
       this.addPiont();
@@ -565,20 +566,140 @@ export default {
     //绘制手环的坐标的函数
     addPiont() {
     
-      this.productList1.forEach(item => {
-      
-        if (item.latestData.location !== "") {
+      this.productList1.forEach((item,index) => {
+      // console.log(item.latestData.location)
+        if (item.latestData.location !== "-") {
+          // console.log(item.latestData.location)
+          var markerArr = {
+            point: item.latestData.location.location,
+            address: item.latestData.location.desc,
+            title: item.productName,
+            status: item.extraInfo.status
+          }
                    var marker = item.latestData.location.location;
                var array=marker.split(",");
 
 
-          this.marker1 = new BMap.Marker(
-            new BMap.Point(array[0], array[1])
+          // this.marker1 = new BMap.Marker(
+          //   new BMap.Point(array[0], array[1])
+          // );
+          // this.map.addOverlay(this.marker1);
+          this.marker1 = this.addMarker(
+            new window.BMap.Point(array[0], array[1]),
+            markerArr
           );
-          this.map.addOverlay(this.marker1);
+          this.addInfoWindow(this.marker1, markerArr,index)
         }
       });
-    }
+    },
+    addMarker(point,i) {
+      // console.log(i)
+      if (i.status== "离线") {
+             var myIcon = new BMap.Icon(
+          require("@/assets/img/定位红.png"),
+          new BMap.Size(50,50)
+        );
+      }
+           if (i.status == "在线") {
+        var myIcon = new BMap.Icon(
+          require("@/assets/img/定位绿.png"),
+          new BMap.Size(50,50)
+        );
+      }
+          var marker = new BMap.Marker(point, {
+        icon: myIcon
+      });
+            var labelopts = {
+        position: point, // 指定文本标注所在的地理位置
+        offset: new BMap.Size(-30, -30) // 设置文本偏移量
+      };
+      var label = new BMap.Label(i.title, labelopts);
+      label.setStyle({
+        color: "#181b40",
+        fontSize: "14px",
+        backgroundColor: "0.05",
+        backgroundColor: "rgba(255,255,255,0.7)",
+        border: "0",
+        fontWeight: "bold"
+      });
+      this.map.addOverlay(marker);
+      // this.map.addOverlay(label);
+      return marker;
+    },
+        // 添加信息窗口
+    addInfoWindow(marker, poi) {
+      //pop弹窗标题
+      // console.log(poi)
+      var title =
+        '<div style="font-weight:bold;color:#CE5521;font-size:18px；background:transparent !important;">' +
+        "手环信息" +
+        "</div>";
+      //pop弹窗信息
+      var html = [];
+      // html.push(
+      //   '<div style="font-weight:bold;color:#CE5521;font-size:12px； margin-top: 40px;">' +
+      //     poi.title +
+      //     "</div>"
+      // );
+
+      html.push(
+        '<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif; margin-top: 10px;background:transparent !important;"><tbody>'
+      );
+      html.push("<tr style = 'height: 25px;'>");
+      html.push(
+        '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">状态:</td>'
+      );
+      html.push(
+        '<td style="vertical-align:top;line-height:18px;">' +
+          poi.status +
+          " </td>"
+      );
+      html.push("</tr>");
+      html.push("<tr style = 'height: 25px;'>");
+      html.push(
+        '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">名称:</td>'
+      );
+      html.push(
+        '<td style="vertical-align:top;line-height:18px;">' +
+          poi.title +
+          " </td>"
+      );
+      html.push("</tr>");
+      html.push("<tr style = 'height: 25px;'>");
+      html.push(
+        '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">坐标:</td>'
+      );
+      html.push(
+        '<td style="vertical-align:top;line-height:18px;">' +
+          "(" +
+          poi.point +
+          ")" +
+          " </td>"
+      );
+      html.push("</tr>");
+      html.push("<tr style = 'height: 25px;'>");
+      html.push(
+        '<td style="vertical-align:top;line-height:16px;width:38px;white-space:nowrap;word-break:keep-all">地址:</td>'
+      );
+      html.push(
+        '<td style="vertical-align:top;line-height:18px;">' +
+          poi.address +
+          " </td>"
+      );
+      html.push("</tr>");
+      html.push("</tbody></table>");
+      var infoWindow = new BMap.InfoWindow(html.join(""), {
+        title: title,
+        width: 200
+      });
+
+      var openInfoWinFun = function() {
+        marker.openInfoWindow(infoWindow);
+      };
+
+      marker.addEventListener("click", openInfoWinFun);
+      return openInfoWinFun;
+    },
   }
 };
 </script>

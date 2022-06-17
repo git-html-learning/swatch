@@ -37,7 +37,7 @@ export default {
       marker1: null,
       fenceList: [],
       alertContent: "",
-      date: "",
+      date: ""
     };
   },
   mounted() {
@@ -136,25 +136,14 @@ export default {
     },
     deviceData() {
       // console.log('1')
-      this.outAlert = [];
-      var username = window.sessionStorage.getItem("username")
-      UserDetail(username).then(res => {
-        console.log(res)
-        this.fenceList = res.data.extraInfo.fence;
-        var fenceData = res.data;
-        window.sessionStorage.setItem(
-          "fenceList",
-          JSON.stringify(this.fenceList)
-        );
-        window.sessionStorage.setItem("fenceData", JSON.stringify(fenceData));
-      });
+
       allProductKey().then(res => {
         if (res.msg == "ok") {
           console.log(res);
-     
+          this.outAlert = [];
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
-           var username = window.sessionStorage.getItem("username")
+          var username = window.sessionStorage.getItem("username");
           getDeviceDatas({
             username: username,
             pkList: this.productNameList,
@@ -163,7 +152,11 @@ export default {
             console.log(res);
 
             this.productList1 = res.data;
-console.log(this.productList1)
+            console.log(this.productList1);
+            console.log(this.productList1.deviceName);
+            // if (this.productList1.deviceName == undefined) {
+            //   this.productList1.extraInfo.status = "未激活"
+            // }
             this.productList1.forEach(item => {
               item.deviceName = [];
               item.latestData = {};
@@ -171,18 +164,64 @@ console.log(this.productList1)
                 for (var i = 0; i < item.deviceData.length; i++) {
                   item.deviceName.push(item.deviceData[i].deviceName);
                 }
+                // console.log(item.extraInfo.fence)
                 if (item.extraInfo.fence !== "-") {
-                  for (var i = 0; i < this.fenceList.length; i++) {
-                    if (
-                      item.extraInfo.fence == this.fenceList[i].fence.fenceName
-                    ) {
-                      item.latestData.fence = this.fenceList[i].fence.data;
+                  var username = window.sessionStorage.getItem("username");
+                  UserDetail(username).then(res => {
+                    // console.log(res)
+                    this.fenceList = res.data.extraInfo.fence;
+                    // console.log(this.fenceList)
+                    for (var i = 0; i < this.fenceList.length; i++) {
+                      if (
+                        item.extraInfo.fence ==
+                        this.fenceList[i].fence.fenceName
+                      ) {
+                        // console.log(this.fenceList[i].fence.fenceName)
+                        item.latestData.fence = this.fenceList[i].fence.data;
+                        // console.log(item.latestData.fence)
+                        var polArry = [];
+                        item.latestData.fence.forEach(item1 => {
+                          var p = new BMap.Point(item1.lng, item1.lat);
+                          polArry.push(p);
+                        });
+                        var polygon = new BMap.Polygon(polArry);
+                        // console.log(polygon)
+                        // console.log(this.marker1)
+                        if (item.deviceName.includes("A4")) {
+                          item.latestData.location =
+                            item.deviceData[
+                              item.deviceName.indexOf("A4")
+                            ].extraInfo;
+                          // console.log(item.latestData.location)
+                          var marker = item.latestData.location.location;
+                          var array = marker.split(",");
+                          this.marker1 = new BMap.Point(array[0], array[1]);
+
+                          // console.log(this.marker1)
+                          if (
+                            BMapLib.GeoUtils.isPointInPolygon(
+                              this.marker1,
+                              polygon
+                            )
+                          ) {
+                            console.log("目前在电子围栏");
+                          } else {
+                            console.log("目前不在电子围栏内");
+                            this.outAlert.push(item);
+                            this.alertContent = "";
+                            this.alertContent += item.productName + " ";
+                            this.alertContent += "不在其对应的电子围栏内";
+                            alert(this.alertContent);
+                          }
+                        }
+                      }
                     }
-                  }
+                  });
                 } else {
                   item.latestData.fence = "-";
                 }
-                console.log(item);
+                // console.log(item.latestData.fence)
+                // console.log(item);
                 if (item.deviceName.includes("BA")) {
                   item.latestData.body =
                     item.deviceData[
@@ -192,6 +231,9 @@ console.log(this.productList1)
                     item.deviceData[
                       item.deviceName.indexOf("BA")
                     ].extraInfo.skin;
+                } else {
+                  item.latestData.body = "-";
+                  item.latestData.skin = "-";
                 }
                 if (item.deviceName.includes("C2")) {
                   item.latestData.heartRate =
@@ -206,6 +248,10 @@ console.log(this.productList1)
                     item.deviceData[
                       item.deviceName.indexOf("C2")
                     ].extraInfo.BPLow;
+                } else {
+                  item.latestData.heartRate = "-";
+                  item.latestData.bpHigh = "-";
+                  item.latestData.bpLow = "-";
                 }
                 if (item.deviceName.includes("F6")) {
                   item.latestData.stepNum =
@@ -216,10 +262,28 @@ console.log(this.productList1)
                     item.deviceData[
                       item.deviceName.indexOf("F6")
                     ].extraInfo.timeStamp;
+                   var date1 = Math.round(new Date().getTime() / 1000);
+                  //  console.log(date1 - item.latestData.heart )
+                   if(date1 - item.latestData.heart <7200) {
+                    //  console.log("在线")
+                     item.extraInfo.status = "在线"
+                   } else {
+                     item.extraInfo.status ="离线"
+                    //  console.log("离线")
+                   }
+                } else {
+                  item.latestData.stepNum = "-";
+                  item.latestData.heart = "-";
+                   item.extraInfo.status ="离线"
                 }
                 if (item.deviceName.includes("A4")) {
                   item.latestData.location =
                     item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
+                  var marker = item.latestData.location.location;
+                  var array = marker.split(",");
+                  this.marker1 = new BMap.Point(array[0], array[1]);
+                } else {
+                  item.latestData.location = "-";
                 }
               } else {
                 item.latestData = {
@@ -229,47 +293,28 @@ console.log(this.productList1)
                   bpHigh: "-",
                   bpLow: "-",
                   stepNum: "-",
-                  location: "",
+                  location: "-",
                   heart: "-",
-                  fence: "-"
+                  fence: "-",
                 };
               }
 
               // console.log(item.deviceData.length)
             });
+
             console.log(this.productList1);
             this.productList1.forEach(item => {
               if (item.latestData.location !== "") {
-                var marker = item.latestData.location.location;
-                var array = marker.split(",");
-                this.marker1 = new BMap.Point(array[0], array[1]);
                 // 之前直接写 var polygon = new BMap.Polygon(item.latestData),返回的
                 // 全部是不在围栏内
                 //所以以下的数据处理是很是重要的
-                var polArry = [];
-                item.latestData.fence.forEach(item1 => {
-                  var p = new BMap.Point(item1.lng, item1.lat);
-                  polArry.push(p);
-                });
-                var polygon = new BMap.Polygon(polArry);
-                // console.log(polygon)
-                // console.log(this.marker1)
-                if (BMapLib.GeoUtils.isPointInPolygon(this.marker1, polygon)) {
-                  console.log("目前在电子围栏");
-                } else {
-                  console.log("目前不在电子围栏内");
-                  this.outAlert.push(item);
-                }
+                // console.log(item.latestData.fence);
+                // if (item.latestData.fence !== "-") {
+                // }
               }
             });
-            this.alertContent = "";
-            if (this.outAlert.length !== 0) {
-              for (var i = 0; i < this.outAlert.length; i++) {
-                this.alertContent += this.outAlert[i].productName + " ";
-              }
-              this.alertContent += "不在其对应的电子围栏内";
-              alert(this.alertContent);
-            }
+
+            console.log(this.productList1);
             window.localStorage.setItem(
               "productList1",
               JSON.stringify(this.productList1)
@@ -290,6 +335,7 @@ console.log(this.productList1)
                 // console.log(this.date - this.productList1[i].latestData.heart);
                 if (this.date - this.productList1[i].latestData.heart <= 7200) {
                   // console.log("wer")
+                  this.productList1[i].extraInfo.status == "在线"
                   if (this.productList1[i].latestData.body !== "-") {
                     if (
                       this.productList1[i].latestData.body > 37 ||
@@ -307,7 +353,11 @@ console.log(this.productList1)
                       obj.alertData.push({ alert: "心率报警" });
                     }
                   }
+                } else {
+                  this.productList1[i].extraInfo.status == "离线"
                 }
+              } else {
+                this.productList1[i].extraInfo.status = "未激活"
               }
               this.alertMessage.push(obj);
             }

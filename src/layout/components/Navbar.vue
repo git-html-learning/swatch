@@ -30,9 +30,11 @@
             </el-col>
             <el-col :span="18" class="row" style="cursor: pointer;">
               <el-dropdown trigger="hover">
-                <!-- <svg-icon icon-class="用户" style="font-size: 15px" /> -->
-                <i class="el-icon-user"></i>
+                <div>
+                     <i class="el-icon-user"></i>
                 {{ name }}
+                </div>
+             
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item @click.native="userCenter">
                     <span class="el-icon-user">个人中心</span>

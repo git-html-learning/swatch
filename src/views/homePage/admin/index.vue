@@ -176,9 +176,11 @@
                       :span="6"
                       style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
                     >
-                      <span style="font-size: 15px; height: 25px; line-height: 25px;">全部用户</span>
-                      <br />
-                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{allUser}}</span>
+                      <span style="font-size: 18px; height: 50px; line-height: 50px;">全部用户</span>
+                      <!-- <br /> -->
+                      <span
+                        style="font-size: 21px; height: 50px; line-height: 50px; margin-left: 20px;"
+                      >{{allUser}}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -220,9 +222,11 @@
                       :span="6"
                       style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
                     >
-                      <span style="font-size: 15px; height: 25px; line-height: 25px;">在线用户</span>
-                      <br />
-                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{allUser}}</span>
+                      <span style="font-size: 18px; height: 50px; line-height: 50px;">在线用户</span>
+                      <!-- <br /> -->
+                      <span
+                        style="font-size: 21px; height: 50px; line-height: 50px; margin-left: 20px;"
+                      >{{onlineNum}}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -264,9 +268,11 @@
                       :span="6"
                       style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
                     >
-                      <span style="font-size: 15px; height: 25px; line-height: 25px;">小组数</span>
-                      <br />
-                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{groupNum}}</span>
+                      <span style="font-size: 18px; height: 50px; line-height: 50px;">小组数</span>
+                      <!-- <br /> -->
+                      <span
+                        style="font-size: 21px; height: 50px; line-height: 50px; margin-left: 20px;"
+                      >{{groupNum}}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -303,9 +309,11 @@
                       :span="6"
                       style="width: 220px;background-color: #001468; text-align: center; border-radius: 0px 20px 20px 00px;"
                     >
-                      <span style="font-size: 15px; height: 25px; line-height: 25px;">电子围栏</span>
-                      <br />
-                      <span style="font-size: 16px; height: 25px; line-height: 25px;">{{fenceNum}}</span>
+                      <span style="font-size: 18px; height: 50px; line-height:50px;">电子围栏</span>
+                      <!-- <br /> -->
+                      <span
+                        style="font-size: 21px; height: 50px; line-height: 50px; margin-left: 20px;"
+                      >{{fenceNum}}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -343,6 +351,63 @@
                 </div>
               </vue-seamless-scroll>
             </div>
+            <div v-if="!alertShow" style="text-align: center;">
+              <svg
+                style="margin-top: 100px;"
+                t="1655342118838"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="3619"
+                width="120"
+                height="120"
+              >
+                <path
+                  d="M1022.976 558.976a463.808 463.808 0 0 1-463.872 463.872H464.896A463.808 463.808 0 0 1 1.024 558.976V464.96A463.872 463.872 0 0 1 464.896 1.088h94.208a463.936 463.936 0 0 1 463.872 463.872v94.016z"
+                  fill="#42BAA8"
+                  p-id="3620"
+                />
+                <path d="M628.096 176H256v661.824h512V315.328z" fill="#FCFCFD" p-id="3621" />
+                <path d="M628.096 315.328H768L628.096 176z" fill="#F1F3F7" p-id="3622" />
+                <path
+                  d="M419.072 446.528H316.416V343.808h102.656v102.72z m-84.096-18.56h65.6V362.368H334.976v65.6z"
+                  fill="#42BAA8"
+                  p-id="3623"
+                />
+                <path
+                  d="M461.504 351.936h246.144v24.384H461.504zM461.504 414.016h180.48v24.384h-180.48z"
+                  fill="#42BAA8"
+                  p-id="3624"
+                />
+                <path
+                  d="M419.072 615.424H316.416V512.704h102.656v102.72z m-84.096-18.496h65.6V531.328H334.976v65.6z"
+                  fill="#42BAA8"
+                  p-id="3625"
+                />
+                <path
+                  d="M461.504 520.832h246.144v24.384H461.504zM461.504 582.848h180.48v24.448h-180.48z"
+                  fill="#42BAA8"
+                  p-id="3626"
+                />
+                <path
+                  d="M419.072 784.448H316.416v-102.656h102.656v102.656z m-84.096-18.624h65.6V700.16H334.976v65.664z"
+                  fill="#42BAA8"
+                  p-id="3627"
+                />
+                <path
+                  d="M461.504 689.28h246.144v24.384H461.504zM461.504 751.296h180.48v24.384h-180.48z"
+                  fill="#42BAA8"
+                  p-id="3628"
+                />
+                <path
+                  d="M339.008 379.776l30.208 42.368 66.176-74.88-66.816 57.472z"
+                  fill="#F0582F"
+                  p-id="3629"
+                />
+              </svg>
+              <p style="color: #31baa8">今日暂无报警</p>
+            </div>
           </div>
         </el-col>
         <el-col :span="12" class="map">
@@ -376,45 +441,147 @@
                 <img src="@/assets/img/icon06.png" alt style="margin-top:10px;" />
                 数据统计
               </div>
-              <vue-seamless-scroll :data="productList" class="seamless-warp">
-                <div
-                  class="cardList"
-                  style="color: #fff; "
-                  v-for="(item,index) in productList"
-                  :key="index"
-                >
-                  <p
-                    style="color: #e29755; font-size: 18px;line-height: 30px; margin-left: 20px; height: 20px;"
-                  >
-                    {{index+1}}、
-                    {{item.productName}}
-                  </p>
-                  <table border="1" cellspacing="0" style="margin-left: 10px; margin-top:0px;">
-                    <tr
-                      style="height: 20px; line-height: 20px; background-color:#010d50; border: 1px solid #19308e"
+              <svg
+                style="float: right; margin-right: 15px; height: 40px;"
+                v-if="!inputShow"
+                @click="startSearch"
+                t="1655345322360"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="2143"
+                width="20"
+                height="20"
+              >
+                <path
+                  d="M912.072815 946.738335c-4.78498 0-9.56996-1.824555-13.220093-5.475711L650.662083 693.076078c-0.285502-0.285502-0.561795-0.579191-0.827855-0.883113l-6.979972-7.948019c-6.671956-7.594979-6.096858-19.11843 1.297552-26.012444 32.130791-29.958312 57.424874-65.413825 75.181283-105.379049 18.374486-41.35692 27.691689-85.472674 27.691689-131.122363 0-86.355787-33.628912-167.542854-94.691639-228.604558-61.062727-61.062727-142.249795-94.691639-228.604558-94.691639s-167.541831 33.628912-228.604558 94.691639c-61.062727 61.062727-94.691639 142.249795-94.691639 228.604558s33.628912 167.542854 94.691639 228.604558c61.062727 61.062727 142.249795 94.691639 228.604558 94.691639 26.15059 0 52.16508-3.130294 77.326133-9.301853 5.090948-1.353834 73.4038-19.189038 120.842229-14.809287 10.282181 0.948605 17.847483 10.05296 16.899902 20.335141s-10.047844 17.853623-20.335141 16.899902c-41.659819-3.845585-107.272165 13.571087-107.930151 13.747095-0.125867 0.033769-0.251733 0.065492-0.3776 0.097214-28.132734 6.91755-57.20998 10.425444-86.425372 10.425444-48.684816 0-95.922676-9.538237-140.402727-28.352745-42.953278-18.166755-81.523735-44.172035-114.644063-77.290317-33.119305-33.119305-59.123562-71.691809-77.29134-114.644063-18.813484-44.479027-28.352745-91.716888-28.352745-140.401704s9.53926-95.922676 28.352745-140.402727c18.167778-42.953278 44.172035-81.524758 77.29134-114.644063 33.119305-33.119305 71.690786-59.123562 114.644063-77.29134 44.480051-18.813484 91.717911-28.352745 140.402727-28.352745s95.922676 9.53926 140.401704 28.352745c42.953278 18.167778 81.524758 44.173059 114.644063 77.29134 33.118282 33.119305 59.123562 71.690786 77.29134 114.644063 18.813484 44.480051 28.351722 91.717911 28.351722 140.402727 0 50.912553-10.399861 100.136651-30.91101 146.305157-17.285688 38.906102-40.96704 73.973782-70.526263 104.47547l242.313791 242.310721c7.302313 7.30129 7.302313 19.138896 0.001023 26.440186C921.642774 944.912757 916.857794 946.738335 912.072815 946.738335z"
+                  p-id="2144"
+                  fill="#e6e6e6"
+                />
+                <path
+                  d="M165.576059 421.887656c-0.696872 0-1.400906-0.038886-2.110057-0.118704-10.260691-1.152243-17.645892-10.404977-16.493649-20.666692 4.838192-43.080168 17.974373-83.934644 39.046295-121.429607 5.058203-9.002025 16.457834-12.19781 25.458835-7.139607 9.002025 5.058203 12.19781 16.45681 7.139607 25.458835-18.605753 33.108049-30.207999 69.202105-34.484396 107.282399C183.060269 414.827867 174.967964 421.887656 165.576059 421.887656z"
+                  p-id="2145"
+                  fill="#e6e6e6"
+                />
+              </svg>
+              <input
+                v-if="inputShow"
+                @input="inputChange"
+                class="input"
+                v-model="productSearch"
+                placeholder="请输入手环名搜索"
+              />
+              <svg
+                v-if="inputShow"
+                @click="change"
+                style="margin-top: 2px; margin-left: 10px;"
+                t="1655345531987"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="2622"
+                width="20"
+                height="20"
+              >
+                <path
+                  d="M512 0C230.4 0 0 230.4 0 512c0 281.6 230.4 512 512 512 281.6 0 512-230.4 512-512C1024 230.4 793.6 0 512 0zM512 985.6c-262.4 0-473.6-211.2-473.6-473.6 0-262.4 211.2-473.6 473.6-473.6 262.4 0 473.6 211.2 473.6 473.6C985.6 774.4 774.4 985.6 512 985.6zM768 256c-6.4-6.4-19.2-6.4-25.6 0L512 486.4 288 256C281.6 249.6 268.8 249.6 256 256 249.6 268.8 249.6 281.6 256 288L486.4 512 256 736c-6.4 6.4-6.4 19.2 0 25.6 6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4L512 537.6l224 224c6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4 6.4-6.4 6.4-19.2 0-25.6L537.6 512 768 288C774.4 281.6 774.4 268.8 768 256z"
+                  p-id="2623"
+                  fill="#8a8a8a"
+                />
+              </svg>
+              <el-table
+                :data="data"
+                class="productList"
+                height="85%"
+                :header-cell-style="{ color: '#a38972', background: '#001066',borderBottom:'1px solid #131b52' }"
+                :cell-style="{ color: '#fff', background: '#00093e',borderBottom:'1px solid #131b52'}"
+              >
+                <el-table-column label="手环名" align="center" prop="productName">
+                  <template slot="header" slot-scope="scope">
+                    <div v-show="show">
+                      <el-row type="flex" justify="center">
+                        <el-col :span="20">手环名</el-col>
+                        <el-col :span="4">
+                          <svg
+                            t="1655362848055"
+                            @click="startSelect"
+                            class="icon"
+                            viewBox="0 0 1024 1024"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            p-id="4588"
+                            width="20"
+                            height="20"
+                          >
+                            <path
+                              d="M1024 789.333333v-554.666666A64 64 0 0 0 960 170.666667h-896A64 64 0 0 0 0 234.666667v554.666666A64 64 0 0 0 64 853.333333h896a64 64 0 0 0 64-64z m-85.333333-21.333333H85.333333V256h853.333334v512z"
+                              p-id="4589"
+                              fill="#8a8a8a"
+                            />
+                            <path
+                              d="M762.282667 590.421333a21.12 21.12 0 0 1-31.232 0l-78.08-83.285333a49.365333 49.365333 0 0 1 0-66.645333 42.24 42.24 0 0 1 62.464 0l31.232 33.28 31.232-33.28a42.24 42.24 0 0 1 62.506666 0c17.237333 18.346667 17.237333 48.213333 0 66.645333l-78.08 83.285333z"
+                              p-id="4590"
+                              fill="#8a8a8a"
+                            />
+                          </svg>
+                          <!-- <svg @click="show = !show" t="1655347950735" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3632" width="20" height="20"><path d="M775.768 778.112H287.84a38.576 38.576 0 0 1-38.712-38.68v-487.92a38.6 38.6 0 0 1 38.712-38.72h487.92a38.608 38.608 0 0 1 38.704 38.72v487.912a38.608 38.608 0 0 1-38.696 38.688z m-485.568-41.08h483.184V253.864H290.2v483.168z" p-id="3633" fill="#8a8a8a"></path><path d="M650.024 383.936L490.784 543.176a15.52 15.52 0 0 1-22.04 0l-55.192-55.184a23.376 23.376 0 0 0-33.144 0 23.36 23.36 0 0 0 0 33.152l66.312 66.32 22.024 22.04a15.496 15.496 0 0 0 22.04 0L683.2 417.104a23.376 23.376 0 0 0 0-33.168 23.384 23.384 0 0 0-33.176 0z" p-id="3634" fill="#8a8a8a"></path></svg> -->
+                          <!-- <i class="el-icon-search" @click="show = !show"></i> -->
+                        </el-col>
+                      </el-row>
+                    </div>
+                    <div v-show="!show">
+                      <select
+                        class="select"
+                        v-model="whichGroup"
+                        placeholder="请选择组"
+                        @change="grouping"
+                      >
+                        <option
+                          v-for="item in groups"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></option>
+                      </select>
+                    </div>
+                  </template>
+                </el-table-column>
+                <el-table-column label="体温" align="center" prop="latestData.body"></el-table-column>
+                <el-table-column label="心率" align="center" prop="latestData.heartRate"></el-table-column>
+                <el-table-column label="详情" align="center">
+                  <template slot-scope="scope">
+                    <svg
+                      @click="detailproduct(scope.row)"
+                      t="1655367341406"
+                      class="icon"
+                      viewBox="0 0 1024 1024"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      p-id="5707"
+                      width="20"
+                      height="20"
                     >
-                      <td
-                        style="font-size: 15px; padding: 5px 20px; width: 10%; text-align: center; color: #9d9fa5"
-                      >温度</td>
-                      <td
-                        style="font-size: 15px; padding: 5px 20px; width: 16%; text-align: center;background-color:#00093c; color: #9d9fa5"
-                      >{{item.latestData.body}}</td>
-                      <td
-                        style="font-size: 15px;padding: 5px 20px; width: 10%; text-align: center;color: #9d9fa5"
-                      >心率</td>
-                      <td
-                        style="font-size: 15px;padding: 5px 20px; width: 16%; text-align: center; background-color:#00093c;color: #9d9fa5"
-                      >{{item.latestData.heartRate}}</td>
-                      <td
-                        style="font-size: 15px; padding: 5px 20px; width: 10%; text-align: center; color: #9d9fa5"
-                      >步数</td>
-                      <td
-                        style="font-size: 15px; padding: 5px 20px; width: 16%; text-align: center; background-color:#00093c;color: #9d9fa5"
-                      >{{item.latestData.stepNum}}</td>
-                    </tr>
-                  </table>
-                </div>
-              </vue-seamless-scroll>
+                      <path
+                        d="M747.7 288.2c0-17.6-14.4-32.1-32.1-32.1H306.4c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h409.2c17.7 0 32.1-14.5 32.1-32.1zM306.4 448c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h191.1c17.7 0 32.2-14.4 32.1-32.1 0-17.6-14.4-32.1-32.1-32.1H306.4zM766.6 776.8c-2.1-2.1-4.4-3.9-6.9-5.2 18.1-25.8 28.7-57.1 28.7-90.9 0-88.2-72.4-159.6-161.7-159.6S465 592.5 465 680.7s72.4 159.6 161.7 159.6c32.7 0 63.2-9.6 88.7-26.1 1.5 2.9 3.4 5.6 5.8 8l83.3 83.3c12.5 12.5 32.9 12.5 45.4 0s12.5-32.9 0-45.4l-83.3-83.3z m-139.9 0.6c-54.1 0-98-43.3-98-96.7s43.9-96.7 98-96.7 98 43.3 98 96.7c0 53.4-43.8 96.7-98 96.7z"
+                        fill="#00c4c1"
+                        p-id="5708"
+                      />
+                      <path
+                        d="M577.6 895.4H221.2c-35.2 0-64-28.8-64-64V192.8c0-35.2 28.8-64 64-64h547.3c35.2 0 64 28.8 64 64v318.4h0.3v0.1c0 17.7 14.4 32.1 32.2 32.1s32.2-14.4 32.2-32.1c0-1.2-0.1-2.3-0.2-3.5v-316c0-70.4-27.6-128-98-128H225c-70.4 0-128 57.6-128 128v639.8c0 70.4 57.6 128 128 128h352.2c17.8 0 32.2-14.4 32.2-32.1 0-17.6-14.2-31.9-31.8-32.1z"
+                        fill="#00c4c1"
+                        p-id="5709"
+                      />
+                      <path
+                        d="M832.7 639.3a32.2 32.1 0 1 0 64.4 0 32.2 32.1 0 1 0-64.4 0Z"
+                        fill="#00c4c1"
+                        p-id="5710"
+                      />
+                    </svg>
+                  </template>
+                </el-table-column>
+              </el-table>
             </div>
             <div class="top" v-if="!productShow">
               <div
@@ -446,7 +613,286 @@
                 <p style="color: #4e8e8f; font-size: 30px; ">当前手环为空</p>
               </div>
             </div>
-            <div id="bottom"></div>
+            <div id="bottom">
+              <div v-if="overallShow">
+                <h4 style="color: #00f6fe">
+                  <span style="font-size: 18px; margin-left: 30px;">{{whichProduct.productName}}</span>
+                  <span style="font-size: 16px; margin-left: 10px;">
+                    <el-tag
+                      effect="dark"
+                      size="mini"
+                      :type="
+                                  whichProduct.extraInfo.status == '在线'
+                                ? 'success'
+                                : whichProduct.extraInfo.status == '离线'?'danger':'info'
+                                "
+                      disable-transitions
+                    >{{whichProduct.extraInfo.status}}</el-tag>
+                  </span>
+                </h4>
+                <el-row>
+                  <el-col :span="7" :offset="1">
+                    <div class="card" style="cursor: pointer" @click="wenduDetails">
+                      <a
+                        style="color: #fff;font-size: 15px; line-height: 40px; cursor: pointer"
+                        class="title"
+                      >温度</a>
+                      <br />
+                      <span
+                        style="color:#00A8FE;font-size:18px;font-weight:600;line-height: 40px;"
+                      >{{whichProduct.latestData.body}}</span>
+                    </div>
+                  </el-col>
+                  <el-col :span="7" class="card">
+                    <div class="card" style="cursor: pointer" @click="xinlvDetails">
+                      <a style="color: #fff;font-size: 15px;line-height: 40px;cursor: pointer">心率</a>
+                      <br />
+                      <span
+                        style="color:#00A8FE;font-size:18px;font-weight:600;line-height: 40px;"
+                      >{{whichProduct.latestData.heartRate}}</span>
+                    </div>
+                  </el-col>
+                  <el-col :span="7">
+                    <div class="card" style="cursor: pointer" @click="locationDetails">
+                      <a style="color: #fff;font-size: 15px;line-height: 40px;cursor: pointer">位置</a>
+                      <br />
+                      <span
+                        style="color:#00A8FE;font-size:18px;font-weight:600;line-height: 40px;"
+                      >{{whichProduct.latestData.location.city}}</span>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row style="margin-top: 20px; margin-left: 20px;">
+                  <span style="color: #fff; font-size: 15px">电子围栏：</span>
+                  <span style="color: #00a6fb;font-size: 18px">{{whichProduct.extraInfo.fence}}</span>
+                </el-row>
+                <el-row style="margin-top: 20px; margin-left: 20px;">
+                  <span style="color: #fff; font-size: 15px">最新更新时间：</span>
+                  <span
+                    style="color: #00a6fb;font-size: 18px"
+                  >{{whichProduct.latestData.normalHeart}}</span>
+                </el-row>
+              </div>
+
+              <div v-if="wenduShow">
+                <div class = "title" @click="backToOverall" style = "cursor: pointer">
+                <svg
+                  
+                  style="margin-left: 30px;"
+                  t="1655382518530"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="9182"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
+                    fill="#3793DF"
+                    p-id="9183"
+                  />
+                  <path
+                    d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
+                    fill="#EB4AF4"
+                    p-id="9184"
+                  />
+                </svg>
+                <span style="color: #2770bb">温度（一天内）</span>
+                </div>
+                <div v-if="dataShow" id="body" v-loading="loading"></div>
+                <div v-if="!dataShow" style="text-align: center; margin-top: 30px">
+                  <svg
+                    t="1655384577348"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="11940"
+                    width="64"
+                    height="64"
+                  >
+                    <path
+                      d="M525.7 247.1h-68.3c-11 0-20-9-20-20s9-20 20-20h68.3c11 0 20 9 20 20s-9 20-20 20zM528.7 319.8h-68.3c-11 0-20-9-20-20s9-20 20-20h68.3c11 0 20 9 20 20s-9 20-20 20zM531.5 389.1h-68.3c-11 0-20-9-20-20s9-20 20-20h68.3c11 0 20 9 20 20s-9 20-20 20z"
+                      fill="#F13451"
+                      p-id="11941"
+                    />
+                    <path
+                      d="M503.9 960c-70.9 0-137.5-27.6-187.6-77.7-50.1-50.1-77.7-116.7-77.7-187.6 0-60.8 21.1-120.2 59.3-167.2 37.7-46.4 90.4-79 148.5-91.8l8.3 37.7c-102.9 22.7-177.5 115.8-177.5 221.3 0 125 101.7 226.7 226.7 226.7V960zM503.9 960v-38.7c125 0 226.7-101.7 226.7-226.7 0-100.3-64.4-187.4-160.1-216.8l11.3-37c53.1 16.3 100.9 49.9 134.4 94.5 34.7 46.2 53 101.2 53 159.2 0 70.9-27.6 137.5-77.7 187.6S574.8 960 503.9 960z"
+                      fill="#003D79"
+                      p-id="11942"
+                    />
+                    <path
+                      d="M610.6 478h-40V114.3H515v-40h55.6c22.1 0 40 17.9 40 40V478zM459.9 472.2h-40.8V115.1c0-22.7 18.1-41.2 40.4-41.2H515v40.8h-55c0 0.1-0.1 0.2-0.1 0.4v357.1z"
+                      fill="#003D79"
+                      p-id="11943"
+                    />
+                  </svg>
+                  <p style="color: #edaddb">近一天无温度数据</p>
+                </div>
+              </div>
+              <div v-if="xinlvShow">
+                <div class = "title" @click="backToOverall" style = "cursor: pointer" >
+                <svg
+                 
+                  style="margin-left: 30px;"
+                  t="1655382518530"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="9182"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
+                    fill="#3793DF"
+                    p-id="9183"
+                  />
+                  <path
+                    d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
+                    fill="#EB4AF4"
+                    p-id="9184"
+                  />
+                </svg>
+                <span style="color: #2770bb">心率（一天内）</span>
+                </div>
+                <div v-if="dataShow" id="body" v-loading="loading"></div>
+                <div v-if="!dataShow" style="text-align: center;margin-top: 30px">
+                  <svg
+                    t="1655384477758"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="10988"
+                    width="64"
+                    height="64"
+                  >
+                    <path
+                      d="M825.2 410.6c0-128.9-104.5-233.3-233.3-233.3-68.5 0-130.1 29.5-172.8 76.5-33.5-36.8-78.6-62.9-129.5-72.4v602.5l53.3 53.3c25.4 25.4 50.8 50.8 76.2 50.8 25.4 0 50.8-25.4 76.1-50.8L749 583.4h-0.4c47.1-42.7 76.6-104.3 76.6-172.8z"
+                      fill="#CB4932"
+                      p-id="10989"
+                    />
+                    <path
+                      d="M246.3 177.3C117.5 177.3 13 281.7 13 410.6c0 68.5 29.5 130.1 76.5 172.8h-0.4l200.5 200.5V181.4c-14-2.7-28.5-4.1-43.3-4.1z"
+                      fill="#D9D9D9"
+                      p-id="10990"
+                    />
+                    <path
+                      d="M771.5 559.5h-171c-9.7 0-18.6-5.2-23.4-13.6l-73.6-129.8-108.1 248.1c-3.5 8.1-10.8 13.9-19.4 15.6-1.7 0.3-3.5 0.5-5.2 0.5-6.9 0-13.6-2.6-18.7-7.5L214.7 540.1H52.2c10.6 15.9 23.2 30.5 37.3 43.3h-0.4L343 837.2c25.4 25.4 50.8 50.8 76.2 50.8 25.4 0 50.8-25.4 76.1-50.8l253.8-253.8h-0.4c8.2-7.4 15.8-15.4 22.8-23.9z"
+                      fill="#EA563B"
+                      p-id="10991"
+                    />
+                    <path
+                      d="M31.8 486.4h193.7c7 0 13.6 2.7 18.7 7.5l117.4 113.4 114.2-261.9c4.1-9.3 13.1-15.6 23.2-16.1 10.1-0.5 19.8 4.7 24.8 13.6l92.4 162.9H805c13-29.1 20.3-61.3 20.3-95.2 0-128.9-104.5-233.3-233.3-233.3-68.5 0-130.1 29.5-172.8 76.5-42.7-47-104.3-76.5-172.8-76.5C117.5 177.3 13 281.7 13 410.6c0 26.8 4.6 52.5 12.9 76.5 1.9-0.5 3.8-0.7 5.9-0.7z"
+                      fill="#EA563B"
+                      p-id="10992"
+                    />
+                    <path
+                      d="M1007.4 559H723.5c-2 0-3.6-1.6-3.6-3.6v-46.2c0-2 1.6-3.6 3.6-3.6h283.9c2 0 3.6 1.6 3.6 3.6v46.2c0 2-1.6 3.6-3.6 3.6z"
+                      fill="#CB4932"
+                      p-id="10993"
+                    />
+                  </svg>
+                  <p style="color: #edaddb">近一天无心率数据</p>
+                </div>
+              </div>
+              <div v-if="guijiShow">
+                <div class = "title" style = "cursor: pointer"     @click="backToOverall">
+                <svg
+              
+                  style="margin-left: 30px;"
+                  t="1655382518530"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="9182"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
+                    fill="#3793DF"
+                    p-id="9183"
+                  />
+                  <path
+                    d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
+                    fill="#EB4AF4"
+                    p-id="9184"
+                  />
+                </svg>
+                <span style="color: #2770bb">轨迹（两天内）</span>
+                </div>
+                             <el-row style="margin-top: 20px; margin-left: 20px;">
+                  <span style="color: #fff; font-size: 15px">具体位置：</span>
+                  <span style="color: #00a6fb;font-size: 18px">{{whichProduct.latestData.location.desc}}</span>
+                </el-row>
+                <div v-if="dataShow" v-loading="loading">
+                         <baidu-map
+          id="body1"
+          :center="center"
+          :zoom="12"
+          :scroll-wheel-zoom="true"
+          Animation="BMAP_ANIMATION_DROP"
+        >
+          <bm-polyline
+            :path="polylinePath"
+            stroke-color="red"
+            :stroke-opacity="1"
+            :stroke-weight="2"
+          ></bm-polyline>
+        </baidu-map>
+                </div>
+                <div v-if="!dataShow" style="text-align: center; margin-top: 30px;">
+                  <svg
+                    t="1655384362836"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="10042"
+                    width="64"
+                    height="64"
+                  >
+                    <path
+                      d="M709.485714 277.942857C709.485714 160.914286 614.4 65.828571 497.371429 65.828571S292.571429 160.914286 292.571429 277.942857c0 73.142857 204.8 358.4 204.8 358.4s212.114286-277.942857 212.114285-358.4z"
+                      fill="#F4B1B2"
+                      p-id="10043"
+                    />
+                    <path
+                      d="M497.371429 709.485714l-21.942858-29.257143c-36.571429-51.2-219.428571-307.2-219.428571-387.657142C256 160.914286 365.714286 51.2 497.371429 51.2s241.371429 109.714286 241.371428 241.371429c0 87.771429-182.857143 336.457143-226.742857 387.657142l-14.628571 29.257143z m0-607.085714C394.971429 102.4 307.2 182.857143 307.2 292.571429c0 43.885714 102.4 204.8 190.171429 321.828571C585.142857 497.371429 687.542857 336.457143 687.542857 292.571429c0-109.714286-87.771429-190.171429-190.171428-190.171429z"
+                      fill="#D72822"
+                      p-id="10044"
+                    />
+                    <path
+                      d="M928.914286 819.2H102.4C58.514286 819.2 14.628571 782.628571 14.628571 731.428571s36.571429-87.771429 87.771429-87.771428h138.971429c14.628571 0 29.257143 14.628571 29.257142 29.257143s-7.314286 29.257143-21.942857 29.257143h-146.285714c-14.628571 0-29.257143 14.628571-29.257143 29.257142s14.628571 29.257143 29.257143 29.257143h819.2c14.628571 0 29.257143 14.628571 29.257143 29.257143s-7.314286 29.257143-21.942857 29.257143z"
+                      fill="#D72822"
+                      p-id="10045"
+                    />
+                    <path
+                      d="M928.914286 936.228571H226.742857c-14.628571 0-29.257143-14.628571-29.257143-29.257142s14.628571-29.257143 29.257143-29.257143h694.857143c14.628571 0 29.257143-14.628571 29.257143-29.257143s-14.628571-29.257143-29.257143-29.257143H102.4c-14.628571 0-29.257143-14.628571-29.257143-29.257143s14.628571-29.257143 29.257143-29.257143h819.2c43.885714 0 87.771429 36.571429 87.771429 87.771429s-36.571429 87.771429-80.457143 87.771428z"
+                      fill="#D72822"
+                      p-id="10046"
+                    />
+                    <path
+                      d="M497.371429 263.314286m-80.457143 0a80.457143 80.457143 0 1 0 160.914285 0 80.457143 80.457143 0 1 0-160.914285 0Z"
+                      fill="#FDFBFB"
+                      p-id="10047"
+                    />
+                    <path
+                      d="M497.371429 365.714286C438.857143 365.714286 394.971429 321.828571 394.971429 263.314286S438.857143 160.914286 497.371429 160.914286s102.4 43.885714 102.4 102.4S555.885714 365.714286 497.371429 365.714286z m0-153.6c-29.257143 0-51.2 21.942857-51.2 51.2s21.942857 51.2 51.2 51.2 51.2-21.942857 51.2-51.2-21.942857-51.2-51.2-51.2z"
+                      fill="#D72822"
+                      p-id="10048"
+                    />
+                  </svg>
+                  <p style="color: #edaddb">近两天无轨迹数据</p>
+                </div>
+              </div>
+            </div>
           </div>
         </el-col>
       </el-row>
@@ -458,7 +904,7 @@
 <script>
 import * as echarts from "echarts";
 import "./js/china.js";
-import { alertbyTime, allProductKey, getDeviceDatas } from "@/api/index";
+import { alertbyTime, allProductKey, getDeviceDatas,historyData } from "@/api/index";
 import { UserDetail } from "@/api/admin";
 // import "./js/area_echarts.js";
 export default {
@@ -474,7 +920,31 @@ export default {
       productShow: false,
       allUser: 0,
       fenceNum: 0,
-      groupNum: 0
+      groupNum: 0,
+      productSearch: "",
+      inputShow: false,
+      whichGroup: "",
+      groups: [],
+      show: true,
+      data: null,
+      whichProduct: {},
+      onlineNum: 0,
+      overallShow: true,
+      wenduShow: false,
+      xinlvShow: false,
+      guijiShow: false,
+      whichDevice:"",
+      dataShow: false,
+      loading: true,
+      date1:[],
+      list:null,
+list1:[],
+ center: { lng: 117.192342, lat: 31.770919 }, // 中心点坐标
+             polylinePath: [
+        { lng: 116.404, lat: 39.915 },
+        { lng: 116.405, lat: 39.92 },
+        { lng: 116.423493, lat: 39.907445 }
+      ],
     };
   },
   created() {
@@ -498,6 +968,26 @@ export default {
         console.log(res);
         this.fenceNum = res.data.extraInfo.fence.length;
         this.groupNum = res.data.extraInfo.groups.length;
+        var groupsDetail = res.data.extraInfo.groups;
+        this.groups = [];
+        groupsDetail.forEach(item => {
+          var obj = {
+            label: item.name,
+            value: item.name
+          };
+          this.groups.push(obj);
+        });
+        var obj = {
+          label: "未分组",
+          value: "un"
+        };
+        this.groups.push(obj);
+        var obj = {
+          label: "全部",
+          value: "all"
+        };
+        this.groups.push(obj);
+        console.log(this.groups);
       });
       var startTime = Math.floor(
         new Date(new Date().setHours(0, 0, 0, 0)).getTime() / 1000
@@ -566,16 +1056,15 @@ export default {
           res.data.alertInfo.forEach(item => {
             this.alertInfo.push(item);
           });
-                        if (this.alertInfo.length !== 0) {
-          this.alertInfo.forEach(item => {
-            this.judge.forEach(item1 => {
-              if (item.productKey == item1.productKey) {
-                item.productName = item1.productName;
-              }
+          if (this.alertInfo.length !== 0) {
+            this.alertInfo.forEach(item => {
+              this.judge.forEach(item1 => {
+                if (item.productKey == item1.productKey) {
+                  item.productName = item1.productName;
+                }
+              });
             });
-          });
-        }
-
+          }
         } else {
           this.$message.error(res.msg);
         }
@@ -599,11 +1088,11 @@ export default {
             if (this.productList.length !== 0) {
               this.judge = [];
               this.productList.forEach(item => {
-                     var jud = {
-                productName: item.productName,
-                productKey: item.productKey
-              };
-              this.judge.push(jud);
+                var jud = {
+                  productName: item.productName,
+                  productKey: item.productKey
+                };
+                this.judge.push(jud);
 
                 item.deviceName = [];
                 item.latestData = [];
@@ -613,11 +1102,15 @@ export default {
                     item.deviceName.push(item.deviceData[i].deviceName);
                   }
                   if (item.extraInfo.fence !== "-") {
-                    console.log(this.fenceList);
                     UserDetail(username).then(res => {
                       console.log(res);
                       this.fenceList = res.data.extraInfo.fence;
-                      console.log(this.fenceList);
+                            window.sessionStorage.setItem(
+          "fenceList",
+          JSON.stringify(this.fenceList)
+        );
+        window.sessionStorage.setItem("fenceData", JSON.stringify(res.data));
+                      
                       if (
                         this.fenceList.length !== 0 ||
                         this.fenceList !== null ||
@@ -693,6 +1186,7 @@ export default {
                     item.latestData.stepNum = "-";
                     item.latestData.heart = "-";
                   }
+
                   if (item.deviceName.includes("A4")) {
                     item.latestData.location =
                       item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
@@ -715,14 +1209,64 @@ export default {
                 }
               });
               console.log(this.productList);
+              this.data = this.productList;
+              this.whichProduct = this.productList[0];
               if (this.productList.length !== 0) {
                 this.productShow = true;
+                var date1 = Math.round(new Date().getTime() / 1000);
+                this.onlineNum = 0;
+                this.productList.forEach(item => {
+                  if (
+                    item.deviceName.length == 0
+                  ) {
+                    item.extraInfo.status = "未激活";
+                  } else {
+                    if (item.latestData.heart == "-") {
+                      item.extraInfo.status = "离线";
+                    } else {
+       if (date1 - item.latestData.heart <= 7200) {
+                      item.extraInfo.status = "在线";
+                      this.onlineNum += 1;
+                    } else if (date1 - item.latestData.heart > 7200) {
+                      item.extraInfo.status = "离线";
+                    }
+                    }
+             
+                  }
+                  if (item.latestData.heart !== "-") {
+                    var date = new Date(item.latestData.heart * 1000);
+                    var Y = date.getFullYear() + "-";
+                    var M =
+                      (date.getMonth() + 1 < 10
+                        ? "0" + (date.getMonth() + 1)
+                        : date.getMonth() + 1) + "-";
+                    var D =
+                      (date.getDate() < 10
+                        ? "0" + date.getDate()
+                        : date.getDate()) +
+                      " " +
+                      " ";
+                    var h =
+                      (date.getHours() < 10
+                        ? "0" + date.getHours()
+                        : date.getHours()) + ":";
+                    var m =
+                      (date.getMinutes() < 10
+                        ? "0" + date.getMinutes()
+                        : date.getMinutes()) + ":";
+                    var s =
+                      date.getSeconds() < 10
+                        ? "0" + date.getSeconds()
+                        : date.getSeconds();
+                    var normalTime = Y + M + D + h + m + s;
+                    item.latestData.normalHeart = normalTime;
+                  } else {
+                    item.latestData.normalHeart = "-";
+                  }
+                });
               }
-              
 
-   
-          //  console.log( this.alertInfo)
-
+              //  console.log( this.alertInfo)
             }
           });
         }
@@ -1460,163 +2004,311 @@ export default {
       window.addEventListener("resize", function() {
         myChart.resize();
       });
-      var chartDom1 = document.getElementById("bottom");
-      var myChart1 = echarts.init(chartDom1);
-      //       option = null;
-      // // Generate data
-      var category = [];
-      var dottedBase = +new Date();
-      dottedBase -= 3600 * 24 * 1000 * 20;
-      var lineData = [];
-      var barData = [];
-      var b = [
-        123,
-        32,
-        23,
-        23,
-        23,
-        34,
-        654,
-        64,
-        644,
-        65,
-        445,
-        445,
-        445,
-        443,
-        2,
-        21,
-        221,
-        122,
-        121,
-        23
-      ];
-      var d = [
-        64,
-        56,
-        755,
-        432,
-        423,
-        43,
-        65,
-        34,
-        65,
-        23,
-        12,
-        32,
-        43,
-        12,
-        43,
-        54,
-        23,
-        54,
-        23
-      ];
-      for (var i = 0; i < 20; i++) {
-        var date = new Date((dottedBase += 3600 * 24 * 1000));
-        category.push(
-          [date.getFullYear(), date.getMonth() + 1, date.getDate()].join("-")
-        );
-        // var b = 12;
-        // var d = 34;
-        lineData.push(b[i]);
-        barData.push(d[i] + b[i]);
-      }
 
-      // option
-      var option1 = {
+      // option1 && myChart1.setOption(option1);
+    },
+    echarts1() {
+console.log(this.whichProduct)
+console.log(this.whichDevice)
+var dealDeviceKey = ""
+    var time = Math.round(new Date() / 1000);
+              var startTime = time - 172800;
+              var startTime1 = time - 86400;
+              this.whichProduct.deviceData.forEach(item=>{
+                if (item.deviceName == this.whichDevice) {
+ dealDeviceKey = item.deviceKey
+                }
+              })
+              console.log(dealDeviceKey)
+              if (dealDeviceKey == "") {
+                this.dataShow = false
+              } else {
+                this.dataShow = true
+                if (this.whichDevice !== "A4") {
+                   var payload = {
+                   deviceKey: dealDeviceKey,
+                  startTime: startTime1,
+                  endTime: time,
+                  asc: 1
+                  } 
+                console.log(payload)
+                 historyData(payload).then((res)=>{
+                   console.log(res) 
+                   if (res.msg == "ok") {
+                     this.loading = false;
+                     this.date1 = [];
+                     this.list = res.data.deviceData;
+                    if (this.whichDevice == "BA") {
+                     this.list1 = [
+                        {    
+                        name: "腕温",
+                        type: "line",
+                        symbol: "none",
+                        data: [],
+                        markLine: {
+                          data: [{ type: "average", name: "Avg" }]
+                        }
+                      },
+                                {
+                        name: "体温",
+                        type: "line",
+                        symbol: "none",
+                        data: [],
+                        markLine: {
+                          data: [{ type: "average", name: "Avg" }]
+                        }
+                      }
+  ];
+  this.list.forEach(item1=>{
+    this.date1.push(item1.date);
+    this.list1[0].data.push(item1.extraInfo.skin)
+    this.list1[1].data.push(item1.extraInfo.body)
+  })
+  this.echarts2();
+} else if(this.whichDevice == "C2") {
+       this.list1 = [
+                      {
+                        name: "心率",
+                        type: "line",
+                        symbol: "none",
+                        data: [],
+                        markLine: {
+                          data: [{ type: "average", name: "Avg" }]
+                        }
+                      },
+                      {
+                        name: "收缩压",
+                        type: "line",
+                        symbol: "none",
+                        data: [],
+                        markLine: {
+                          data: [{ type: "average", name: "Avg" }]
+                        }
+                      },
+                      {
+                        name: "舒张压",
+                        type: "line",
+                        symbol: "none",
+                        data: [],
+                        markLine: {
+                          data: [{ type: "average", name: "Avg" }]
+                        }
+                      }
+                    ];
+                      this.list.forEach(item1=>{
+    this.date1.push(item1.date);
+                      this.list1[0].data.push(item1.extraInfo.BPHeart);
+                      this.list1[1].data.push(item1.extraInfo.BPHigh);
+                      this.list1[2].data.push(item1.extraInfo.BPLow);
+  })
+         this.echarts2();           
+}
+
+                   } else {
+                     this.dataShow = false
+                   }
+                 })
+
+
+              } else {
+                console.log("A4") 
+                      var payload = {
+                   deviceKey: dealDeviceKey,
+                  startTime: startTime,
+                  endTime: time,
+                  asc: 1
+                  } 
+                      historyData(payload).then(res => {
+                  console.log(res);
+                  if (res.msg == "ok") {
+                    this.loading= false;
+                    var trace = res.data.deviceData;
+                    this.center = {
+                      lng: trace[0].extraInfo.location.split(",")[0],
+                      lat: trace[0].extraInfo.location.split(",")[1]
+                    };
+                    this.polylinePath = [];
+                    trace.forEach(item1 => {
+                      item1.position = {
+                        lng: item1.extraInfo.location.split(",")[0],
+                        lat: item1.extraInfo.location.split(",")[1]
+                      };
+                      // console.log(item1.position)
+                      this.polylinePath.push(item1.position);
+                    });
+                  
+                  } else {
+                    console.log(res.msg);
+                    this.dataShow = false;
+                  }
+                });
+              }
+              }
+
+    },
+    echarts2() {
+      // console.log(this.date1)
+      // console.log(this.list1)
+      var chartDom1 = document.getElementById("body");
+      var myChart1 = echarts.init(chartDom1);
+      var option1;
+
+      option1 = {
         tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "shadow"
-          }
+          trigger: "axis"
         },
         legend: {
-          data: ["处理数", "报警数"],
-          textStyle: {
-            color: "#ccc"
+textStyle: {
+     color: "#fff" 
+        },
+        },
+        toolbox: {
+          show: true,
+          feature: {
           }
         },
+
+          color: ["#cd9136","#5a99e6","#d1191e"],
         xAxis: {
-          data: category,
-          axisLine: {
-            lineStyle: {
-              color: "#ccc"
-            }
-          }
+          type: "category",
+          boundaryGap: false,
+          data: this.date1,
+                     axisLabel: {   // X轴线 标签修改 
+                     textStyle: {
+                         color: '#fff', //坐标值得具体的颜色
+                     }
+                 },
+                 splitLine:{  
+                     show: true, // X轴线 颜色类型的修改
+                     lineStyle: {
+                         color: '#fff'
+                     }  
+                 },
+                 axisLine: { 
+                     show: true, // X轴 网格线 颜色类型的修改
+                     lineStyle: {
+                         color: '#fff'
+                     }  
+                 }, 
         },
         yAxis: {
-          splitLine: { show: false },
-          axisLine: {
-            lineStyle: {
-              color: "#ccc"
-            }
-          }
+          type: "value",
+          axisLabel: {
+            formatter: "{value} °C"
+          },
+          axisLabel: {
+                     formatter: '{value}',
+                     textStyle: {
+                         color: '#fff', //坐标值得具体的颜色
+                     }
+                 },
+                 axisLine: { 
+                     show: true, // Y轴线
+                     lineStyle: {
+                         type: 'dashed',
+                         color: '#fff'
+                     }  
+                 },
+                 splitLine:{  
+                     show: true,
+                     lineStyle: {
+                         type: 'dashed',
+                         color: '#fff'
+                     }  
+                 }  
         },
-        series: [
-          {
-            name: "line",
-            type: "line",
-            smooth: true,
-            showAllSymbol: true,
-            symbol: "emptyCircle",
-            symbolSize: 15,
-            data: lineData
-          },
-          {
-            name: "报警数",
-            type: "bar",
-            barWidth: 10,
-            itemStyle: {
-              normal: {
-                barBorderRadius: 5,
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0, color: "#14c8d4" },
-                  { offset: 1, color: "#43eec6" }
-                ])
-              }
-            },
-            data: barData
-          },
-          {
-            name: "处理数",
-            type: "bar",
-            barGap: "-100%",
-            barWidth: 10,
-            itemStyle: {
-              normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0, color: "rgba(20,200,212,0.5)" },
-                  { offset: 0.2, color: "rgba(20,200,212,0.2)" },
-                  { offset: 1, color: "rgba(20,200,212,0)" }
-                ])
-              }
-            },
-            z: -12,
-            data: lineData
-          },
-          {
-            name: "dotted",
-            type: "pictorialBar",
-            symbol: "rect",
-            itemStyle: {
-              normal: {
-                color: "#0f375f"
-              }
-            },
-            symbolRepeat: true,
-            symbolSize: [12, 4],
-            symbolMargin: 1,
-            z: -10,
-            data: lineData
-          }
-        ]
+        series:
+          this.list1
       };
-      myChart1.setOption(option1);
-      window.addEventListener("resize", function() {
-        myChart1.resize();
+
+      option1 && myChart1.setOption(option1);
+    },
+    detailproduct(row) {
+      this.whichProduct = row;
+      console.log(this.whichProduct);
+      this.backToOverall()
+    },
+    inputChange() {
+      console.log(this.productSearch);
+      this.data = [];
+      this.productList.forEach(item => {
+        if (
+          item.productName
+            .toLowerCase()
+            .includes(this.productSearch.toLowerCase())
+        ) {
+          this.data.push(item);
+        }
       });
-      // option1 && myChart1.setOption(option1);
+    },
+    change() {
+      this.productSearch = "";
+      this.inputShow = false;
+      this.data = this.productList;
+
+      // this.products();
+    },
+    startSearch() {
+      this.inputShow = true;
+      this.show = true;
+      this.whichGroup = "all";
+      this.data = this.productList;
+    },
+    startSelect() {
+      this.show = false;
+      this.change();
+      this.whichGroup = "all";
+    },
+    grouping() {
+      this.change();
+      console.log(this.whichGroup);
+      if (this.whichGroup !== "all") {
+        this.data = [];
+        this.productList.forEach(item => {
+          if (
+            item.extraInfo.groupStatus.groups == this.whichGroup ||
+            item.extraInfo.groupStatus.status == this.whichGroup
+          ) {
+            this.data.push(item);
+          }
+        });
+      } else {
+        this.data = this.productList;
+      }
+    },
+    wenduDetails() {
+      console.log("温度详情");
+      this.overallShow = false;
+      this.wenduShow = true;
+      this.xinlvShow = false;
+      this.guijiShow = false;
+      this.whichDevice = "BA"
+      this.echarts1();
+    },
+    xinlvDetails() {
+      console.log("心率详情");
+            this.overallShow = false;
+      this.wenduShow = false;
+      this.xinlvShow = true;
+      this.guijiShow = false;
+       this.whichDevice = "C2"
+      this.echarts1();
+    },
+    locationDetails() {
+      console.log("位置详情");
+                  this.overallShow = false;
+      this.wenduShow = false;
+      this.xinlvShow = false;
+      this.guijiShow = true;
+       this.whichDevice = "A4"
+      this.echarts1();
+    },
+    backToOverall() {
+      console.log("返回");
+      this.overallShow = true;
+         this.wenduShow = false;
+      this.xinlvShow = false;
+      this.guijiShow = false;
     }
   }
 };
@@ -1676,13 +2368,16 @@ export default {
       border-radius: 15px;
       z-index: 5;
       color: #fff;
+       background: url("../img/footer-bg.png") no-repeat center bottom;
       .top {
-        height: calc(100% - 360px);
+        height: 400px;
+        // background-color: #fff;
       }
       .bottom {
-        height: 330px;
+        // margin-top: 30px;
+        height: calc(100% - 400px);
         width: 100%;
-        background: url("../img/footer-bg.png") no-repeat center center;
+        // background: url("../img/footer-bg.png") no-repeat center center;
         .seamless-warp {
           height: 100%;
           width: 100%;
@@ -1779,10 +2474,47 @@ export default {
       .top {
         height: calc(100% - 360px);
         width: 100%;
-        .seamless-warp {
-          height: 100%;
+        .input {
+          width: 86%;
+          margin-left: 2%;
+          height: 40px;
+          background-color: #00093e !important;
+          color: #fff;
+          border: 1px solid #001257;
+          outline: none;
+        }
+        .select {
+          width: 90%;
+          float: left;
+          margin-left: 2%;
+          background-color: #00093e !important;
+          color: #9b8f8f;
+          border: 1px solid #001257;
+          outline: none;
+        }
+
+        .productList {
+          margin-top: 10px;
+          height: calc(100% - 50px);
           width: 100%;
-          overflow: hidden;
+          overflow: auto;
+          background-color: #00093e;
+          border: none;
+          ::-webkit-scrollbar {
+            width: 6px;
+            height: 1px;
+            // display: none;
+          }
+          ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(97, 184, 179, 0.1);
+            background: #78b4b4;
+          }
+          ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px rgba(87, 175, 187, 0.1);
+            border-radius: 10px;
+            background: #ededed;
+          }
         }
         .cardList {
           height: 80px;
@@ -1795,10 +2527,36 @@ export default {
         margin-top: 100px;
         height: 280px;
         width: 100%;
+        .card {
+          height: 80px;
+          line-height: 30px;
+          margin-left: 5px;
+          margin-right: 5px;
+          vertical-align: middle;
+          text-align: center;
+          color: #fff;
+          background: #101a57;
+          border-radius: 6px;
+        }
+        #body,#body1 {
+          float: bottom;
+          margin-top: 22px;
+          border-bottom-left-radius: 20px;
+          border-bottom-right-radius: 20px;
+          height: 220px;
+          width: 100%;
+          // background-color: #fff;
+        }
+        #body1 {
+          height: 180px;
+          margin-top: 0px;
+          border-radius: 20px;
+        }
       }
     }
   }
 }
+
 @keyframes myfirst2 {
   from {
     transform: rotate(0deg);

@@ -112,7 +112,7 @@ export default {
       if (data.length !== 0) {
         data.forEach(item => {
           historyDataNum(item.productKey, item.deviceKey).then(res => {
-            console.log(res);
+            // console.log(res);
             this.dataList.push(res.data.deviceData);
             var time = [];
             res.data.deviceData.forEach(item1 => {
@@ -133,7 +133,7 @@ export default {
         if (data1.length !== 0) {
         data1.forEach(item => {
           historyDataNum(item.productKey, item.deviceKey).then(res => {
-            console.log(res);
+            // console.log(res);
             this.dataList1.push(res.data.deviceData);
             var time1 = [];
             res.data.deviceData.forEach(item1 => {
@@ -167,7 +167,7 @@ export default {
       //   var timelineData = [];
       if (this.dataList.length !== 0) {
         this.dataList.forEach((item, index) => {
-          console.log(item);
+          // console.log(item);
           var body1 = [];
           var skin1 = [];
   
@@ -196,14 +196,14 @@ export default {
           bodyList.push(body1);
           skinList.push(skin1);
         });
-          console.log(bodyList)
-          console.log(skinList)
+          // console.log(bodyList)
+          // console.log(skinList)
         // console.log(timelineData)
     }
      if (this.dataList1.length !== 0) {
         console.log(this.dataList1)
         this.dataList1.forEach((item, index) => {
-          console.log(item);
+          // console.log(item);
           var heartRate1 = [];
           var bphigh1 = [];
           var bplow1 = [];
@@ -236,7 +236,7 @@ export default {
          bpLowList.push( bplow1);
         });
      }
-     console.log(heratRateList)
+    //  console.log(heratRateList)
         for (var i = 0; i < this.dataList.length; i++) {
           optionData.push({
             		    tooltip: {trigger: 'axis',axisPointer: {lineStyle: {color: '#fff'}}},
@@ -369,7 +369,7 @@ export default {
             ]
           });
         }
-        console.log(optionData);
+        // console.log(optionData);
         var chartDom = document.getElementById("chart");
         var myChart = echarts.init(chartDom);
         var option;
