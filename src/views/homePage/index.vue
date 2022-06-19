@@ -30,11 +30,11 @@ export default {
     };
   },
   created() {
-    console.log(this.name)
+    // console.log(this.name)
     var username = window.sessionStorage.getItem("username");
     console.log(username);
     UserDetail(username).then(res => {
-      console.log(res);
+      console.log(res.data.extraInfo.role);
       window.sessionStorage.setItem("role", res.data.extraInfo.role);
       if (res.data.extraInfo.role == "admin") {
         this.currentRole = "admin";

@@ -45,7 +45,7 @@
             .filter(
               (data) =>
                 !search ||
-                data.deviceName.toLowerCase().includes(search.toLowerCase())
+                data.productName.toLowerCase().includes(search.toLowerCase())
             )
             .slice((currentPage - 1) * pageSize, currentPage * pageSize)
         "
@@ -61,13 +61,13 @@
         <el-table-column
           align="center"
           min-width="20"
-          prop="deviceName"
-          label="设备名称"
+          prop="productName"
+          label="产品名称"
         >
           <template slot="header" slot-scope="scope">
             <div v-show="show">
               <el-row type="flex" justify="center">
-                <el-col :span="23">设备名称</el-col>
+                <el-col :span="23">产品名称</el-col>
                 <el-col :span="1">
                   <i class="el-icon-search" @click="show = !show"></i>
                 </el-col>
@@ -75,7 +75,7 @@
             </div>
             <div v-show="!show">
               <el-input
-                placeholder="请输入设备名"
+                placeholder="请输入产品名"
                 label
                 suffix-icon="el-icon-search"
                 size="mini"
@@ -147,6 +147,7 @@ export default {
       showbt: true,
       search: "",
       columns: {
+deviceName:"设备名称",
         date: "时间",
         alertId: "报警ID",
         level: "报警等级",
@@ -207,6 +208,17 @@ export default {
           //这个是为了加载过的页数存起来，不需要二次加载
           this.pageNum.push(this.currentPage);
           this.tableData = [...this.tableData, ...res];
+         
+          var judge = JSON.parse(sessionStorage.getItem("judge"));
+          console.log(judge)
+    this.tableData.forEach(item => {
+              judge.forEach(item1 => {
+                if (item.productKey == item1.productKey) {
+                  item.productName = item1.productName;
+                }
+              });
+            });
+             console.log(this.tableData)
           this.loading = false;
         } else {
           this.$message({

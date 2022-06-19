@@ -559,7 +559,7 @@ export default {
           }).then(res1 => {
             console.log(res1);
             this.productMessage = res1.data[0];
-            if (res1.data[0].extraInfo.userMessage == undefined) {
+            if (res1.data[0].extraInfo.userMessage == undefined || res1.data[0].extraInfo.userMessage == {}) {
               this.cardShow = true;
             } else {
               this.cardShow = false;
@@ -573,7 +573,7 @@ export default {
                 );
               }
               if (this.productMessage.extraInfo.fence !== "-") {
-                UserDetail(username).then(res => {
+                UserDetail("admin").then(res => {
                   console.log(res);
                   this.fenceList = res.data.extraInfo.fence;
                   console.log(this.fenceList);
@@ -753,6 +753,7 @@ export default {
                   asc: 1
                 };
                 historyData(payload).then(res => {
+                  console.log(res)
                   if (res.msg == "ok") {
                     console.log(res);
                     this.loading2 = false;
@@ -863,18 +864,11 @@ export default {
     bind1(formName) {
       console.log(formName);
       console.log(this.ruleForm);
-      //    this.$refs[formName].validate(valid => {
-      // if (valid) {
-      var user = {
-        username: "admin",
-        password: "123456"
-      };
+         this.$refs[formName].validate(valid => {
+      if (valid) {
+
       // 获取admin账号的token
-      UserLogin(user).then(res => {
-        console.log(res);
-        if (res.msg == "ok") {
-          var tokenForAdmin = res.data.token;
-          window.sessionStorage.setItem("tokenForAdmin", res.data.token);
+
           console.log(this.productMessage);
           var extraInfo = this.productMessage.extraInfo;
           console.log(extraInfo);
@@ -903,6 +897,8 @@ export default {
           adminMessage.push(extraInfo.userMessage);
           console.log(adminMessage);
           //修改产品信息
+          var tokenForAdmin = window.sessionStorage.getItem("tokenForAdmin")
+          console.log(tokenForAdmin)
           var _this = this;
           _this
             .axios({
@@ -964,18 +960,18 @@ export default {
                 }
               });
           });
-        }
-      });
-      // }
-      // else {
-      //   this.$message({
-      //     showClose: true,
-      //     message: "error input！",
-      //     type: "warning"
-      //   });
-      //   return false;
-      // }
-      //    })
+  
+   
+      }
+      else {
+        this.$message({
+          showClose: true,
+          message: "error input！",
+          type: "warning"
+        });
+        return false;
+      }
+         })
 
       // 即修改产品信息，放在extraInfo里面
     },

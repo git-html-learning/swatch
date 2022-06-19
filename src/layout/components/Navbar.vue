@@ -117,19 +117,19 @@ export default {
         if(res.msg == "未找到记录") {
           this.message = 0
         }
-        // subjectCount().then(res => {
-        //   if ((res.msg = "ok")) {
-        //     var subjectCount = res.data.subjectCount;
-        //     var total = res.data.total;
-        //     window.localStorage.setItem(
-        //       "subjectNum",
-        //       JSON.stringify(subjectCount)
-        //     );
-        //     window.sessionStorage.setItem("total", JSON.stringify(total));
-        //   } else {
-        //     this.$message.error(res.msg);
-        //   }
-        // });
+        subjectCount().then(res => {
+          if ((res.msg = "ok")) {
+            var subjectCount = res.data.subjectCount;
+            var total = res.data.total;
+            window.localStorage.setItem(
+              "subjectNum",
+              JSON.stringify(subjectCount)
+            );
+            window.sessionStorage.setItem("total", JSON.stringify(total));
+          } else {
+            this.$message.error(res.msg);
+          }
+        });
       });
     },
     openBell() {

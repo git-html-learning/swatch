@@ -14,200 +14,429 @@
     <el-row>
       <el-card class="box-card">
         <!-- Card 组件包括header和body部分，header部分需要有显式具名 slot 分发，同时也是可选的。 -->
-        <div slot="header" style="margin-bottom: 50px">
-          <el-col :span="3" class="text-center">
-            <router-link class="btn" to="/productRegister">注册手环</router-link>
-         
-          </el-col>
-                 <el-col :span="3" class="text-center">
-     
-            <router-link class="btn1" to="/userMessage">用户信息</router-link>
-          </el-col>
-                           <el-col :span="3" class="text-center">
-            <router-link class="btn2" to="/grouping">分组操作</router-link>
-          </el-col>
-                                   <el-col :span="3" class="text-center" style = "margin-left: 50px; cursor:pointer">
-            <div class="btn3" @click = "batchUnbind" >批量解绑</div>
-          </el-col>
+        <div slot="header" style = "height: 20px;">
+            <p style = "font-size: 21px; padding: 0px;">用户分组操作</p>
+
         </div>
         <!-- data绑定的数据是搜索筛选的数据 -->
-     <el-table
-            v-if="tableShow"
-         :data="
-              data
-                .filter(
+        <div class="clearfix">
+          <!-- clearfix 主要是用在浮动层的父层，而 clear 主要是用在浮动层与浮动层之间 -->
+          <!-- 主要借助 tableData的数组分割来实现分页。currentPage是当前页数，pagesize是每页展示的条数  -->
+          <el-row :gutter="20">
+            <el-col :span="10">
+              <el-card style="height: 100%; border-radius: 20px;">
+                <div slot="header" style="color: #00a29a">
+                  未分组用户
+                  <!-- <el-button
+                    type="primary"
+                    plain
+                    size="mini"
+                    style="float: right; margin-right: 20px;"
+                  >批量分组</el-button>-->
+                </div>
+                <el-table
+                  v-if="tableShow"
+                  :data="
+                     productList2
+                      .filter(
                   (data) =>
                     !search ||
                     data.productName
                       .toLowerCase()
                       .includes(search.toLowerCase())
-                )
-                .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-            "
-            border
-            stripe
-            v-loading="loading"
-            element-loading-text="数据加载中"
-            element-loading-spinner="el-icon-loading"
-            :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
-            :cell-style="tableCellStyle"
-            @selection-change="handleSelectionChange"
-          >
-            <el-table-column type="selection" width="40"></el-table-column>
-            <!-- 搜索设备名 -->
-            <el-table-column align="center" prop="productName" label="用户名称">
-              <template slot="header" slot-scope="scope">
-                <!-- 不点击显示产品名称，搜索框绑定一个点击事件，点击一下，show变成false -->
-                <div v-show="show">
-                  <el-row type="flex" justify="center">
-                    <el-col :span="18">用户名</el-col>
-                    <el-col :span="1">
-                      <i class="el-icon-search" @click="startSearch"></i>
-                      </el-col>
-                          <el-col :span="1" :offset = "2">
-<svg @click = "startSelect" t="1655620475394" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15929" width="15" height="15"><path d="M490.666667 601.6L797.866667 298.666667l59.733333 59.733333-302.933333 302.933333-59.733334 64-59.733333-59.733333L128 358.4 187.733333 298.666667l302.933334 302.933333z" fill="#b7a696" p-id="15930"></path></svg>
-                    </el-col>
-                  </el-row>
-                </div>
-                <!-- 点击显示搜索框 -->
-                <div v-show="searchShow">
-      <el-row>
-        <el-col :span = "16">
-                     <el-input
-                    placeholder="请输入用户名"
-                    label
-                    suffix-icon="el-icon-search"
+                     )
+                      .slice((currentPage - 1) * pageSize, currentPage * pageSize)
+                       "
+                  border
+                  stripe
+                  v-loading="loading"
+                  element-loading-text="数据加载中"
+                  element-loading-spinner="el-icon-loading"
+                  :header-cell-style="{ color: '#a38972', background: '#ebf7f7' }"
+                  :cell-style="tableCellStyle"
+                  @selection-change="handleSelectionChange"
+                >
+                  <!-- <el-table-column type="selection" width="40"></el-table-column> -->
+                  <!-- 搜索设备名 -->
+                  <el-table-column align="center" prop="productName" label="手环名称">
+                    <template slot="header" slot-scope="scope">
+                      <!-- 不点击显示产品名称，搜索框绑定一个点击事件，点击一下，show变成false -->
+                      <div v-show="show">
+                        <el-row type="flex" justify="center">
+                          <el-col :span="23">用户</el-col>
+                          <el-col :span="1">
+                            <i class="el-icon-search" @click="show = !show"></i>
+                          </el-col>
+                        </el-row>
+                      </div>
+                      <!-- 点击显示搜索框 -->
+                      <div v-show="!show">
+                        <el-input
+                          placeholder="请输入用户名"
+                          label
+                          suffix-icon="el-icon-search"
+                          size="mini"
+                          v-model="search"
+                        ></el-input>
+                      </div>
+                    </template>
+                  </el-table-column>
+                  <el-table-column align="center" label="电子围栏" prop="extraInfo.fence"></el-table-column>
+                  <el-table-column align="center" label="操作" min-width="120">
+                    <template slot-scope="scope">
+                      <!-- <el-button
+                        type="success"
+                        plain
+                        icon="el-icon-more"
+                        size="mini "
+                        @click="detailproduct(scope.row)"
+                      ></el-button> -->
+                      <el-button
+                        type="primary"
+                        plain
+                        icon="el-icon-folder-add"
+                        size="mini "
+                        @click="editproduct(scope.row)"
+                      ></el-button>
+                      <!-- <el-button
+                        type="danger"
+                        plain
+                        icon="el-icon-delete"
+                        size="mini "
+                        @click="deleteproduct(scope.$index, scope.row, productList)"
+                      ></el-button> -->
+                    </template>
+                  </el-table-column>
+                </el-table>
+
+                <!-- 分页 -->
+                <el-pagination
+                  v-show="
+                    productList2.filter(
+                   (data) =>
+                  !search ||
+                  data.productName.toLowerCase().includes(search.toLowerCase())
+                    ).length > 5
+                   "
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-sizes="[5,10, 20, 40]"
+                  :page-size="pageSize"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="total"
+                ></el-pagination>
+              </el-card>
+            </el-col>
+            <el-col :span="14">
+              <el-card style="border-radius: 20px;">
+                <div slot="header" style="color: #00a29a">
+                  分组操作
+                  <el-button
+                    type="danger"
+                    plain
                     size="mini"
-                    v-model="search"
-                  ></el-input>
-        </el-col>
-        <el-col :span = "8">
-          <svg @click = "back" t="1655621327563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17554" width="15" height="15"><path d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z" p-id="17555" fill="#00c4c1"></path></svg>
-        </el-col>
-      </el-row>
-       
+                    style="float: right;margin-right: 20px;"
+                    @click="deleteBatchs"
+                  >批量删除</el-button>
+                  <el-button
+                    type="primary"
+                    plain
+                    size="mini"
+                    style="float: right;margin-right: 20px;"
+                    @click="issue"
+                  >消息下发</el-button>
+                  <el-button
+                    type="success"
+                    plain
+                    size="mini"
+                    style="float: right;margin-right: 20px;"
+                    @click="creatGroups"
+                  >创建新组</el-button>
                 </div>
-                  <div v-show="selectShow">
-                          <el-row>
-        <el-col :span = "16">
-  <select
-                        class="select"
-                        v-model="whichGroup"
-                        placeholder="请选择组"
-                        @change="grouping"
+                <div v-if="totalShow">
+                  <div v-if="groupsShow">
+                    <el-row :gutter="30">
+                      <el-col :span="7" v-for="(item,index) in groupsMessage" :key="index">
+                        <el-card :class="['proitem1',groupCheck[index] ? 'prochecked1' : '']">
+                          <div
+                            slot="header"
+                            style="cursor: pointer;"
+                            @click="handleClick1(item,index)"
+                          >
+                            {{item.name}}
+                            <svg
+                              @click="details(item)"
+                              style="float: right; marign-right: 10px;"
+                              t="1654940735265"
+                              class="icon"
+                              viewBox="0 0 1024 1024"
+                              version="1.1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              p-id="2563"
+                              width="20"
+                              height="20"
+                            >
+                              <path
+                                d="M346.2 514.6m-64.2 0a64.2 64.2 0 1 0 128.4 0 64.2 64.2 0 1 0-128.4 0Z"
+                                fill="#91B1D5"
+                                p-id="2564"
+                              />
+                              <path
+                                d="M450.1 514.6a64.2 64.2 0 1 0 128.4 0 64.2 64.2 0 1 0-128.4 0Z"
+                                fill="#91B1D5"
+                                p-id="2565"
+                              />
+                              <path
+                                d="M682.5 514.6m-64.2 0a64.2 64.2 0 1 0 128.4 0 64.2 64.2 0 1 0-128.4 0Z"
+                                fill="#91B1D5"
+                                p-id="2566"
+                              />
+                              <path
+                                d="M512 136.3c50.7 0 99.9 9.9 146.2 29.5 44.7 18.9 84.9 46 119.5 80.6 34.5 34.5 61.6 74.7 80.6 119.5 19.6 46.3 29.5 95.5 29.5 146.2s-9.9 99.9-29.5 146.2c-18.9 44.7-46 84.9-80.6 119.5-34.5 34.5-74.7 61.6-119.5 80.6-46.3 19.6-95.5 29.5-146.2 29.5s-99.9-9.9-146.2-29.5c-44.7-18.9-84.9-46-119.4-80.6-34.5-34.5-61.6-74.7-80.6-119.5-19.6-46.3-29.5-95.5-29.5-146.2s9.9-99.9 29.5-146.2c18.9-44.7 46-84.9 80.6-119.5 34.5-34.5 74.7-61.6 119.4-80.6 46.3-19.6 95.5-29.5 146.2-29.5m0-70C265.9 66.3 66.3 265.9 66.3 512S265.9 957.7 512 957.7 957.7 758.1 957.7 512 758.1 66.3 512 66.3z"
+                                fill="#91B1D5"
+                                p-id="2567"
+                              />
+                            </svg>
+                          </div>
+                          <div style="color: #73969d">组长： {{item.grouper.productName}}</div>
+                        </el-card>
+                      </el-col>
+                    </el-row>
+                  </div>
+                  <div v-if="!groupsShow" style="text-align: center;">
+                    <svg
+                      t="1654935647697"
+                      class="icon"
+                      viewBox="0 0 1024 1024"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      p-id="1736"
+                      width="200"
+                      height="200"
+                    >
+                      <path
+                        d="M102.4 896a409.6 51.2 0 1 0 819.2 0 409.6 51.2 0 1 0-819.2 0Z"
+                        fill="#4A68CC"
+                        opacity=".1"
+                        p-id="1737"
+                      />
+                      <path
+                        d="M116.736 376.832c0 8.704 6.656 15.36 15.36 15.36s15.36-6.656 15.36-15.36-6.656-15.36-15.36-15.36c-8.192 0-15.36 7.168-15.36 15.36zM926.72 832c-19.456 5.12-23.552 9.216-28.16 28.16-5.12-19.456-9.216-23.552-28.16-28.16 18.944-5.12 23.552-9.216 28.16-28.16 4.608 18.944 8.704 23.552 28.16 28.16zM202.24 323.072c-25.088 6.656-30.208 11.776-36.864 36.864-6.656-25.088-11.776-30.208-36.864-36.864 25.088-6.656 30.208-12.288 36.864-36.864 6.144 25.088 11.776 30.208 36.864 36.864zM816.64 235.008c-15.36 4.096-18.432 7.168-22.528 22.528-4.096-15.36-7.168-18.432-22.528-22.528 15.36-4.096 18.432-7.168 22.528-22.528 3.584 15.36 7.168 18.432 22.528 22.528zM882.688 156.16c-39.936 10.24-48.128 18.944-58.88 58.88-10.24-39.936-18.944-48.128-58.88-58.88 39.936-10.24 48.128-18.944 58.88-58.88 10.24 39.424 18.944 48.128 58.88 58.88z"
+                        fill="#4A68CC"
+                        opacity=".5"
+                        p-id="1738"
+                      />
+                      <path
+                        d="M419.84 713.216v4.096l33.792 31.232 129.536-62.976L465.92 760.832v36.864l18.944-18.432v-0.512 0.512l18.944 18.432 100.352-122.88v-4.096z"
+                        fill="#4A68CC"
+                        opacity=".2"
+                        p-id="1739"
+                      />
+                      <path
+                        d="M860.16 551.936v-1.024c0-1.024-0.512-1.536-0.512-2.56v-0.512l-110.08-287.232c-15.872-48.64-60.928-81.408-112.128-81.408H387.072c-51.2 0-96.256 32.768-112.128 81.408L164.864 547.84v0.512c-0.512 1.024-0.512 1.536-0.512 2.56V757.76c0 65.024 52.736 117.76 117.76 117.76h460.8c65.024 0 117.76-52.736 117.76-117.76v-204.8c-0.512-0.512-0.512-0.512-0.512-1.024zM303.616 271.36s0-0.512 0.512-0.512C315.392 233.984 349.184 209.92 387.072 209.92h249.856c37.888 0 71.68 24.064 83.456 60.416 0 0 0 0.512 0.512 0.512l101.888 266.24H588.8c-8.704 0-15.36 6.656-15.36 15.36 0 33.792-27.648 61.44-61.44 61.44s-61.44-27.648-61.44-61.44c0-8.704-6.656-15.36-15.36-15.36H201.728L303.616 271.36zM829.44 757.76c0 48.128-38.912 87.04-87.04 87.04H281.6c-48.128 0-87.04-38.912-87.04-87.04v-189.44h226.816c7.168 43.52 45.056 76.8 90.624 76.8s83.456-33.28 90.624-76.8H829.44v189.44z"
+                        fill="#4A68CC"
+                        opacity=".5"
+                        p-id="1740"
+                      />
+                      <path
+                        d="M512 578.56c-14.336 0-25.6-11.264-25.6-25.6V501.76H253.44l83.968-219.136 0.512-1.024c7.168-21.504 26.624-35.84 49.152-35.84h249.856c22.528 0 41.984 14.336 49.152 35.84l0.512 1.024L770.56 501.76H537.6v51.2c0 14.336-11.264 25.6-25.6 25.6z"
+                        fill="#4A68CC"
+                        opacity=".2"
+                        p-id="1741"
+                      />
+                    </svg>
+                    <div style="font-size: 25px;color: #a4b3e4">当前无小组</div>
+                  </div>
+                </div>
+                <div v-if="!totalShow">
+                  <svg
+                    @click="totalShow = true"
+                    t="1654941095100"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="3396"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M475 276V141.4c-12.1-56.3-58.2-22-58.2-22L96.6 395.9c-70.4 48.9-4.8 85.7-4.8 85.7l315.4 274.1c63.1 46.5 67.9-24.5 67.9-24.5V606.4C795.3 506 926.3 907.5 926.3 907.5c12.1 22 19.4 0 19.4 0C1069.4 305.4 475 276 475 276z"
+                      p-id="3397"
+                      fill="#4e8e8f"
+                    />
+                  </svg>
+                  <span style="margin-left:20px;">小组详情</span>
+                  <!-- <div>
+                    <span>组长：</span>
+                    <el-card>
+                      <div slot="header">用户名： {{groupsDetail.grouper.productName}}</div>
+                      <div>
+                        <ol>
+                          <li>温度： {{groupsDetail.grouper.latestData.body}}</li>
+                          <li>心率： {{groupsDetail.grouper.latestData.heartRate}}</li>
+                          <li>电子围栏： {{groupsDetail.grouper.extraInfo.fence}}</li>
+                        </ol>
+                      </div>
+                    </el-card>
+                  </div>
+                  <div>
+                    <span>组员</span>
+                    <el-card
+                      v-for="(item,index) in groupsDetail.users"
+                      :key="index"
+                    >{{item.productName}}</el-card>
+                  </div>-->
+                  <p style="font-size: 20px; color:#a9927e; margin-left: 20px;">
+                    <span>组长</span>
+                  </p>
+                  <el-card>
+                    用户名： {{groupsDetail.grouper.productName}}
+                    <span>
+                      <svg
+                        style="float: right; margin-right: 30px;"
+                        @click="productDetail(groupsDetail.grouper)"
+                        t="1654997784910"
+                        class="icon"
+                        viewBox="0 0 1024 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="2157"
+                        width="20"
+                        height="20"
                       >
-                        <option
-                          v-for="item in groups"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                        ></option>
-                      </select>
-        </el-col>
-        <el-col :span = "8">
-          <svg @click = "back" t="1655621327563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17554" width="15" height="15"><path d="M894.976 574.464q0 78.848-29.696 148.48t-81.408 123.392-121.856 88.064-151.04 41.472q-5.12 1.024-9.216 1.536t-9.216 0.512l-177.152 0q-17.408 0-34.304-6.144t-30.208-16.896-22.016-25.088-8.704-29.696 8.192-29.696 21.504-24.576 29.696-16.384 33.792-6.144l158.72 1.024q54.272 0 102.4-19.968t83.968-53.76 56.32-79.36 20.48-97.792q0-49.152-18.432-92.16t-50.688-76.8-75.264-54.784-93.184-26.112q-2.048 0-2.56 0.512t-2.56 0.512l-162.816 0 0 80.896q0 17.408-13.824 25.6t-44.544-10.24q-8.192-5.12-26.112-17.92t-41.984-30.208-50.688-36.864l-51.2-38.912q-15.36-12.288-26.624-22.016t-11.264-24.064q0-12.288 12.8-25.6t29.184-26.624q18.432-15.36 44.032-35.84t50.688-39.936 45.056-35.328 28.16-22.016q24.576-17.408 39.936-7.168t16.384 30.72l0 81.92 162.816 0q5.12 0 10.752 1.024t10.752 2.048q79.872 8.192 149.504 41.984t121.344 87.552 80.896 123.392 29.184 147.456z" p-id="17555" fill="#00c4c1"></path></svg>
-        </el-col>
-      </el-row>
-         
+                        <path
+                          d="M512 1011.2a496.384 496.384 0 0 0 448.3072-279.296 38.4 38.4 0 0 0-68.9664-33.8944A420.0448 420.0448 0 0 1 512 934.4c-232.9088 0-422.4-189.4912-422.4-422.4S279.0912 89.6 512 89.6s422.4 189.4912 422.4 422.4a38.4 38.4 0 0 0 76.8 0c0-275.2512-223.9488-499.2-499.2-499.2S12.8 236.7488 12.8 512s223.9488 499.2 499.2 499.2z"
+                          fill="#438CFF"
+                          p-id="2158"
+                        />
+                        <path
+                          d="M760.4224 537.6a38.4 38.4 0 0 0-38.4-38.4h-460.8a38.4 38.4 0 0 0 0 76.8h460.8a38.4 38.4 0 0 0 38.4-38.4zM261.2224 378.8288h307.2a38.4 38.4 0 0 0 0-76.8h-307.2a38.4 38.4 0 0 0 0 76.8zM261.2224 696.3712a38.4 38.4 0 0 0 0 76.8h204.8a38.4 38.4 0 0 0 0-76.8h-204.8z"
+                          fill="#438CFF"
+                          p-id="2159"
+                        />
+                        <path
+                          d="M711.5776 340.4288m-51.2 0a51.2 51.2 0 1 0 102.4 0 51.2 51.2 0 1 0-102.4 0Z"
+                          fill="#438CFF"
+                          p-id="2160"
+                        />
+                      </svg>
+                    </span>
+                    <el-row style="margin-top: 20px;">
+                      <el-col :span="8">温度： {{groupsDetail.grouper.latestData.body}}</el-col>
+                      <el-col :span="8">心率： {{groupsDetail.grouper.latestData.heartRate}}</el-col>
+                      <el-col :span="8">电子围栏： {{groupsDetail.grouper.extraInfo.fence}}</el-col>
+                    </el-row>
+                  </el-card>
+                  <p style="font-size: 20px; color:#a9927e; margin-left: 20px;">
+                    <span>组员</span>
+                    <span v-if="groupsDetail.users.length == 0">(当前无成员)</span>
+                  </p>
+                  <el-card v-for="(item,index) in groupsDetail.users" :key="index">
+                    {{index+1}} 、 用户名： {{item.productName}}
+                    <span>
+                      <svg
+                        style="float: right; margin-right: 30px;"
+                        @click="productDetail(item)"
+                        t="1654997784910"
+                        class="icon"
+                        viewBox="0 0 1024 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="2157"
+                        width="20"
+                        height="20"
+                      >
+                        <path
+                          d="M512 1011.2a496.384 496.384 0 0 0 448.3072-279.296 38.4 38.4 0 0 0-68.9664-33.8944A420.0448 420.0448 0 0 1 512 934.4c-232.9088 0-422.4-189.4912-422.4-422.4S279.0912 89.6 512 89.6s422.4 189.4912 422.4 422.4a38.4 38.4 0 0 0 76.8 0c0-275.2512-223.9488-499.2-499.2-499.2S12.8 236.7488 12.8 512s223.9488 499.2 499.2 499.2z"
+                          fill="#438CFF"
+                          p-id="2158"
+                        />
+                        <path
+                          d="M760.4224 537.6a38.4 38.4 0 0 0-38.4-38.4h-460.8a38.4 38.4 0 0 0 0 76.8h460.8a38.4 38.4 0 0 0 38.4-38.4zM261.2224 378.8288h307.2a38.4 38.4 0 0 0 0-76.8h-307.2a38.4 38.4 0 0 0 0 76.8zM261.2224 696.3712a38.4 38.4 0 0 0 0 76.8h204.8a38.4 38.4 0 0 0 0-76.8h-204.8z"
+                          fill="#438CFF"
+                          p-id="2159"
+                        />
+                        <path
+                          d="M711.5776 340.4288m-51.2 0a51.2 51.2 0 1 0 102.4 0 51.2 51.2 0 1 0-102.4 0Z"
+                          fill="#438CFF"
+                          p-id="2160"
+                        />
+                      </svg>
+                    </span>
+                    <el-row style="margin-top: 20px;">
+                      <el-col :span="8">温度： {{item.latestData.body}}</el-col>
+                      <el-col :span="8">心率： {{item.latestData.heartRate}}</el-col>
+                      <el-col :span="8">电子围栏： {{item.extraInfo.fence}}</el-col>
+                    </el-row>
+                  </el-card>
                 </div>
-              </template>
-            </el-table-column>
-
-            <!-- <el-table-column align="center" label="IMEI" prop="extraInfo.nickname"></el-table-column> -->
-            <!-- 表头 -->
-            <el-table-column align="center" label="体温" prop="latestData.body"></el-table-column>
-            <el-table-column align="center" label="手腕温度" prop="latestData.skin"></el-table-column>
-            <el-table-column align="center" label="心率" prop="latestData.heartRate"></el-table-column>
-            <el-table-column align="center" label="收缩压" prop="latestData.bpHigh"></el-table-column>
-            <el-table-column align="center" label="舒张压" prop="latestData.bpLow"></el-table-column>
-            <el-table-column align="center" label="步数" prop="latestData.stepNum"></el-table-column>
-            <el-table-column align="center" label="电子围栏" prop="extraInfo.fence"></el-table-column>
-
-            <!-- 按钮 -->
-            <el-table-column align="center" label="操作" min-width="120">
-              <template slot-scope="scope">
-                <el-button
-                  type="success"
-                  plain
-                  icon="el-icon-more"
-                  size="mini "
-                  @click="detailproduct(scope.row)"
-                ></el-button>
-                <el-button
-                  type="primary"
-                  plain
-                  icon="el-icon-edit"
-                  size="mini "
-                  @click="editproduct(scope.row)"
-                ></el-button>
-                             <el-button
-                  type="warning"
-                  plain
-                  icon="el-icon-connection"
-                  size="mini "
-                  @click="bind(scope.row)"
-                ></el-button>
-                <el-button
-                  type="danger"
-                  plain
-                  icon="el-icon-delete"
-                  size="mini "
-                  @click="deleteproduct(scope.$index, scope.row, productList1)"
-                ></el-button>
-         
-              </template>
-            </el-table-column>
-          </el-table>
-    <el-pagination
-            v-show="
-              data.length > 10
-            "
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[5,10, 20, 40]"
-            :page-size="pageSize"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
-          ></el-pagination>
+              </el-card>
+            </el-col>
+          </el-row>
+        </div>
       </el-card>
     </el-row>
-    <el-dialog
-  title="操作"
-  :visible.sync="dialogVisible3"
-  width="30%">
-
-    <span @click = "unbind" class = "btn" style = "cursor: pointer">一建解绑</span>
-    <span @click="makeSure" class = "btn1" style = "cursor: pointer; margin-left: 40px;">绑定</span>
-
-
-</el-dialog>
-<el-dialog
-  title="用户列表"
-  :visible.sync="dialogVisible2"
-  width="60%">
-  <!-- <span>这是一段信息</span> -->
-  <div>
-  <el-row :gutter="20">
-        <el-col v-for="(item,index) in userList" :key="index" :span="10" :offset="1">
+    <el-drawer title="点击选择要分入的组" :visible.sync="drawer" :with-header="true">
+      <el-row :gutter="20">
+        <el-col v-for="(item,index) in groupsMessage" :key="index" :span="10" :offset="1">
           <div
             style="margin-top: 20px;"
             @click="handleClick(item,index)"
-            :class="['proitem', userCheck[index] ? 'prochecked' : '']"
+            :class="['proitem', productCheck[index] ? 'prochecked' : '']"
           >
-            <span style="margin-left: 30px;">{{item.name}}____{{item.phone}}</span>
+            <span style="margin-left: 30px;">{{item.name}}</span>
           </div>
         </el-col>
         <el-button
-        @click = "bind1"
+          @click="addGroups"
           type="primary"
           plain
           style="margin-top: 50px; float: right; margin-right: 50px;"
-        >绑定</el-button>
+        >确定加入</el-button>
+      </el-row>
+    </el-drawer>
+    <el-dialog title="创建新组" :visible.sync="dialogVisible" width="30%">
+      <el-row>
+        <el-col :span="6" style="margin-top: 13px; font-weight: bold;">自定义组名：</el-col>
+        <el-col :span="18">
+          <el-input v-model="groupName" placeholder="组名"></el-input>
+        </el-col>
+      </el-row>
+      <el-row style="margin-top: 30px;">
+        <el-col :span="6" style="margin-top: 13px; font-weight: bold;">设置组长：</el-col>
+        <el-col :span="18">
+          <el-select label=" " v-model="grouper">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :value="item.value"
+              :label="item.label"
+            ></el-option>
+          </el-select>
+        </el-col>
       </el-row>
 
-  </div>
-</el-dialog>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="creat">确定创建</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog title="消息下发" :visible.sync="dialogVisible1" width="30%">
+      <!-- <span>这是一段信息</span> -->
+      <el-row>
+        <el-col :span="6" style="margin-top: 12px; font-weight: bold">下发的消息:</el-col>
+        <el-col :span="18">
+          <el-input v-model="issueMessage" placeholder="下发的消息"></el-input>
+        </el-col>
+      </el-row>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible1 = false">取 消</el-button>
+        <el-button type="primary" @click="issue1">下发</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -221,10 +450,10 @@ import {
   NewDeviceDataOne,
   ProductOne,
   updated_product,
-  sendMessage,
+  sendMessage
 } from "@/api/index";
 import { DeleteUsers, UserDetail, EditUser } from "@/api/admin";
-import productDetail from "./productDetail";
+import productDetail from "../admin/productDetail";
 export default {
   name: "product",
   components: {
@@ -244,8 +473,6 @@ export default {
       detail: {},
       search: "",
       show: true,
-      searchShow: false,
-      selectShow: false,
       viewMoreproduct: false,
       product: {
         protocolType: "接入类型",
@@ -254,7 +481,7 @@ export default {
       },
       currentPage: 1,
       // currentPage 初始页
-      pageSize: 10,
+      pageSize: 5,
       // 每页的数据
       DeleteKey: { productKey: "" },
       deleteId: "",
@@ -268,8 +495,6 @@ export default {
       drawer: false,
       dialogVisible: false,
       dialogVisible1: false,
-      dialogVisible2: false,
-      dialogVisible3: false,
       groupName: "",
       grouper: "",
       productName: "",
@@ -280,27 +505,17 @@ export default {
       groupsMessage: [],
       groupsShow: true,
       productCheck: [],
-      whichGroup: "all",
+      whichGroup: {},
       totalShow: true,
       groupsDetail: [],
       groupCheck: [],
       issueMessage: "",
-      selectedProduct: [],
-      judge:null,
-      userList: [],
-      userValue:"",
-      userCheck: [],
-      whichUser:{},
-      whichProduct:{},
-      res:{},
-      show: true,
-      data:[],
-      groups:[],
+      selectedProduct: []
     };
   },
   computed: {
     total() {
-      return this.data.filter(
+      return this.productList2.filter(
         data =>
           !this.search ||
           data.productName.toLowerCase().includes(this.search.toLowerCase())
@@ -316,7 +531,6 @@ export default {
     //  this.timer =  setInterval(this.products, 5000);
 
     this.products();
-
   },
   //   beforeDestroy(){
   //  clearInterval(this.timer);
@@ -334,34 +548,7 @@ export default {
 
   methods: {
     products() {
-      var username = window.sessionStorage.getItem("username")
-           UserDetail(username).then(res => {
-        if (res.msg == "ok") {
-          this.userList = res.data.extraInfo.userMessage;
-                  var groupsDetail = res.data.extraInfo.groups;
-        this.groups = [];
-        groupsDetail.forEach(item => {
-          var obj = {
-            label: item.name,
-            value: item.name
-          };
-          this.groups.push(obj);
-        });
-        var obj = {
-          label: "未分组",
-          value: "un"
-        };
-        this.groups.push(obj);
-                var obj = {
-          label: "全部",
-          value: "all"
-        };
-        this.groups.push(obj);
-          this.res = res.data
-          console.log(this.userList)
-          this.userCheck = new Array(this.userList.length).fill(false);
-        }
-      });
+      this.loading = false;
       allProductKey().then(res => {
         if (res.msg == "ok") {
           this.productNameList = res.data.productKeys;
@@ -377,137 +564,87 @@ export default {
             this.productList1 = res.data;
             console.log(this.productList1);
             // console.log(this.productList1);
-this.judge = []
-           this.productList1.forEach(item => {
-                var jud = {
-                  productName: item.productName,
-                  productKey: item.productKey
-                };
-                this.judge.push(jud);
 
-                item.deviceName = [];
-                item.latestData = [];
-                console.log(item.deviceData);
-                if (item.deviceData !== null) {
-                  for (var i = 0; i < item.deviceData.length; i++) {
-                    item.deviceName.push(item.deviceData[i].deviceName);
-                  }
-                  if (item.extraInfo.fence !== "-") {
-                    UserDetail(username).then(res => {
-                      console.log(res);
-                      this.fenceList = res.data.extraInfo.fence;
-                      window.sessionStorage.setItem(
-                        "fenceList",
-                        JSON.stringify(this.fenceList)
-                      );
-                      window.sessionStorage.setItem(
-                        "fenceData",
-                        JSON.stringify(res.data)
-                      );
-
-                      if (
-                        this.fenceList.length !== 0 ||
-                        this.fenceList !== null ||
-                        this.fenceList !== undefined
-                      ) {
-                        for (var i = 0; i < this.fenceList.length; i++) {
-                          if (
-                            item.extraInfo.fence ==
-                            this.fenceList[i].fence.fenceName
-                          ) {
-                            item.latestData.fence = this.fenceList[
-                              i
-                            ].fence.data;
-                          }
-                        }
-                      }
-                      this.fenceNum = this.fenceList.length;
-                      var fenceData = res.data;
-                      window.sessionStorage.setItem(
-                        "fenceList",
-                        JSON.stringify(this.fenceList)
-                      );
-                      window.sessionStorage.setItem(
-                        "fenceData",
-                        JSON.stringify(fenceData)
-                      );
-                    });
-                  } else {
-                    item.latestData.fence = "-";
-                  }
-                  console.log(item);
-                  if (item.deviceName.includes("BA")) {
-                    item.latestData.body =
-                      item.deviceData[
-                        item.deviceName.indexOf("BA")
-                      ].extraInfo.body;
-                    item.latestData.skin =
-                      item.deviceData[
-                        item.deviceName.indexOf("BA")
-                      ].extraInfo.skin;
-                  } else {
-                    item.latestData.body = "-";
-                    item.latestData.skin = "-";
-                  }
-                  if (item.deviceName.includes("C2")) {
-                    item.latestData.heartRate =
-                      item.deviceData[
-                        item.deviceName.indexOf("C2")
-                      ].extraInfo.BPHeart;
-                    item.latestData.bpHigh =
-                      item.deviceData[
-                        item.deviceName.indexOf("C2")
-                      ].extraInfo.BPHigh;
-                    item.latestData.bpLow =
-                      item.deviceData[
-                        item.deviceName.indexOf("C2")
-                      ].extraInfo.BPLow;
-                  } else {
-                    item.latestData.heartRate = "-";
-                    item.latestData.bpHigh = "-";
-                    item.latestData.bpLow = "-";
-                  }
-                  if (item.deviceName.includes("F6")) {
-                    item.latestData.stepNum =
-                      item.deviceData[
-                        item.deviceName.indexOf("F6")
-                      ].extraInfo.stepNum;
-                    item.latestData.heart =
-                      item.deviceData[
-                        item.deviceName.indexOf("F6")
-                      ].extraInfo.timeStamp;
-                  } else {
-                    item.latestData.stepNum = "-";
-                    item.latestData.heart = "-";
-                  }
-
-                  if (item.deviceName.includes("A4")) {
-                    item.latestData.location =
-                      item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
-                  } else {
-                    item.latestData.location = "-";
-                  }
-                } else {
-                  item.latestData = {
-                    body: "-",
-                    skin: "-",
-                    heartRate: "-",
-                    bpHigh: "-",
-                    bpLow: "-",
-                    stepNum: "-",
-                    location: "",
-                    heart: "-",
-                    fence: "-",
-                    ifIn: "-"
-                  };
+            this.productList1.forEach(item => {
+              item.deviceName = [];
+              item.latestData = {};
+              if (item.deviceData !== null) {
+                for (var i = 0; i < item.deviceData.length; i++) {
+                  item.deviceName.push(item.deviceData[i].deviceName);
                 }
-              });
-              this.loading = false;
+                if (item.deviceName.includes("BA")) {
+                  item.latestData.body =
+                    item.deviceData[
+                      item.deviceName.indexOf("BA")
+                    ].extraInfo.body;
+                  item.latestData.skin =
+                    item.deviceData[
+                      item.deviceName.indexOf("BA")
+                    ].extraInfo.skin;
+                }
+                if (item.deviceName.includes("C2")) {
+                  item.latestData.heartRate =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPHeart;
+                  item.latestData.bpHigh =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPHigh;
+                  item.latestData.bpLow =
+                    item.deviceData[
+                      item.deviceName.indexOf("C2")
+                    ].extraInfo.BPLow;
+                }
+                if (item.deviceName.includes("F6")) {
+                  item.latestData.stepNum =
+                    item.deviceData[
+                      item.deviceName.indexOf("F6")
+                    ].extraInfo.stepNum;
+                  item.latestData.heart =
+                    item.deviceData[
+                      item.deviceName.indexOf("F6")
+                    ].extraInfo.timeStamp;
+                }
+                if (item.deviceName.includes("A4")) {
+                  item.latestData.location =
+                    item.deviceData[item.deviceName.indexOf("A4")].extraInfo;
+                }
+              } else {
+                item.latestData = {
+                  body: "-",
+                  skin: "-",
+                  heartRate: "-",
+                  bpHigh: "-",
+                  bpLow: "-",
+                  stepNum: "-",
+                  location: "",
+                  heart: "-"
+                };
+              }
+              // console.log(item.deviceData.length)
+            });
             this.productList2 = [];
             this.options = [];
             console.log(this.productList1);
-            this.data = this.productList1;
-            console.log(this.data)
+            if (this.productList1.length !== 0) {
+              this.productList1.forEach(item => {
+                if (item.extraInfo.groupStatus.status == "un") {
+                  this.productList2.push(item);
+                }
+              });
+            }
+
+            console.log(this.productCheck);
+            if (this.productList2.length !== 0) {
+              this.productList2.forEach(item => {
+                var obj = {
+                  value: item.productName,
+                  label: item.productName
+                };
+                this.options.push(obj);
+              });
+            }
 
             (this.currentPage = 1), (this.alertMessage = []);
             this.latestAlert = [];
@@ -516,24 +653,24 @@ this.judge = []
                 productName: this.productList1[i].productName,
                 alertData: []
               };
-              if (this.productList1[i].latestData.body !== "-") {
-                if (
-                  this.productList1[i].latestData.body > 37 ||
-                  this.productList1[i].latestData.body < 35
-                ) {
-                  console.log("体温");
-                  obj.alertData.push({ alert: "温度报警" });
-                }
-              }
-              if (this.productList1[i].latestData.heartRate !== "-") {
-                if (
-                  this.productList1[i].latestData.heartRate > 100 ||
-                  this.productList1[i].latestData.heartRate < 60
-                ) {
-                  console.log("心率");
-                  obj.alertData.push({ alert: "心率报警" });
-                }
-              }
+              // if (this.productList1[i].latestData.body !== "-") {
+              //   if (
+              //     this.productList1[i].latestData.body > 37 ||
+              //     this.productList1[i].latestData.body < 35
+              //   ) {
+              //     console.log("体温");
+              //     obj.alertData.push({ alert: "温度报警" });
+              //   }
+              // }
+              // if (this.productList1[i].latestData.heartRate !== "-") {
+              //   if (
+              //     this.productList1[i].latestData.heartRate > 100 ||
+              //     this.productList1[i].latestData.heartRate < 60
+              //   ) {
+              //     console.log("心率");
+              //     obj.alertData.push({ alert: "心率报警" });
+              //   }
+              // }
               this.alertMessage.push(obj);
             }
             console.log(this.alertMessage);
@@ -544,7 +681,6 @@ this.judge = []
             }
             // console.log(this.latestAlert);
           });
-          this.loading = false;
         } else {
           this.$message.error(res.msg);
         }
@@ -647,10 +783,12 @@ this.judge = []
       this.viewMoreproduct = !this.viewMoreproduct;
     },
     editproduct(val) {
-      this.condition = 1;
-      this.diglogTitle = "用户围栏信息修改(建议不要轻易修改)";
+      //   this.condition = 2;
+      //   this.diglogTitle = "将用户分到下面的小组";
       this.detail = val;
-      this.viewMoreproduct = !this.viewMoreproduct;
+
+      //   this.viewMoreproduct = !this.viewMoreproduct;
+      this.drawer = true;
     },
     closeDialog() {
       this.viewMoreproduct = !this.viewMoreproduct;
@@ -685,39 +823,7 @@ this.judge = []
     },
     handleSelectionChange(val, index) {
       this.multipleSelection = val;
-      
-    },
-    batchUnbind() {
-console.log(this.multipleSelection);
-if (this.multipleSelection.length ==0) {
-  this.$message.info("没有选中手环")
-} else {
-  this.multipleSelection.forEach(item=>{
-     ProductOne(item.productKey).then((res)=>{
-   if (res.msg == "ok") {
-    //  res.data.extraInfo.userMessage = {};
-    delete res.data.extraInfo.userMessage
-     console.log(res.data.extraInfo)
-     updated_product({
-       productKey: item.productKey,
-       productName: item.productName,
-       protocolType: "TCP",
-       productType: 1,
-       typeIdentify: item.typeIdentify,
-       description: "",
-       extraInfo: res.data.extraInfo,
-
-     }).then((res1)=>{
-       console.log(res1)
-       if(res1.msg == "ok") {
-         this.$message.success("解绑成功")
-       }
-     })
-   }
- })
-  })
-}
-this.multipleSelection = []
+      console.log(this.multipleSelection);
     },
     creatGroups() {
       this.dialogVisible = true;
@@ -1255,109 +1361,6 @@ this.multipleSelection = []
           
         }
       }
-    },
-    bind(item) {
-this.dialogVisible3 = true
-this.whichProduct = item
-    },
-    unbind() {
-console.log("解绑")
- ProductOne(this.whichProduct.productKey).then((res)=>{
-   if (res.msg == "ok") {
-    //  res.data.extraInfo.userMessage = {};
-    delete res.data.extraInfo.userMessage
-     console.log(res.data.extraInfo)
-     updated_product({
-       productKey: this.whichProduct.productKey,
-       productName: this.whichProduct.productName,
-       protocolType: "TCP",
-       productType: 1,
-       typeIdentify: this.whichProduct.typeIdentify,
-       description: "",
-       extraInfo: res.data.extraInfo,
-
-     }).then((res1)=>{
-       console.log(res1)
-       if(res1.msg == "ok") {
-         this.$message.success("解绑成功")
-         this.dialogVisible3 = false;
-       }
-     })
-   }
- })
-    },
-    makeSure() {
-console.log("用户绑定")
-console.log(this.whichProduct)
-
-this.dialogVisible2 = true
-this.dialogVisible3 = false
-    },
-        handleClick(item, index) {
-      var flag = this.userCheck[index];
-      this.userCheck = new Array(this.userList.length).fill(false);
-      this.userCheck.splice(index, 1, !flag);
-      console.log(this.userCheck);
-      console.log(item);
-      this.whichUser = item;
-    },
-    bind1() {
- ProductOne(this.whichProduct.productKey).then((res)=>{
-   if (res.msg == "ok") {
-     res.data.extraInfo.userMessage = this.whichUser;
-     console.log(res.data.extraInfo)
-     updated_product({
-       productKey: this.whichProduct.productKey,
-       productName: this.whichProduct.productName,
-       protocolType: "TCP",
-       productType: 1,
-       typeIdentify: this.whichProduct.typeIdentify,
-       description: "",
-       extraInfo: res.data.extraInfo,
-
-     }).then((res1)=>{
-       console.log(res1)
-       if(res1.msg == "ok") {
-         this.$message.success("绑定成功")
-         this.dialogVisible2 = false;
-       }
-     })
-   }
- })
-    },
-    startSearch() {
-this.searchShow = true;
-this.show = false;
-this.selectShow = false;
-    },
-    startSelect() {
-this.searchShow = false;
-this.show = false;
-this.selectShow = true;
-    },
-        grouping() {
-      console.log(this.whichGroup);
-      if (this.whichGroup !== "all") {
-        this.data = [];
-        this.productList1.forEach(item => {
-          if (
-            item.extraInfo.groupStatus.groups == this.whichGroup ||
-            item.extraInfo.groupStatus.status == this.whichGroup
-          ) {
-            this.data.push(item);
-          }
-        });
-      } else {
-        this.data = this.productList1;
-      }
-    },
-    back() {
-      this.searchShow = false;
-this.show = true;
-this.selectShow = false;
-this.whichGroup = "all"
-this.search = ""
-this.data = this.productList1
     }
   }
 };
@@ -1430,22 +1433,6 @@ this.data = this.productList1
   border-bottom: 2px solid #aa9457;
   border-top: 2px solid #aa9457;
 }
-.btn3 {
-  padding: 15px 5px;
-  line-height: 18px;
-  width: 100px;
-  border-radius: 10px;
-  font-size: 14px;
-  background-color: #68a3e7;
-  color: #fff;
-}
-.btn3:hover {
-  background-color: #fff;
-  color: #68a3e7;
-  border-radius: 0px;
-  border-bottom: 2px solid #68a3e7;
-  border-top: 2px solid #68a3e7;
-}
 
 ::v-deep .el-table__expanded-cell {
   background-color: transparent !important;
@@ -1477,25 +1464,5 @@ this.data = this.productList1
 .prochecked {
   background-color: rgba(24, 144, 255, 0.2);
 }
-.proitem1 {
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.4);
-  z-index: 10;
-  margin-top: 20px;
-}
-.prochecked1 {
-  border-radius: 20px;
-  background-color: rgba(227, 241, 247, 1);
-  z-index: 20;
-  margin-top: 20px;
-}
- .select {
-          width: 90%;
-          float: left;
-          margin-left: 2%;
-          background-color: #ebf7f7 !important;
-          color: #9b8f8f;
-          border: 1px solid #ebf7f7;
-          outline: none;
-        }
+
 </style>

@@ -32,6 +32,11 @@
             <template slot="prepend">密钥：</template>
           </el-input>
         </el-col>
+              <el-col :span="12" :offset="0">
+          <el-input placeholder="请输入内容" v-model="bind">
+            <template slot="prepend">绑定：</template>
+          </el-input>
+        </el-col>
         <!-- <el-col :span="12" :offset="0">
         <el-input placeholder="请输入内容" :value="formdata(product.createdAt)">
           <template slot="prepend">创建时间：</template>
@@ -119,7 +124,8 @@ export default {
       activeNames: "",
       fence: "",
       options: [],
-      UserDetail: []
+      UserDetail: [],
+      bind:"",
     };
   },
   created() {
@@ -130,6 +136,11 @@ export default {
       handler(val) {
         this.product = val;
         console.log(this.product);
+              if(this.product.extraInfo.userMessage == undefined || this.product.extraInfo.userMessage == {}) {
+        this.bind = "未绑定"
+      } else {
+        this.bind = this.product.extraInfo.userMessage.name
+      }
         //在获取到pk的时候，获取产品下设备的信息
         //目的是以防设备注册的时候出现问题，点开查不了设备信息的尴尬情况
         //判断7个设备是否全部成功注册，如果没有就不显示设备信息这一项。如果注册的数量不够，需要判断少注册哪一个设备，注册的按钮不显示
@@ -144,6 +155,7 @@ export default {
   methods: {
     dataPrepare() {
       this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
+
     },
     formdata(val) {
       return dataType(val);
@@ -173,7 +185,7 @@ export default {
       console.log("下行反馈");
     },
 
-    updateproduct() {
+updateproduct    () {
       this.$confirm("修改电子围栏可能会造成影响，确定修改?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",

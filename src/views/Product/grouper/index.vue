@@ -33,12 +33,12 @@
         <div slot="header" style="margin-bottom: 50px">
           <!-- <el-col :span="3" class="text-center">
             <router-link class="btn" to="/products/createProduct">创建用户</router-link>
-          </el-col> -->
+          </el-col>-->
           <el-col :span="3" class="text-center">
             <el-button class="btn1" @click="sendMessage">下发消息</el-button>
           </el-col>
           <el-col :span="12">
-            <el-input style = "margin-top: 6px;" v-show="visible" v-model="input" placeholder="下发消息"></el-input>
+            <el-input style="margin-top: 6px;" v-show="visible" v-model="input" placeholder="下发消息"></el-input>
           </el-col>
         </div>
         <!-- data绑定的数据是搜索筛选的数据 -->
@@ -113,7 +113,7 @@
                   size="mini "
                   @click="detailproduct(scope.row)"
                 ></el-button>
-                <el-button
+                <!-- <el-button
                   type="primary"
                   plain
                   icon="el-icon-edit"
@@ -126,7 +126,7 @@
                   icon="el-icon-delete"
                   size="mini "
                   @click="deleteproduct(scope.$index, scope.row, productList)"
-                ></el-button>
+                ></el-button>-->
               </template>
             </el-table-column>
           </el-table>
@@ -165,6 +165,7 @@ import {
   ProductOne,
   sendMessage
 } from "@/api/index";
+import { UserDetail } from "@/api/admin";
 import productDetail from "./productDetail";
 export default {
   name: "product",
@@ -203,7 +204,7 @@ export default {
       date: "",
       visible: true,
       multipleSelection: [],
-      input: "",
+      input: ""
     };
   },
   computed: {
@@ -240,13 +241,21 @@ export default {
 
   methods: {
     products() {
-      allProductKey().then(res => {
+      var username = window.sessionStorage.getItem("username");
+      UserDetail(username).then(res => {
         if (res.msg == "ok") {
           this.productNameList = res.data.productKeys;
           console.log(this.productNameList);
+          this.productNameList = JSON.parse(
+            window.sessionStorage.getItem("productNameList")
+          );
+          var productKeys = JSON.parse(
+            window.sessionStorage.getItem("productKeys")
+          );
+          console.log(productKeys);
           getDeviceDatas({
-            username: "智能手环测试",
-            pkList: this.productNameList,
+            username: "admin",
+            pkList: productKeys,
             startTime: 100000
           }).then(res => {
             console.log(res);
@@ -314,274 +323,6 @@ export default {
               // console.log(item.deviceData.length)
             });
             console.log(this.productList1);
-            this.productList1.push(
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "测试围栏1",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 110,
-                  bpLow: 70,
-                  heart: 1654331273,
-                  heartRate: 78,
-                  skin: 29,
-                  stepNum: 123
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试3",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "合肥市庐阳区",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 35,
-                  bpHigh: 109,
-                  bpLow: 78,
-                  heart: 1654331273,
-                  heartRate: 82,
-                  skin: 31,
-                  stepNum: 64
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试4",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "测试围栏3",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 123,
-                  bpLow: 87,
-                  heart: 1654331273,
-                  heartRate: 80,
-                  skin: 30,
-                  stepNum: 43
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试5",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "合肥市蜀山区",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 37,
-                  bpHigh: 120,
-                  bpLow: 68,
-                  heart: 1654331273,
-                  heartRate: 81,
-                  skin: 28,
-                  stepNum: 345
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试6",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 35,
-                  bpHigh: 113,
-                  bpLow: 68,
-                  heart: 1654331273,
-                  heartRate: 86,
-                  skin: 27,
-                  stepNum: 456
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试7",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "翡翠湖区域围栏",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 114,
-                  bpLow: 77,
-                  heart: 1654331273,
-                  heartRate: 79,
-                  skin: 29,
-                  stepNum: 0
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试8",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "合肥市庐阳区",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 35,
-                  bpHigh: 123,
-                  bpLow: 67,
-                  heart: 1654331273,
-                  heartRate: 87,
-                  skin: 30,
-                  stepNum: 0
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试9",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "合肥市蜀山区",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 122,
-                  bpLow: 65,
-                  heart: 1654331273,
-                  heartRate: 87,
-                  skin: 31,
-                  stepNum: 234
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试10",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "测试围栏1",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 35,
-                  bpHigh: 117,
-                  bpLow: 67,
-                  heart: 1654331273,
-                  heartRate: 84,
-                  skin: 32,
-                  stepNum: 2354
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试11",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "测试围栏1",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 35,
-                  bpHigh: 121,
-                  bpLow: 73,
-                  heart: 1654331273,
-                  heartRate: 84,
-                  skin: 31,
-                  stepNum: 234
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试12",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "合肥市",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 37,
-                  bpHigh: 123,
-                  bpLow: 76,
-                  heart: 1654331273,
-                  heartRate: 93,
-                  skin: 32,
-                  stepNum: 2344
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试13",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "-",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 114,
-                  bpLow: 77,
-                  heart: 1654331273,
-                  heartRate: 79,
-                  skin: 29,
-                  stepNum: 0
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试14",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "测试围栏2",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 114,
-                  bpLow: 77,
-                  heart: 1654331273,
-                  heartRate: 79,
-                  skin: 29,
-                  stepNum: 0
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试15",
-                typeIdentify: "1"
-              },
-              {
-                extraInfo: {
-                  deviceId: "3f62c497d94f4e11bcf87698a3e1b759",
-                  fence: "测试围栏2",
-                  nickname: "223334455666778"
-                },
-                latestData: {
-                  body: 36,
-                  bpHigh: 114,
-                  bpLow: 77,
-                  heart: 1654331273,
-                  heartRate: 79,
-                  skin: 29,
-                  stepNum: 0
-                },
-                productKey: "c9810br4s1fe4r7jpjng",
-                productName: "手环测试16",
-                typeIdentify: "1"
-              }
-            );
             (this.currentPage = 1), (this.alertMessage = []);
             this.latestAlert = [];
             for (var i = 0; i < this.productList1.length; i++) {
@@ -623,51 +364,51 @@ export default {
       });
     },
 
-    deleteproduct(index, row, rows) {
-      this.DeleteKey.productKey = row.productKey;
-      this.deleteId = row.extraInfo.deviceId;
-      // console.log(this.DeleteKey)
-      // console.log(this.deleteId)
-      this.$confirm("此操作将永久删除用户, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          rows.splice(index, 1);
-          cloudDevcieDelete(this.deleteId).then(res => {
-            console.log(res);
-            if (res.msg == "ok") {
-              console.log("ok");
-            } else {
-              this.$message({
-                type: "error",
-                message: res.msg
-              });
-            }
-            Delete_product(this.DeleteKey).then(res => {
-              if (res.code == 200) {
-                this.$message({
-                  type: "success",
-                  message: "删除成功!"
-                });
-                this.products();
-              } else {
-                this.$message({
-                  type: "info",
-                  message: res.msg
-                });
-              }
-            });
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
-    },
+    // deleteproduct(index, row, rows) {
+    //   this.DeleteKey.productKey = row.productKey;
+    //   this.deleteId = row.extraInfo.deviceId;
+    //   // console.log(this.DeleteKey)
+    //   // console.log(this.deleteId)
+    //   this.$confirm("此操作将永久删除用户, 是否继续?", "提示", {
+    //     confirmButtonText: "确定",
+    //     cancelButtonText: "取消",
+    //     type: "warning"
+    //   })
+    //     .then(() => {
+    //       rows.splice(index, 1);
+    //       cloudDevcieDelete(this.deleteId).then(res => {
+    //         console.log(res);
+    //         if (res.msg == "ok") {
+    //           console.log("ok");
+    //         } else {
+    //           this.$message({
+    //             type: "error",
+    //             message: res.msg
+    //           });
+    //         }
+    //         Delete_product(this.DeleteKey).then(res => {
+    //           if (res.code == 200) {
+    //             this.$message({
+    //               type: "success",
+    //               message: "删除成功!"
+    //             });
+    //             this.products();
+    //           } else {
+    //             this.$message({
+    //               type: "info",
+    //               message: res.msg
+    //             });
+    //           }
+    //         });
+    //       });
+    //     })
+    //     .catch(() => {
+    //       this.$message({
+    //         type: "info",
+    //         message: "已取消删除"
+    //       });
+    //     });
+    // },
 
     // 打开弹窗
     detailproduct(val) {
@@ -719,33 +460,30 @@ export default {
     },
     sendMessage() {
       var multipleSelection1 = [];
-console.log(this.multipleSelection)
-if (this.multipleSelection.length == 0) {
-  this.$message.info("当前没有选中用户")
-  this.input = ""
-} else {
-this.multipleSelection.forEach(item=>{
-  console.log(item)
-  if (item.productName == "手环测试1" || item.productName == "手环测试2") {
-    multipleSelection1.push(item.extraInfo.deviceId)
-  }
-})
-console.log(multipleSelection1)
-if (multipleSelection1.length == 0) {
-  this.$mesasge.success("发送成功")
-  this.input = ""
-} else {
-  multipleSelection1.forEach(item1=>{
-    sendMessage(item1,this.input).then((res)=>{
-      console.log(res)
-
-    })
-    this.$message.success("发送成功")
-    this.input = ""
-  })
-}
-}
-    },
+      console.log(this.multipleSelection);
+      if (this.multipleSelection.length == 0) {
+        this.$message.info("当前没有选中用户");
+        this.input = "";
+      } else {
+        this.multipleSelection.forEach(item => {
+          console.log(item);
+          multipleSelection1.push(item.extraInfo.deviceId);
+        });
+        console.log(multipleSelection1);
+        if (multipleSelection1.length == 0) {
+          this.$mesasge.success("发送成功");
+          this.input = "";
+        } else {
+          multipleSelection1.forEach(item1 => {
+            sendMessage(item1, this.input).then(res => {
+              console.log(res);
+            });
+            this.$message.success("发送成功");
+            this.input = "";
+          });
+        }
+      }
+    }
   }
 };
 </script>

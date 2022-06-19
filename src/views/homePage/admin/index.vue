@@ -322,15 +322,64 @@
                 class="title"
                 style="text-align: center;
                color: #00f6ff; font-size: 23px; line-height: 80px; height: 80px;"
+                v-if="alertTitle"
               >
                 <img src="@/assets/img/icon05.png" alt style="margin-top:10px;" />
                 今日报警（{{alertInfo.length}}条）
+                <svg
+                  @click="startSearch1"
+                  style="float: right; margin-right: 15px; height: 80px; line-height: 80px;"
+                  t="1655345322360"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="2143"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M912.072815 946.738335c-4.78498 0-9.56996-1.824555-13.220093-5.475711L650.662083 693.076078c-0.285502-0.285502-0.561795-0.579191-0.827855-0.883113l-6.979972-7.948019c-6.671956-7.594979-6.096858-19.11843 1.297552-26.012444 32.130791-29.958312 57.424874-65.413825 75.181283-105.379049 18.374486-41.35692 27.691689-85.472674 27.691689-131.122363 0-86.355787-33.628912-167.542854-94.691639-228.604558-61.062727-61.062727-142.249795-94.691639-228.604558-94.691639s-167.541831 33.628912-228.604558 94.691639c-61.062727 61.062727-94.691639 142.249795-94.691639 228.604558s33.628912 167.542854 94.691639 228.604558c61.062727 61.062727 142.249795 94.691639 228.604558 94.691639 26.15059 0 52.16508-3.130294 77.326133-9.301853 5.090948-1.353834 73.4038-19.189038 120.842229-14.809287 10.282181 0.948605 17.847483 10.05296 16.899902 20.335141s-10.047844 17.853623-20.335141 16.899902c-41.659819-3.845585-107.272165 13.571087-107.930151 13.747095-0.125867 0.033769-0.251733 0.065492-0.3776 0.097214-28.132734 6.91755-57.20998 10.425444-86.425372 10.425444-48.684816 0-95.922676-9.538237-140.402727-28.352745-42.953278-18.166755-81.523735-44.172035-114.644063-77.290317-33.119305-33.119305-59.123562-71.691809-77.29134-114.644063-18.813484-44.479027-28.352745-91.716888-28.352745-140.401704s9.53926-95.922676 28.352745-140.402727c18.167778-42.953278 44.172035-81.524758 77.29134-114.644063 33.119305-33.119305 71.690786-59.123562 114.644063-77.29134 44.480051-18.813484 91.717911-28.352745 140.402727-28.352745s95.922676 9.53926 140.401704 28.352745c42.953278 18.167778 81.524758 44.173059 114.644063 77.29134 33.118282 33.119305 59.123562 71.690786 77.29134 114.644063 18.813484 44.480051 28.351722 91.717911 28.351722 140.402727 0 50.912553-10.399861 100.136651-30.91101 146.305157-17.285688 38.906102-40.96704 73.973782-70.526263 104.47547l242.313791 242.310721c7.302313 7.30129 7.302313 19.138896 0.001023 26.440186C921.642774 944.912757 916.857794 946.738335 912.072815 946.738335z"
+                    p-id="2144"
+                    fill="#e6e6e6"
+                  />
+                  <path
+                    d="M165.576059 421.887656c-0.696872 0-1.400906-0.038886-2.110057-0.118704-10.260691-1.152243-17.645892-10.404977-16.493649-20.666692 4.838192-43.080168 17.974373-83.934644 39.046295-121.429607 5.058203-9.002025 16.457834-12.19781 25.458835-7.139607 9.002025 5.058203 12.19781 16.45681 7.139607 25.458835-18.605753 33.108049-30.207999 69.202105-34.484396 107.282399C183.060269 414.827867 174.967964 421.887656 165.576059 421.887656z"
+                    p-id="2145"
+                    fill="#e6e6e6"
+                  />
+                </svg>
               </div>
-              <!-- <p style = "color: #00f6fe;text-align: left; font-size: 18px; margin-left: 30px;"></p> -->
+              <div v-if="!alertTitle" style="height: 80px; line-height: 80px;">
+                <input
+                  @input="inputChange1"
+                  class="input"
+                  v-model="alertSearch"
+                  placeholder="请输入手环名搜索"
+                />
+                <svg
+                  @click="change1"
+                  style="margin-top: 2px; margin-left: 10px;"
+                  t="1655345531987"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="2622"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M512 0C230.4 0 0 230.4 0 512c0 281.6 230.4 512 512 512 281.6 0 512-230.4 512-512C1024 230.4 793.6 0 512 0zM512 985.6c-262.4 0-473.6-211.2-473.6-473.6 0-262.4 211.2-473.6 473.6-473.6 262.4 0 473.6 211.2 473.6 473.6C985.6 774.4 774.4 985.6 512 985.6zM768 256c-6.4-6.4-19.2-6.4-25.6 0L512 486.4 288 256C281.6 249.6 268.8 249.6 256 256 249.6 268.8 249.6 281.6 256 288L486.4 512 256 736c-6.4 6.4-6.4 19.2 0 25.6 6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4L512 537.6l224 224c6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4 6.4-6.4 6.4-19.2 0-25.6L537.6 512 768 288C774.4 281.6 774.4 268.8 768 256z"
+                    p-id="2623"
+                    fill="#8a8a8a"
+                  />
+                </svg>
+              </div>
             </div>
             <div class="bottom" v-if="alertShow">
-              <vue-seamless-scroll :data="alertInfo" class="seamless-warp">
-                <div class="cardList" v-for="(item,index) in alertInfo" :key="index">
+              <vue-seamless-scroll :data="data1" class="seamless-warp">
+                <div class="cardList" v-for="(item,index) in data1" :key="index">
                   <p style="color: #fff; font-size: 15px; margin-left: 20px;">
                     <span>{{index+1}}、</span>
                     <span style="margin-top: 20px;">{{item.productName}}____{{item.deviceName}}</span>
@@ -675,31 +724,30 @@
               </div>
 
               <div v-if="wenduShow">
-                <div class = "title" @click="backToOverall" style = "cursor: pointer">
-                <svg
-                  
-                  style="margin-left: 30px;"
-                  t="1655382518530"
-                  class="icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="9182"
-                  width="20"
-                  height="20"
-                >
-                  <path
-                    d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
-                    fill="#3793DF"
-                    p-id="9183"
-                  />
-                  <path
-                    d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
-                    fill="#EB4AF4"
-                    p-id="9184"
-                  />
-                </svg>
-                <span style="color: #2770bb">温度（一天内）</span>
+                <div class="title" @click="backToOverall" style="cursor: pointer">
+                  <svg
+                    style="margin-left: 30px;"
+                    t="1655382518530"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="9182"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
+                      fill="#3793DF"
+                      p-id="9183"
+                    />
+                    <path
+                      d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
+                      fill="#EB4AF4"
+                      p-id="9184"
+                    />
+                  </svg>
+                  <span style="color: #2770bb">温度（一天内）</span>
                 </div>
                 <div v-if="dataShow" id="body" v-loading="loading"></div>
                 <div v-if="!dataShow" style="text-align: center; margin-top: 30px">
@@ -733,31 +781,30 @@
                 </div>
               </div>
               <div v-if="xinlvShow">
-                <div class = "title" @click="backToOverall" style = "cursor: pointer" >
-                <svg
-                 
-                  style="margin-left: 30px;"
-                  t="1655382518530"
-                  class="icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="9182"
-                  width="20"
-                  height="20"
-                >
-                  <path
-                    d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
-                    fill="#3793DF"
-                    p-id="9183"
-                  />
-                  <path
-                    d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
-                    fill="#EB4AF4"
-                    p-id="9184"
-                  />
-                </svg>
-                <span style="color: #2770bb">心率（一天内）</span>
+                <div class="title" @click="backToOverall" style="cursor: pointer">
+                  <svg
+                    style="margin-left: 30px;"
+                    t="1655382518530"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="9182"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
+                      fill="#3793DF"
+                      p-id="9183"
+                    />
+                    <path
+                      d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
+                      fill="#EB4AF4"
+                      p-id="9184"
+                    />
+                  </svg>
+                  <span style="color: #2770bb">心率（一天内）</span>
                 </div>
                 <div v-if="dataShow" id="body" v-loading="loading"></div>
                 <div v-if="!dataShow" style="text-align: center;margin-top: 30px">
@@ -801,51 +848,52 @@
                 </div>
               </div>
               <div v-if="guijiShow">
-                <div class = "title" style = "cursor: pointer"     @click="backToOverall">
-                <svg
-              
-                  style="margin-left: 30px;"
-                  t="1655382518530"
-                  class="icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="9182"
-                  width="20"
-                  height="20"
-                >
-                  <path
-                    d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
-                    fill="#3793DF"
-                    p-id="9183"
-                  />
-                  <path
-                    d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
-                    fill="#EB4AF4"
-                    p-id="9184"
-                  />
-                </svg>
-                <span style="color: #2770bb">轨迹（两天内）</span>
+                <div class="title" style="cursor: pointer" @click="backToOverall">
+                  <svg
+                    style="margin-left: 30px;"
+                    t="1655382518530"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="9182"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M856.746667 546.133333h-682.666667c-18.773333 0-34.133333-15.36-34.133333-34.133333s15.36-34.133333 34.133333-34.133333h682.666667c18.773333 0 34.133333 15.36 34.133333 34.133333s-15.36 34.133333-34.133333 34.133333z"
+                      fill="#3793DF"
+                      p-id="9183"
+                    />
+                    <path
+                      d="M455.68 836.266667c-8.533333 0-17.066667-3.413333-23.893333-10.24l-288.426667-290.133334c-13.653333-13.653333-13.653333-34.133333 0-47.786666l288.426667-290.133334c13.653333-13.653333 34.133333-13.653333 47.786666 0 13.653333 13.653333 13.653333 34.133333 0 47.786667L215.04 512l264.533333 266.24c13.653333 13.653333 13.653333 34.133333 0 47.786667-6.826667 6.826667-15.36 10.24-23.893333 10.24z"
+                      fill="#EB4AF4"
+                      p-id="9184"
+                    />
+                  </svg>
+                  <span style="color: #2770bb">轨迹（两天内）</span>
                 </div>
-                             <el-row style="margin-top: 20px; margin-left: 20px;">
+                <el-row style="margin-top: 20px; margin-left: 20px;">
                   <span style="color: #fff; font-size: 15px">具体位置：</span>
-                  <span style="color: #00a6fb;font-size: 18px">{{whichProduct.latestData.location.desc}}</span>
+                  <span
+                    style="color: #00a6fb;font-size: 18px"
+                  >{{whichProduct.latestData.location.desc}}</span>
                 </el-row>
                 <div v-if="dataShow" v-loading="loading">
-                         <baidu-map
-          id="body1"
-          :center="center"
-          :zoom="12"
-          :scroll-wheel-zoom="true"
-          Animation="BMAP_ANIMATION_DROP"
-        >
-          <bm-polyline
-            :path="polylinePath"
-            stroke-color="red"
-            :stroke-opacity="1"
-            :stroke-weight="2"
-          ></bm-polyline>
-        </baidu-map>
+                  <baidu-map
+                    id="body1"
+                    :center="center"
+                    :zoom="12"
+                    :scroll-wheel-zoom="true"
+                    Animation="BMAP_ANIMATION_DROP"
+                  >
+                    <bm-polyline
+                      :path="polylinePath"
+                      stroke-color="red"
+                      :stroke-opacity="1"
+                      :stroke-weight="2"
+                    ></bm-polyline>
+                  </baidu-map>
                 </div>
                 <div v-if="!dataShow" style="text-align: center; margin-top: 30px;">
                   <svg
@@ -904,7 +952,12 @@
 <script>
 import * as echarts from "echarts";
 import "./js/china.js";
-import { alertbyTime, allProductKey, getDeviceDatas,historyData } from "@/api/index";
+import {
+  alertbyTime,
+  allProductKey,
+  getDeviceDatas,
+  historyData
+} from "@/api/index";
 import { UserDetail } from "@/api/admin";
 // import "./js/area_echarts.js";
 export default {
@@ -927,24 +980,31 @@ export default {
       groups: [],
       show: true,
       data: null,
+      data1: null,
       whichProduct: {},
       onlineNum: 0,
       overallShow: true,
       wenduShow: false,
       xinlvShow: false,
       guijiShow: false,
-      whichDevice:"",
+      whichDevice: "",
       dataShow: false,
       loading: true,
-      date1:[],
-      list:null,
-list1:[],
- center: { lng: 117.192342, lat: 31.770919 }, // 中心点坐标
-             polylinePath: [
+      date1: [],
+      list: null,
+      list1: [],
+      center: { lng: 117.192342, lat: 31.770919 }, // 中心点坐标
+      polylinePath: [
         { lng: 116.404, lat: 39.915 },
         { lng: 116.405, lat: 39.92 },
         { lng: 116.423493, lat: 39.907445 }
       ],
+      alertTitle: true,
+      alertSearch: "",
+      positionList: [],
+      whichGroup:"",
+      cityList:[],
+      cityStatistic:[],
     };
   },
   created() {
@@ -1006,50 +1066,6 @@ list1:[],
         console.log(res);
         if (res.msg == "未找到记录") {
           this.alertShow = false; //为了展示改动的地方
-          // this.alertInfo.push(
-          //   {
-          //     productName: "手环测试3",
-          //     deviceName: "AC",
-          //     Content: "温度报警",
-          //     date: "2022-06-06 10:02:28"
-          //   },
-          //   {
-          //     productName: "手环测试5",
-          //     deviceName: "A02",
-          //     Content: "SOS",
-          //     date: "2022-06-06 11:05:28"
-          //   },
-          //   {
-          //     productName: "手环测试7",
-          //     deviceName: "02",
-          //     Content: "SOS取消",
-          //     date: "2022-06-06 13:34:13"
-          //   },
-          //   {
-          //     productName: "手环测试12",
-          //     deviceName: "02",
-          //     Content: "SOS取消",
-          //     date: "2022-06-06 15:45:34"
-          //   },
-          //   {
-          //     productName: "手环测试1",
-          //     deviceName: "02",
-          //     Content: " S0S",
-          //     date: "2022-06-06 16:34:32"
-          //   },
-          //   {
-          //     productName: "手环测试5",
-          //     deviceName: "02",
-          //     Content: "S0S",
-          //     date: "2022-06-06 17:53:23"
-          //   },
-          //   {
-          //     productName: "手环测试2",
-          //     deviceName: "02",
-          //     Content: "SOS取消",
-          //     date: "2022-06-06 19:34:56"
-          //   }
-          // );
         } else if (res.msg == "ok") {
           // this.fenceNum = res.data.
           this.alertShow = true;
@@ -1063,6 +1079,7 @@ list1:[],
                   item.productName = item1.productName;
                 }
               });
+              this.data1 = this.alertInfo;
             });
           }
         } else {
@@ -1093,6 +1110,7 @@ list1:[],
                   productKey: item.productKey
                 };
                 this.judge.push(jud);
+                   window.sessionStorage.setItem("judge", JSON.stringify(this.judge));
 
                 item.deviceName = [];
                 item.latestData = [];
@@ -1105,12 +1123,15 @@ list1:[],
                     UserDetail(username).then(res => {
                       console.log(res);
                       this.fenceList = res.data.extraInfo.fence;
-                            window.sessionStorage.setItem(
-          "fenceList",
-          JSON.stringify(this.fenceList)
-        );
-        window.sessionStorage.setItem("fenceData", JSON.stringify(res.data));
-                      
+                      window.sessionStorage.setItem(
+                        "fenceList",
+                        JSON.stringify(this.fenceList)
+                      );
+                      window.sessionStorage.setItem(
+                        "fenceData",
+                        JSON.stringify(res.data)
+                      );
+
                       if (
                         this.fenceList.length !== 0 ||
                         this.fenceList !== null ||
@@ -1208,65 +1229,103 @@ list1:[],
                   };
                 }
               });
-              console.log(this.productList);
+              // console.log(this.productList);
               this.data = this.productList;
               this.whichProduct = this.productList[0];
               if (this.productList.length !== 0) {
                 this.productShow = true;
                 var date1 = Math.round(new Date().getTime() / 1000);
                 this.onlineNum = 0;
-                this.productList.forEach(item => {
-                  if (
-                    item.deviceName.length == 0
-                  ) {
-                    item.extraInfo.status = "未激活";
-                  } else {
-                    if (item.latestData.heart == "-") {
-                      item.extraInfo.status = "离线";
+                if (this.productList.length !== 0) {
+                  this.productList.forEach(item => {
+                    if (item.deviceName.length == 0) {
+                      item.extraInfo.status = "未激活";
                     } else {
-       if (date1 - item.latestData.heart <= 7200) {
-                      item.extraInfo.status = "在线";
-                      this.onlineNum += 1;
-                    } else if (date1 - item.latestData.heart > 7200) {
-                      item.extraInfo.status = "离线";
+                      if (
+                        item.latestData.heart == "-" ||
+                        item.latestData.heart !== undefined
+                      ) {
+                        item.extraInfo.status = "离线";
+                      } else {
+                        if (date1 - item.latestData.heart <= 7200) {
+                          item.extraInfo.status = "在线";
+                          this.onlineNum += 1;
+                        } else if (date1 - item.latestData.heart > 7200) {
+                          item.extraInfo.status = "离线";
+                        }
+                      }
                     }
+                    if (item.latestData.heart !== "-") {
+                      var date = new Date(item.latestData.heart * 1000);
+                      var Y = date.getFullYear() + "-";
+                      var M =
+                        (date.getMonth() + 1 < 10
+                          ? "0" + (date.getMonth() + 1)
+                          : date.getMonth() + 1) + "-";
+                      var D =
+                        (date.getDate() < 10
+                          ? "0" + date.getDate()
+                          : date.getDate()) +
+                        " " +
+                        " ";
+                      var h =
+                        (date.getHours() < 10
+                          ? "0" + date.getHours()
+                          : date.getHours()) + ":";
+                      var m =
+                        (date.getMinutes() < 10
+                          ? "0" + date.getMinutes()
+                          : date.getMinutes()) + ":";
+                      var s =
+                        date.getSeconds() < 10
+                          ? "0" + date.getSeconds()
+                          : date.getSeconds();
+                      var normalTime = Y + M + D + h + m + s;
+                      item.latestData.normalHeart = normalTime;
+                    } else {
+                      item.latestData.normalHeart = "-";
                     }
-             
-                  }
-                  if (item.latestData.heart !== "-") {
-                    var date = new Date(item.latestData.heart * 1000);
-                    var Y = date.getFullYear() + "-";
-                    var M =
-                      (date.getMonth() + 1 < 10
-                        ? "0" + (date.getMonth() + 1)
-                        : date.getMonth() + 1) + "-";
-                    var D =
-                      (date.getDate() < 10
-                        ? "0" + date.getDate()
-                        : date.getDate()) +
-                      " " +
-                      " ";
-                    var h =
-                      (date.getHours() < 10
-                        ? "0" + date.getHours()
-                        : date.getHours()) + ":";
-                    var m =
-                      (date.getMinutes() < 10
-                        ? "0" + date.getMinutes()
-                        : date.getMinutes()) + ":";
-                    var s =
-                      date.getSeconds() < 10
-                        ? "0" + date.getSeconds()
-                        : date.getSeconds();
-                    var normalTime = Y + M + D + h + m + s;
-                    item.latestData.normalHeart = normalTime;
-                  } else {
-                    item.latestData.normalHeart = "-";
-                  }
-                });
+                  });
+                }
               }
 
-              //  console.log( this.alertInfo)
+              console.log(this.productList);
+              this.positionList = []
+             if(this.productList.length !==0) {
+               this.productList.forEach(item=>{
+this.positionList.push(item.latestData.location)
+               })
+                         console.log(this.positionList)
+             this.cityList = []
+             this.positionList.forEach(item1=>{
+               this.cityList.push(item1.city)
+             })
+             console.log(this.cityList)
+               var arr = this.cityList;
+            var newArr = arr.filter(function(item, index) {
+              return arr.indexOf(item) === index; // 因为indexOf 只能查找到第一个
+            });
+
+            console.log(newArr);
+            this.cityList = newArr
+            this.cityStatistic = [];
+            this.cityList.forEach(item2=>{
+              var obj = {
+                name: item2,
+                value:0              }
+                this.cityStatistic.push(obj)
+            })
+            this.positionList.forEach(item=>{
+              this.cityStatistic.forEach(item1=>{
+                if (item1.name == item.city) {
+                  item1.value+=1
+                }
+              })
+            })
+            console.log(this.cityStatistic)
+
+             }
+   
             }
           });
         }
@@ -1355,7 +1414,6 @@ list1:[],
         { name: "宝鸡", value: 72 },
         { name: "焦作", value: 75 },
         { name: "北京", value: 79 },
-
         { name: "大庆", value: 279 }
       ];
       var geoCoordMap = {
@@ -1550,198 +1608,6 @@ list1:[],
         武汉: [114.31, 30.52],
         大庆: [125.03, 46.58]
       };
-      var toolTipData = [
-        { name: "海门", value: 69 },
-        { name: "鄂尔多斯", value: 12 },
-        { name: "招远", value: 12 },
-        { name: "舟山", value: 12 },
-        { name: "齐齐哈尔", value: 14 },
-        { name: "盐城", value: 15 },
-        { name: "赤峰", value: 16 },
-        { name: "青岛", value: 18 },
-        { name: "乳山", value: 18 },
-        { name: "金昌", value: 19 },
-        { name: "泉州", value: 21 },
-        { name: "莱西", value: 21 },
-        { name: "日照", value: 21 },
-        { name: "胶南", value: 22 },
-        { name: "南通", value: 23 },
-        { name: "拉萨", value: 24 },
-        { name: "云浮", value: 24 },
-        { name: "梅州", value: 25 },
-        { name: "文登", value: 25 },
-        { name: "上海", value: 25 },
-        { name: "攀枝花", value: 25 },
-        { name: "威海", value: 25 },
-        { name: "承德", value: 25 },
-        { name: "厦门", value: 26 },
-        { name: "汕尾", value: 26 },
-        { name: "潮州", value: 26 },
-        { name: "丹东", value: 27 },
-        { name: "太仓", value: 27 },
-        { name: "曲靖", value: 27 },
-        { name: "烟台", value: 28 },
-        { name: "福州", value: 29 },
-        { name: "瓦房店", value: 30 },
-        { name: "即墨", value: 30 },
-        { name: "抚顺", value: 31 },
-        { name: "玉溪", value: 31 },
-        { name: "张家口", value: 31 },
-        { name: "阳泉", value: 31 },
-        { name: "莱州", value: 32 },
-        { name: "湖州", value: 32 },
-        { name: "汕头", value: 32 },
-        { name: "昆山", value: 33 },
-        { name: "宁波", value: 33 },
-        { name: "湛江", value: 33 },
-        { name: "揭阳", value: 34 },
-        { name: "荣成", value: 34 },
-        { name: "连云港", value: 35 },
-        { name: "葫芦岛", value: 35 },
-        { name: "常熟", value: 36 },
-        { name: "东莞", value: 36 },
-        { name: "河源", value: 36 },
-        { name: "淮安", value: 36 },
-        { name: "泰州", value: 36 },
-        { name: "南宁", value: 37 },
-        { name: "营口", value: 37 },
-        { name: "惠州", value: 37 },
-        { name: "江阴", value: 37 },
-        { name: "蓬莱", value: 37 },
-        { name: "韶关", value: 38 },
-        { name: "嘉峪关", value: 38 },
-        { name: "广州", value: 38 },
-        { name: "延安", value: 38 },
-        { name: "太原", value: 39 },
-        { name: "清远", value: 39 },
-        { name: "中山", value: 39 },
-        { name: "昆明", value: 39 },
-        { name: "寿光", value: 40 },
-        { name: "盘锦", value: 40 },
-        { name: "长治", value: 41 },
-        { name: "深圳", value: 41 },
-        { name: "珠海", value: 42 },
-        { name: "宿迁", value: 43 },
-        { name: "咸阳", value: 43 },
-        { name: "铜川", value: 44 },
-        { name: "平度", value: 44 },
-        { name: "佛山", value: 44 },
-        { name: "海口", value: 44 },
-        { name: "江门", value: 45 },
-        { name: "章丘", value: 45 },
-        { name: "肇庆", value: 46 },
-        { name: "大连", value: 47 },
-        { name: "临汾", value: 47 },
-        { name: "吴江", value: 47 },
-        { name: "石嘴山", value: 49 },
-        { name: "沈阳", value: 50 },
-        { name: "苏州", value: 50 },
-        { name: "茂名", value: 50 },
-        { name: "嘉兴", value: 51 },
-        { name: "长春", value: 51 },
-        { name: "胶州", value: 52 },
-        { name: "银川", value: 52 },
-        { name: "张家港", value: 52 },
-        { name: "三门峡", value: 53 },
-        { name: "锦州", value: 54 },
-        { name: "南昌", value: 54 },
-        { name: "柳州", value: 54 },
-        { name: "三亚", value: 54 },
-        { name: "自贡", value: 56 },
-        { name: "吉林", value: 56 },
-        { name: "阳江", value: 57 },
-        { name: "泸州", value: 57 },
-        { name: "西宁", value: 57 },
-        { name: "宜宾", value: 58 },
-        { name: "呼和浩特", value: 58 },
-        { name: "成都", value: 58 },
-        { name: "大同", value: 58 },
-        { name: "镇江", value: 59 },
-        { name: "桂林", value: 59 },
-        { name: "张家界", value: 59 },
-        { name: "宜兴", value: 59 },
-        { name: "北海", value: 60 },
-        { name: "西安", value: 61 },
-        { name: "金坛", value: 62 },
-        { name: "东营", value: 62 },
-        { name: "牡丹江", value: 63 },
-        { name: "遵义", value: 63 },
-        { name: "绍兴", value: 63 },
-        { name: "扬州", value: 64 },
-        { name: "常州", value: 64 },
-        { name: "潍坊", value: 65 },
-        { name: "重庆", value: 66 },
-        { name: "台州", value: 67 },
-        { name: "南京", value: 67 },
-        { name: "滨州", value: 70 },
-        { name: "贵阳", value: 71 },
-        { name: "无锡", value: 71 },
-        { name: "本溪", value: 71 },
-        { name: "克拉玛依", value: 72 },
-        { name: "渭南", value: 72 },
-        { name: "马鞍山", value: 72 },
-        { name: "宝鸡", value: 72 },
-        { name: "焦作", value: 75 },
-        { name: "句容", value: 75 },
-        { name: "北京", value: 79 },
-        { name: "徐州", value: 79 },
-        { name: "衡水", value: 80 },
-        { name: "包头", value: 80 },
-        { name: "绵阳", value: 80 },
-        { name: "乌鲁木齐", value: 84 },
-        { name: "枣庄", value: 84 },
-        { name: "杭州", value: 84 },
-        { name: "淄博", value: 85 },
-        { name: "鞍山", value: 86 },
-        { name: "溧阳", value: 86 },
-        { name: "库尔勒", value: 86 },
-        { name: "安阳", value: 90 },
-        { name: "开封", value: 90 },
-        { name: "济南", value: 92 },
-        { name: "德阳", value: 93 },
-        { name: "温州", value: 95 },
-        { name: "九江", value: 96 },
-        { name: "邯郸", value: 98 },
-        { name: "临安", value: 99 },
-        { name: "兰州", value: 99 },
-        { name: "沧州", value: 100 },
-        { name: "临沂", value: 103 },
-        { name: "南充", value: 104 },
-        { name: "天津", value: 105 },
-        { name: "富阳", value: 106 },
-        { name: "泰安", value: 112 },
-        { name: "诸暨", value: 112 },
-        { name: "郑州", value: 313 },
-        { name: "哈尔滨", value: 114 },
-        { name: "聊城", value: 116 },
-        { name: "芜湖", value: 117 },
-        { name: "唐山", value: 119 },
-        { name: "平顶山", value: 119 },
-        { name: "邢台", value: 119 },
-        { name: "德州", value: 120 },
-        { name: "济宁", value: 120 },
-        { name: "荆州", value: 127 },
-        { name: "宜昌", value: 130 },
-        { name: "义乌", value: 132 },
-        { name: "丽水", value: 133 },
-        { name: "洛阳", value: 134 },
-        { name: "秦皇岛", value: 136 },
-        { name: "株洲", value: 143 },
-        { name: "石家庄", value: 147 },
-        { name: "莱芜", value: 148 },
-        { name: "常德", value: 152 },
-        { name: "保定", value: 153 },
-        { name: "湘潭", value: 154 },
-        { name: "金华", value: 157 },
-        { name: "岳阳", value: 169 },
-        { name: "长沙", value: 175 },
-        { name: "衢州", value: 177 },
-        { name: "廊坊", value: 193 },
-        { name: "菏泽", value: 194 },
-        { name: "合肥", value: 229 },
-        { name: "武汉", value: 273 },
-        { name: "大庆", value: 279 }
-      ];
       /*获取地图数据*/
       myChart.showLoading();
       var mapFeatures = echarts.getMap(mapName).geoJson.features;
@@ -2008,143 +1874,138 @@ list1:[],
       // option1 && myChart1.setOption(option1);
     },
     echarts1() {
-console.log(this.whichProduct)
-console.log(this.whichDevice)
-var dealDeviceKey = ""
-    var time = Math.round(new Date() / 1000);
-              var startTime = time - 172800;
-              var startTime1 = time - 86400;
-              this.whichProduct.deviceData.forEach(item=>{
-                if (item.deviceName == this.whichDevice) {
- dealDeviceKey = item.deviceKey
-                }
-              })
-              console.log(dealDeviceKey)
-              if (dealDeviceKey == "") {
-                this.dataShow = false
-              } else {
-                this.dataShow = true
-                if (this.whichDevice !== "A4") {
-                   var payload = {
-                   deviceKey: dealDeviceKey,
-                  startTime: startTime1,
-                  endTime: time,
-                  asc: 1
-                  } 
-                console.log(payload)
-                 historyData(payload).then((res)=>{
-                   console.log(res) 
-                   if (res.msg == "ok") {
-                     this.loading = false;
-                     this.date1 = [];
-                     this.list = res.data.deviceData;
-                    if (this.whichDevice == "BA") {
-                     this.list1 = [
-                        {    
-                        name: "腕温",
-                        type: "line",
-                        symbol: "none",
-                        data: [],
-                        markLine: {
-                          data: [{ type: "average", name: "Avg" }]
-                        }
-                      },
-                                {
-                        name: "体温",
-                        type: "line",
-                        symbol: "none",
-                        data: [],
-                        markLine: {
-                          data: [{ type: "average", name: "Avg" }]
-                        }
-                      }
-  ];
-  this.list.forEach(item1=>{
-    this.date1.push(item1.date);
-    this.list1[0].data.push(item1.extraInfo.skin)
-    this.list1[1].data.push(item1.extraInfo.body)
-  })
-  this.echarts2();
-} else if(this.whichDevice == "C2") {
-       this.list1 = [
-                      {
-                        name: "心率",
-                        type: "line",
-                        symbol: "none",
-                        data: [],
-                        markLine: {
-                          data: [{ type: "average", name: "Avg" }]
-                        }
-                      },
-                      {
-                        name: "收缩压",
-                        type: "line",
-                        symbol: "none",
-                        data: [],
-                        markLine: {
-                          data: [{ type: "average", name: "Avg" }]
-                        }
-                      },
-                      {
-                        name: "舒张压",
-                        type: "line",
-                        symbol: "none",
-                        data: [],
-                        markLine: {
-                          data: [{ type: "average", name: "Avg" }]
-                        }
-                      }
-                    ];
-                      this.list.forEach(item1=>{
-    this.date1.push(item1.date);
-                      this.list1[0].data.push(item1.extraInfo.BPHeart);
-                      this.list1[1].data.push(item1.extraInfo.BPHigh);
-                      this.list1[2].data.push(item1.extraInfo.BPLow);
-  })
-         this.echarts2();           
-}
-
-                   } else {
-                     this.dataShow = false
-                   }
-                 })
-
-
-              } else {
-                console.log("A4") 
-                      var payload = {
-                   deviceKey: dealDeviceKey,
-                  startTime: startTime,
-                  endTime: time,
-                  asc: 1
-                  } 
-                      historyData(payload).then(res => {
-                  console.log(res);
-                  if (res.msg == "ok") {
-                    this.loading= false;
-                    var trace = res.data.deviceData;
-                    this.center = {
-                      lng: trace[0].extraInfo.location.split(",")[0],
-                      lat: trace[0].extraInfo.location.split(",")[1]
-                    };
-                    this.polylinePath = [];
-                    trace.forEach(item1 => {
-                      item1.position = {
-                        lng: item1.extraInfo.location.split(",")[0],
-                        lat: item1.extraInfo.location.split(",")[1]
-                      };
-                      // console.log(item1.position)
-                      this.polylinePath.push(item1.position);
-                    });
-                  
-                  } else {
-                    console.log(res.msg);
-                    this.dataShow = false;
+      console.log(this.whichProduct);
+      console.log(this.whichDevice);
+      var dealDeviceKey = "";
+      var time = Math.round(new Date() / 1000);
+      var startTime = time - 172800;
+      var startTime1 = time - 86400;
+      this.whichProduct.deviceData.forEach(item => {
+        if (item.deviceName == this.whichDevice) {
+          dealDeviceKey = item.deviceKey;
+        }
+      });
+      console.log(dealDeviceKey);
+      if (dealDeviceKey == "") {
+        this.dataShow = false;
+      } else {
+        this.dataShow = true;
+        if (this.whichDevice !== "A4") {
+          var payload = {
+            deviceKey: dealDeviceKey,
+            startTime: startTime1,
+            endTime: time,
+            asc: 1
+          };
+          console.log(payload);
+          historyData(payload).then(res => {
+            console.log(res);
+            if (res.msg == "ok") {
+              this.loading = false;
+              this.date1 = [];
+              this.list = res.data.deviceData;
+              if (this.whichDevice == "BA") {
+                this.list1 = [
+                  {
+                    name: "腕温",
+                    type: "line",
+                    symbol: "none",
+                    data: [],
+                    markLine: {
+                      data: [{ type: "average", name: "Avg" }]
+                    }
+                  },
+                  {
+                    name: "体温",
+                    type: "line",
+                    symbol: "none",
+                    data: [],
+                    markLine: {
+                      data: [{ type: "average", name: "Avg" }]
+                    }
                   }
+                ];
+                this.list.forEach(item1 => {
+                  this.date1.push(item1.date);
+                  this.list1[0].data.push(item1.extraInfo.skin);
+                  this.list1[1].data.push(item1.extraInfo.body);
                 });
+                this.echarts2();
+              } else if (this.whichDevice == "C2") {
+                this.list1 = [
+                  {
+                    name: "心率",
+                    type: "line",
+                    symbol: "none",
+                    data: [],
+                    markLine: {
+                      data: [{ type: "average", name: "Avg" }]
+                    }
+                  },
+                  {
+                    name: "收缩压",
+                    type: "line",
+                    symbol: "none",
+                    data: [],
+                    markLine: {
+                      data: [{ type: "average", name: "Avg" }]
+                    }
+                  },
+                  {
+                    name: "舒张压",
+                    type: "line",
+                    symbol: "none",
+                    data: [],
+                    markLine: {
+                      data: [{ type: "average", name: "Avg" }]
+                    }
+                  }
+                ];
+                this.list.forEach(item1 => {
+                  this.date1.push(item1.date);
+                  this.list1[0].data.push(item1.extraInfo.BPHeart);
+                  this.list1[1].data.push(item1.extraInfo.BPHigh);
+                  this.list1[2].data.push(item1.extraInfo.BPLow);
+                });
+                this.echarts2();
               }
-              }
-
+            } else {
+              this.dataShow = false;
+            }
+          });
+        } else {
+          console.log("A4");
+          var payload = {
+            deviceKey: dealDeviceKey,
+            startTime: startTime,
+            endTime: time,
+            asc: 1
+          };
+          historyData(payload).then(res => {
+            console.log(res);
+            if (res.msg == "ok") {
+              this.loading = false;
+              var trace = res.data.deviceData;
+              this.center = {
+                lng: trace[0].extraInfo.location.split(",")[0],
+                lat: trace[0].extraInfo.location.split(",")[1]
+              };
+              this.polylinePath = [];
+              trace.forEach(item1 => {
+                item1.position = {
+                  lng: item1.extraInfo.location.split(",")[0],
+                  lat: item1.extraInfo.location.split(",")[1]
+                };
+                // console.log(item1.position)
+                this.polylinePath.push(item1.position);
+              });
+            } else {
+              console.log(res.msg);
+              this.dataShow = false;
+            }
+          });
+        }
+      }
     },
     echarts2() {
       // console.log(this.date1)
@@ -2158,38 +2019,38 @@ var dealDeviceKey = ""
           trigger: "axis"
         },
         legend: {
-textStyle: {
-     color: "#fff" 
-        },
+          textStyle: {
+            color: "#fff"
+          }
         },
         toolbox: {
           show: true,
-          feature: {
-          }
+          feature: {}
         },
 
-          color: ["#cd9136","#5a99e6","#d1191e"],
+        color: ["#cd9136", "#5a99e6", "#d1191e"],
         xAxis: {
           type: "category",
           boundaryGap: false,
           data: this.date1,
-                     axisLabel: {   // X轴线 标签修改 
-                     textStyle: {
-                         color: '#fff', //坐标值得具体的颜色
-                     }
-                 },
-                 splitLine:{  
-                     show: true, // X轴线 颜色类型的修改
-                     lineStyle: {
-                         color: '#fff'
-                     }  
-                 },
-                 axisLine: { 
-                     show: true, // X轴 网格线 颜色类型的修改
-                     lineStyle: {
-                         color: '#fff'
-                     }  
-                 }, 
+          axisLabel: {
+            // X轴线 标签修改
+            textStyle: {
+              color: "#fff" //坐标值得具体的颜色
+            }
+          },
+          splitLine: {
+            show: true, // X轴线 颜色类型的修改
+            lineStyle: {
+              color: "#fff"
+            }
+          },
+          axisLine: {
+            show: true, // X轴 网格线 颜色类型的修改
+            lineStyle: {
+              color: "#fff"
+            }
+          }
         },
         yAxis: {
           type: "value",
@@ -2197,28 +2058,27 @@ textStyle: {
             formatter: "{value} °C"
           },
           axisLabel: {
-                     formatter: '{value}',
-                     textStyle: {
-                         color: '#fff', //坐标值得具体的颜色
-                     }
-                 },
-                 axisLine: { 
-                     show: true, // Y轴线
-                     lineStyle: {
-                         type: 'dashed',
-                         color: '#fff'
-                     }  
-                 },
-                 splitLine:{  
-                     show: true,
-                     lineStyle: {
-                         type: 'dashed',
-                         color: '#fff'
-                     }  
-                 }  
+            formatter: "{value}",
+            textStyle: {
+              color: "#fff" //坐标值得具体的颜色
+            }
+          },
+          axisLine: {
+            show: true, // Y轴线
+            lineStyle: {
+              type: "dashed",
+              color: "#fff"
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              type: "dashed",
+              color: "#fff"
+            }
+          }
         },
-        series:
-          this.list1
+        series: this.list1
       };
 
       option1 && myChart1.setOption(option1);
@@ -2226,7 +2086,7 @@ textStyle: {
     detailproduct(row) {
       this.whichProduct = row;
       console.log(this.whichProduct);
-      this.backToOverall()
+      this.backToOverall();
     },
     inputChange() {
       console.log(this.productSearch);
@@ -2241,6 +2101,19 @@ textStyle: {
         }
       });
     },
+    inputChange1() {
+      console.log(this.alertSearch);
+      this.data1 = [];
+      this.alertInfo.forEach(item => {
+        if (
+          item.productName
+            .toLowerCase()
+            .includes(this.alertSearch.toLowerCase())
+        ) {
+          this.data1.push(item);
+        }
+      });
+    },
     change() {
       this.productSearch = "";
       this.inputShow = false;
@@ -2248,11 +2121,18 @@ textStyle: {
 
       // this.products();
     },
+    change1() {
+      this.alertTitle = true;
+      this.data1 = this.alertInfo;
+    },
     startSearch() {
       this.inputShow = true;
       this.show = true;
       this.whichGroup = "all";
       this.data = this.productList;
+    },
+    startSearch1() {
+      this.alertTitle = false;
     },
     startSelect() {
       this.show = false;
@@ -2282,31 +2162,31 @@ textStyle: {
       this.wenduShow = true;
       this.xinlvShow = false;
       this.guijiShow = false;
-      this.whichDevice = "BA"
+      this.whichDevice = "BA";
       this.echarts1();
     },
     xinlvDetails() {
       console.log("心率详情");
-            this.overallShow = false;
+      this.overallShow = false;
       this.wenduShow = false;
       this.xinlvShow = true;
       this.guijiShow = false;
-       this.whichDevice = "C2"
+      this.whichDevice = "C2";
       this.echarts1();
     },
     locationDetails() {
       console.log("位置详情");
-                  this.overallShow = false;
+      this.overallShow = false;
       this.wenduShow = false;
       this.xinlvShow = false;
       this.guijiShow = true;
-       this.whichDevice = "A4"
+      this.whichDevice = "A4";
       this.echarts1();
     },
     backToOverall() {
       console.log("返回");
       this.overallShow = true;
-         this.wenduShow = false;
+      this.wenduShow = false;
       this.xinlvShow = false;
       this.guijiShow = false;
     }
@@ -2368,9 +2248,18 @@ textStyle: {
       border-radius: 15px;
       z-index: 5;
       color: #fff;
-       background: url("../img/footer-bg.png") no-repeat center bottom;
+      background: url("../img/footer-bg.png") no-repeat center bottom;
       .top {
         height: 400px;
+        .input {
+          width: 86%;
+          margin-left: 2%;
+          height: 40px;
+          background-color: #00093e !important;
+          color: #fff;
+          border: 1px solid #001257;
+          outline: none;
+        }
         // background-color: #fff;
       }
       .bottom {
@@ -2538,7 +2427,8 @@ textStyle: {
           background: #101a57;
           border-radius: 6px;
         }
-        #body,#body1 {
+        #body,
+        #body1 {
           float: bottom;
           margin-top: 22px;
           border-bottom-left-radius: 20px;

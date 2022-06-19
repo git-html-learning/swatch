@@ -46,7 +46,38 @@ export const constantRoutes = [
         title: '手环管理',                // 设置该路由在侧边栏和面包屑中展示的名字
         icon: '主页'                  // 设置该路由的图标
       }
-    }]
+    },
+    {
+      path: 'productRegister',
+      name: 'productRegister',
+      hidden: true,
+      component: () => import('@/views/Product/createProduct/index'),
+      meta: {
+        title: '注册手环',                // 设置该路由在侧边栏和面包屑中展示的名字
+        icon: '主页'                  // 设置该路由的图标
+      }
+    },
+    {
+      path: 'userMessage',
+      name: 'userMessage',
+      hidden: true,
+      component: () => import('@/views/Product/userMessage/index'),
+      meta: {
+        title: '用户信息',                // 设置该路由在侧边栏和面包屑中展示的名字
+        icon: '主页'                  // 设置该路由的图标
+      }
+    },
+    {
+      path: 'grouping',
+      name: 'grouping',
+      hidden: true,
+      component: () => import('@/views/Product/bind/index'),
+      meta: {
+        title: '分组操作',                // 设置该路由在侧边栏和面包屑中展示的名字
+        icon: '主页'                  // 设置该路由的图标
+      }
+    },
+  ]
   }, 
   
   {

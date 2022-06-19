@@ -41,7 +41,7 @@
               />
             </svg>
           </el-tooltip>
-          <el-tooltip
+          <!-- <el-tooltip
             style="margin-right: 10px;"
             class="item"
             effect="light"
@@ -80,7 +80,7 @@
                 p-id="2222"
               />
             </svg>
-          </el-tooltip>
+          </el-tooltip>-->
           <el-tooltip class="item" effect="light" content="注销" placement="top-start">
             <svg
               @click="logout"
@@ -157,9 +157,7 @@
                               p-id="4175"
                             />
                           </svg>
-                          <p
-                            style="	color: #00A8FE;font-size: 25px;font-weight: 600;"
-                          >{{totalNum}}</p>
+                          <p style="	color: #00A8FE;font-size: 25px;font-weight: 600;">{{totalNum}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >组用户数</p>
@@ -277,9 +275,7 @@
                               p-id="8368"
                             />
                           </svg>
-                          <p
-                            style="color: #00A8FE;font-size: 25px;font-weight: 600;"
-                          >{{onlineNum}}</p>
+                          <p style="color: #00A8FE;font-size: 25px;font-weight: 600;">{{onlineNum}}</p>
                           <p
                             style="font-size: 14px;color: #fff;height: 20px; margin-top: -12px;font-weight: 500"
                           >当前在线</p>
@@ -294,74 +290,141 @@
               <el-col :span="24">
                 <div class="alert">
                   <div class="col-info">
-                    <div class="title">
-                      <span>报警统计</span>
+                    <div class="title" v-if="alertTitle">
+                      <span>今日报警统计（{{alertInfo.length}}条）</span>
                       <span style="margin-left: 15px; line-height: 25px;">
-                        <router-link to="/alert/index">
-                          <svg
-                            t="1654419730805"
-                            class="icon"
-                            viewBox="0 0 1024 1024"
-                            version="1.1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            p-id="2110"
-                            width="16"
-                            height="16"
-                          >
-                            <path
-                              d="M182.044444 256m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
-                              fill="#00c1ea"
-                              p-id="2111"
-                            />
-                            <path
-                              d="M182.044444 199.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
-                              fill="#00c1ea"
-                              p-id="2112"
-                            />
-                            <path
-                              d="M182.044444 512m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
-                              fill="#00c1ea"
-                              p-id="2113"
-                            />
-                            <path
-                              d="M182.044444 455.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
-                              fill="#00c1ea"
-                              p-id="2114"
-                            />
-                            <path
-                              d="M182.044444 768m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
-                              fill="#00c1ea"
-                              p-id="2115"
-                            />
-                            <path
-                              d="M182.044444 711.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
-                              fill="#00c1ea"
-                              p-id="2116"
-                            />
-                            <path d="M381.155556 256h512" fill="#00c1ea" p-id="2117" />
-                            <path
-                              d="M893.155556 284.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
-                              fill="#00c1ea"
-                              p-id="2118"
-                            />
-                            <path d="M381.155556 512h512" fill="#00c1ea" p-id="2119" />
-                            <path
-                              d="M893.155556 540.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
-                              fill="#00c1ea"
-                              p-id="2120"
-                            />
-                            <path d="M381.155556 768h512" fill="#00c1ea" p-id="2121" />
-                            <path
-                              d="M893.155556 796.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
-                              fill="#00c1ea"
-                              p-id="2122"
-                            />
-                          </svg>
-                        </router-link>
+                        <svg
+                          @click="startSearch1"
+                          style="float: right; margin-right: 15px; height: 30px; line-height: 30px;"
+                          t="1655345322360"
+                          class="icon"
+                          viewBox="0 0 1024 1024"
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          p-id="2143"
+                          width="20"
+                          height="20"
+                        >
+                          <path
+                            d="M912.072815 946.738335c-4.78498 0-9.56996-1.824555-13.220093-5.475711L650.662083 693.076078c-0.285502-0.285502-0.561795-0.579191-0.827855-0.883113l-6.979972-7.948019c-6.671956-7.594979-6.096858-19.11843 1.297552-26.012444 32.130791-29.958312 57.424874-65.413825 75.181283-105.379049 18.374486-41.35692 27.691689-85.472674 27.691689-131.122363 0-86.355787-33.628912-167.542854-94.691639-228.604558-61.062727-61.062727-142.249795-94.691639-228.604558-94.691639s-167.541831 33.628912-228.604558 94.691639c-61.062727 61.062727-94.691639 142.249795-94.691639 228.604558s33.628912 167.542854 94.691639 228.604558c61.062727 61.062727 142.249795 94.691639 228.604558 94.691639 26.15059 0 52.16508-3.130294 77.326133-9.301853 5.090948-1.353834 73.4038-19.189038 120.842229-14.809287 10.282181 0.948605 17.847483 10.05296 16.899902 20.335141s-10.047844 17.853623-20.335141 16.899902c-41.659819-3.845585-107.272165 13.571087-107.930151 13.747095-0.125867 0.033769-0.251733 0.065492-0.3776 0.097214-28.132734 6.91755-57.20998 10.425444-86.425372 10.425444-48.684816 0-95.922676-9.538237-140.402727-28.352745-42.953278-18.166755-81.523735-44.172035-114.644063-77.290317-33.119305-33.119305-59.123562-71.691809-77.29134-114.644063-18.813484-44.479027-28.352745-91.716888-28.352745-140.401704s9.53926-95.922676 28.352745-140.402727c18.167778-42.953278 44.172035-81.524758 77.29134-114.644063 33.119305-33.119305 71.690786-59.123562 114.644063-77.29134 44.480051-18.813484 91.717911-28.352745 140.402727-28.352745s95.922676 9.53926 140.401704 28.352745c42.953278 18.167778 81.524758 44.173059 114.644063 77.29134 33.118282 33.119305 59.123562 71.690786 77.29134 114.644063 18.813484 44.480051 28.351722 91.717911 28.351722 140.402727 0 50.912553-10.399861 100.136651-30.91101 146.305157-17.285688 38.906102-40.96704 73.973782-70.526263 104.47547l242.313791 242.310721c7.302313 7.30129 7.302313 19.138896 0.001023 26.440186C921.642774 944.912757 916.857794 946.738335 912.072815 946.738335z"
+                            p-id="2144"
+                            fill="#e6e6e6"
+                          />
+                          <path
+                            d="M165.576059 421.887656c-0.696872 0-1.400906-0.038886-2.110057-0.118704-10.260691-1.152243-17.645892-10.404977-16.493649-20.666692 4.838192-43.080168 17.974373-83.934644 39.046295-121.429607 5.058203-9.002025 16.457834-12.19781 25.458835-7.139607 9.002025 5.058203 12.19781 16.45681 7.139607 25.458835-18.605753 33.108049-30.207999 69.202105-34.484396 107.282399C183.060269 414.827867 174.967964 421.887656 165.576059 421.887656z"
+                            p-id="2145"
+                            fill="#e6e6e6"
+                          />
+                        </svg>
                       </span>
                     </div>
+                    <div class = "title" v-if="!alertTitle" style="height: 40px; line-height: 40px;">
+                      <input
+                        @input="inputChange1"
+                        class="input"
+                        v-model="alertSearch"
+                        placeholder="请输入手环名搜索"
+                      />
+                      <svg
+                        @click="change1"
+                        style="margin-top: 2px; margin-left: 10px;"
+                        t="1655345531987"
+                        class="icon"
+                        viewBox="0 0 1024 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="2622"
+                        width="20"
+                        height="20"
+                      >
+                        <path
+                          d="M512 0C230.4 0 0 230.4 0 512c0 281.6 230.4 512 512 512 281.6 0 512-230.4 512-512C1024 230.4 793.6 0 512 0zM512 985.6c-262.4 0-473.6-211.2-473.6-473.6 0-262.4 211.2-473.6 473.6-473.6 262.4 0 473.6 211.2 473.6 473.6C985.6 774.4 774.4 985.6 512 985.6zM768 256c-6.4-6.4-19.2-6.4-25.6 0L512 486.4 288 256C281.6 249.6 268.8 249.6 256 256 249.6 268.8 249.6 281.6 256 288L486.4 512 256 736c-6.4 6.4-6.4 19.2 0 25.6 6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4L512 537.6l224 224c6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4 6.4-6.4 6.4-19.2 0-25.6L537.6 512 768 288C774.4 281.6 774.4 268.8 768 256z"
+                          p-id="2623"
+                          fill="#8a8a8a"
+                        />
+                      </svg>
+                    </div>
+        <div class="bottom" v-if="alertShow">
+              <vue-seamless-scroll :data="data1" class="seamless-warp">
+                <div class="cardList" v-for="(item,index) in data1" :key="index">
+                  <p style="color: #fff; font-size: 15px; margin-left: 20px;">
+                    <span>{{index+1}}、</span>
+                    <span style="margin-top: 20px;">{{item.productName}}____{{item.deviceName}}</span>
+                  </p>
+                  <p style="margin-left: 20px;">
+                    <span style="color: #fff; font-size: 15px; line-height: 30px;">报警内容:</span>
+
+                    <span
+                      style="color: #e29755; font-size: 17px;line-height: 30px;"
+                    >{{item.Content}}</span>
+                    <!-- <br /> -->
+                    <span
+                      style="color: #fff; font-size: 15px; float: right; margin-right: 20px;line-height: 30px;"
+                    >{{item.date}}</span>
+                  </p>
+
+                  <div class="divider" style="margin-left: 10%;"></div>
+                </div>
+              </vue-seamless-scroll>
+            </div>
+            <div v-if="!alertShow" style="text-align: center;">
+              <svg
+                style="margin-top: 30px;"
+                t="1655342118838"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="3619"
+                width="120"
+                height="120"
+              >
+                <path
+                  d="M1022.976 558.976a463.808 463.808 0 0 1-463.872 463.872H464.896A463.808 463.808 0 0 1 1.024 558.976V464.96A463.872 463.872 0 0 1 464.896 1.088h94.208a463.936 463.936 0 0 1 463.872 463.872v94.016z"
+                  fill="#42BAA8"
+                  p-id="3620"
+                />
+                <path d="M628.096 176H256v661.824h512V315.328z" fill="#FCFCFD" p-id="3621" />
+                <path d="M628.096 315.328H768L628.096 176z" fill="#F1F3F7" p-id="3622" />
+                <path
+                  d="M419.072 446.528H316.416V343.808h102.656v102.72z m-84.096-18.56h65.6V362.368H334.976v65.6z"
+                  fill="#42BAA8"
+                  p-id="3623"
+                />
+                <path
+                  d="M461.504 351.936h246.144v24.384H461.504zM461.504 414.016h180.48v24.384h-180.48z"
+                  fill="#42BAA8"
+                  p-id="3624"
+                />
+                <path
+                  d="M419.072 615.424H316.416V512.704h102.656v102.72z m-84.096-18.496h65.6V531.328H334.976v65.6z"
+                  fill="#42BAA8"
+                  p-id="3625"
+                />
+                <path
+                  d="M461.504 520.832h246.144v24.384H461.504zM461.504 582.848h180.48v24.448h-180.48z"
+                  fill="#42BAA8"
+                  p-id="3626"
+                />
+                <path
+                  d="M419.072 784.448H316.416v-102.656h102.656v102.656z m-84.096-18.624h65.6V700.16H334.976v65.664z"
+                  fill="#42BAA8"
+                  p-id="3627"
+                />
+                <path
+                  d="M461.504 689.28h246.144v24.384H461.504zM461.504 751.296h180.48v24.384h-180.48z"
+                  fill="#42BAA8"
+                  p-id="3628"
+                />
+                <path
+                  d="M339.008 379.776l30.208 42.368 66.176-74.88-66.816 57.472z"
+                  fill="#F0582F"
+                  p-id="3629"
+                />
+              </svg>
+              <p style="color: #31baa8">今日暂无报警</p>
+            </div>
                   </div>
-                  <div id="pie"></div>
                 </div>
               </el-col>
             </el-row>
@@ -377,8 +440,8 @@
                 <span>已激活手环数据详情</span>
 
                 <span style="margin-left: 15px; margin-top: 10px;">
-                  <router-link to="/home">
                     <svg
+                    @click = "allProduct"
                       t="1654419730805"
                       class="icon"
                       viewBox="0 0 1024 1024"
@@ -437,7 +500,7 @@
                         p-id="2122"
                       />
                     </svg>
-                  </router-link>
+                 
                 </span>
               </div>
               <div class="content">
@@ -473,32 +536,7 @@
                             disable-transitions
                           >{{item1.extraInfo.status}}</el-tag>
                         </span>
-                        <span
-                          style="float: right; margin-right: 20px; margin-top: 10px;"
-                          @click="enterDetails(item1)"
-                        >
-                          <svg
-                            t="1654498195562"
-                            class="icon"
-                            viewBox="0 0 1024 1024"
-                            version="1.1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            p-id="3526"
-                            width="15"
-                            height="15"
-                          >
-                            <path
-                              d="M877.714 877.714V585.143H1024V1024H0V0h438.857v146.286H146.286v731.428z"
-                              p-id="3527"
-                              fill="#f9f28b"
-                            />
-                            <path
-                              d="M301.422 577.829L456.63 732.89l383.415-383.414L1021.074 512V0H512l172.91 194.34z"
-                              p-id="3528"
-                              fill="#f9f28b"
-                            />
-                          </svg>
-                        </span>
+ 
                       </p>
 
                       <el-row
@@ -567,70 +605,7 @@
             <el-col :span="12">
               <div class="ranking">
                 <div class="title">
-                  报警手环排名
-                  <span style="margin-left: 15px; margin-top: 10px;">
-                    <router-link to="/alert/index">
-                      <svg
-                        t="1654419730805"
-                        class="icon"
-                        viewBox="0 0 1024 1024"
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        p-id="2110"
-                        width="16"
-                        height="16"
-                      >
-                        <path
-                          d="M182.044444 256m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
-                          fill="#00c1ea"
-                          p-id="2111"
-                        />
-                        <path
-                          d="M182.044444 199.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
-                          fill="#00c1ea"
-                          p-id="2112"
-                        />
-                        <path
-                          d="M182.044444 512m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
-                          fill="#00c1ea"
-                          p-id="2113"
-                        />
-                        <path
-                          d="M182.044444 455.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
-                          fill="#00c1ea"
-                          p-id="2114"
-                        />
-                        <path
-                          d="M182.044444 768m-28.444444 0a28.444444 28.444444 0 1 0 56.888889 0 28.444444 28.444444 0 1 0-56.888889 0Z"
-                          fill="#00c1ea"
-                          p-id="2115"
-                        />
-                        <path
-                          d="M182.044444 711.111111c-34.133333 0-56.888889 22.755556-56.888888 56.888889s22.755556 56.888889 56.888888 56.888889 56.888889-22.755556 56.888889-56.888889-22.755556-56.888889-56.888889-56.888889z"
-                          fill="#00c1ea"
-                          p-id="2116"
-                        />
-                        <path d="M381.155556 256h512" fill="#00c1ea" p-id="2117" />
-                        <path
-                          d="M893.155556 284.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
-                          fill="#00c1ea"
-                          p-id="2118"
-                        />
-                        <path d="M381.155556 512h512" fill="#00c1ea" p-id="2119" />
-                        <path
-                          d="M893.155556 540.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
-                          fill="#00c1ea"
-                          p-id="2120"
-                        />
-                        <path d="M381.155556 768h512" fill="#00c1ea" p-id="2121" />
-                        <path
-                          d="M893.155556 796.444444h-512c-17.066667 0-28.444444-11.377778-28.444445-28.444444s11.377778-28.444444 28.444445-28.444444h512c17.066667 0 28.444444 11.377778 28.444444 28.444444s-17.066667 28.444444-28.444444 28.444444z"
-                          fill="#00c1ea"
-                          p-id="2122"
-                        />
-                      </svg>
-                    </router-link>
-                  </span>
+                  各手环报警数
                 </div>
                 <div id="ranking"></div>
               </div>
@@ -649,11 +624,33 @@
       </div>
     </div>
     <!-- <el-button @click="skip">详情页</el-button> -->
+
+<el-dialog
+  title="小组用户信息"
+  :visible.sync="dialogVisible"
+  width="90%">
+  <grouper/>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+<!-- <el-dialog
+  title="小组用户信息"
+  :visible.sync="dialogVisible1"
+  width="90%">
+  <detailPage/>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="cancel">取 消</el-button>
+    <el-button type="primary" @click="cancel">确 定</el-button>
+  </span>
+</el-dialog> -->
   </div>
 </template>
 
 
 <script>
+import grouper from "@/views/Product/grouper";
 import {
   allProductKey,
   getDeviceDatas,
@@ -664,12 +661,15 @@ import { UserDetail } from "@/api/admin";
 import * as echarts from "echarts";
 import chartsData from "@/views/Home/chartsData";
 import chartsData1 from "@/views/homePage/grouper/chartsData";
+import detailPage from "@/views/Product/detailPage";
 
 export default {
   name: "homepage",
   components: {
     chartsData,
-    chartsData1
+    chartsData1,
+    grouper,
+    detailPage
   },
   data() {
     return {
@@ -689,7 +689,7 @@ export default {
       total: 0,
       carouselData: [],
       alertShow: false,
-       center: { lng: 117.932682, lat: 31.194548 }, // 中心点坐标
+      center: { lng: 117.932682, lat: 31.194548 }, // 中心点坐标
       zoom: 5, // 缩放级别
       mapStyle: {
         style: "bluish"
@@ -700,7 +700,13 @@ export default {
       length: 0,
       judge: [],
       productList2: [],
-      fenceName:[],
+      fenceName: [],
+      alertTitle: true,
+      alertSearch: "",
+      data1: null,
+      alertStatistic:[],
+      dialogVisible: false,
+      dialogVisible1: false,
     };
   },
   created() {
@@ -773,36 +779,42 @@ export default {
       this.outAlert = [];
       this.productList1 = [];
       this.fenceList = [];
-   
-        var username = window.sessionStorage.getItem("username");
-        console.log(username)
+
+      var username = window.sessionStorage.getItem("username");
+      console.log(username);
       UserDetail(username).then(res => {
         if (res.msg == "ok") {
           //   console.log(res);
-console.log(res)
-this.productNameList = [];
-var productKeys = []
-this.productNameList.push({
-  productName: username,
-  productKey:  res.data.extraInfo.groups[0].productKey
-}
- )
- productKeys.push(res.data.extraInfo.groups[0].productKey)
-if(res.data.extraInfo.groups[0].users.length !==0) {
-  res.data.extraInfo.groups[0].users.forEach(item=>{
-    var obj = {
-      productName:item.productName,
-      productKey:item.productKey,
-    }
-    this.productNameList.push(obj)
-    productKeys.push(item.productKey)
-  })
-}
-          console.log(this.productNameList )
-          console.log(productKeys)
-          window.sessionStorage.setItem("productNameList", JSON.stringify(this.productNameList))
+          console.log(res);
+          this.productNameList = [];
+          var productKeys = [];
+          this.productNameList.push({
+            productName: username,
+            productKey: res.data.extraInfo.groups[0].productKey
+          });
+          productKeys.push(res.data.extraInfo.groups[0].productKey);
+          if (res.data.extraInfo.groups[0].users.length !== 0) {
+            res.data.extraInfo.groups[0].users.forEach(item => {
+              var obj = {
+                productName: item.productName,
+                productKey: item.productKey
+              };
+              this.productNameList.push(obj);
+              productKeys.push(item.productKey);
+            });
+          }
+          console.log(this.productNameList);
+          console.log(productKeys);
+          window.sessionStorage.setItem(
+            "productNameList",
+            JSON.stringify(this.productNameList)
+          );
+                   window.sessionStorage.setItem(
+            "productKeys",
+            JSON.stringify(productKeys)
+          );
           // console.log(this.productNameList);
-       
+
           getDeviceDatas({
             username: "admin",
             pkList: productKeys,
@@ -811,25 +823,23 @@ if(res.data.extraInfo.groups[0].users.length !==0) {
             // console.log(res);
 
             this.productList1 = res.data;
-this.fenceNum = 0;
-this.fenceName = []
+            this.fenceNum = 0;
+            this.fenceName = [];
 
-this.productList1.forEach(item=>{
-  if (item.extraInfo.fence !=="-") {
-this.fenceName.push(item.extraInfo.fence)
-  }
+            this.productList1.forEach(item => {
+              if (item.extraInfo.fence !== "-") {
+                this.fenceName.push(item.extraInfo.fence);
+              }
+            });
+            console.log(this.fenceName);
+            var arr = this.fenceName;
+            var newArr = arr.filter(function(item, index) {
+              return arr.indexOf(item) === index; // 因为indexOf 只能查找到第一个
+            });
 
-})
-console.log(this.fenceName)
-var arr = this.fenceName
-var newArr = arr.filter(function(item,index){
-     return arr.indexOf(item) === index;  // 因为indexOf 只能查找到第一个  
-  });
+            console.log(newArr);
+            this.fenceNum = newArr.length;
 
-
-console.log(newArr)
-this.fenceNum = newArr.length
- 
             this.productList1.forEach(item => {
               // if (item.extraInfo.fence !== "-") {
 
@@ -1186,12 +1196,12 @@ this.fenceNum = newArr.length
         new Date(new Date().setHours(23, 59, 59, 999)).getTime() / 1000
       );
       this.alertInfo = [];
-      var obj = {
-        startTime: startTime,
-        endTime: endTime,
-        asc: 1,
-        num: 50
-      };
+      // var obj = {
+      //   startTime: startTime,
+      //   endTime: endTime,
+      //   asc: 1,
+      //   num: 50
+      // };
       // console.log(obj);
       //      var obj = {
       //   startTime: 1650297600,
@@ -1199,121 +1209,82 @@ this.fenceNum = newArr.length
       //   asc: 1,
       //   num:50
       // }
-      alertbyTime(obj).then(res => {
-        console.log(res);
-        if (res.msg == "未找到记录") {
-          this.alertShow = true; //为了展示改动的地方
-          this.alertInfo.push(
-            {
-              productName: "手环测试3",
-              deviceName: "AC",
-              Content: "温度报警",
-              date: "2022-06-06 10:02:28"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "A02",
-              Content: "SOS",
-              date: "2022-06-06 11:05:28"
-            },
-            {
-              productName: "手环测试7",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 13:34:13"
-            },
-            {
-              productName: "手环测试12",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 15:45:34"
-            },
-            {
-              productName: "手环测试1",
-              deviceName: "02",
-              Content: " S0S",
-              date: "2022-06-06 16:34:32"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "02",
-              Content: "S0S",
-              date: "2022-06-06 17:53:23"
-            },
-            {
-              productName: "手环测试2",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 19:34:56"
-            }
-          );
-        } else if (res.msg == "ok") {
-          this.alertShow = true;
-          res.data.alertInfo.forEach(item => {
-            this.alertInfo.push(item);
-          });
-          this.alertInfo.push(
-            {
-              productName: "手环测试3",
-              deviceName: "AC",
-              Content: "温度报警",
-              date: "2022-06-06 10:02:28"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "A02",
-              Content: "SOS",
-              date: "2022-06-06 11:05:28"
-            },
-            {
-              productName: "手环测试7",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 13:34:13"
-            },
-            {
-              productName: "手环测试12",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 15:45:34"
-            },
-            {
-              productName: "手环测试1",
-              deviceName: "02",
-              Content: " S0S",
-              date: "2022-06-06 16:34:32"
-            },
-            {
-              productName: "手环测试5",
-              deviceName: "02",
-              Content: "S0S",
-              date: "2022-06-06 17:53:23"
-            },
-            {
-              productName: "手环测试2",
-              deviceName: "02",
-              Content: "SOS取消",
-              date: "2022-06-06 19:34:56"
-            }
-          );
-        } else {
-          this.$message.error(res.msg);
-        }
-        if (this.alertInfo.length !== 0) {
-          this.alertInfo.forEach(item => {
-            this.judge.forEach(item1 => {
-              if (item.productKey == item1.productKey) {
-                item.productName = item1.productName;
-              }
+      var tokenForAdmin = window.sessionStorage.getItem("tokenForAdmin");
+      // alertbyTime(obj).
+      var _this = this;
+      _this
+        .axios({
+          method: "post",
+          url: "https://api.ahusmart.com/api/v1/userAlertInfos/byTime",
+          headers: {
+            token: tokenForAdmin
+          },
+          data: {
+            startTime: startTime,
+            endTime: endTime,
+            asc: 1,
+            num: 50
+          }
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.msg == "未找到记录") {
+            this.alertShow = false; //为了展示改动的地方
+          } else if (res.data.msg == "ok") {
+            this.alertShow = true;
+            res.data.data.alertInfo.forEach(item => {
+              this.alertInfo.push(item);
             });
-          });
-        }
-        console.log(this.alertInfo);
-        this.loading2 = false;
-        console.log(this.judge);
-        //从productKey得到productName
-        this.length = this.alertInfo.length;
-      });
+          } else {
+            this.$message.error(res.msg);
+          }
+          if (this.alertInfo.length !== 0) {
+            console.log(this.alertInfo);
+            var alertInfo1 = [];
+            this.alertInfo.forEach(item => {
+              this.productNameList.forEach(item1 => {
+                if (item.productKey == item1.productKey) {
+                  item.productName = item1.productName;
+                  alertInfo1.push(item);
+                }
+              });
+            });
+            this.alertInfo = alertInfo1;
+            if (this.alertInfo.length == 0) {
+              this.alertShow = false;
+            } else {
+              this.alertShow = true;
+              var value = 0
+              this.alertStatistic = []
+              this.productNameList.forEach(item=>{
+                var obj = {
+                  productName: item.productName,
+                  value: 0
+                }
+                this.alertStatistic.push(obj)
+              })
+              console.log(this.productNameList)
+               this.alertInfo.forEach(item=>{
+                 this.alertStatistic.forEach(item1=>{
+                   if (item1.productName == item.productName) {
+item1.value+=1
+                   }
+
+                 })
+                
+               })
+            }
+            console.log(this.alertInfo);
+            console.log(this.alertStatistic)
+              this.echarts();
+            this.data1 = this.alertInfo;
+        
+          }
+          this.loading2 = false;
+          console.log(this.judge);
+          //从productKey得到productName
+          this.length = this.alertInfo.length;
+        });
       subjectCount().then(res => {
         console.log(res);
         if ((res.msg = "ok")) {
@@ -1324,16 +1295,25 @@ this.fenceNum = newArr.length
             JSON.stringify(this.subjectNum)
           );
           window.sessionStorage.setItem("total", JSON.stringify(this.total));
-          this.echarts();
+       
         } else {
           this.$message.error(res.msg);
         }
       });
     },
     echarts() {
+      console.log(this.alertStatistic)
       var chartDom = document.getElementById("ranking");
       var myChart = echarts.init(chartDom);
-
+      var name = []
+      var num = []
+this.alertStatistic.forEach(item=>{
+  name.push(item.productName)
+  // console.log(item.value)
+  num.push(item.value.toString())
+})
+console.log(name)
+console.log(num)
       var option;
       option = {
         // backgroundColor: "#141f56",
@@ -1344,11 +1324,11 @@ this.fenceNum = newArr.length
           backgroundColor: "rgba(0,0,0,0.4)", // 背景
           padding: [8, 10], //内边距
           // extraCssText: 'box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);', //添加阴影
-          formatter: function(params) {
-            if (params.seriesName != "") {
-              return params.name + " ：  " + params.value + " 条";
-            }
-          }
+          // formatter: function(params) {
+          //   if (params.seriesName != "") {
+          //     return params.name + " ：  " + params.value + " 条";
+          //   }
+          // }
         },
         grid: {
           borderWidth: 0,
@@ -1380,20 +1360,8 @@ this.fenceNum = newArr.length
                 fontWeight: "normal",
                 fontSize: "11"
               }
-              // formatter:function(val){
-              //     return val.split("").join("\n")
-              // },
             },
-            data: [
-              "手环测试2",
-              "手环测试1",
-              "手环测试7",
-              "手环测试3",
-              "手环测试4",
-              "手环测试10",
-              "手环测试5",
-              "手环测试11"
-            ]
+            data: name
           },
           {
             type: "category",
@@ -1412,16 +1380,7 @@ this.fenceNum = newArr.length
             splitLine: {
               show: false
             },
-            data: [
-              "手环测试2",
-              "手环测试1",
-              "手环测试7",
-              "手环测试3",
-              "手环测试4",
-              "手环测试10",
-              "手环测试5",
-              "手环测试11"
-            ]
+            data: name
           }
         ],
         yAxis: {
@@ -1477,7 +1436,7 @@ this.fenceNum = newArr.length
             },
             zlevel: 2,
             barWidth: "35%",
-            data: [28, 22, 20, 16, 12, 8, 6, 2]
+            data: num
           },
           {
             name: "",
@@ -1505,128 +1464,6 @@ this.fenceNum = newArr.length
       window.addEventListener("resize", function() {
         myChart.resize();
       });
-      var num1 = 0;
-      var num2 = 0;
-      var num3 = 0;
-      var num4 = 0;
-      var num5 = 0;
-      if (this.subjectNum.低电量 !== undefined) {
-        num1 = this.subjectNum.低电量;
-      }
-      if (this.subjectNum.关机 !== undefined) {
-        num2 = this.subjectNum.关机;
-      }
-      if (this.subjectNum.摘掉设备 !== undefined) {
-        num3 = this.subjectNum.摘掉设备;
-      }
-      if (this.subjectNum.震动报警 !== undefined) {
-        num4 = this.subjectNum.震动报警;
-      }
-      if (this.subjectNum.表带破坏 !== undefined) {
-        num5 = this.subjectNum.表带破坏;
-      }
-      var chartDom1 = document.getElementById("pie");
-      var myChart1 = echarts.init(chartDom1);
-      var option1;
-      var data = [
-        { value: num1, name: "低电量" },
-        { value: num2, name: "关机" },
-        { value: num3, name: "摘掉设备" },
-        //这两条是为了造数据改的
-        { value: num4, name: "震动报警" },
-        { value: num5, name: "表带破坏" }
-      ];
-      option1 = {
-        backgroundColor: "rgba(0,0,0,0)",
-        tooltip: {
-          trigger: "item",
-          formatter: "{b}: <br/>{c} ({d}%)"
-        },
-        color: ["#af89d6", "#4ac7f5", "#0089ff", "#f36f8a", "#f5c847"],
-        legend: {
-          //图例组件，颜色和名字
-          x: "70%",
-          y: "center",
-          orient: "vertical",
-          itemGap: 12, //图例每项之间的间隔
-          itemWidth: 10,
-          itemHeight: 10,
-          icon: "rect",
-          data: ["低电量", "关机", "摘掉设备", "震动报警", "表带破坏"],
-          textStyle: {
-            color: [],
-            fontStyle: "normal",
-            fontFamily: "微软雅黑",
-            fontSize: 15
-          }
-        },
-        series: [
-          {
-            name: "行业占比",
-            type: "pie",
-            clockwise: false, //饼图的扇区是否是顺时针排布
-            minAngle: 20, //最小的扇区角度（0 ~ 360）
-            center: ["35%", "50%"], //饼图的中心（圆心）坐标
-            radius: [50, 80], //饼图的半径
-            avoidLabelOverlap: true, ////是否启用防止标签重叠
-            itemStyle: {
-              //图形样式
-              normal: {
-                borderColor: "#1e2239",
-                borderWidth: 2
-              }
-            },
-            label: {
-              //标签的位置
-              normal: {
-                show: true,
-                position: "inside", //标签的位置
-                formatter: "{d}%",
-                textStyle: {
-                  color: "#fff"
-                }
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontWeight: "bold"
-                }
-              }
-            },
-            data: data
-          },
-          {
-            name: "",
-            type: "pie",
-            clockwise: false,
-            silent: true,
-            minAngle: 20, //最小的扇区角度（0 ~ 360）
-            center: ["35%", "50%"], //饼图的中心（圆心）坐标
-            radius: [0, 48], //饼图的半径
-            itemStyle: {
-              //图形样式
-              normal: {
-                borderColor: "#1e2239",
-                borderWidth: 1.5,
-                opacity: 0.21
-              }
-            },
-            label: {
-              //标签的位置
-              normal: {
-                show: false
-              }
-            },
-            data: data
-          }
-        ]
-      };
-
-      option1 && myChart1.setOption(option1);
-
-      window.addEventListener("resize", function() {
-        myChart1.resize();
-      });
     },
     onSwiper(swiper) {
       console.log(swiper);
@@ -1653,13 +1490,13 @@ this.fenceNum = newArr.length
       if (i.status == "离线") {
         var myIcon = new BMap.Icon(
           require("@/assets/img/定位红.png"),
-          new BMap.Size(50,50)
+          new BMap.Size(50, 50)
         );
       }
       if (i.status == "在线") {
         var myIcon = new BMap.Icon(
           require("@/assets/img/定位绿.png"),
-          new BMap.Size(50,50)
+          new BMap.Size(50, 50)
         );
       }
 
@@ -1765,10 +1602,39 @@ this.fenceNum = newArr.length
     reset() {
       this.prepare();
     },
-    enterDetails(val) {
-      console.log(val);
-      window.sessionStorage.setItem("whichProduct", JSON.stringify(val));
-      this.$router.push({ path: "/products/pageDetail" });
+//     enterDetails(val) {
+//       console.log(val);
+//       window.sessionStorage.setItem("whichProduct", JSON.stringify(val));
+//       // this.$router.push({ path: "/products/pageDetail" });
+//       this.dialogVisible1 = true;
+//     },
+//     cancel() {
+//  window.sessionStorage.setItem("whichProduct", JSON.stringify({}));
+//   this.dialogVisible1 = false;
+//     },
+    startSearch1() {
+      this.alertTitle = false;
+    },
+    inputChange1() {
+      console.log(this.alertSearch);
+      this.data1 = [];
+      this.alertInfo.forEach(item => {
+        if (
+          item.productName
+            .toLowerCase()
+            .includes(this.alertSearch.toLowerCase())
+        ) {
+          this.data1.push(item);
+        }
+      });
+    },
+    change1() {
+      this.alertTitle = true;
+      this.data1 = this.alertInfo;
+      this.alertSearch = ""
+    },
+    allProduct() {
+      this.dialogVisible = true;
     }
   }
 };
@@ -1845,11 +1711,49 @@ this.fenceNum = newArr.length
           font-weight: 600;
           color: #03c2ec;
           text-align: left;
+          .input {
+          width: 86%;
+          margin-left: 2%;
+          height: 40px;
+          background-color: #00093e !important;
+          color: #fff;
+          border: 1px solid #001257;
+          outline: none;
         }
-        #pie {
-          height: calc(100% - 40px);
+        }
+                   .bottom {
+        height: 180px;
+        width: 100%;
+        .seamless-warp {
+          height: 100%;
           width: 100%;
+          overflow: auto;
+
         }
+        .cardList {
+          height: 80px;
+          width: 100%;
+          text-align: left;
+          /* background-color: rgb(204, 90, 90); */
+        }
+        .divider {
+          margin-top: 5%;
+          width: 80%;
+          margin-left: 10%;
+          height: 2px;
+          padding: 0;
+          margin: 0;
+          background-color: rgb(24, 136, 93);
+          font-family: "Kosugi Maru", sans-serif;
+          background-image: linear-gradient(
+            45deg,
+            rgb(47, 56, 93),
+            rgb(101, 120, 156),
+            rgb(101, 120, 156),
+            rgb(47, 56, 93)
+          );
+        }
+      }
       }
       #mapBody1 {
         border-radius: 30px;
@@ -1978,8 +1882,9 @@ this.fenceNum = newArr.length
           text-align: left;
         }
         .body {
-          height: calc(100% - 40px);
+          height: 100px;
           width: 100%;
+          background-color: #fff;
           background: url("../img/footer-bg.png") no-repeat center center;
           .seamless-warp {
             height: 100%;
@@ -2037,4 +1942,18 @@ this.fenceNum = newArr.length
     }
   }
 }
+               ::-webkit-scrollbar {
+            width: 6px;
+            height: 1px;
+          }
+          ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(97, 184, 179, 0.1);
+            background: #78b4b4;
+          }
+          ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px rgba(87, 175, 187, 0.1);
+            border-radius: 10px;
+            background: #ededed;
+          }
 </style>

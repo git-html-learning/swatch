@@ -44,17 +44,10 @@
         <el-col :span="12" :offset="0" v-for="(item, index) in product.extraInfo" :key="index">
           <el-input placeholder="请输入内容" v-model="product.extraInfo[index]">
             <template slot="prepend">
-           <span v-if = "index == 'deviceId'">
-设备ID
-           </span>
-                      <span v-if = "index == 'fence'">
-
-围栏
-           </span>
-                      <span v-if = "index == 'nickname'">
-手环编号
-           </span>
-                     <!-- {{index}} -->
+              <span v-if="index == 'deviceId'">设备ID</span>
+              <span v-if="index == 'fence'">围栏</span>
+              <span v-if="index == 'nickname'">手环编号</span>
+              <!-- {{index}} -->
             </template>
           </el-input>
         </el-col>
@@ -166,65 +159,81 @@ export default {
       console.log("下行反馈");
     },
 
-    updateproduct() {
-      this.$confirm("修改电子围栏可能会造成影响，确定修改?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-        console.log("确定修改");
+    // updateproduct() {
+    //   this.$confirm("修改电子围栏可能会造成影响，确定修改?", "提示", {
+    //     confirmButtonText: "确定",
+    //     cancelButtonText: "取消",
+    //     type: "warning"
+    //   }).then(() => {
+    //     console.log("确定修改");
 
-        console.log(this.product);
-        var key = this.product.productKey;
-        ProductOne(key).then(res => {
-          console.log(res.data);
-          var obj = {
-            productKey: res.data.productKey,
-            productName: res.data.productName,
-            protocolType: res.data.protocolType,
-            productType: res.data.productType,
-            typeIdentify: res.data.typeIdentify,
-            description: res.data.description,
-            extraInfo: res.data.extraInfo
-          };
-          obj.extraInfo.fence = this.fence;
-          console.log(obj);
-          updated_product(obj).then(res => {
-            if (res.msg == "ok") {
-              this.$message.success("修改成功");
-            } else {
-              this.$message.info(res.msg);
-            }
-            this.$emit("beforeClose");
-          });
-        });
-      });
-      // var list = Object.values(this.product.extraInfo);
-      // list.map(val => {
-      //   //  var exp=
-      //   val.Value = val.Value.replace(/[\uff0c]/g, ",");
-      // });
-      // updated_product(this.productdetail).then(res => {
-      //   if (res.code == 200) {
-      //     this.$message({
-      //       showClose: true,
-      //       message: "产品信息更新成功！",
-      //       type: "success"
-      //     });
-      //     this.$emit("beforeClose");
-      //   } else {
-      //     this.$message({
-      //       showClose: true,
-      //       message: "提示:" + res.msg,
-      //       type: "error"
-      //     });
-      //   }
-      // });
-    },
+    //     console.log(this.product);
+    //     var key = this.product.productKey;
+    //     console.log(key);
+    //     var adminToken = window.sessionStorage.getItem("adminToken");
+    //     var _this = this;
+    //     _this
+    //       .axios({
+    //         method: "get",
+    //         url:
+    //           "https://api.ahusmart.com/api/v1/productDetail?productKey=" + key,
+    //         headers: {
+    //           token: adminToken
+    //         }
+    //       })
+    //       .then(res => {
+    //         console.log(res);
+    //         console.log(res.data);
+    //         var obj = {
+    //           productKey: res.data.productKey,
+    //           productName: res.data.productName,
+    //           protocolType: res.data.protocolType,
+    //           productType: res.data.productType,
+    //           typeIdentify: res.data.typeIdentify,
+    //           description: res.data.description,
+    //           extraInfo: res.data.extraInfo
+    //         };
+    //         obj.extraInfo.fence = this.fence;
+    //         console.log(obj);
+    //         updated_product(obj).then(res => {
+    //           if (res.msg == "ok") {
+    //             this.$message.success("修改成功");
+    //           } else {
+    //             this.$message.info(res.msg);
+    //           }
+    //           this.$emit("beforeClose");
+    //         });
+    //       });
+    //   });
+    //   // var list = Object.values(this.product.extraInfo);
+    //   // list.map(val => {
+    //   //   //  var exp=
+    //   //   val.Value = val.Value.replace(/[\uff0c]/g, ",");
+    //   // });
+    //   // updated_product(this.productdetail).then(res => {
+    //   //   if (res.code == 200) {
+    //   //     this.$message({
+    //   //       showClose: true,
+    //   //       message: "产品信息更新成功！",
+    //   //       type: "success"
+    //   //     });
+    //   //     this.$emit("beforeClose");
+    //   //   } else {
+    //   //     this.$message({
+    //   //       showClose: true,
+    //   //       message: "提示:" + res.msg,
+    //   //       type: "error"
+    //   //     });
+    //   //   }
+    //   // });
+    // },
     detail() {
-      this.$router.push({path: '/products/pageDetail'})
+      this.$router.push({ path: "/products/pageDetail" });
       // console.log(this.product)
-      window.sessionStorage.setItem("whichProduct",JSON.stringify(this.product))
+      window.sessionStorage.setItem(
+        "whichProduct",
+        JSON.stringify(this.product)
+      );
     }
   },
   props: ["productdetail", "condition"]

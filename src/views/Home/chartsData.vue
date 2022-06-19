@@ -145,7 +145,8 @@ export default {
               this.dataList1.length === data.length ||
               this.timeList1.length === data.length
             ) {
-              this.echarts();
+              // this.echarts();
+              setTimeout(this.echarts, 1000);
             }
           });
         });
