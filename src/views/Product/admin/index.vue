@@ -364,7 +364,18 @@ export default {
       });
       allProductKey().then(res => {
         if (res.msg == "ok") {
+          console.log(res)
+          //冒泡排序
           this.productNameList = res.data.productKeys;
+               for(var i=0;i< this.productNameList.length;i++) {
+              for(var j=0;j< this.productNameList.length-1-i;j++) {
+                if( this.productNameList[j]> this.productNameList[j+1]) {
+                  var temp =  this.productNameList[j]
+                   this.productNameList[j] =  this.productNameList[j+1] 
+                  this.productNameList[j+1] = temp
+                }
+              }
+            }
           // console.log(this.productNameList);
           var username = window.sessionStorage.getItem("username");
           console.log(username);
@@ -375,6 +386,7 @@ export default {
           }).then(res => {
             console.log(res);
             this.productList1 = res.data;
+       
             console.log(this.productList1);
             // console.log(this.productList1);
 this.judge = []

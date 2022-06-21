@@ -1201,6 +1201,15 @@ export default {
         console.log(res);
         if (res.msg == "ok") {
           this.productnameList = res.data.productKeys;
+                       for(var i=0;i< this.productnameList.length;i++) {
+              for(var j=0;j< this.productnameList.length-1-i;j++) {
+                if( this.productnameList[j]> this.productnameList[j+1]) {
+                  var temp = this.productnameList[j]
+                   this.productnameList[j] =  this.productnameList[j+1] 
+                  this.productnameList[j+1] = temp
+                }
+              }
+            }
           var username = window.sessionStorage.getItem("username");
           getDeviceDatas({
             username: username,
