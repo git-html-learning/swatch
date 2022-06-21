@@ -137,6 +137,11 @@ export default {
             .dispatch("user/login", this.loginForm)
             .then(res => {
               if (res.code == 200) {
+                console.log(res)
+                   window.sessionStorage.setItem(
+                  "token",
+                  res.data.token
+                );
                 window.sessionStorage.setItem(
                   "username",
                   this.loginForm.username
