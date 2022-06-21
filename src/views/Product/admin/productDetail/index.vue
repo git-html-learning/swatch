@@ -241,9 +241,10 @@ updateproduct    () {
       // });
     },
     detail() {
-      this.$router.push({path: '/products/pageDetail'})
-      // console.log(this.product)
+     
+      console.log(this.product)
       window.sessionStorage.setItem("whichProduct",JSON.stringify(this.product))
+       this.$router.push({path: '/products/pageDetail'})
     }
   },
   props: ["productdetail", "condition"]

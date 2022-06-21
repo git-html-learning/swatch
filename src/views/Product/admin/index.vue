@@ -55,12 +55,12 @@
           >
             <el-table-column type="selection" width="40"></el-table-column>
             <!-- 搜索设备名 -->
-            <el-table-column align="center" prop="productName" label="用户名称">
-              <template slot="header" slot-scope="scope">
+            <el-table-column   align="center" prop="productName" label="用户名称">
+              <template slot="header" slot-scope="scope" >
                 <!-- 不点击显示产品名称，搜索框绑定一个点击事件，点击一下，show变成false -->
                 <div v-show="show">
                   <el-row type="flex" justify="center">
-                    <el-col :span="18">用户名</el-col>
+                    <el-col :span="18" >用户名</el-col>
                     <el-col :span="1">
                       <i class="el-icon-search" @click="startSearch"></i>
                       </el-col>
@@ -121,7 +121,7 @@
             <el-table-column align="center" label="收缩压" prop="latestData.bpHigh"></el-table-column>
             <el-table-column align="center" label="舒张压" prop="latestData.bpLow"></el-table-column>
             <el-table-column align="center" label="步数" prop="latestData.stepNum"></el-table-column>
-            <el-table-column align="center" label="电子围栏" prop="extraInfo.fence"></el-table-column>
+            <el-table-column align="center" sortable label="电子围栏" prop="extraInfo.fence"></el-table-column>
 
             <!-- 按钮 -->
             <el-table-column align="center" label="操作" min-width="120">
@@ -507,8 +507,6 @@ this.judge = []
             this.options = [];
             console.log(this.productList1);
             this.data = this.productList1;
-            console.log(this.data)
-
             (this.currentPage = 1), (this.alertMessage = []);
             this.latestAlert = [];
             for (var i = 0; i < this.productList1.length; i++) {
@@ -544,7 +542,7 @@ this.judge = []
             }
             // console.log(this.latestAlert);
           });
-          this.loading = false;
+          // this.loading = false;
         } else {
           this.$message.error(res.msg);
         }
@@ -1022,9 +1020,10 @@ this.multipleSelection = []
       console.log(this.groupsDetail);
     },
     productDetail(item) {
-      // console.log(item)
-      this.$router.push({ path: "/products/pageDetail" });
-      window.sessionStorage.setItem("whichProduct", JSON.stringify(item));
+      console.log(item)
+      console.log(this.detail)
+      // this.$router.push({ path: "/products/pageDetail" });
+      window.sessionStorage.setItem("whichProduct", JSON.stringify(this.detail));
     },
     issue() {
       if (this.groupCheck.length == 0) {

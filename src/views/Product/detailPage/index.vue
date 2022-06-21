@@ -10,14 +10,14 @@
             <el-col :span="6">
               <el-card class="card">
                 <el-row type="flex" justify>
-                  <el-col :span="14" style= "text-align: center;">
+                  <el-col :span="14" style="text-align: center;">
                     <p>温度</p>
                     <p>
-                      <span style="font-size: 30px">{{this.product.latestData.body}}</span>
+                      <span style="font-size: 30px">{{this.body}}</span>
                       <span style="margin-left:10px;">℃</span>
                     </p>
                   </el-col>
-                  <el-col :span="8" style= "text-align: center;">
+                  <el-col :span="8" style="text-align: center;">
                     <p>
                       <svg
                         t="1654496594344"
@@ -50,17 +50,17 @@
                 </el-row>
               </el-card>
             </el-col>
-                        <el-col :span="6">
+            <el-col :span="6">
               <el-card class="card">
                 <el-row type="flex" justify>
-                  <el-col :span="14" style= "text-align: center;">
+                  <el-col :span="14" style="text-align: center;">
                     <p>腕温</p>
                     <p>
-                      <span style="font-size: 30px">{{this.product.latestData.skin}}</span>
+                      <span style="font-size: 30px">{{this.skin}}</span>
                       <span style="margin-left:10px;">℃</span>
                     </p>
                   </el-col>
-                  <el-col :span="8" style= "text-align: center;">
+                  <el-col :span="8" style="text-align: center;">
                     <p>
                       <svg
                         t="1654497095057"
@@ -86,14 +86,14 @@
             <el-col :span="6">
               <el-card class="card">
                 <el-row type="flex" justify>
-                  <el-col :span="14" style= "text-align: center;">
+                  <el-col :span="14" style="text-align: center;">
                     <p>心率</p>
                     <p>
-                      <span style="font-size: 30px">{{this.product.latestData.heartRate}}</span>
+                      <span style="font-size: 30px">{{this.heartRate}}</span>
                       <span style="margin-left:10px;">次/分</span>
                     </p>
                   </el-col>
-                  <el-col :span="8" style= "text-align: center;">
+                  <el-col :span="8" style="text-align: center;">
                     <p>
                       <svg
                         t="1654496706565"
@@ -125,14 +125,14 @@
             <el-col :span="6">
               <el-card class="card">
                 <el-row type="flex" justify>
-                  <el-col :span="14" style= "text-align: center;">
+                  <el-col :span="14" style="text-align: center;">
                     <p>步数</p>
                     <p>
-                      <span style="font-size: 30px">{{this.product.latestData.stepNum}}</span>
+                      <span style="font-size: 30px">{{this.stepNum}}</span>
                       <span style="margin-left:10px;">步</span>
                     </p>
                   </el-col>
-                  <el-col :span="8"  style= "text-align: center;">
+                  <el-col :span="8" style="text-align: center;">
                     <p>
                       <svg
                         t="1654496797193"
@@ -170,7 +170,6 @@
                 </el-row>
               </el-card>
             </el-col>
-
           </el-row>
         </el-card>
       </div>
@@ -234,12 +233,12 @@ export default {
     return {
       product: null,
       polylinePath: [
-        { lng: 116.404, lat: 39.915 },
-        { lng: 116.405, lat: 39.92 },
-        { lng: 116.423493, lat: 39.907445 }
+        { lng: 117.2303094543, lat: 31.8205655344 },
+        { lng: 117.22182953445, lat: 31.807063454 },
+        { lng: 117.23971454343, lat: 31.79758154343 }
       ],
       // map: null,
-      center: { lng: 117.192342, lat: 31.770919 }, // 中心点坐标
+      center: { lng: 117.233902, lat: 31.81429 }, // 中心点坐标
       zoom: 12,
       pl: null,
       bmap: null,
@@ -255,8 +254,11 @@ export default {
       date1: [],
       date2: [],
       wenduList: null,
-      heartList: null
-      //  obj: null,
+      heartList: null,
+      body:"-",
+      skin:"-",
+      heartRate:"-",
+      stepNum:"-",
     };
   },
   created() {
@@ -267,6 +269,43 @@ export default {
     test() {
       this.product = JSON.parse(window.sessionStorage.getItem("whichProduct"));
       console.log(this.product);
+     if( this.product.deviceData!==null) {
+       this.product.deviceData.forEach(item=>{
+if (item.deviceName == "BA") {
+  this.body = item.extraInfo.body
+  this.skin = item.extraInfo.skin
+}
+if (item.deviceName == "C2") {
+   this.heartRate == item.extraInfo.BPHeart
+}
+if (item.deviceName == "F6") {
+   this.stepNum == item.extraInfo.stepNum
+}
+          //           if (item.deviceName.includes("C2")) {
+          //           this.heartRate =
+          //             item.deviceData[
+          //               item.deviceName.indexOf("C2")
+          //             ].extraInfo.BPHeart;
+                 
+          //         } else {
+          //           this.heartRate = "-";
+          //         }
+          //            if (item.deviceName.includes("F6")) {
+          //           this.stepNum =
+          //             item.deviceData[
+          //               item.deviceName.indexOf("F6")
+          //             ].extraInfo.stepNum;
+          //         } else {
+          //          this.stepNum = "-";
+          //         }
+          console.log(item)
+
+       })
+       console.log(this.body)
+       console.log(this.skin)
+       console.log(this.heartRate)
+       console.log(this.stepNum)
+     }
       //查询指定产品下的设备列表
       ProductOne(this.product.productKey).then(res => {
         console.log(res);
@@ -311,8 +350,8 @@ export default {
               var startTime1 = time - 86400;
               if (item.deviceType == "位置信息") {
                 //开始请求坐标的历史数据
-                console.log(time);
-                console.log(startTime);
+                // console.log(time);
+                // console.log(startTime);
                 var payload = {
                   deviceKey: item.deviceKey,
                   startTime: startTime,
@@ -322,7 +361,6 @@ export default {
                 historyData(payload).then(res => {
                   console.log(res);
                   if (res.msg == "ok") {
-                    this.loading1 = false;
                     var trace = res.data.deviceData;
                     this.center = {
                       lng: trace[0].extraInfo.location.split(",")[0],
@@ -330,13 +368,29 @@ export default {
                     };
                     this.polylinePath = [];
                     trace.forEach(item1 => {
-                      item1.position = {
-                        lng: item1.extraInfo.location.split(",")[0],
-                        lat: item1.extraInfo.location.split(",")[1]
-                      };
-                      // console.log(item1.position)
-                      this.polylinePath.push(item1.position);
+                      var x = item1.extraInfo.location.split(",")[0];
+                      var y = item1.extraInfo.location.split(",")[1];
+                      var X_PI = (Math.PI * 3000.0) / 180.0;
+                      // var x = 116.32652,
+                      //   y = 39.995685;
+                      var z =
+                        Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * X_PI);
+                      var theta =
+                        Math.atan2(y, x) + 0.000003 * Math.cos(x * X_PI);
+                      var bd_lng = z * Math.cos(theta) + 0.0065;
+                      var bd_lat = z * Math.sin(theta) + 0.006;
+                      this.polylinePath.push({
+                        lng: bd_lng,
+                        lat: bd_lat
+                      });
+                      // item1.position = {
+                      //   lng: item1.extraInfo.location.split(",")[0],
+                      //   lat: item1.extraInfo.location.split(",")[1]
+                      // };
+                      // this.polylinePath.push(item1.position);
                     });
+                    // console.log(this.polylinePath);
+                    this.loading1 = false;
                   } else {
                     console.log(res.msg);
                     this.show1 = false;
@@ -544,7 +598,7 @@ export default {
         yAxis: {
           type: "value",
           axisLabel: {
-            formatter: "{value} °C"
+            formatter: "{value}"
           }
         },
         series: this.heartList

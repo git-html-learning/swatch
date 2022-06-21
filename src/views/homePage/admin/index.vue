@@ -489,9 +489,13 @@
               >
                 <img src="@/assets/img/icon06.png" alt style="margin-top:10px;" />
                 数据统计
+                <span style = "height: 80px; line-height: 80px; float: right; margin-right: 30px;">
+                    <svg v-if = "tableShow" @click = "switch1"  t="1655628773853" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18381" width="20" height="20"><path d="M960 672H64a32 32 0 0 1-32-32v-256a32 32 0 0 1 32-32h896a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32zM96 608h832v-192H96z" fill="#1296db" p-id="18382"></path><path d="M896 928H128a32 32 0 0 1-32-32v-256a32 32 0 0 1 64 0v224h704v-224a32 32 0 0 1 64 0v256a32 32 0 0 1-32 32zM896 416a32 32 0 0 1-32-32V160H160v224a32 32 0 0 1-64 0V128a32 32 0 0 1 32-32h768a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32z" fill="#1296db" p-id="18383"></path><path d="M448 288H256a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM768 288h-192a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM448 800H256a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM768 800h-192a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM448 544H192a32 32 0 0 1 0-64h256a32 32 0 0 1 0 64zM832 544h-256a32 32 0 0 1 0-64h256a32 32 0 0 1 0 64z" fill="#1296db" p-id="18384"></path></svg>
+               <svg  v-if = "scrollShow" @click = "switch2" t="1655731396421" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="19554" width="20" height="20"><path d="M1001.951626 1001.951626H22.048374V22.048374h979.903252v979.903252" fill="#FFFFFF" p-id="19555"></path><path d="M1001.951626 1024H22.048374a22.048374 22.048374 0 0 1-22.048374-22.048374V22.048374a22.048374 22.048374 0 0 1 22.048374-22.048374h979.903252a22.048374 22.048374 0 0 1 22.048374 22.048374v979.903252a22.048374 22.048374 0 0 1-22.048374 22.048374zM44.096749 979.903251h935.806502V44.096749H44.096749z" fill="#888888" p-id="19556"></path><path d="M22.048374 22.048374h979.903252v256.643078H22.048374z" fill="#04BEBD" p-id="19557"></path><path d="M1001.951626 300.739826H22.048374a22.048374 22.048374 0 0 1-22.048374-22.048374V22.048374a22.048374 22.048374 0 0 1 22.048374-22.048374h979.903252a22.048374 22.048374 0 0 1 22.048374 22.048374v256.643078a22.048374 22.048374 0 0 1-22.048374 22.048374zM44.096749 256.643078h935.806502V44.096749H44.096749z" fill="#888888" p-id="19558"></path><path d="M901.190555 546.72619H119.722673a22.048374 22.048374 0 0 1 0-44.096749h781.467882a22.048374 22.048374 0 0 1 0 44.096749zM901.190555 784.334171H119.722673a22.048374 22.048374 0 1 1 0-44.096749h781.467882a22.048374 22.048374 0 0 1 0 44.096749z" fill="#CCCCCC" p-id="19559"></path><path d="M673.357353 932.352257a22.048374 22.048374 0 0 1-22.048374-22.048374v-540.185172a22.048374 22.048374 0 0 1 44.096748 0v540.185172a22.048374 22.048374 0 0 1-22.048374 22.048374zM347.555875 932.352257a22.048374 22.048374 0 0 1-22.048375-22.048374v-540.185172a22.048374 22.048374 0 0 1 44.096749 0v540.185172a22.048374 22.048374 0 0 1-22.048374 22.048374z" fill="#CCCCCC" p-id="19560"></path></svg>
+                </span>
               </div>
-              <svg
-                style="float: right; margin-right: 15px; height: 40px;"
+              <div style = "heigth: 40px; margin-bottom: 45px; margin-top: -10px; text-align: right;">
+                            <svg
                 v-if="!inputShow"
                 @click="startSearch"
                 t="1655345322360"
@@ -514,6 +518,8 @@
                   fill="#e6e6e6"
                 />
               </svg>
+              </div>
+  <div  style = "margin-top: -45px;">
               <input
                 v-if="inputShow"
                 @input="inputChange"
@@ -540,7 +546,9 @@
                   fill="#8a8a8a"
                 />
               </svg>
+              </div>
               <el-table
+                 v-if = "tableShow"
                 :data="data"
                 class="productList"
                 height="85%"
@@ -631,6 +639,105 @@
                   </template>
                 </el-table-column>
               </el-table>
+              <div v-if = "scrollShow" class="title1" style = "background-color: #000b64; color: #a08672; height: 45px;  font-size: 15px; line-height: 45px; font-weight: 700">
+                    <el-row type="flex" justify="" style = "text-align: center" >
+                        <el-col :span="8">
+                               <div v-show="show">
+                      <el-row type="flex" justify="center" >
+                        <el-col :span="20">手环名</el-col>
+                        <el-col :span="4">
+                          <svg
+                            t="1655362848055"
+                            @click="startSelect"
+                            class="icon"
+                            viewBox="0 0 1024 1024"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            p-id="4588"
+                            width="20"
+                            height="20"
+                          >
+                            <path
+                              d="M1024 789.333333v-554.666666A64 64 0 0 0 960 170.666667h-896A64 64 0 0 0 0 234.666667v554.666666A64 64 0 0 0 64 853.333333h896a64 64 0 0 0 64-64z m-85.333333-21.333333H85.333333V256h853.333334v512z"
+                              p-id="4589"
+                              fill="#8a8a8a"
+                            />
+                            <path
+                              d="M762.282667 590.421333a21.12 21.12 0 0 1-31.232 0l-78.08-83.285333a49.365333 49.365333 0 0 1 0-66.645333 42.24 42.24 0 0 1 62.464 0l31.232 33.28 31.232-33.28a42.24 42.24 0 0 1 62.506666 0c17.237333 18.346667 17.237333 48.213333 0 66.645333l-78.08 83.285333z"
+                              p-id="4590"
+                              fill="#8a8a8a"
+                            />
+                          </svg>
+                          <!-- <svg @click="show = !show" t="1655347950735" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3632" width="20" height="20"><path d="M775.768 778.112H287.84a38.576 38.576 0 0 1-38.712-38.68v-487.92a38.6 38.6 0 0 1 38.712-38.72h487.92a38.608 38.608 0 0 1 38.704 38.72v487.912a38.608 38.608 0 0 1-38.696 38.688z m-485.568-41.08h483.184V253.864H290.2v483.168z" p-id="3633" fill="#8a8a8a"></path><path d="M650.024 383.936L490.784 543.176a15.52 15.52 0 0 1-22.04 0l-55.192-55.184a23.376 23.376 0 0 0-33.144 0 23.36 23.36 0 0 0 0 33.152l66.312 66.32 22.024 22.04a15.496 15.496 0 0 0 22.04 0L683.2 417.104a23.376 23.376 0 0 0 0-33.168 23.384 23.384 0 0 0-33.176 0z" p-id="3634" fill="#8a8a8a"></path></svg> -->
+                          <!-- <i class="el-icon-search" @click="show = !show"></i> -->
+                        </el-col>
+                      </el-row>
+                    </div>
+                    <div v-show="!show" style = "margin-top: 13px;">
+                      <select
+                        class="select"
+                        v-model="whichGroup"
+                        placeholder="请选择组"
+                        @change="grouping"
+                      >
+                        <option
+                          v-for="item in groups"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        ></option>
+                      </select>
+                    </div>
+                        </el-col>
+                        <el-col :span="8">体温</el-col>
+                        <el-col :span="8">心率</el-col>
+                        <el-col :span="8">详情</el-col>
+                    </el-row>
+                </div>
+              <div v-if = "scrollShow" class="seamless-warp" >
+                
+                  <vue-seamless-scroll  :data="data"  >
+               <div style = "height: 50px; line-height: 50px; border-bottom: 1px solid #121951; background-color: #00073d"  v-for="(item,index) in data" :key="index" >
+                   <el-row type="flex" justify=""  style = "text-align: center; color: #fff">
+                       <el-col :span="8" style = "font-size: 14px;">  {{item.productName}}</el-col>
+                       <el-col :span="8">{{item.latestData.body}}</el-col>
+                       <el-col :span="8">{{item.latestData.heartRate}}</el-col>
+                       <el-col :span="8">
+                              <svg
+                      @click="detailproduct(item)"
+                      t="1655367341406"
+                      class="icon"
+                      viewBox="0 0 1024 1024"
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      p-id="5707"
+                      width="20"
+                      height="20"
+                    >
+                      <path
+                        d="M747.7 288.2c0-17.6-14.4-32.1-32.1-32.1H306.4c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h409.2c17.7 0 32.1-14.5 32.1-32.1zM306.4 448c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h191.1c17.7 0 32.2-14.4 32.1-32.1 0-17.6-14.4-32.1-32.1-32.1H306.4zM766.6 776.8c-2.1-2.1-4.4-3.9-6.9-5.2 18.1-25.8 28.7-57.1 28.7-90.9 0-88.2-72.4-159.6-161.7-159.6S465 592.5 465 680.7s72.4 159.6 161.7 159.6c32.7 0 63.2-9.6 88.7-26.1 1.5 2.9 3.4 5.6 5.8 8l83.3 83.3c12.5 12.5 32.9 12.5 45.4 0s12.5-32.9 0-45.4l-83.3-83.3z m-139.9 0.6c-54.1 0-98-43.3-98-96.7s43.9-96.7 98-96.7 98 43.3 98 96.7c0 53.4-43.8 96.7-98 96.7z"
+                        fill="#00c4c1"
+                        p-id="5708"
+                      />
+                      <path
+                        d="M577.6 895.4H221.2c-35.2 0-64-28.8-64-64V192.8c0-35.2 28.8-64 64-64h547.3c35.2 0 64 28.8 64 64v318.4h0.3v0.1c0 17.7 14.4 32.1 32.2 32.1s32.2-14.4 32.2-32.1c0-1.2-0.1-2.3-0.2-3.5v-316c0-70.4-27.6-128-98-128H225c-70.4 0-128 57.6-128 128v639.8c0 70.4 57.6 128 128 128h352.2c17.8 0 32.2-14.4 32.2-32.1 0-17.6-14.2-31.9-31.8-32.1z"
+                        fill="#00c4c1"
+                        p-id="5709"
+                      />
+                      <path
+                        d="M832.7 639.3a32.2 32.1 0 1 0 64.4 0 32.2 32.1 0 1 0-64.4 0Z"
+                        fill="#00c4c1"
+                        p-id="5710"
+                      />
+                    </svg>
+                       </el-col>
+                   </el-row>
+               </div>
+
+  
+         
+              </vue-seamless-scroll>
+              </div>
             </div>
             <div class="top" v-if="!productShow">
               <div
@@ -1005,6 +1112,8 @@ export default {
       whichGroup:"",
       cityList:[],
       cityStatistic:[],
+      tableShow: false,
+      scrollShow: true,
     };
   },
   created() {
@@ -2189,7 +2298,15 @@ this.positionList.push(item.latestData.location)
       this.wenduShow = false;
       this.xinlvShow = false;
       this.guijiShow = false;
-    }
+    },
+    switch1() {
+this.tableShow = false;
+this.scrollShow = true;
+    },
+        switch2() {
+this.tableShow = true;
+this.scrollShow = false;
+    },
   }
 };
 </script>
@@ -2380,6 +2497,34 @@ this.positionList.push(item.latestData.location)
           color: #9b8f8f;
           border: 1px solid #001257;
           outline: none;
+        }
+          .seamless-warp {
+          height: calc(90% - 60px);
+          width: 100%;
+          overflow: hidden;
+        }
+        .cardList {
+          height: 40px;
+          width: 100%;
+          text-align: left;
+          /* background-color: rgb(204, 90, 90); */
+        }
+        .divider {
+          margin-top: 5%;
+          width: 80%;
+          margin-left: 10%;
+          height: 2px;
+          padding: 0;
+          margin: 0;
+          background-color: rgb(24, 136, 93);
+          font-family: "Kosugi Maru", sans-serif;
+          background-image: linear-gradient(
+            45deg,
+            rgb(47, 56, 93),
+            rgb(101, 120, 156),
+            rgb(101, 120, 156),
+            rgb(47, 56, 93)
+          );
         }
 
         .productList {
