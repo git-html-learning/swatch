@@ -1,4 +1,9 @@
 <template>
+<div class="la">
+
+
+  
+
   <div class="layout">
     <!-- <div
       id="background"
@@ -6,6 +11,7 @@
     >
       <img src="@/assets/img/bg.jpg" width="100%" height="100%" />
     </div>-->
+
     <div class="titlePart">
       <!-- <div
       style="position: absolute; z-index: -1; width:100%; height:100%; top:0px; left:0px; background: transparent;"
@@ -463,11 +469,21 @@
           <div
             class="title"
             style="position: absolute; top: 5px; left: 40%;
-          color: #00f6ff; font-size: 23px; line-height: 70px; height: 70px;"
+          color: #00f6ff; font-size: 23px; line-height: 70px; height: 70px;z-index: 30; cursor: pointer"
           >
-            <img src="@/assets/img/icon03.png" alt style="margin-top:10px;" />
+            <img src="@/assets/img/icon03.png" alt style="margin-top:10px; " />
             平台数据分布
+        <svg @click = "mapDetail = !mapDetail" t="1656146963028" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4135" width="25" height="25"><path d="M512 512m-416 0a416 416 0 1 0 832 0 416 416 0 1 0-832 0Z" fill="#AEECFF" p-id="4136"></path><path d="M752 512L580.032 604.032 312 512 102.656 583.872A415.744 415.744 0 0 0 512 928a415.808 415.808 0 0 0 408.96-341.376L752 512z" fill="#01ADDB" p-id="4137"></path><path d="M289.728 863.232L312 512 102.656 583.872a415.552 415.552 0 0 0 187.072 279.36zM767.616 839.744L752 512 581.248 604.032l-8.768 319.104a412.864 412.864 0 0 0 195.136-83.392z" fill="#009BC4" p-id="4138"></path><path d="M759.488 40c-105.984 0-192 85.952-192 192s192 358.016 192 358.016 192-251.968 192-358.016-86.016-192-192-192z m0 254.144a68.48 68.48 0 1 1 0-136.96 68.48 68.48 0 0 1 0 136.96z" fill="#38A4FE" p-id="4139"></path><path d="M759.488 603.2l-6.4-8.32c-7.872-10.368-193.6-255.36-193.6-362.88C559.488 121.728 649.216 32 759.488 32s200 89.728 200 200c0 107.52-185.728 352.512-193.6 362.88l-6.4 8.32z m0-555.2a184.256 184.256 0 0 0-184 184c0 91.392 150.848 299.968 184 344.64 33.152-44.672 184-253.248 184-344.64A184.256 184.256 0 0 0 759.488 48z m0 254.144c-42.176 0-76.48-34.304-76.48-76.48s34.304-76.48 76.48-76.48 76.48 34.304 76.48 76.48-34.304 76.48-76.48 76.48z m0-137.024a60.544 60.544 0 0 0 0 120.96 60.544 60.544 0 0 0 0-120.96z" fill="#FFFFFF" p-id="4140"></path><path d="M102.528 582.976c4.352 25.536 11.136 50.176 19.968 73.92l187.52-59.328 270.4 75.264 0.896-68.864L312 512 102.528 582.976z" fill="#429E2F" p-id="4141"></path><path d="M897.408 668.096l-138.432-26.752-185.024 89.024-276.8-42.24-142.912 35.328c6.144 10.368 12.608 20.416 19.584 30.208l122.816-32.256 275.328 41.984 188.992-88 122.368 23.36c5.12-9.984 9.856-20.096 14.08-30.656z" fill="#FFFFFF" p-id="4142"></path><path d="M415.232 916.224c6.464 1.472 12.864 3.072 19.456 4.288l8-360.128-18.688-6.848-8.768 362.688z" fill="#FFFFFF" p-id="4143"></path><path d="M760.256 662.016m-40 0a40 40 0 1 0 80 0 40 40 0 1 0-80 0Z" fill="#FC354D" p-id="4144"></path><path d="M825.088 785.344c8.896-10.112 17.216-20.672 25.088-31.616l-90.112-14.4-118.016 54.656 1.664 112.384c12.864-4.224 25.408-9.216 37.696-14.656l-1.344-77.76 84.032-36.032 60.992 7.424z" fill="#39BEE9" p-id="4145"></path><path d="M817.984 540.736L832 655.36l65.408 12.736c10.752-26.56 18.688-54.528 23.808-83.52l-103.232-43.84z" fill="#F5F9C7" p-id="4146"></path></svg>
+
           </div>
+                                  <div
+      v-show="mapDetail"
+      style="position: absolute; left: 0%;  top: 20%; z-index: 100; height: 500px; width: 100%; border-radius: 30px;"
+       >
+      <div id="mapBody1" style="width: 100%; height: 450px; background-color: #000; ">
+          <mapDetail :setCenter = "center"></mapDetail>
+      </div>
+    </div>
           <div class="map1">
             <img src="@/assets/img/lbx.png" />
           </div>
@@ -477,7 +493,18 @@
           <div class="map3">
             <img src="@/assets/img/map.png" />
           </div>
-          <div id="mapBody"></div>
+          <div id="mapBody" ref="dotMap" v-show="mapShow"></div>
+          <!-- <div id="map-container" v-show="!mapShow"></div> -->
+          <div class="mapChoose" v-show = "!mapDetail">
+            <span v-for="(item,index) in parentInfo" :key="item.code">
+              <span
+                class="title"
+                style=" cursor: pointer;"
+                @click="chooseArea(item,index)"
+              >{{item.cityName=='全国'?'中国':item.cityName}}</span>
+              <span class="icon" v-show="index+1!=parentInfo.length">></span>
+            </span>
+          </div>
         </el-col>
         <el-col :span="6">
           <div class="right">
@@ -489,66 +516,137 @@
               >
                 <img src="@/assets/img/icon06.png" alt style="margin-top:10px;" />
                 数据统计
-                <span style = "height: 80px; line-height: 80px; float: right; margin-right: 30px;">
-                    <svg v-if = "tableShow" @click = "switch1"  t="1655628773853" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18381" width="20" height="20"><path d="M960 672H64a32 32 0 0 1-32-32v-256a32 32 0 0 1 32-32h896a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32zM96 608h832v-192H96z" fill="#1296db" p-id="18382"></path><path d="M896 928H128a32 32 0 0 1-32-32v-256a32 32 0 0 1 64 0v224h704v-224a32 32 0 0 1 64 0v256a32 32 0 0 1-32 32zM896 416a32 32 0 0 1-32-32V160H160v224a32 32 0 0 1-64 0V128a32 32 0 0 1 32-32h768a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32z" fill="#1296db" p-id="18383"></path><path d="M448 288H256a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM768 288h-192a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM448 800H256a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM768 800h-192a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM448 544H192a32 32 0 0 1 0-64h256a32 32 0 0 1 0 64zM832 544h-256a32 32 0 0 1 0-64h256a32 32 0 0 1 0 64z" fill="#1296db" p-id="18384"></path></svg>
-               <svg  v-if = "scrollShow" @click = "switch2" t="1655731396421" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="19554" width="20" height="20"><path d="M1001.951626 1001.951626H22.048374V22.048374h979.903252v979.903252" fill="#FFFFFF" p-id="19555"></path><path d="M1001.951626 1024H22.048374a22.048374 22.048374 0 0 1-22.048374-22.048374V22.048374a22.048374 22.048374 0 0 1 22.048374-22.048374h979.903252a22.048374 22.048374 0 0 1 22.048374 22.048374v979.903252a22.048374 22.048374 0 0 1-22.048374 22.048374zM44.096749 979.903251h935.806502V44.096749H44.096749z" fill="#888888" p-id="19556"></path><path d="M22.048374 22.048374h979.903252v256.643078H22.048374z" fill="#04BEBD" p-id="19557"></path><path d="M1001.951626 300.739826H22.048374a22.048374 22.048374 0 0 1-22.048374-22.048374V22.048374a22.048374 22.048374 0 0 1 22.048374-22.048374h979.903252a22.048374 22.048374 0 0 1 22.048374 22.048374v256.643078a22.048374 22.048374 0 0 1-22.048374 22.048374zM44.096749 256.643078h935.806502V44.096749H44.096749z" fill="#888888" p-id="19558"></path><path d="M901.190555 546.72619H119.722673a22.048374 22.048374 0 0 1 0-44.096749h781.467882a22.048374 22.048374 0 0 1 0 44.096749zM901.190555 784.334171H119.722673a22.048374 22.048374 0 1 1 0-44.096749h781.467882a22.048374 22.048374 0 0 1 0 44.096749z" fill="#CCCCCC" p-id="19559"></path><path d="M673.357353 932.352257a22.048374 22.048374 0 0 1-22.048374-22.048374v-540.185172a22.048374 22.048374 0 0 1 44.096748 0v540.185172a22.048374 22.048374 0 0 1-22.048374 22.048374zM347.555875 932.352257a22.048374 22.048374 0 0 1-22.048375-22.048374v-540.185172a22.048374 22.048374 0 0 1 44.096749 0v540.185172a22.048374 22.048374 0 0 1-22.048374 22.048374z" fill="#CCCCCC" p-id="19560"></path></svg>
+                <span
+                  style="height: 80px; line-height: 80px; float: right; margin-right: 30px;"
+                >
+                  <svg
+                    v-if="tableShow"
+                    @click="switch1"
+                    t="1655628773853"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="18381"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M960 672H64a32 32 0 0 1-32-32v-256a32 32 0 0 1 32-32h896a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32zM96 608h832v-192H96z"
+                      fill="#1296db"
+                      p-id="18382"
+                    />
+                    <path
+                      d="M896 928H128a32 32 0 0 1-32-32v-256a32 32 0 0 1 64 0v224h704v-224a32 32 0 0 1 64 0v256a32 32 0 0 1-32 32zM896 416a32 32 0 0 1-32-32V160H160v224a32 32 0 0 1-64 0V128a32 32 0 0 1 32-32h768a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32z"
+                      fill="#1296db"
+                      p-id="18383"
+                    />
+                    <path
+                      d="M448 288H256a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM768 288h-192a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM448 800H256a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM768 800h-192a32 32 0 0 1 0-64h192a32 32 0 0 1 0 64zM448 544H192a32 32 0 0 1 0-64h256a32 32 0 0 1 0 64zM832 544h-256a32 32 0 0 1 0-64h256a32 32 0 0 1 0 64z"
+                      fill="#1296db"
+                      p-id="18384"
+                    />
+                  </svg>
+                  <svg
+                    v-if="scrollShow"
+                    @click="switch2"
+                    t="1655731396421"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="19554"
+                    width="20"
+                    height="20"
+                  >
+                    <path
+                      d="M1001.951626 1001.951626H22.048374V22.048374h979.903252v979.903252"
+                      fill="#FFFFFF"
+                      p-id="19555"
+                    />
+                    <path
+                      d="M1001.951626 1024H22.048374a22.048374 22.048374 0 0 1-22.048374-22.048374V22.048374a22.048374 22.048374 0 0 1 22.048374-22.048374h979.903252a22.048374 22.048374 0 0 1 22.048374 22.048374v979.903252a22.048374 22.048374 0 0 1-22.048374 22.048374zM44.096749 979.903251h935.806502V44.096749H44.096749z"
+                      fill="#888888"
+                      p-id="19556"
+                    />
+                    <path
+                      d="M22.048374 22.048374h979.903252v256.643078H22.048374z"
+                      fill="#04BEBD"
+                      p-id="19557"
+                    />
+                    <path
+                      d="M1001.951626 300.739826H22.048374a22.048374 22.048374 0 0 1-22.048374-22.048374V22.048374a22.048374 22.048374 0 0 1 22.048374-22.048374h979.903252a22.048374 22.048374 0 0 1 22.048374 22.048374v256.643078a22.048374 22.048374 0 0 1-22.048374 22.048374zM44.096749 256.643078h935.806502V44.096749H44.096749z"
+                      fill="#888888"
+                      p-id="19558"
+                    />
+                    <path
+                      d="M901.190555 546.72619H119.722673a22.048374 22.048374 0 0 1 0-44.096749h781.467882a22.048374 22.048374 0 0 1 0 44.096749zM901.190555 784.334171H119.722673a22.048374 22.048374 0 1 1 0-44.096749h781.467882a22.048374 22.048374 0 0 1 0 44.096749z"
+                      fill="#CCCCCC"
+                      p-id="19559"
+                    />
+                    <path
+                      d="M673.357353 932.352257a22.048374 22.048374 0 0 1-22.048374-22.048374v-540.185172a22.048374 22.048374 0 0 1 44.096748 0v540.185172a22.048374 22.048374 0 0 1-22.048374 22.048374zM347.555875 932.352257a22.048374 22.048374 0 0 1-22.048375-22.048374v-540.185172a22.048374 22.048374 0 0 1 44.096749 0v540.185172a22.048374 22.048374 0 0 1-22.048374 22.048374z"
+                      fill="#CCCCCC"
+                      p-id="19560"
+                    />
+                  </svg>
                 </span>
               </div>
-              <div style = "heigth: 40px; margin-bottom: 45px; margin-top: -10px; text-align: right;">
-                            <svg
-                v-if="!inputShow"
-                @click="startSearch"
-                t="1655345322360"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="2143"
-                width="20"
-                height="20"
-              >
-                <path
-                  d="M912.072815 946.738335c-4.78498 0-9.56996-1.824555-13.220093-5.475711L650.662083 693.076078c-0.285502-0.285502-0.561795-0.579191-0.827855-0.883113l-6.979972-7.948019c-6.671956-7.594979-6.096858-19.11843 1.297552-26.012444 32.130791-29.958312 57.424874-65.413825 75.181283-105.379049 18.374486-41.35692 27.691689-85.472674 27.691689-131.122363 0-86.355787-33.628912-167.542854-94.691639-228.604558-61.062727-61.062727-142.249795-94.691639-228.604558-94.691639s-167.541831 33.628912-228.604558 94.691639c-61.062727 61.062727-94.691639 142.249795-94.691639 228.604558s33.628912 167.542854 94.691639 228.604558c61.062727 61.062727 142.249795 94.691639 228.604558 94.691639 26.15059 0 52.16508-3.130294 77.326133-9.301853 5.090948-1.353834 73.4038-19.189038 120.842229-14.809287 10.282181 0.948605 17.847483 10.05296 16.899902 20.335141s-10.047844 17.853623-20.335141 16.899902c-41.659819-3.845585-107.272165 13.571087-107.930151 13.747095-0.125867 0.033769-0.251733 0.065492-0.3776 0.097214-28.132734 6.91755-57.20998 10.425444-86.425372 10.425444-48.684816 0-95.922676-9.538237-140.402727-28.352745-42.953278-18.166755-81.523735-44.172035-114.644063-77.290317-33.119305-33.119305-59.123562-71.691809-77.29134-114.644063-18.813484-44.479027-28.352745-91.716888-28.352745-140.401704s9.53926-95.922676 28.352745-140.402727c18.167778-42.953278 44.172035-81.524758 77.29134-114.644063 33.119305-33.119305 71.690786-59.123562 114.644063-77.29134 44.480051-18.813484 91.717911-28.352745 140.402727-28.352745s95.922676 9.53926 140.401704 28.352745c42.953278 18.167778 81.524758 44.173059 114.644063 77.29134 33.118282 33.119305 59.123562 71.690786 77.29134 114.644063 18.813484 44.480051 28.351722 91.717911 28.351722 140.402727 0 50.912553-10.399861 100.136651-30.91101 146.305157-17.285688 38.906102-40.96704 73.973782-70.526263 104.47547l242.313791 242.310721c7.302313 7.30129 7.302313 19.138896 0.001023 26.440186C921.642774 944.912757 916.857794 946.738335 912.072815 946.738335z"
-                  p-id="2144"
-                  fill="#e6e6e6"
-                />
-                <path
-                  d="M165.576059 421.887656c-0.696872 0-1.400906-0.038886-2.110057-0.118704-10.260691-1.152243-17.645892-10.404977-16.493649-20.666692 4.838192-43.080168 17.974373-83.934644 39.046295-121.429607 5.058203-9.002025 16.457834-12.19781 25.458835-7.139607 9.002025 5.058203 12.19781 16.45681 7.139607 25.458835-18.605753 33.108049-30.207999 69.202105-34.484396 107.282399C183.060269 414.827867 174.967964 421.887656 165.576059 421.887656z"
-                  p-id="2145"
-                  fill="#e6e6e6"
-                />
-              </svg>
+              <div style="heigth: 40px; margin-bottom: 45px; margin-top: -10px; text-align: right;">
+                <svg
+                  v-if="!inputShow"
+                  @click="startSearch"
+                  t="1655345322360"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="2143"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M912.072815 946.738335c-4.78498 0-9.56996-1.824555-13.220093-5.475711L650.662083 693.076078c-0.285502-0.285502-0.561795-0.579191-0.827855-0.883113l-6.979972-7.948019c-6.671956-7.594979-6.096858-19.11843 1.297552-26.012444 32.130791-29.958312 57.424874-65.413825 75.181283-105.379049 18.374486-41.35692 27.691689-85.472674 27.691689-131.122363 0-86.355787-33.628912-167.542854-94.691639-228.604558-61.062727-61.062727-142.249795-94.691639-228.604558-94.691639s-167.541831 33.628912-228.604558 94.691639c-61.062727 61.062727-94.691639 142.249795-94.691639 228.604558s33.628912 167.542854 94.691639 228.604558c61.062727 61.062727 142.249795 94.691639 228.604558 94.691639 26.15059 0 52.16508-3.130294 77.326133-9.301853 5.090948-1.353834 73.4038-19.189038 120.842229-14.809287 10.282181 0.948605 17.847483 10.05296 16.899902 20.335141s-10.047844 17.853623-20.335141 16.899902c-41.659819-3.845585-107.272165 13.571087-107.930151 13.747095-0.125867 0.033769-0.251733 0.065492-0.3776 0.097214-28.132734 6.91755-57.20998 10.425444-86.425372 10.425444-48.684816 0-95.922676-9.538237-140.402727-28.352745-42.953278-18.166755-81.523735-44.172035-114.644063-77.290317-33.119305-33.119305-59.123562-71.691809-77.29134-114.644063-18.813484-44.479027-28.352745-91.716888-28.352745-140.401704s9.53926-95.922676 28.352745-140.402727c18.167778-42.953278 44.172035-81.524758 77.29134-114.644063 33.119305-33.119305 71.690786-59.123562 114.644063-77.29134 44.480051-18.813484 91.717911-28.352745 140.402727-28.352745s95.922676 9.53926 140.401704 28.352745c42.953278 18.167778 81.524758 44.173059 114.644063 77.29134 33.118282 33.119305 59.123562 71.690786 77.29134 114.644063 18.813484 44.480051 28.351722 91.717911 28.351722 140.402727 0 50.912553-10.399861 100.136651-30.91101 146.305157-17.285688 38.906102-40.96704 73.973782-70.526263 104.47547l242.313791 242.310721c7.302313 7.30129 7.302313 19.138896 0.001023 26.440186C921.642774 944.912757 916.857794 946.738335 912.072815 946.738335z"
+                    p-id="2144"
+                    fill="#e6e6e6"
+                  />
+                  <path
+                    d="M165.576059 421.887656c-0.696872 0-1.400906-0.038886-2.110057-0.118704-10.260691-1.152243-17.645892-10.404977-16.493649-20.666692 4.838192-43.080168 17.974373-83.934644 39.046295-121.429607 5.058203-9.002025 16.457834-12.19781 25.458835-7.139607 9.002025 5.058203 12.19781 16.45681 7.139607 25.458835-18.605753 33.108049-30.207999 69.202105-34.484396 107.282399C183.060269 414.827867 174.967964 421.887656 165.576059 421.887656z"
+                    p-id="2145"
+                    fill="#e6e6e6"
+                  />
+                </svg>
               </div>
-  <div  style = "margin-top: -45px;">
-              <input
-                v-if="inputShow"
-                @input="inputChange"
-                class="input"
-                v-model="productSearch"
-                placeholder="请输入手环名搜索"
-              />
-              <svg
-                v-if="inputShow"
-                @click="change"
-                style="margin-top: 2px; margin-left: 10px;"
-                t="1655345531987"
-                class="icon"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                p-id="2622"
-                width="20"
-                height="20"
-              >
-                <path
-                  d="M512 0C230.4 0 0 230.4 0 512c0 281.6 230.4 512 512 512 281.6 0 512-230.4 512-512C1024 230.4 793.6 0 512 0zM512 985.6c-262.4 0-473.6-211.2-473.6-473.6 0-262.4 211.2-473.6 473.6-473.6 262.4 0 473.6 211.2 473.6 473.6C985.6 774.4 774.4 985.6 512 985.6zM768 256c-6.4-6.4-19.2-6.4-25.6 0L512 486.4 288 256C281.6 249.6 268.8 249.6 256 256 249.6 268.8 249.6 281.6 256 288L486.4 512 256 736c-6.4 6.4-6.4 19.2 0 25.6 6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4L512 537.6l224 224c6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4 6.4-6.4 6.4-19.2 0-25.6L537.6 512 768 288C774.4 281.6 774.4 268.8 768 256z"
-                  p-id="2623"
-                  fill="#8a8a8a"
+              <div style="margin-top: -45px;">
+                <input
+                  v-if="inputShow"
+                  @input="inputChange"
+                  class="input"
+                  v-model="productSearch"
+                  placeholder="请输入手环名搜索"
                 />
-              </svg>
+                <svg
+                  v-if="inputShow"
+                  @click="change"
+                  style="margin-top: 2px; margin-left: 10px;"
+                  t="1655345531987"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="2622"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M512 0C230.4 0 0 230.4 0 512c0 281.6 230.4 512 512 512 281.6 0 512-230.4 512-512C1024 230.4 793.6 0 512 0zM512 985.6c-262.4 0-473.6-211.2-473.6-473.6 0-262.4 211.2-473.6 473.6-473.6 262.4 0 473.6 211.2 473.6 473.6C985.6 774.4 774.4 985.6 512 985.6zM768 256c-6.4-6.4-19.2-6.4-25.6 0L512 486.4 288 256C281.6 249.6 268.8 249.6 256 256 249.6 268.8 249.6 281.6 256 288L486.4 512 256 736c-6.4 6.4-6.4 19.2 0 25.6 6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4L512 537.6l224 224c6.4 6.4 6.4 6.4 12.8 6.4 6.4 0 12.8 0 12.8-6.4 6.4-6.4 6.4-19.2 0-25.6L537.6 512 768 288C774.4 281.6 774.4 268.8 768 256z"
+                    p-id="2623"
+                    fill="#8a8a8a"
+                  />
+                </svg>
               </div>
               <el-table
-                 v-if = "tableShow"
+                v-if="tableShow"
                 :data="data"
                 class="productList"
                 height="85%"
@@ -639,11 +737,15 @@
                   </template>
                 </el-table-column>
               </el-table>
-              <div v-if = "scrollShow" class="title1" style = "background-color: #000b64; color: #a08672; height: 45px;  font-size: 15px; line-height: 45px; font-weight: 700">
-                    <el-row type="flex" justify="" style = "text-align: center" >
-                        <el-col :span="8">
-                               <div v-show="show">
-                      <el-row type="flex" justify="center" >
+              <div
+                v-if="scrollShow"
+                class="title1"
+                style="background-color: #000b64; color: #a08672; height: 45px;  font-size: 15px; line-height: 45px; font-weight: 700"
+              >
+                <el-row type="flex" justify style="text-align: center">
+                  <el-col :span="8">
+                    <div v-show="show">
+                      <el-row type="flex" justify="center">
                         <el-col :span="20">手环名</el-col>
                         <el-col :span="4">
                           <svg
@@ -673,7 +775,7 @@
                         </el-col>
                       </el-row>
                     </div>
-                    <div v-show="!show" style = "margin-top: 13px;">
+                    <div v-show="!show" style="margin-top: 13px;">
                       <select
                         class="select"
                         v-model="whichGroup"
@@ -688,55 +790,55 @@
                         ></option>
                       </select>
                     </div>
-                        </el-col>
-                        <el-col :span="8">体温</el-col>
-                        <el-col :span="8">心率</el-col>
-                        <el-col :span="8">详情</el-col>
+                  </el-col>
+                  <el-col :span="8">体温</el-col>
+                  <el-col :span="8">心率</el-col>
+                  <el-col :span="8">详情</el-col>
+                </el-row>
+              </div>
+              <div v-if="scrollShow" class="seamless-warp">
+                <vue-seamless-scroll :data="data">
+                  <div
+                    style="height: 50px; line-height: 50px; border-bottom: 1px solid #121951; background-color: #00073d"
+                    v-for="(item,index) in data"
+                    :key="index"
+                  >
+                    <el-row type="flex" justify style="text-align: center; color: #fff">
+                      <el-col :span="8" style="font-size: 14px;">{{item.productName}}</el-col>
+                      <el-col :span="8">{{item.latestData.body}}</el-col>
+                      <el-col :span="8">{{item.latestData.heartRate}}</el-col>
+                      <el-col :span="8">
+                        <svg
+                          @click="detailproduct(item)"
+                          t="1655367341406"
+                          class="icon"
+                          viewBox="0 0 1024 1024"
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          p-id="5707"
+                          width="20"
+                          height="20"
+                        >
+                          <path
+                            d="M747.7 288.2c0-17.6-14.4-32.1-32.1-32.1H306.4c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h409.2c17.7 0 32.1-14.5 32.1-32.1zM306.4 448c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h191.1c17.7 0 32.2-14.4 32.1-32.1 0-17.6-14.4-32.1-32.1-32.1H306.4zM766.6 776.8c-2.1-2.1-4.4-3.9-6.9-5.2 18.1-25.8 28.7-57.1 28.7-90.9 0-88.2-72.4-159.6-161.7-159.6S465 592.5 465 680.7s72.4 159.6 161.7 159.6c32.7 0 63.2-9.6 88.7-26.1 1.5 2.9 3.4 5.6 5.8 8l83.3 83.3c12.5 12.5 32.9 12.5 45.4 0s12.5-32.9 0-45.4l-83.3-83.3z m-139.9 0.6c-54.1 0-98-43.3-98-96.7s43.9-96.7 98-96.7 98 43.3 98 96.7c0 53.4-43.8 96.7-98 96.7z"
+                            fill="#00c4c1"
+                            p-id="5708"
+                          />
+                          <path
+                            d="M577.6 895.4H221.2c-35.2 0-64-28.8-64-64V192.8c0-35.2 28.8-64 64-64h547.3c35.2 0 64 28.8 64 64v318.4h0.3v0.1c0 17.7 14.4 32.1 32.2 32.1s32.2-14.4 32.2-32.1c0-1.2-0.1-2.3-0.2-3.5v-316c0-70.4-27.6-128-98-128H225c-70.4 0-128 57.6-128 128v639.8c0 70.4 57.6 128 128 128h352.2c17.8 0 32.2-14.4 32.2-32.1 0-17.6-14.2-31.9-31.8-32.1z"
+                            fill="#00c4c1"
+                            p-id="5709"
+                          />
+                          <path
+                            d="M832.7 639.3a32.2 32.1 0 1 0 64.4 0 32.2 32.1 0 1 0-64.4 0Z"
+                            fill="#00c4c1"
+                            p-id="5710"
+                          />
+                        </svg>
+                      </el-col>
                     </el-row>
-                </div>
-              <div v-if = "scrollShow" class="seamless-warp" >
-                
-                  <vue-seamless-scroll  :data="data"  >
-               <div style = "height: 50px; line-height: 50px; border-bottom: 1px solid #121951; background-color: #00073d"  v-for="(item,index) in data" :key="index" >
-                   <el-row type="flex" justify=""  style = "text-align: center; color: #fff">
-                       <el-col :span="8" style = "font-size: 14px;">  {{item.productName}}</el-col>
-                       <el-col :span="8">{{item.latestData.body}}</el-col>
-                       <el-col :span="8">{{item.latestData.heartRate}}</el-col>
-                       <el-col :span="8">
-                              <svg
-                      @click="detailproduct(item)"
-                      t="1655367341406"
-                      class="icon"
-                      viewBox="0 0 1024 1024"
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      p-id="5707"
-                      width="20"
-                      height="20"
-                    >
-                      <path
-                        d="M747.7 288.2c0-17.6-14.4-32.1-32.1-32.1H306.4c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h409.2c17.7 0 32.1-14.5 32.1-32.1zM306.4 448c-17.6 0-32.1 14.4-32.1 32.1 0 17.6 14.4 32.1 32.1 32.1h191.1c17.7 0 32.2-14.4 32.1-32.1 0-17.6-14.4-32.1-32.1-32.1H306.4zM766.6 776.8c-2.1-2.1-4.4-3.9-6.9-5.2 18.1-25.8 28.7-57.1 28.7-90.9 0-88.2-72.4-159.6-161.7-159.6S465 592.5 465 680.7s72.4 159.6 161.7 159.6c32.7 0 63.2-9.6 88.7-26.1 1.5 2.9 3.4 5.6 5.8 8l83.3 83.3c12.5 12.5 32.9 12.5 45.4 0s12.5-32.9 0-45.4l-83.3-83.3z m-139.9 0.6c-54.1 0-98-43.3-98-96.7s43.9-96.7 98-96.7 98 43.3 98 96.7c0 53.4-43.8 96.7-98 96.7z"
-                        fill="#00c4c1"
-                        p-id="5708"
-                      />
-                      <path
-                        d="M577.6 895.4H221.2c-35.2 0-64-28.8-64-64V192.8c0-35.2 28.8-64 64-64h547.3c35.2 0 64 28.8 64 64v318.4h0.3v0.1c0 17.7 14.4 32.1 32.2 32.1s32.2-14.4 32.2-32.1c0-1.2-0.1-2.3-0.2-3.5v-316c0-70.4-27.6-128-98-128H225c-70.4 0-128 57.6-128 128v639.8c0 70.4 57.6 128 128 128h352.2c17.8 0 32.2-14.4 32.2-32.1 0-17.6-14.2-31.9-31.8-32.1z"
-                        fill="#00c4c1"
-                        p-id="5709"
-                      />
-                      <path
-                        d="M832.7 639.3a32.2 32.1 0 1 0 64.4 0 32.2 32.1 0 1 0-64.4 0Z"
-                        fill="#00c4c1"
-                        p-id="5710"
-                      />
-                    </svg>
-                       </el-col>
-                   </el-row>
-               </div>
-
-  
-         
-              </vue-seamless-scroll>
+                  </div>
+                </vue-seamless-scroll>
               </div>
             </div>
             <div class="top" v-if="!productShow">
@@ -1053,12 +1155,16 @@
       </el-row>
     </div>
   </div>
+  </div>
 </template>
 <script type="text/javascript" src="./js/china.js"></script> 
 
 <script>
 import * as echarts from "echarts";
 import "./js/china.js";
+// import map from "@/views/fence/index"
+// import resize from "./mixins/resize";
+
 import {
   alertbyTime,
   allProductKey,
@@ -1066,9 +1172,14 @@ import {
   historyData
 } from "@/api/index";
 import { UserDetail } from "@/api/admin";
+import mapDetail from '../mapDetail'
 // import "./js/area_echarts.js";
 export default {
   name: "admin",
+  components: {
+mapDetail
+  },
+  // mixins: [resize],
   data() {
     return {
       date: "",
@@ -1109,11 +1220,28 @@ export default {
       alertTitle: true,
       alertSearch: "",
       positionList: [],
-      whichGroup:"",
-      cityList:[],
-      cityStatistic:[],
+      whichGroup: "",
+      cityList: [],
+      cityStatistic: [],
       tableShow: false,
+      myCharts: null,
       scrollShow: true,
+      geoJson: {
+        features: []
+      },
+      parentInfo: [
+        {
+          cityName: "全国",
+          code: 100000
+        }
+      ],
+      option: null,
+      mapShow: true,
+     map: null,
+      zoom: 6,
+      baiduMap: false,
+      currentRole: mapDetail,
+      mapDetail: false,
     };
   },
   created() {
@@ -1121,14 +1249,266 @@ export default {
     setTimeout(this.echarts, 1000);
   },
   mounted() {
+    // setTimeout(this.getGeoJson(100000), 1000);
     setInterval(this.timer, 1000);
+    var that = this; //防止this指向问题
+    var timer = setInterval(function() {
+      // 判断页面所有资源已加载完毕
+      if (document.readyState === "complete") {
+        that.getGeoJson(100000), //执行方法
+          window.clearInterval(timer);
+      }
+    }, 800);
   },
   beforeDestroy() {
     if (this.date) {
       clearInterval(this.timer);
     }
   },
-  methods: {
+  methods: {    
+
+
+
+    getGeoJson(adcode) {
+      let that = this;
+      AMapUI.loadUI(["geo/DistrictExplorer"], DistrictExplorer => {
+        var districtExplorer = new DistrictExplorer();
+        districtExplorer.loadAreaNode(adcode, function(error, areaNode) {
+          if (error) {
+            console.error(error);
+            return;
+          }
+          let Json = areaNode.getSubFeatures();
+          // console.log(that.geoJson)
+          if (Json.length > 0) {
+            that.geoJson.features = Json;
+          } else if (Json.length === 0) {
+            that.geoJson.features = that.geoJson.features.filter(
+              item => item.properties.adcode == adcode
+            );
+            if (that.geoJson.features.length === 0) return;
+          }
+          that.getMapData();
+        });
+      });
+    },
+    //获取数据
+    getMapData() {
+      console.log( this.cityStatistic)
+      let mapData = this.geoJson.features.map(item => {
+        // console.log(item.properties);
+          let value = 0;
+        if(item.properties.level == "province") {
+         this.cityStatistic.forEach(item1=>{
+           if(item1.province ==item.properties.name ) {
+             value = item1.total
+           }
+         })
+        }
+            if(item.properties.level == "city") {
+         this.cityStatistic.forEach(item1=>{
+           item1.judge.forEach(item2=>{
+if(item2.city == item.properties.name) {
+  value = item2.value
+}
+           })
+        
+         })
+        }
+      
+        // if (item.properties.name == "安徽省") {
+        //   value = 5;
+        // }
+        return {
+          name: item.properties.name,
+          value: [item.properties.center[0], item.properties.center[1], value],
+          cityCode: item.properties.adcode
+        };
+      });
+      mapData = mapData.sort(function(a, b) {
+        return a.value[2] - b.value[2];
+      });
+      console.log(mapData);
+      //去渲染echarts
+      this.initEcharts(mapData);
+    },
+    initEcharts(mapData) {
+      this.myChart = echarts.init(document.getElementById("mapBody"));
+      // this.myChart = echarts.init(this.$refs.dotMap)
+      echarts.registerMap("Map", this.geoJson); //注册
+      var option;
+      option = {
+        tooltip: {
+          trigger: "item",
+          formatter: p => {
+            let val = p.value[2];
+            if (window.isNaN(val)) {
+              val = 0;
+            }
+            let txtCon = p.name + "：" + val.toFixed();
+            return txtCon;
+          }
+        },
+        // toolbox: {
+        //   feature: {
+        //     dataView: {
+        //       show: false
+        //     },
+        //     magicType: {
+        //       show: false
+        //     },
+        //     restore: {
+        //       show: false
+        //     },
+        //     saveAsImage: {
+        //       show: true,
+        //       name: "地图",
+        //       pixelRatio: 2
+        //     }
+        //   },
+        //   iconStyle: {
+        //     normal: {
+        //       borderColor: "#1990DA"
+        //     }
+        //   },
+        //   itemSize: 15,
+        //   top: 20,
+        //   right: 22
+        // },
+        geo: {
+          show: true,
+          map: "Map", //使用
+          roam: true,
+          itemStyle: {
+            normal: {
+              show: true,
+              areaColor: "#3a7fd5",
+              borderColor: "#215495",
+              borderWidth: "1.3",
+              shadowColor: "rgb(10,76,139)",
+              shadowOffsetX: 5,
+              shadowOffsetY: 3,
+              shadowBlur: 65
+            },
+            //emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时。
+            emphasis: {
+              show: true,
+              areaColor: "#8dd7fc"
+            }
+          },
+          label: {
+            normal: {
+              show: true,
+              color: "rgb(249, 249, 249)", //省份标签字体颜色
+              formatter: p => {
+                switch (p.name) {
+                  case "内蒙古自治区":
+                    p.name = "内蒙古";
+                    break;
+                  case "西藏自治区":
+                    p.name = "西藏";
+                    break;
+                  case "新疆维吾尔自治区":
+                    p.name = "新疆";
+                    break;
+                  case "宁夏回族自治区":
+                    p.name = "宁夏";
+                    break;
+                  case "广西壮族自治区":
+                    p.name = "广西";
+                    break;
+                  case "香港特别行政区":
+                    p.name = "香港";
+                    break;
+                  case "澳门特别行政区":
+                    p.name = "澳门";
+                    break;
+                  default:
+                    break;
+                }
+                return p.name;
+              }
+            },
+            emphasis: {
+              show: true,
+              color: "#f75a00"
+            }
+          },
+          zoom: 1.15
+        },
+        series: [
+          {
+            name: "top5",
+            type: "effectScatter",
+            data: mapData,
+            coordinateSystem: "geo",
+            //这里可以设置点的大小
+            symbolSize: function(val) {
+              return val[2]*1.5;
+            },
+            showEffectOn: "render", //高亮时显示特效
+            rippleEffect: {
+              brushType: "fill"
+            },
+            hoverAnimation: false,
+            label: {
+              normal: {
+                formatter: p => {
+                  return p.value[2].toFixed();
+                },
+                position: "center", //地图上是否有文字
+                show: true,
+                textStyle: {
+                  color: "#d9227a"
+                }
+              },
+              emphasis: {
+                show: false
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#fff" //地图点的颜色
+              }
+            },
+            layoutCenter: ["70%", "50%"], //属性定义地图中心在屏幕中的位置，一般结合layoutSize 定义地图的大小
+            layoutSize: 500
+          }
+        ]
+      };
+
+          this.myChart.setOption(option);
+    window.addEventListener("resize", function() {
+      this.myChart.resize();
+    });
+
+      option && this.myChart.setOption(option);
+
+      let that = this;
+      this.myChart.off("click");
+      this.myChart.on("click", params => {
+        console.log(params);
+        if (params.name.includes("市")) {
+          this.mapDetail = true;
+          this.center = params.name
+        }
+        if (!params.data) {
+          return;
+        }
+        if (
+          that.parentInfo[that.parentInfo.length - 1].code ==
+          params.data.cityCode
+        ) {
+          return;
+        }
+        let data = params.data;
+        that.parentInfo.push({
+          cityName: data.name,
+          code: data.cityCode
+        });
+        that.getGeoJson(data.cityCode);
+      });
+    },
     prepare() {
       console.log("初始数据准备");
       var username = window.sessionStorage.getItem("username");
@@ -1201,15 +1581,15 @@ export default {
         console.log(res);
         if (res.msg == "ok") {
           this.productnameList = res.data.productKeys;
-                       for(var i=0;i< this.productnameList.length;i++) {
-              for(var j=0;j< this.productnameList.length-1-i;j++) {
-                if( this.productnameList[j]> this.productnameList[j+1]) {
-                  var temp = this.productnameList[j]
-                   this.productnameList[j] =  this.productnameList[j+1] 
-                  this.productnameList[j+1] = temp
-                }
+          for (var i = 0; i < this.productnameList.length; i++) {
+            for (var j = 0; j < this.productnameList.length - 1 - i; j++) {
+              if (this.productnameList[j] > this.productnameList[j + 1]) {
+                var temp = this.productnameList[j];
+                this.productnameList[j] = this.productnameList[j + 1];
+                this.productnameList[j + 1] = temp;
               }
             }
+          }
           var username = window.sessionStorage.getItem("username");
           getDeviceDatas({
             username: username,
@@ -1228,11 +1608,14 @@ export default {
                   productKey: item.productKey
                 };
                 this.judge.push(jud);
-                   window.sessionStorage.setItem("judge", JSON.stringify(this.judge));
+                window.sessionStorage.setItem(
+                  "judge",
+                  JSON.stringify(this.judge)
+                );
 
                 item.deviceName = [];
                 item.latestData = [];
-                console.log(item.deviceData);
+                // console.log(item.deviceData);
                 if (item.deviceData !== null) {
                   for (var i = 0; i < item.deviceData.length; i++) {
                     item.deviceName.push(item.deviceData[i].deviceName);
@@ -1280,7 +1663,7 @@ export default {
                   } else {
                     item.latestData.fence = "-";
                   }
-                  console.log(item);
+                  // console.log(item);
                   if (item.deviceName.includes("BA")) {
                     item.latestData.body =
                       item.deviceData[
@@ -1408,42 +1791,108 @@ export default {
               }
 
               console.log(this.productList);
-              this.positionList = []
-             if(this.productList.length !==0) {
-               this.productList.forEach(item=>{
-this.positionList.push(item.latestData.location)
-               })
-                         console.log(this.positionList)
-             this.cityList = []
-             this.positionList.forEach(item1=>{
-               this.cityList.push(item1.city)
-             })
-             console.log(this.cityList)
-               var arr = this.cityList;
-            var newArr = arr.filter(function(item, index) {
-              return arr.indexOf(item) === index; // 因为indexOf 只能查找到第一个
-            });
+              this.positionList = [];
+              if (this.productList.length !== 0) {
+                this.productList.forEach(item => {
+                  if (item.latestData.location !== "") {
+                    this.positionList.push(item.latestData.location);
+                  }
+                });
+                console.log(this.positionList);
+                this.cityList = [];
+                var provinceList = [];
+                this.positionList.forEach(item1 => {
+                  provinceList.push(item1.province);
+                });
+                var arr = provinceList;
+                var newArr = arr.filter(function(item, index) {
+                  return arr.indexOf(item) === index; // 因为indexOf 只能查找到第一个
+                });
+                provinceList = newArr;
+                console.log(provinceList);
+                var provinceList1 = [];
+                provinceList.forEach(item => {
+                  provinceList1.push({
+                    province: item,
+                    city: [],
+                    judge: [],
+                    city1:[],
+                  });
+                });
+                this.positionList.forEach(item1 => {
+                  provinceList1.forEach((item2, index2) => {
+                    if (item1.province == item2.province) {
+                      provinceList1[index2].city.push(item1.city);
+                      provinceList1[index2].city1.push(item1.city);
+                    }
+                  });
+                });
 
-            console.log(newArr);
-            this.cityList = newArr
-            this.cityStatistic = [];
-            this.cityList.forEach(item2=>{
-              var obj = {
-                name: item2,
-                value:0              }
-                this.cityStatistic.push(obj)
-            })
-            this.positionList.forEach(item=>{
-              this.cityStatistic.forEach(item1=>{
-                if (item1.name == item.city) {
-                  item1.value+=1
+                if (provinceList1 !== []) {
+                  provinceList1.forEach(item => {
+                    var arr = item.city;
+                    var newArr = arr.filter(function(item, index) {
+                      return arr.indexOf(item) === index; // 因为indexOf 只能查找到第一个
+                    });
+
+                    item.city = newArr;
+                  });
                 }
-              })
-            })
-            console.log(this.cityStatistic)
+               
+provinceList1.forEach((item,index)=>{
+  item.city.forEach(item1=>{
+    provinceList1[index].judge.push({
+      city: item1,
+      value:0
+    })
+  })
+}
+)
+ 
+ provinceList1.forEach(item=>{
+   item.judge.forEach(item1=>{
+     item.city1.forEach(item2=>{
+       if (item1.city == item2) {
+         item1.value +=1
+       }
+     })
+   })
+ })
+ console.log(provinceList1);
+ provinceList1.forEach(item1=>{
+   var value = 0
+   item1.judge.forEach(item2=>{
+value += item2.value
+   })
+   item1.total = value
+ })
+this.cityStatistic = provinceList1
+                // console.log(this.cityList);
+                // var arr = this.cityList;
+                // var newArr = arr.filter(function(item, index) {
+                //   return arr.indexOf(item) === index; // 因为indexOf 只能查找到第一个
+                // });
 
-             }
-   
+                // console.log(newArr);
+                // this.cityList = newArr;
+                // var provinceList = [];
+                // this.cityStatistic = [];
+                // this.cityList.forEach(item2 => {
+                //   var obj = {
+                //     name: item2.substring(0, item2.length - 1),
+                //     value: 0
+                //   };
+                //   this.cityStatistic.push(obj);
+                // });
+                // this.positionList.forEach(item => {
+                //   this.cityStatistic.forEach(item1 => {
+                //     if (item1.name.includes(item.city)) {
+                //       item1.value += 1;
+                //     }
+                //   });
+                // });
+                // console.log(this.cityStatistic);
+              }
             }
           });
         }
@@ -1495,502 +1944,1317 @@ this.positionList.push(item.latestData.location)
     reset() {
       this.prepare();
     },
-    echarts() {
-      var myChart = echarts.init(document.getElementById("mapBody"));
+    //    echarts() {
+    //      console.log("1")
+    // },
+    // echarts() {
+    // var myChart = echarts.init(document.getElementById("mapBody"));
 
-      var mapName = "china";
-      var data = [
-        { name: "大连", value: 47 },
-        { name: "临汾", value: 47 },
-        { name: "石嘴山", value: 49 },
-        { name: "长春", value: 51 },
-        { name: "胶州", value: 52 },
-        { name: "三门峡", value: 53 },
-        { name: "锦州", value: 54 },
-        { name: "南昌", value: 54 },
-        { name: "柳州", value: 54 },
-        { name: "三亚", value: 54 },
-        { name: "自贡", value: 56 },
-        { name: "吉林", value: 56 },
-        { name: "阳江", value: 57 },
-        { name: "泸州", value: 57 },
-        { name: "西宁", value: 57 },
-        { name: "宜宾", value: 58 },
-        { name: "呼和浩特", value: 58 },
-        { name: "成都", value: 58 },
-        { name: "大同", value: 58 },
-        { name: "桂林", value: 59 },
-        { name: "张家界", value: 59 },
-        { name: "北海", value: 60 },
-        { name: "台州", value: 67 },
-        { name: "滨州", value: 70 },
-        { name: "贵阳", value: 71 },
-        { name: "本溪", value: 71 },
-        { name: "克拉玛依", value: 72 },
-        { name: "渭南", value: 72 },
-        { name: "马鞍山", value: 72 },
-        { name: "宝鸡", value: 72 },
-        { name: "焦作", value: 75 },
-        { name: "北京", value: 79 },
-        { name: "大庆", value: 279 }
-      ];
-      var geoCoordMap = {
-        海门: [121.15, 31.89],
-        鄂尔多斯: [109.781327, 39.608266],
-        招远: [120.38, 37.35],
-        舟山: [122.207216, 29.985295],
-        齐齐哈尔: [123.97, 47.33],
-        盐城: [120.13, 33.38],
-        赤峰: [118.87, 42.28],
-        青岛: [120.33, 36.07],
-        乳山: [121.52, 36.89],
-        金昌: [102.188043, 38.520089],
-        泉州: [118.58, 24.93],
-        莱西: [120.53, 36.86],
-        日照: [119.46, 35.42],
-        胶南: [119.97, 35.88],
-        南通: [121.05, 32.08],
-        拉萨: [91.11, 29.97],
-        云浮: [112.02, 22.93],
-        梅州: [116.1, 24.55],
-        文登: [122.05, 37.2],
-        上海: [121.48, 31.22],
-        攀枝花: [101.718637, 26.582347],
-        威海: [122.1, 37.5],
-        承德: [117.93, 40.97],
-        厦门: [118.1, 24.46],
-        汕尾: [115.375279, 22.786211],
-        潮州: [116.63, 23.68],
-        丹东: [124.37, 40.13],
-        太仓: [121.1, 31.45],
-        曲靖: [103.79, 25.51],
-        烟台: [121.39, 37.52],
-        福州: [119.3, 26.08],
-        瓦房店: [121.979603, 39.627114],
-        即墨: [120.45, 36.38],
-        抚顺: [123.97, 41.97],
-        玉溪: [102.52, 24.35],
-        张家口: [114.87, 40.82],
-        阳泉: [113.57, 37.85],
-        莱州: [119.942327, 37.177017],
-        湖州: [120.1, 30.86],
-        汕头: [116.69, 23.39],
-        昆山: [120.95, 31.39],
-        宁波: [121.56, 29.86],
-        湛江: [110.359377, 21.270708],
-        揭阳: [116.35, 23.55],
-        荣成: [122.41, 37.16],
-        连云港: [119.16, 34.59],
-        葫芦岛: [120.836932, 40.711052],
-        常熟: [120.74, 31.64],
-        东莞: [113.75, 23.04],
-        河源: [114.68, 23.73],
-        淮安: [119.15, 33.5],
-        泰州: [119.9, 32.49],
-        南宁: [108.33, 22.84],
-        营口: [122.18, 40.65],
-        惠州: [114.4, 23.09],
-        江阴: [120.26, 31.91],
-        蓬莱: [120.75, 37.8],
-        韶关: [113.62, 24.84],
-        嘉峪关: [98.289152, 39.77313],
-        广州: [113.23, 23.16],
-        延安: [109.47, 36.6],
-        太原: [112.53, 37.87],
-        清远: [113.01, 23.7],
-        中山: [113.38, 22.52],
-        昆明: [102.73, 25.04],
-        寿光: [118.73, 36.86],
-        盘锦: [122.070714, 41.119997],
-        长治: [113.08, 36.18],
-        深圳: [114.07, 22.62],
-        珠海: [113.52, 22.3],
-        宿迁: [118.3, 33.96],
-        咸阳: [108.72, 34.36],
-        铜川: [109.11, 35.09],
-        平度: [119.97, 36.77],
-        佛山: [113.11, 23.05],
-        海口: [110.35, 20.02],
-        江门: [113.06, 22.61],
-        章丘: [117.53, 36.72],
-        肇庆: [112.44, 23.05],
-        大连: [121.62, 38.92],
-        临汾: [111.5, 36.08],
-        吴江: [120.63, 31.16],
-        石嘴山: [106.39, 39.04],
-        沈阳: [123.38, 41.8],
-        苏州: [120.62, 31.32],
-        茂名: [110.88, 21.68],
-        嘉兴: [120.76, 30.77],
-        长春: [125.35, 43.88],
-        胶州: [120.03336, 36.264622],
-        银川: [106.27, 38.47],
-        张家港: [120.555821, 31.875428],
-        三门峡: [111.19, 34.76],
-        锦州: [121.15, 41.13],
-        南昌: [115.89, 28.68],
-        柳州: [109.4, 24.33],
-        三亚: [109.511909, 18.252847],
-        自贡: [104.778442, 29.33903],
-        吉林: [126.57, 43.87],
-        阳江: [111.95, 21.85],
-        泸州: [105.39, 28.91],
-        西宁: [101.74, 36.56],
-        宜宾: [104.56, 29.77],
-        呼和浩特: [111.65, 40.82],
-        成都: [104.06, 30.67],
-        大同: [113.3, 40.12],
-        镇江: [119.44, 32.2],
-        桂林: [110.28, 25.29],
-        张家界: [110.479191, 29.117096],
-        宜兴: [119.82, 31.36],
-        北海: [109.12, 21.49],
-        西安: [108.95, 34.27],
-        金坛: [119.56, 31.74],
-        东营: [118.49, 37.46],
-        牡丹江: [129.58, 44.6],
-        遵义: [106.9, 27.7],
-        绍兴: [120.58, 30.01],
-        扬州: [119.42, 32.39],
-        常州: [119.95, 31.79],
-        潍坊: [119.1, 36.62],
-        重庆: [106.54, 29.59],
-        台州: [121.420757, 28.656386],
-        南京: [118.78, 32.04],
-        滨州: [118.03, 37.36],
-        贵阳: [106.71, 26.57],
-        无锡: [120.29, 31.59],
-        本溪: [123.73, 41.3],
-        克拉玛依: [84.77, 45.59],
-        渭南: [109.5, 34.52],
-        马鞍山: [118.48, 31.56],
-        宝鸡: [107.15, 34.38],
-        焦作: [113.21, 35.24],
-        句容: [119.16, 31.95],
-        北京: [116.46, 39.92],
-        徐州: [117.2, 34.26],
-        衡水: [115.72, 37.72],
-        包头: [110, 40.58],
-        绵阳: [104.73, 31.48],
-        乌鲁木齐: [87.68, 43.77],
-        枣庄: [117.57, 34.86],
-        杭州: [120.19, 30.26],
-        淄博: [118.05, 36.78],
-        鞍山: [122.85, 41.12],
-        溧阳: [119.48, 31.43],
-        库尔勒: [86.06, 41.68],
-        安阳: [114.35, 36.1],
-        开封: [114.35, 34.79],
-        济南: [117, 36.65],
-        德阳: [104.37, 31.13],
-        温州: [120.65, 28.01],
-        九江: [115.97, 29.71],
-        邯郸: [114.47, 36.6],
-        临安: [119.72, 30.23],
-        兰州: [103.73, 36.03],
-        沧州: [116.83, 38.33],
-        临沂: [118.35, 35.05],
-        南充: [106.110698, 30.837793],
-        天津: [117.2, 39.13],
-        富阳: [119.95, 30.07],
-        泰安: [117.13, 36.18],
-        诸暨: [120.23, 29.71],
-        郑州: [113.65, 34.76],
-        哈尔滨: [126.63, 45.75],
-        聊城: [115.97, 36.45],
-        芜湖: [118.38, 31.33],
-        唐山: [118.02, 39.63],
-        平顶山: [113.29, 33.75],
-        邢台: [114.48, 37.05],
-        德州: [116.29, 37.45],
-        济宁: [116.59, 35.38],
-        荆州: [112.239741, 30.335165],
-        宜昌: [111.3, 30.7],
-        义乌: [120.06, 29.32],
-        丽水: [119.92, 28.45],
-        洛阳: [112.44, 34.7],
-        秦皇岛: [119.57, 39.95],
-        株洲: [113.16, 27.83],
-        石家庄: [114.48, 38.03],
-        莱芜: [117.67, 36.19],
-        常德: [111.69, 29.05],
-        保定: [115.48, 38.85],
-        湘潭: [112.91, 27.87],
-        金华: [119.64, 29.12],
-        岳阳: [113.09, 29.37],
-        长沙: [113, 28.21],
-        衢州: [118.88, 28.97],
-        廊坊: [116.7, 39.53],
-        菏泽: [115.480656, 35.23375],
-        合肥: [117.27, 31.86],
-        武汉: [114.31, 30.52],
-        大庆: [125.03, 46.58]
-      };
-      /*获取地图数据*/
-      myChart.showLoading();
-      var mapFeatures = echarts.getMap(mapName).geoJson.features;
-      myChart.hideLoading();
-      mapFeatures.forEach(function(v) {
-        // 地区名称
-        var name = v.properties.name;
-        // 地区经纬度
-        geoCoordMap[name] = v.properties.cp;
-      });
+    // var mapName = "china";
+    // var data =this.cityStatistic
+    // var geoCoordMap = {
+    //   海门: [121.15, 31.89],
+    //   鄂尔多斯: [109.781327, 39.608266],
+    //   招远: [120.38, 37.35],
+    //   舟山: [122.207216, 29.985295],
+    //   齐齐哈尔: [123.97, 47.33],
+    //   盐城: [120.13, 33.38],
+    //   赤峰: [118.87, 42.28],
+    //   青岛: [120.33, 36.07],
+    //   乳山: [121.52, 36.89],
+    //   金昌: [102.188043, 38.520089],
+    //   泉州: [118.58, 24.93],
+    //   莱西: [120.53, 36.86],
+    //   日照: [119.46, 35.42],
+    //   胶南: [119.97, 35.88],
+    //   南通: [121.05, 32.08],
+    //   拉萨: [91.11, 29.97],
+    //   云浮: [112.02, 22.93],
+    //   梅州: [116.1, 24.55],
+    //   文登: [122.05, 37.2],
+    //   上海: [121.48, 31.22],
+    //   攀枝花: [101.718637, 26.582347],
+    //   威海: [122.1, 37.5],
+    //   承德: [117.93, 40.97],
+    //   厦门: [118.1, 24.46],
+    //   汕尾: [115.375279, 22.786211],
+    //   潮州: [116.63, 23.68],
+    //   丹东: [124.37, 40.13],
+    //   太仓: [121.1, 31.45],
+    //   曲靖: [103.79, 25.51],
+    //   烟台: [121.39, 37.52],
+    //   福州: [119.3, 26.08],
+    //   瓦房店: [121.979603, 39.627114],
+    //   即墨: [120.45, 36.38],
+    //   抚顺: [123.97, 41.97],
+    //   玉溪: [102.52, 24.35],
+    //   张家口: [114.87, 40.82],
+    //   阳泉: [113.57, 37.85],
+    //   莱州: [119.942327, 37.177017],
+    //   湖州: [120.1, 30.86],
+    //   汕头: [116.69, 23.39],
+    //   昆山: [120.95, 31.39],
+    //   宁波: [121.56, 29.86],
+    //   湛江: [110.359377, 21.270708],
+    //   揭阳: [116.35, 23.55],
+    //   荣成: [122.41, 37.16],
+    //   连云港: [119.16, 34.59],
+    //   葫芦岛: [120.836932, 40.711052],
+    //   常熟: [120.74, 31.64],
+    //   东莞: [113.75, 23.04],
+    //   河源: [114.68, 23.73],
+    //   淮安: [119.15, 33.5],
+    //   泰州: [119.9, 32.49],
+    //   南宁: [108.33, 22.84],
+    //   营口: [122.18, 40.65],
+    //   惠州: [114.4, 23.09],
+    //   江阴: [120.26, 31.91],
+    //   蓬莱: [120.75, 37.8],
+    //   韶关: [113.62, 24.84],
+    //   嘉峪关: [98.289152, 39.77313],
+    //   广州: [113.23, 23.16],
+    //   延安: [109.47, 36.6],
+    //   太原: [112.53, 37.87],
+    //   清远: [113.01, 23.7],
+    //   中山: [113.38, 22.52],
+    //   昆明: [102.73, 25.04],
+    //   寿光: [118.73, 36.86],
+    //   盘锦: [122.070714, 41.119997],
+    //   长治: [113.08, 36.18],
+    //   深圳: [114.07, 22.62],
+    //   珠海: [113.52, 22.3],
+    //   宿迁: [118.3, 33.96],
+    //   咸阳: [108.72, 34.36],
+    //   铜川: [109.11, 35.09],
+    //   平度: [119.97, 36.77],
+    //   佛山: [113.11, 23.05],
+    //   海口: [110.35, 20.02],
+    //   江门: [113.06, 22.61],
+    //   章丘: [117.53, 36.72],
+    //   肇庆: [112.44, 23.05],
+    //   大连: [121.62, 38.92],
+    //   临汾: [111.5, 36.08],
+    //   吴江: [120.63, 31.16],
+    //   石嘴山: [106.39, 39.04],
+    //   沈阳: [123.38, 41.8],
+    //   苏州: [120.62, 31.32],
+    //   茂名: [110.88, 21.68],
+    //   嘉兴: [120.76, 30.77],
+    //   长春: [125.35, 43.88],
+    //   胶州: [120.03336, 36.264622],
+    //   银川: [106.27, 38.47],
+    //   张家港: [120.555821, 31.875428],
+    //   三门峡: [111.19, 34.76],
+    //   锦州: [121.15, 41.13],
+    //   南昌: [115.89, 28.68],
+    //   柳州: [109.4, 24.33],
+    //   三亚: [109.511909, 18.252847],
+    //   自贡: [104.778442, 29.33903],
+    //   吉林: [126.57, 43.87],
+    //   阳江: [111.95, 21.85],
+    //   泸州: [105.39, 28.91],
+    //   西宁: [101.74, 36.56],
+    //   宜宾: [104.56, 29.77],
+    //   呼和浩特: [111.65, 40.82],
+    //   成都: [104.06, 30.67],
+    //   大同: [113.3, 40.12],
+    //   镇江: [119.44, 32.2],
+    //   桂林: [110.28, 25.29],
+    //   张家界: [110.479191, 29.117096],
+    //   宜兴: [119.82, 31.36],
+    //   北海: [109.12, 21.49],
+    //   西安: [108.95, 34.27],
+    //   金坛: [119.56, 31.74],
+    //   东营: [118.49, 37.46],
+    //   牡丹江: [129.58, 44.6],
+    //   遵义: [106.9, 27.7],
+    //   绍兴: [120.58, 30.01],
+    //   扬州: [119.42, 32.39],
+    //   常州: [119.95, 31.79],
+    //   潍坊: [119.1, 36.62],
+    //   重庆: [106.54, 29.59],
+    //   台州: [121.420757, 28.656386],
+    //   南京: [118.78, 32.04],
+    //   滨州: [118.03, 37.36],
+    //   贵阳: [106.71, 26.57],
+    //   无锡: [120.29, 31.59],
+    //   本溪: [123.73, 41.3],
+    //   克拉玛依: [84.77, 45.59],
+    //   渭南: [109.5, 34.52],
+    //   马鞍山: [118.48, 31.56],
+    //   宝鸡: [107.15, 34.38],
+    //   焦作: [113.21, 35.24],
+    //   句容: [119.16, 31.95],
+    //   北京: [116.46, 39.92],
+    //   徐州: [117.2, 34.26],
+    //   衡水: [115.72, 37.72],
+    //   包头: [110, 40.58],
+    //   绵阳: [104.73, 31.48],
+    //   乌鲁木齐: [87.68, 43.77],
+    //   枣庄: [117.57, 34.86],
+    //   杭州: [120.19, 30.26],
+    //   淄博: [118.05, 36.78],
+    //   鞍山: [122.85, 41.12],
+    //   溧阳: [119.48, 31.43],
+    //   库尔勒: [86.06, 41.68],
+    //   安阳: [114.35, 36.1],
+    //   开封: [114.35, 34.79],
+    //   济南: [117, 36.65],
+    //   德阳: [104.37, 31.13],
+    //   温州: [120.65, 28.01],
+    //   九江: [115.97, 29.71],
+    //   邯郸: [114.47, 36.6],
+    //   临安: [119.72, 30.23],
+    //   兰州: [103.73, 36.03],
+    //   沧州: [116.83, 38.33],
+    //   临沂: [118.35, 35.05],
+    //   南充: [106.110698, 30.837793],
+    //   天津: [117.2, 39.13],
+    //   富阳: [119.95, 30.07],
+    //   泰安: [117.13, 36.18],
+    //   诸暨: [120.23, 29.71],
+    //   郑州: [113.65, 34.76],
+    //   哈尔滨: [126.63, 45.75],
+    //   聊城: [115.97, 36.45],
+    //   芜湖: [118.38, 31.33],
+    //   唐山: [118.02, 39.63],
+    //   平顶山: [113.29, 33.75],
+    //   邢台: [114.48, 37.05],
+    //   德州: [116.29, 37.45],
+    //   济宁: [116.59, 35.38],
+    //   荆州: [112.239741, 30.335165],
+    //   宜昌: [111.3, 30.7],
+    //   义乌: [120.06, 29.32],
+    //   丽水: [119.92, 28.45],
+    //   洛阳: [112.44, 34.7],
+    //   秦皇岛: [119.57, 39.95],
+    //   株洲: [113.16, 27.83],
+    //   石家庄: [114.48, 38.03],
+    //   莱芜: [117.67, 36.19],
+    //   常德: [111.69, 29.05],
+    //   保定: [115.48, 38.85],
+    //   湘潭: [112.91, 27.87],
+    //   金华: [119.64, 29.12],
+    //   岳阳: [113.09, 29.37],
+    //   长沙: [113, 28.21],
+    //   衢州: [118.88, 28.97],
+    //   廊坊: [116.7, 39.53],
+    //   菏泽: [115.480656, 35.23375],
+    //   合肥: [117.27, 31.86],
+    //   武汉: [114.31, 30.52],
+    //   大庆: [125.03, 46.58]
+    // };
+    // /*获取地图数据*/
+    // myChart.showLoading();
+    // var mapFeatures = echarts.getMap(mapName).geoJson.features;
+    // myChart.hideLoading();
+    // mapFeatures.forEach(function(v) {
+    //   // 地区名称
+    //   var name = v.properties.name;
+    //   // 地区经纬度
+    //   geoCoordMap[name] = v.properties.cp;
+    // });
+    // console.log(geoCoordMap)
 
-      // console.log(data);
-      // console.log(toolTipData);
-      var max = 480,
-        min = 9; // todo
-      var maxSize4Pin = 100,
-        minSize4Pin = 20;
-      var convertData = function(data) {
-        var res = [];
-        for (var i = 0; i < data.length; i++) {
-          var geoCoord = geoCoordMap[data[i].name];
-          if (geoCoord) {
-            res.push({
-              name: data[i].name,
-              value: geoCoord.concat(data[i].value)
-            });
-          }
-        }
-        return res;
-      };
+    // // console.log(data);
+    // // console.log(toolTipData);
+    // var max = 480,
+    //   min = 9; // todo
+    // var maxSize4Pin = 100,
+    //   minSize4Pin = 20;
+    // var convertData = function(data) {
+    //   var res = [];
+    //   for (var i = 0; i < data.length; i++) {
+    //     var geoCoord = geoCoordMap[data[i].name];
+    //     if (geoCoord) {
+    //       res.push({
+    //         name: data[i].name,
+    //         value: geoCoord.concat(data[i].value)
+    //       });
+    //     }
+    //   }
+    //   return res;
+    // };
 
-      var option = {
-        // backgroundColor: '#404a59',
-        /***  title: {
-        text: '实时行驶车辆',
-        subtext: 'data from PM25.in',
-        sublink: 'http://www.pm25.in',
-        left: 'center',
-        textStyle: {
-            color: '#fff'
-        }
-                  },**/
-        title: {
-          top: 10,
-          text: "",
-          left: "center",
-          textStyle: {
-            color: "#fff"
-          }
-        },
-        tooltip: {
-          padding: 0,
-          enterable: true,
-          transitionDuration: 1,
-          textStyle: {
-            color: "#000",
-            decoration: "none"
-          },
-          trigger: "item",
-          formatter: function(params) {
-            // console.log(params)
-            var tipHtml = "";
-            tipHtml =
-              '<div style="width:280px;height:150px;background:rgba(22,80,158,0.8);border:1px solid rgba(7,166,255,0.7)">' +
-              '<div style="width:100%;height:40px;line-height:40px;border-bottom:2px solid rgba(7,166,255,0.7);padding:0 20px">' +
-              '<i style="display:inline-block;width:8px;height:8px;background:#16d6ff;border-radius:40px;">' +
-              "</i>" +
-              '<span style="margin-left:10px;color:#fff;font-size:16px;">' +
-              params.name +
-              "</span>" +
-              "</div>" +
-              '<div style="padding:20px">' +
-              '<p style="color:#fff;font-size:12px;">' +
-              '<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px">' +
-              "</i>" +
-              "总人数：" +
-              '<span style="color:#11ee7d;margin:0 6px;">' +
-              params.value[2] +
-              "</span>" +
-              "个" +
-              "</p>" +
-              '<p style="color:#fff;font-size:12px;">' +
-              '<i style="display:inline-block;width:10px;height:10px;background:#00c94b;border-radius:40px;margin:0 8px">' +
-              "</i>" +
-              "在线人数：" +
-              '<span style="color:#f48225;margin:0 6px;">' +
-              params.value[2] +
-              "</span>" +
-              "个" +
-              "</p>" +
-              "</div>" +
-              "</div>";
-            // setTimeout(function() {
-            //   tooltipCharts(params.name);
-            // }, 10);
-            return tipHtml;
-          }
-        },
+    // var option = {
+    //   // backgroundColor: '#404a59',
+    //   /***  title: {
+    //   text: '实时行驶车辆',
+    //   subtext: 'data from PM25.in',
+    //   sublink: 'http://www.pm25.in',
+    //   left: 'center',
+    //   textStyle: {
+    //       color: '#fff'
+    //   }
+    //             },**/
+    //   title: {
+    //     top: 10,
+    //     text: "",
+    //     left: "center",
+    //     textStyle: {
+    //       color: "#fff"
+    //     }
+    //   },
+    //   tooltip: {
+    //     padding: 0,
+    //     enterable: true,
+    //     transitionDuration: 1,
+    //     textStyle: {
+    //       color: "#000",
+    //       decoration: "none"
+    //     },
+    //     trigger: "item",
+    //     formatter: function(params) {
+    //       // console.log(params)
+    //       var tipHtml = "";
+    //       tipHtml =
+    //         '<div style="width:280px;height:150px;background:rgba(22,80,158,0.8);border:1px solid rgba(7,166,255,0.7)">' +
+    //         '<div style="width:100%;height:40px;line-height:40px;border-bottom:2px solid rgba(7,166,255,0.7);padding:0 20px">' +
+    //         '<i style="display:inline-block;width:8px;height:8px;background:#16d6ff;border-radius:40px;">' +
+    //         "</i>" +
+    //         '<span style="margin-left:10px;color:#fff;font-size:16px;">' +
+    //         params.name +
+    //         "</span>" +
+    //         "</div>" +
+    //         '<div style="padding:20px">' +
+    //         '<p style="color:#fff;font-size:12px;">' +
+    //         '<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px">' +
+    //         "</i>" +
+    //         "总人数：" +
+    //         '<span style="color:#11ee7d;margin:0 6px;">' +
+    //         params.value[2] +
+    //         "</span>" +
+    //         "个"  +
+    //         "</div>" +
+    //         "</div>";
+    //       // setTimeout(function() {
+    //       //   tooltipCharts(params.name);
+    //       // }, 10);
+    //       return tipHtml;
+    //     }
+    //   },
 
-        geo: {
-          show: true,
-          map: mapName,
-          aspectScale: 0.75,
-          layoutCenter: ["50%", "51.5%"], //地图位置
-          layoutSize: "118%",
-          label: {
-            emphasis: {
-              show: false
-            },
-            normal: {
-              show: false
-            }
-          },
-          // roam: false, //禁止其放大缩小
-          itemStyle: {
-            normal: {
-              areaColor: "#4c60ff",
-              borderColor: "#002097"
-            },
-            emphasis: {
-              areaColor: "#293fff"
-            }
-          },
-          z: 2
-        },
-        series: [
-          {
-            name: "行政区内人数",
-            type: "scatter",
-            coordinateSystem: "geo",
-            data: convertData(data),
-            symbolSize: function(val) {
-              return val[2] / 10;
-            },
-            label: {
-              normal: {
-                formatter: "{b}",
-                position: "right",
-                show: true
-              },
-              emphasis: {
-                show: true
-              }
-            },
-            aspectScale: 0.75,
-            layoutCenter: ["50%", "50%"], //地图位置
-            layoutSize: "118%",
-            itemStyle: {
-              normal: {
-                color: "#ffeb7b"
-              }
-            }
-          },
-          {
-            type: "map",
-            map: mapName,
-            geoIndex: 0,
-            aspectScale: 0.75, //长宽比
-            showLegendSymbol: false, // 存在legend时显示
-            label: {
-              normal: {
-                show: true
-              },
-              emphasis: {
-                show: false,
-                textStyle: {
-                  color: "#fff"
-                }
-              }
-            },
-            roam: true,
-            itemStyle: {
-              normal: {
-                areaColor: "#031525",
-                borderColor: "#3B5077"
-              },
-              emphasis: {
-                areaColor: "#2B91B7"
-              }
-            },
-            animation: false,
-            data: data
-          },
-          {
-            name: "点",
-            type: "scatter",
-            coordinateSystem: "geo",
-            zlevel: 6
-          }
-          // {
-          //     name: 'Top 5',
-          //     type: 'effectScatter',
-          //     coordinateSystem: 'geo',
-          //     data: convertData(data.sort(function(a, b) {
-          //         return b.value - a.value;
-          //     }).slice(0, 10)),
-          //     symbolSize: function(val) {
-          //         return val[2] / 10;
-          //     },
-          //     showEffectOn: 'render',
-          //     rippleEffect: {
-          //         brushType: 'stroke'
-          //     },
-          //     hoverAnimation: true,
-          //     label: {
-          //         normal: {
-          //             formatter: '{b}',
-          //             position: 'left',
-          //             show: false
-          //         }
-          //     },
-          //     itemStyle: {
-          //         normal: {
-          //             color: 'yellow',
-          //             shadowBlur: 10,
-          //             shadowColor: 'yellow'
-          //         }
-          //     },
-          //     zlevel: 1
-          // },
-        ]
-      };
-      var index = 0; //播放所在下标
-      var showTip = setInterval(function() {
-        myChart.dispatchAction({
-          type: "showTip",
-          seriesIndex: 0,
-          dataIndex: index
-        });
-        index++;
-        if (index >= option.series[0].data.length) {
-          index = 0;
-        }
-      }, 2000);
-      myChart.on("mouseover", function(params) {
-        // console.log(params)
-        clearInterval(showTip);
-        myChart.dispatchAction({
-          type: "showTip",
-          seriesIndex: 0,
-          dataIndex: params.dataIndex
-        });
-      });
-      myChart.on("mouseout", function(params) {
-        showTip && clearInterval(showTip);
-        showTip = setInterval(function() {
-          myChart.dispatchAction({
-            type: "showTip",
-            seriesIndex: 0,
-            dataIndex: index
-          });
-          index++;
-          if (index >= option.series[0].data.length) {
-            index = 0;
-          }
-        }, 2000);
-      });
+    //   geo: {
+    //     show: true,
+    //     map: mapName,
+    //     aspectScale: 0.75,
+    //     layoutCenter: ["50%", "51.5%"], //地图位置
+    //     layoutSize: "118%",
+    //     label: {
+    //       emphasis: {
+    //         show: false
+    //       },
+    //       normal: {
+    //         show: false
+    //       }
+    //     },
+    //     // roam: false, //禁止其放大缩小
+    //     itemStyle: {
+    //       normal: {
+    //         areaColor: "#4c60ff",
+    //         borderColor: "#002097"
+    //       },
+    //       emphasis: {
+    //         areaColor: "#293fff"
+    //       }
+    //     },
+    //     z: 2
+    //   },
+    //   series: [
+    //     {
+    //       name: "行政区内人数",
+    //       type: "scatter",
+    //       coordinateSystem: "geo",
+    //       data: convertData(data),
+    //       symbolSize: function(val) {
+    //         return val[2] / 10;
+    //       },
+    //       label: {
+    //         normal: {
+    //           formatter: "{b}",
+    //           position: "right",
+    //           show: true
+    //         },
+    //         emphasis: {
+    //           show: true
+    //         }
+    //       },
+    //       aspectScale: 0.75,
+    //       layoutCenter: ["50%", "50%"], //地图位置
+    //       layoutSize: "118%",
+    //       itemStyle: {
+    //         normal: {
+    //           color: "#ffeb7b"
+    //         }
+    //       }
+    //     },
+    //     {
+    //       type: "map",
+    //       map: mapName,
+    //       geoIndex: 0,
+    //       aspectScale: 0.75, //长宽比
+    //       showLegendSymbol: false, // 存在legend时显示
+    //       label: {
+    //         normal: {
+    //           show: true
+    //         },
+    //         emphasis: {
+    //           show: false,
+    //           textStyle: {
+    //             color: "#fff"
+    //           }
+    //         }
+    //       },
+    //       roam: true,
+    //       itemStyle: {
+    //         normal: {
+    //           areaColor: "#031525",
+    //           borderColor: "#3B5077"
+    //         },
+    //         emphasis: {
+    //           areaColor: "#2B91B7"
+    //         }
+    //       },
+    //       animation: false,
+    //       data: data
+    //     },
+    //     {
+    //       name: "点",
+    //       type: "scatter",
+    //       coordinateSystem: "geo",
+    //       zlevel: 6
+    //     }
+    //   ]
+    // };
+    // var index = 0; //播放所在下标
+    // var showTip = setInterval(function() {
+    //   myChart.dispatchAction({
+    //     type: "showTip",
+    //     seriesIndex: 0,
+    //     dataIndex: index
+    //   });
+    //   index++;
+    //   if (index >= option.series[0].data.length) {
+    //     index = 0;
+    //   }
+    // }, 2000);
+    // myChart.on("mouseover", function(params) {
+    //   // console.log(params)
+    //   clearInterval(showTip);
+    //   myChart.dispatchAction({
+    //     type: "showTip",
+    //     seriesIndex: 0,
+    //     dataIndex: params.dataIndex
+    //   });
+    // });
+    // myChart.on("mouseout", function(params) {
+    //   showTip && clearInterval(showTip);
+    //   showTip = setInterval(function() {
+    //     myChart.dispatchAction({
+    //       type: "showTip",
+    //       seriesIndex: 0,
+    //       dataIndex: index
+    //     });
+    //     index++;
+    //     if (index >= option.series[0].data.length) {
+    //       index = 0;
+    //     }
+    //   }, 2000);
+    // });
 
-      myChart.setOption(option);
-      window.addEventListener("resize", function() {
-        myChart.resize();
-      });
+    // myChart.setOption(option);
+    // window.addEventListener("resize", function() {
+    //   myChart.resize();
+    // });
 
-      // option1 && myChart1.setOption(option1);
-    },
+    // option1 && myChart1.setOption(option1);
+
+    //   var zhongguo = "./map/data-china.json";
+    //   var hainan = "./map/data-hainan.json";
+    //   var xizang = "./map/data-xizang.json";
+    //   var zhejiang = "./map/data-zhejiang.json";
+    //   var yunnan = "./map/data-yunnan.json";
+    //   var xinjiang = "./map/data-xinjiang.json";
+    //   var tianjin = "./map/data-tianjin.json";
+    //   var sichuan = "./map/data-sichuan.json";
+    //   var shanxi = "./map/data-shanxi.json";
+    //   var shangxi = "./map/data-shangxi.json";
+    //   var shanghai = "./map/data-shanghai.json";
+    //   var shangdong = "./map/data-shangdong.json";
+    //   var qinghai = "./map/data-qinghai.json";
+    //   var ningxia = "./map/data-china.json";
+    //   var neimenggu = "./map/data-neimenggu.json";
+    //   var liaoning = "./map/data-liaoning.json";
+    //   var jilin = "./map/data-jilin.json";
+    //   var jiangxi = "./map/data-jiangxi.json";
+    //   var jiangsu = "./map/data-jiangsu.json";
+    //   var hunan = "./map/data-hunan.json";
+    //   var hubei = "./map/data-hubei.json";
+    //   var henan = "./map/data-henan.json";
+    //   var heilongjiang = "./map/data-heilongjiang.json";
+    //   var hebei = "./map/data-hebei.json";
+    //   var guizhou = "./map/data-guizhou.json";
+    //   var guangxi = "./map/data-guangxi.json";
+    //   var guangdong = "./map/data-guangdong.json";
+    //   var gansu = "./map/data-gansu.json";
+    //   var chongqing = "./map/data-chongqing.json";
+    //   var aomen = "./map/data-aomen.json";
+    //   var anhui = "./map/data-anhui.json";
+    //   var beijing = "./map/data-beijing.json";
+    //   var fujian = "./map/data-fujian.json";
+    //   var xianggang = "./map/data-xianggang.json";
+    //   echarts.extendsMap = function(id, opt) {
+    //     // 实例
+    //     var chart = echarts.init(document.getElementById("mapBody"));
+    //     var geoJson = {};
+    //     var geoCoordMap = {
+    //       海门: [121.15, 31.89],
+    //       鄂尔多斯: [109.781327, 39.608266],
+    //       招远: [120.38, 37.35],
+    //       舟山: [122.207216, 29.985295],
+    //       齐齐哈尔: [123.97, 47.33],
+    //       盐城: [120.13, 33.38],
+    //       赤峰: [118.87, 42.28],
+    //       青岛: [120.33, 36.07],
+    //       乳山: [121.52, 36.89],
+    //       金昌: [102.188043, 38.520089],
+    //       泉州: [118.58, 24.93],
+    //       莱西: [120.53, 36.86],
+    //       日照: [119.46, 35.42],
+    //       胶南: [119.97, 35.88],
+    //       南通: [121.05, 32.08],
+    //       拉萨: [91.11, 29.97],
+    //       云浮: [112.02, 22.93],
+    //       梅州: [116.1, 24.55],
+    //       文登: [122.05, 37.2],
+    //       上海: [121.48, 31.22],
+    //       攀枝花: [101.718637, 26.582347],
+    //       威海: [122.1, 37.5],
+    //       承德: [117.93, 40.97],
+    //       厦门: [118.1, 24.46],
+    //       汕尾: [115.375279, 22.786211],
+    //       潮州: [116.63, 23.68],
+    //       丹东: [124.37, 40.13],
+    //       太仓: [121.1, 31.45],
+    //       曲靖: [103.79, 25.51],
+    //       烟台: [121.39, 37.52],
+    //       福州: [119.3, 26.08],
+    //       瓦房店: [121.979603, 39.627114],
+    //       即墨: [120.45, 36.38],
+    //       抚顺: [123.97, 41.97],
+    //       玉溪: [102.52, 24.35],
+    //       张家口: [114.87, 40.82],
+    //       阳泉: [113.57, 37.85],
+    //       莱州: [119.942327, 37.177017],
+    //       湖州: [120.1, 30.86],
+    //       汕头: [116.69, 23.39],
+    //       昆山: [120.95, 31.39],
+    //       宁波: [121.56, 29.86],
+    //       湛江: [110.359377, 21.270708],
+    //       揭阳: [116.35, 23.55],
+    //       荣成: [122.41, 37.16],
+    //       连云港: [119.16, 34.59],
+    //       葫芦岛: [120.836932, 40.711052],
+    //       常熟: [120.74, 31.64],
+    //       东莞: [113.75, 23.04],
+    //       河源: [114.68, 23.73],
+    //       淮安: [119.15, 33.5],
+    //       泰州: [119.9, 32.49],
+    //       南宁: [108.33, 22.84],
+    //       营口: [122.18, 40.65],
+    //       惠州: [114.4, 23.09],
+    //       江阴: [120.26, 31.91],
+    //       蓬莱: [120.75, 37.8],
+    //       韶关: [113.62, 24.84],
+    //       嘉峪关: [98.289152, 39.77313],
+    //       广州: [113.23, 23.16],
+    //       延安: [109.47, 36.6],
+    //       太原: [112.53, 37.87],
+    //       清远: [113.01, 23.7],
+    //       中山: [113.38, 22.52],
+    //       昆明: [102.73, 25.04],
+    //       寿光: [118.73, 36.86],
+    //       盘锦: [122.070714, 41.119997],
+    //       长治: [113.08, 36.18],
+    //       深圳: [114.07, 22.62],
+    //       珠海: [113.52, 22.3],
+    //       宿迁: [118.3, 33.96],
+    //       咸阳: [108.72, 34.36],
+    //       铜川: [109.11, 35.09],
+    //       平度: [119.97, 36.77],
+    //       佛山: [113.11, 23.05],
+    //       海口: [110.35, 20.02],
+    //       江门: [113.06, 22.61],
+    //       章丘: [117.53, 36.72],
+    //       肇庆: [112.44, 23.05],
+    //       大连: [121.62, 38.92],
+    //       临汾: [111.5, 36.08],
+    //       吴江: [120.63, 31.16],
+    //       石嘴山: [106.39, 39.04],
+    //       沈阳: [123.38, 41.8],
+    //       苏州: [120.62, 31.32],
+    //       茂名: [110.88, 21.68],
+    //       嘉兴: [120.76, 30.77],
+    //       长春: [125.35, 43.88],
+    //       胶州: [120.03336, 36.264622],
+    //       银川: [106.27, 38.47],
+    //       张家港: [120.555821, 31.875428],
+    //       三门峡: [111.19, 34.76],
+    //       锦州: [121.15, 41.13],
+    //       南昌: [115.89, 28.68],
+    //       柳州: [109.4, 24.33],
+    //       三亚: [109.511909, 18.252847],
+    //       自贡: [104.778442, 29.33903],
+    //       吉林: [126.57, 43.87],
+    //       阳江: [111.95, 21.85],
+    //       泸州: [105.39, 28.91],
+    //       西宁: [101.74, 36.56],
+    //       宜宾: [104.56, 29.77],
+    //       呼和浩特: [111.65, 40.82],
+    //       成都: [104.06, 30.67],
+    //       大同: [113.3, 40.12],
+    //       镇江: [119.44, 32.2],
+    //       桂林: [110.28, 25.29],
+    //       张家界: [110.479191, 29.117096],
+    //       宜兴: [119.82, 31.36],
+    //       北海: [109.12, 21.49],
+    //       西安: [108.95, 34.27],
+    //       金坛: [119.56, 31.74],
+    //       东营: [118.49, 37.46],
+    //       牡丹江: [129.58, 44.6],
+    //       遵义: [106.9, 27.7],
+    //       绍兴: [120.58, 30.01],
+    //       扬州: [119.42, 32.39],
+    //       常州: [119.95, 31.79],
+    //       潍坊: [119.1, 36.62],
+    //       重庆: [106.54, 29.59],
+    //       台州: [121.420757, 28.656386],
+    //       南京: [118.78, 32.04],
+    //       滨州: [118.03, 37.36],
+    //       贵阳: [106.71, 26.57],
+    //       无锡: [120.29, 31.59],
+    //       本溪: [123.73, 41.3],
+    //       克拉玛依: [84.77, 45.59],
+    //       渭南: [109.5, 34.52],
+    //       马鞍山: [118.48, 31.56],
+    //       宝鸡: [107.15, 34.38],
+    //       焦作: [113.21, 35.24],
+    //       句容: [119.16, 31.95],
+    //       北京: [116.46, 39.92],
+    //       徐州: [117.2, 34.26],
+    //       衡水: [115.72, 37.72],
+    //       包头: [110, 40.58],
+    //       绵阳: [104.73, 31.48],
+    //       乌鲁木齐: [87.68, 43.77],
+    //       枣庄: [117.57, 34.86],
+    //       杭州: [120.19, 30.26],
+    //       淄博: [118.05, 36.78],
+    //       鞍山: [122.85, 41.12],
+    //       溧阳: [119.48, 31.43],
+    //       库尔勒: [86.06, 41.68],
+    //       安阳: [114.35, 36.1],
+    //       开封: [114.35, 34.79],
+    //       济南: [117, 36.65],
+    //       德阳: [104.37, 31.13],
+    //       温州: [120.65, 28.01],
+    //       九江: [115.97, 29.71],
+    //       邯郸: [114.47, 36.6],
+    //       临安: [119.72, 30.23],
+    //       兰州: [103.73, 36.03],
+    //       沧州: [116.83, 38.33],
+    //       临沂: [118.35, 35.05],
+    //       南充: [106.110698, 30.837793],
+    //       天津: [117.2, 39.13],
+    //       富阳: [119.95, 30.07],
+    //       泰安: [117.13, 36.18],
+    //       诸暨: [120.23, 29.71],
+    //       郑州: [113.65, 34.76],
+    //       哈尔滨: [126.63, 45.75],
+    //       聊城: [115.97, 36.45],
+    //       芜湖: [118.38, 31.33],
+    //       唐山: [118.02, 39.63],
+    //       平顶山: [113.29, 33.75],
+    //       邢台: [114.48, 37.05],
+    //       德州: [116.29, 37.45],
+    //       济宁: [116.59, 35.38],
+    //       荆州: [112.239741, 30.335165],
+    //       宜昌: [111.3, 30.7],
+    //       义乌: [120.06, 29.32],
+    //       丽水: [119.92, 28.45],
+    //       洛阳: [112.44, 34.7],
+    //       秦皇岛: [119.57, 39.95],
+    //       株洲: [113.16, 27.83],
+    //       石家庄: [114.48, 38.03],
+    //       莱芜: [117.67, 36.19],
+    //       常德: [111.69, 29.05],
+    //       保定: [115.48, 38.85],
+    //       湘潭: [112.91, 27.87],
+    //       金华: [119.64, 29.12],
+    //       岳阳: [113.09, 29.37],
+    //       长沙: [113, 28.21],
+    //       衢州: [118.88, 28.97],
+    //       廊坊: [116.7, 39.53],
+    //       菏泽: [115.480656, 35.23375],
+    //       合肥: [117.27, 31.86],
+    //       武汉: [114.31, 30.52],
+    //       大庆: [125.03, 46.58]
+    //     };
+    //     var mapName = "china";
+    //     /*获取地图数据*/
+    //     chart.showLoading();
+    //     var mapFeatures = echarts.getMap(mapName).geoJson.features;
+    //     chart.hideLoading();
+    //     mapFeatures.forEach(function(v) {
+    //       // 地区名称
+    //       var name = v.properties.name;
+    //       // 地区经纬度
+    //       geoCoordMap[name] = v.properties.cp;
+    //     });
+    //     console.log(geoCoordMap);
+    //     var data = [];
+    //     data.push(
+    //       {
+    //         name: "合肥",
+    //         value: "21",
+    //         cityCode: "0551"
+    //       },
+    //       {
+    //         name: "无锡",
+    //         value: "21",
+    //         cityCode: "0510"
+    //       }
+    //     );
+
+    //     var convertData = function(data) {
+    //       var res = [];
+    //       for (var i = 0; i < data.length; i++) {
+    //         var geoCoord = geoCoordMap[data[i].name];
+    //         if (geoCoord) {
+    //           res.push({
+    //             name: data[i].name,
+    //             value: geoCoord.concat(data[i].value)
+    //           });
+    //         }
+    //       }
+    //       return res;
+    //     };
+    //     var curGeoJson = {};
+    //     var cityMap = {
+    //       中国: zhongguo,
+    //       上海: shanghai,
+    //       河北: hebei,
+    //       山西: shangxi,
+    //       内蒙古: neimenggu,
+    //       辽宁: liaoning,
+    //       吉林: jilin,
+    //       黑龙江: heilongjiang,
+    //       江苏: jiangsu,
+    //       浙江: zhejiang,
+    //       安徽: anhui,
+    //       福建: fujian,
+    //       江西: jiangxi,
+    //       山东: shangdong,
+    //       河南: henan,
+    //       湖北: hubei,
+    //       湖南: hunan,
+    //       广东: guangdong,
+    //       广西: guangxi,
+    //       海南: hainan,
+    //       四川: sichuan,
+    //       贵州: guizhou,
+    //       云南: yunnan,
+    //       西藏: xizang,
+    //       陕西: shanxi,
+    //       甘肃: gansu,
+    //       青海: qinghai,
+    //       宁夏: ningxia,
+    //       新疆: xinjiang,
+    //       北京: beijing,
+    //       天津: tianjin,
+    //       重庆: chongqing,
+    //       香港: xianggang,
+    //       澳门: aomen
+    //     };
+
+    //     // var levelColorMap = {
+    //     //     '1': 'rgba(241, 109, 115, .8)',
+    //     //     '2': 'rgba(255, 235, 59, .7)',
+    //     //     '3': 'rgba(147, 235, 248, 1)'
+    //     // };
+
+    //     var defaultOpt = {
+    //       mapName: "china", // 地图展示
+    //       goDown: false, // 是否下钻
+    //       bgColor: "#404a59", // 画布背景色
+    //       activeArea: [], // 区域高亮,同echarts配置项
+    //       data: [],
+    //       // 下钻回调(点击的地图名、实例对象option、实例对象)
+    //       callback: function(name, option, instance) {}
+    //     };
+    //     if (opt) opt = this.util.extend(defaultOpt, opt);
+
+    //     // 层级索引
+    //     var name = [opt.mapName];
+    //     var idx = 0;
+    //     var pos = {
+    //       leftPlus: 115,
+    //       leftCur: 150,
+    //       left: 198,
+    //       top: 50
+    //     };
+
+    //     var line = [
+    //       [0, 0],
+    //       [8, 11],
+    //       [0, 22]
+    //     ];
+    //     // style
+    //     var style = {
+    //       font: '18px "Microsoft YaHei", sans-serif',
+    //       textColor: "#eee",
+    //       lineColor: "rgba(147, 235, 248, .8)"
+    //     };
+
+    //     var handleEvents = {
+    //       /**
+    //        * i 实例对象
+    //        * o option
+    //        * n 地图名
+    //        **/
+    //       resetOption: function(i, o, n) {
+    //         var breadcrumb = this.createBreadcrumb(n);
+    //         var j = name.indexOf(n);
+    //         var l = o.graphic.length;
+    //         if (j < 0) {
+    //           o.graphic.push(breadcrumb);
+    //           o.graphic[0].children[0].shape.x2 = 145;
+    //           o.graphic[0].children[1].shape.x2 = 145;
+    //           if (o.graphic.length > 2) {
+    //             var cityData = [];
+    //             var cityJson;
+    //             for (var x = 0; x < opt.data.length; x++) {
+    //               if (n === opt.data[x].city) {
+    //                 $([opt.data[x]]).each(function(index, data) {
+    //                   cityJson = {
+    //                     city: data.city,
+    //                     name: data.name,
+    //                     value: data.value,
+    //                     crew: data.crew,
+    //                     company: data.company,
+    //                     position: data.position,
+    //                     region: data.region
+    //                   };
+    //                   cityData.push(cityJson);
+    //                 });
+    //               }
+    //             }
+
+    //             if (cityData != null) {
+    //               o.series[0].data = handleEvents.initSeriesData(cityData);
+    //             } else {
+    //               o.series[0].data = [];
+    //             }
+    //           }
+    //           name.push(n);
+    //           idx++;
+    //         } else {
+    //           o.graphic.splice(j + 2, l);
+    //           if (o.graphic.length <= 2) {
+    //             o.graphic[0].children[0].shape.x2 = 60;
+    //             o.graphic[0].children[1].shape.x2 = 60;
+    //             o.series[0].data = handleEvents.initSeriesData(opt.data);
+    //           }
+    //           name.splice(j + 1, l);
+    //           idx = j;
+    //           pos.leftCur -= pos.leftPlus * (l - j - 1);
+    //         }
+
+    //         o.geo.map = n;
+    //         o.geo.zoom = 0.4;
+    //         i.clear();
+    //         i.setOption(o);
+    //         this.zoomAnimation();
+    //         opt.callback(n, o, i);
+    //       },
+
+    //       /**
+    //        * name 地图名
+    //        **/
+    //       createBreadcrumb: function(name) {
+    //         var cityToPinyin = {
+    //           中国: "zhongguo",
+    //           上海: "shanghai",
+    //           河北: "hebei",
+    //           山西: "shangxi",
+    //           内蒙古: "neimenggu",
+    //           辽宁: "liaoning",
+    //           吉林: "jilin",
+    //           黑龙江: "heilongjiang",
+    //           江苏: "jiangsu",
+    //           浙江: "zhejiang",
+    //           安徽: "anhui",
+    //           福建: "fujian",
+    //           江西: "jiangxi",
+    //           山东: "shangdong",
+    //           河南: "henan",
+    //           湖北: "hubei",
+    //           湖南: "hunan",
+    //           广东: "guangdong",
+    //           广西: "guangxi",
+    //           海南: "hainan",
+    //           四川: "sichuan",
+    //           贵州: "guizhou",
+    //           云南: "yunnan",
+    //           西藏: "xizang",
+    //           陕西: "shanxi",
+    //           甘肃: "gansu",
+    //           青海: "qinghai",
+    //           宁夏: "ningxia",
+    //           新疆: "xinjiang",
+    //           北京: "beijing",
+    //           天津: "tianjin",
+    //           重庆: "chongqing",
+    //           香港: "xianggang",
+    //           澳门: "aomen"
+    //         };
+    //         var breadcrumb = {
+    //           type: "group",
+    //           id: name,
+    //           left: pos.leftCur + pos.leftPlus,
+    //           top: pos.top + 3,
+    //           children: [
+    //             {
+    //               type: "polyline",
+    //               left: -90,
+    //               top: -5,
+    //               shape: {
+    //                 points: line
+    //               },
+    //               style: {
+    //                 stroke: "#fff",
+    //                 key: name
+    //                 // lineWidth: 2,
+    //               },
+    //               onclick: function() {
+    //                 var name = this.style.key;
+    //                 handleEvents.resetOption(chart, option, name);
+    //               }
+    //             },
+    //             {
+    //               type: "text",
+    //               left: -68,
+    //               top: "middle",
+    //               style: {
+    //                 text: name,
+    //                 textAlign: "center",
+    //                 fill: style.textColor,
+    //                 font: style.font
+    //               },
+    //               onclick: function() {
+    //                 var name = this.style.text;
+    //                 handleEvents.resetOption(chart, option, name);
+    //               }
+    //             },
+    //             {
+    //               type: "text",
+    //               left: -68,
+    //               top: 10,
+    //               style: {
+    //                 name: name,
+    //                 text: cityToPinyin[name]
+    //                   ? cityToPinyin[name].toUpperCase()
+    //                   : "",
+    //                 textAlign: "center",
+    //                 fill: style.textColor,
+    //                 font: '12px "Microsoft YaHei", sans-serif'
+    //               },
+    //               onclick: function() {
+    //                 // console.log(this.style);
+    //                 var name = this.style.name;
+    //                 handleEvents.resetOption(chart, option, name);
+    //               }
+    //             }
+    //           ]
+    //         };
+
+    //         pos.leftCur += pos.leftPlus;
+
+    //         return breadcrumb;
+    //       },
+
+    //       // 设置effectscatter
+    //       initSeriesData: function(data) {
+    //         var temp = [];
+    //         for (var i = 0; i < data.length; i++) {
+    //           var geoCoord = geoCoordMap[data[i].name];
+    //           if (geoCoord) {
+    //             temp.push({
+    //               name: data[i].name,
+    //               value: geoCoord.concat(data[i].value),
+    //               crew: data[i].crew,
+    //               company: data[i].company,
+    //               position: data[i].position,
+    //               region: data[i].region
+    //             });
+    //           }
+    //         }
+    //         return temp;
+    //       },
+    //       zoomAnimation: function() {
+    //         var count = null;
+    //         var zoom = function(per) {
+    //           if (!count) count = per;
+    //           count = count + per;
+    //           // console.log(per,count);
+    //           chart.setOption({
+    //             geo: {
+    //               zoom: count
+    //             }
+    //           });
+    //           if (count < 1)
+    //             window.requestAnimationFrame(function() {
+    //               zoom(0.2);
+    //             });
+    //         };
+    //         window.requestAnimationFrame(function() {
+    //           zoom(0.2);
+    //         });
+    //       }
+    //     };
+
+    //     var option = {
+    //       backgroundColor: opt.bgColor,
+    //       tooltip: {
+    //         show: true,
+    //         trigger: "item",
+    //         alwaysShowContent: false,
+    //         backgroundColor: "#4b5bfb",
+    //         hideDelay: 100,
+    //         triggerOn: "mousemove",
+    //         enterable: true,
+    //         position: ["90%", "90%"]
+    //       },
+    //       graphic: [
+    //         {
+    //           type: "group",
+    //           left: pos.left,
+    //           top: pos.top - 4,
+    //           children: [
+    //             {
+    //               type: "line",
+    //               left: 0,
+    //               top: -20,
+    //               shape: {
+    //                 x1: 0,
+    //                 y1: 0,
+    //                 x2: 60,
+    //                 y2: 0
+    //               },
+    //               style: {
+    //                 stroke: style.lineColor
+    //               }
+    //             },
+    //             {
+    //               type: "line",
+    //               left: 0,
+    //               top: 20,
+    //               shape: {
+    //                 x1: 0,
+    //                 y1: 0,
+    //                 x2: 60,
+    //                 y2: 0
+    //               },
+    //               style: {
+    //                 stroke: style.lineColor
+    //               }
+    //             }
+    //           ]
+    //         },
+    //         {
+    //           id: name[idx],
+    //           type: "group",
+    //           left: pos.left + 2,
+    //           top: pos.top,
+    //           children: [
+    //             {
+    //               type: "polyline",
+    //               left: 90,
+    //               top: -12,
+    //               shape: {
+    //                 points: line
+    //               },
+    //               style: {
+    //                 stroke: "transparent",
+    //                 key: name[0]
+    //               },
+    //               onclick: function() {
+    //                 var name = this.style.key;
+    //                 handleEvents.resetOption(chart, option, name);
+    //               }
+    //             },
+    //             {
+    //               type: "text",
+    //               left: 0,
+    //               top: "middle",
+    //               style: {
+    //                 text: "中国",
+    //                 textAlign: "center",
+    //                 fill: style.textColor,
+    //                 font: style.font
+    //               },
+    //               onclick: function() {
+    //                 handleEvents.resetOption(chart, option, "中国");
+    //               }
+    //             },
+    //             {
+    //               type: "text",
+    //               left: 0,
+    //               top: 10,
+    //               style: {
+    //                 text: "China",
+    //                 textAlign: "center",
+    //                 fill: style.textColor,
+    //                 font: '12px "Microsoft YaHei", sans-serif'
+    //               },
+    //               onclick: function() {
+    //                 handleEvents.resetOption(chart, option, "中国");
+    //               }
+    //             }
+    //           ]
+    //         }
+    //       ],
+    //       geo: {
+    //         map: opt.mapName,
+    //         roam: true,
+    //         zoom: 1,
+    //         label: {
+    //           normal: {
+    //             show: true,
+    //             textStyle: {
+    //               color: "#818187"
+    //             }
+    //           },
+    //           emphasis: {
+    //             textStyle: {
+    //               color: "#fff"
+    //             }
+    //           },
+    //           tooltip: {
+    //             padding: 0,
+    //             enterable: true,
+    //             transitionDuration: 1,
+    //             textStyle: {
+    //               color: "#000",
+    //               decoration: "none"
+    //             },
+    //             trigger: "item",
+    //             formatter: function(params) {
+    //               // console.log(params)
+    //               var tipHtml = "";
+    //               tipHtml =
+    //                 '<div style="width:280px;height:150px;background:rgba(22,80,158,0.8);border:1px solid rgba(7,166,255,0.7)">' +
+    //                 '<div style="width:100%;height:40px;line-height:40px;border-bottom:2px solid rgba(7,166,255,0.7);padding:0 20px">' +
+    //                 '<i style="display:inline-block;width:8px;height:8px;background:#16d6ff;border-radius:40px;">' +
+    //                 "</i>" +
+    //                 '<span style="margin-left:10px;color:#fff;font-size:16px;">' +
+    //                 params.name +
+    //                 "</span>" +
+    //                 "</div>" +
+    //                 '<div style="padding:20px">' +
+    //                 '<p style="color:#fff;font-size:12px;">' +
+    //                 '<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px">' +
+    //                 "</i>" +
+    //                 "总人数：" +
+    //                 '<span style="color:#11ee7d;margin:0 6px;">' +
+    //                 params.value[2] +
+    //                 "</span>" +
+    //                 "个" +
+    //                 "</div>" +
+    //                 "</div>";
+    //               // setTimeout(function() {
+    //               //   tooltipCharts(params.name);
+    //               // }, 10);
+    //               return tipHtml;
+    //             }
+    //           }
+    //         },
+    //         itemStyle: {
+    //           normal: {
+    //             borderColor: "rgba(147, 235, 248, 1)",
+    //             borderWidth: 1,
+    //             areaColor: {
+    //               type: "radial",
+    //               x: 0.5,
+    //               y: 0.5,
+    //               r: 0.8,
+    //               colorStops: [
+    //                 {
+    //                   offset: 0,
+    //                   color: "rgba(75, 91, 251, 0)" // 0% 处的颜色
+    //                 },
+    //                 {
+    //                   offset: 1,
+    //                   color: "rgba(147, 235, 248, .2)" // 100% 处的颜色
+    //                 }
+    //               ],
+    //               globalCoord: false // 缺省为 false
+    //             },
+    //             shadowColor: "rgba(75, 91, 251, 1)",
+    //             // shadowColor: 'rgba(255, 255, 255, 1)',
+    //             shadowOffsetX: -2,
+    //             shadowOffsetY: 2,
+    //             shadowBlur: 10
+    //           },
+    //           emphasis: {
+    //             areaColor: "#4b5bfb",
+    //             borderWidth: 0
+    //           }
+    //         },
+    //         regions: opt.activeArea.map(function(item) {
+    //           if (typeof item !== "string") {
+    //             return {
+    //               name: item.name,
+    //               itemStyle: {
+    //                 normal: {
+    //                   areaColor: item.areaColor || "#4b5bfb"
+    //                 }
+    //               }
+    //               // label: {
+    //               //     normal: {
+    //               //         show: item.showLabel,
+    //               //         textStyle: {
+    //               //             color: '#fff'
+    //               //         }
+    //               //     }
+    //               // }
+    //             };
+    //           } else {
+    //             return {
+    //               name: item,
+    //               itemStyle: {
+    //                 normal: {
+    //                   borderColor: "#91e6ff",
+    //                   areaColor: "#4b5bfb"
+    //                 }
+    //               }
+    //             };
+    //           }
+    //         })
+    //       },
+    //       series: [
+    //         {
+    //           name: "行政区内人数",
+    //           type: "scatter",
+    //           coordinateSystem: "geo",
+    //           data: convertData(data),
+    //           symbolSize: function(val) {
+    //             return val[2] / 10;
+    //           },
+    //           label: {
+    //             normal: {
+    //               formatter: "{b}",
+    //               position: "right",
+    //               show: true
+    //             },
+    //             emphasis: {
+    //               show: true
+    //             }
+    //           },
+    //           aspectScale: 0.75,
+    //           layoutCenter: ["50%", "50%"], //地图位置
+    //           layoutSize: "118%",
+    //           itemStyle: {
+    //             normal: {
+    //               color: "#ffeb7b"
+    //             }
+    //           }
+    //         },
+    //         {
+    //           type: "map",
+    //           map: mapName,
+    //           geoIndex: 0,
+    //           aspectScale: 0.75, //长宽比
+    //           showLegendSymbol: false, // 存在legend时显示
+    //           label: {
+    //             normal: {
+    //               show: true
+    //             },
+    //             emphasis: {
+    //               show: false,
+    //               textStyle: {
+    //                 color: "#fff"
+    //               }
+    //             }
+    //           },
+    //           roam: true,
+    //           itemStyle: {
+    //             normal: {
+    //               areaColor: "#031525",
+    //               borderColor: "#3B5077"
+    //             },
+    //             emphasis: {
+    //               areaColor: "#2B91B7"
+    //             }
+    //           },
+    //           animation: false,
+    //           data: data
+    //         },
+    //         {
+    //           name: "点",
+    //           type: "scatter",
+    //           coordinateSystem: "geo",
+    //           zlevel: 6
+    //         }
+    //       ]
+    //     };
+
+    //     chart.setOption(option);
+    //     // 添加事件
+    //     chart.on("click", function(params) {
+    //       var _self = this;
+    //       if (opt.goDown && params.name !== name[idx]) {
+    //         if (cityMap[params.name]) {
+    //           var url = cityMap[params.name];
+    //           $.get(url, function(response) {
+    //             //console.log(response);
+    //             curGeoJson = response;
+    //             echarts.registerMap(params.name, response);
+    //             handleEvents.resetOption(_self, option, params.name);
+    //           });
+    //         }
+    //       }
+    //     });
+
+    //     chart.setMap = function(mapName) {
+    //       var _self = this;
+    //       if (mapName.indexOf("市") < 0) mapName = mapName + "市";
+    //       var citySource = cityMap[mapName];
+    //       if (citySource) {
+    //         var url = "./map/" + citySource + ".json";
+    //         $.get(url, function(response) {
+    //           // console.log(response);
+    //           curGeoJson = response;
+    //           echarts.registerMap(mapName, response);
+    //           handleEvents.resetOption(_self, option, mapName);
+    //         });
+    //       }
+    //     };
+
+    //     return chart;
+    //   };
+    //   $.getJSON(zhongguo, function(geoJson) {
+    //     echarts.registerMap("中国", geoJson);
+    //     var myChart = echarts.extendsMap("chart-panel", {
+    //       bgColor: "transparent", // 画布背景色
+    //       mapName: "中国", // 地图名
+    //       goDown: true, // 是否下钻
+    //       // 下钻回调
+    //       callback: function(name, option, instance) {
+    //         //console.log(name, option, instance);
+    //       }
+    //     });
+    //   });
+    // },
     echarts1() {
       console.log(this.whichProduct);
       console.log(this.whichDevice);
@@ -2309,13 +3573,22 @@ this.positionList.push(item.latestData.location)
       this.guijiShow = false;
     },
     switch1() {
-this.tableShow = false;
-this.scrollShow = true;
+      this.tableShow = false;
+      this.scrollShow = true;
     },
-        switch2() {
-this.tableShow = true;
-this.scrollShow = false;
+    switch2() {
+      this.tableShow = true;
+      this.scrollShow = false;
     },
+    // 选择切换市县
+    chooseArea(val, index) {
+      console.log("选择切换");
+      if (this.parentInfo.length === index + 1) {
+        return;
+      }
+      this.parentInfo.splice(index + 1);
+      this.getGeoJson(this.parentInfo[this.parentInfo.length - 1].code);
+    }
   }
 };
 </script>
@@ -2399,7 +3672,7 @@ this.scrollShow = false;
           overflow: hidden;
         }
         .cardList {
-          height: 80px;
+          height: 70px;
           width: 100%;
           text-align: left;
           /* background-color: rgb(204, 90, 90); */
@@ -2432,7 +3705,7 @@ this.scrollShow = false;
       .map2,
       .map3 {
         position: absolute;
-        opacity: 0.3;
+        opacity: 0.1;
       }
       .map1 {
         width: 50%;
@@ -2457,7 +3730,7 @@ this.scrollShow = false;
       }
 
       #mapBody {
-        position: absolute;
+        // position: absolute;
         left: 0px;
         top: 0px;
         height: calc(100vh - 120px);
@@ -2469,6 +3742,36 @@ this.scrollShow = false;
 
         z-index: 7;
         // background-color: #fff;
+      }
+
+        // background-color: #fff;
+//       }
+//       #container {
+//   position: absolute;
+//   width: 90%;
+//   margin-left: 5%;
+//   height: 600px;
+//  border-radius: 15px;
+// z-index: 30
+// }
+      .mapChoose {
+        position: absolute;
+        left: 10%;
+        top: 55px;
+        color: #eee;
+        z-index: 12;
+        .title {
+          padding: 5px;
+          border-top: 1px solid rgba(147, 235, 248, 0.8);
+          border-bottom: 1px solid rgba(147, 235, 248, 0.8);
+          cursor: pointer;
+        }
+
+        .icon {
+          font-family: "simsun";
+          font-size: 25px;
+          margin: 0 11px;
+        }
       }
     }
 
@@ -2507,7 +3810,7 @@ this.scrollShow = false;
           border: 1px solid #001257;
           outline: none;
         }
-          .seamless-warp {
+        .seamless-warp {
           height: calc(90% - 60px);
           width: 100%;
           overflow: hidden;
@@ -2599,6 +3902,20 @@ this.scrollShow = false;
       }
     }
   }
+      //   #container {
+      //   position: absolute;
+      //   left: 0px;
+      //   top: 0px;
+      //   height: calc(100vh - 120px);
+      //   width: 90%;
+      //   left: 5%;
+      //   margin: 10px 10px 20px 10px;
+      //   border-radius: 8px;
+      // background-color: rgb(238, 232, 232);
+      //   //    background: url("../img/footer-bg.png") no-repeat center center;
+
+      //   z-index: 10;
+      // }
 }
 
 @keyframes myfirst2 {
@@ -2618,6 +3935,15 @@ this.scrollShow = false;
     transform: rotate(-360deg);
   }
 }
+  // #mapContainer {
+  //       overflow: hidden;
+  //       background-color: #fff;
+  //       width: 100px;
+  //       height: 500px;
+  //       margin: 0;
+  //       font-family: "微软雅黑";
+  //       color: #000;
+  //   }
 </style>
 
 

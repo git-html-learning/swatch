@@ -59,7 +59,15 @@ Vue.use(BaiduMap, {
 Vue.use(ElementUI);
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
+import VueAMap from 'vue-amap';
 
+Vue.use(VueAMap);
+VueAMap.initAMapApiLoader({
+  key: '2ea1cecc8ba4c24de6c050825689a42a',
+  plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PlaceSearch', 'AMap.Geolocation', 'AMap.Geocoder'],
+  v: '1.4.4',
+  uiVersion: '1.0'
+});
 Vue.config.productionTip = false
 
 new Vue({

@@ -16,33 +16,46 @@
             <!-- {{item.da}} -->
 
             <el-input placeholder="请输入电子围栏名字" v-model="input[index]" style="width: 300px;"></el-input>
-            <el-button type="primary" @click="nameShow(item,index)" style = "background-color: #00a29a">确定</el-button>
+            <el-button
+              type="primary"
+              @click="nameShow(item,index)"
+              style="background-color: #00a29a"
+            >确定</el-button>
           </p>
-          <el-button type="primary" @click="maskFalse" style = "background-color: #00a29a">取消</el-button>
+          <el-button type="primary" @click="maskFalse" style="background-color: #00a29a">取消</el-button>
         </div>
       </div>
 
       <!-- 左侧操作区 -->
-      <div class="s-control-l" style = "margin-left: 7%;">
+      <div class="s-control-l" style="margin-left: 7%;">
         <v-region @values="regionChange" class="form-control"></v-region>
-        <el-button type="success" size="small" style="margin-left:20px; background-color: #00a29a" @click="drawRegion">绘制区域</el-button>
+        <el-button
+          type="success"
+          size="small"
+          style="margin-left:20px; background-color: #00a29a"
+          @click="drawRegion"
+        >绘制区域</el-button>
       </div>
-            <!-- 教程 --> 
-        <div class = "manual">
-          <p>    绘制电子围栏</p>
-      <p> 可以选择两种方式：</p>
-           <p>   1. 利用左上角绘制行政区域  </p>
-       <p> 2. 利用右上角自定义区域 </p>
-          <p>       绘制完成时候点击右下角的保存按钮，
-          给绘制的围栏命名并提交  </p>
-          <p>    注:</p>
-          <p> 如果在绘制过程中出错，可以选择清
+      <!-- 教程 -->
+      <div class="manual">
+        <p>绘制电子围栏</p>
+        <p>可以选择两种方式：</p>
+        <p>1. 利用左上角绘制行政区域</p>
+        <p>2. 利用右上角自定义区域</p>
+        <p>
+          绘制完成时候点击右下角的保存按钮，
+          给绘制的围栏命名并提交
+        </p>
+        <p>注:</p>
+        <p>
+          如果在绘制过程中出错，可以选择清
           除按钮，
-          清除已经绘制的围栏</p>
-        </div>
+          清除已经绘制的围栏
+        </p>
+      </div>
 
       <!-- 右侧操作区 -->
-      <div class="s-control-r" style = "float: right; margin-right: 7%;">
+      <div class="s-control-r" style="float: right; margin-right: 7%;">
         <el-form :inline="true" class="demo-form-inline">
           <el-form-item label style="margin-right:30px;">
             <el-input
@@ -51,12 +64,11 @@
               prefix-icon="el-icon-search"
               clearable
             >
-  
               <!-- v-model.lazy指失焦后绑定数字 -->
             </el-input>
           </el-form-item>
           <el-form-item label>
-            <el-radio-group v-model="radioSelect" size="mini" fill = "#00a29a">
+            <el-radio-group v-model="radioSelect" size="mini" fill="#00a29a">
               <el-radio-button label="none">
                 <span class="s-icon s-icon-select"></span>
               </el-radio-button>
@@ -81,10 +93,10 @@
     </el-main>
 
     <!-- 尾部 -->
-    <el-footer class="footer" style = "float: right; margin-right: 8%;">
+    <el-footer class="footer" style="float: right; margin-right: 8%;">
       <el-row type="flex" class="row-bg" justify="end" style="margin:14px 0 0 0;">
-      <span style = "color: #04424d;">显示已有电子围栏：</span>
-       
+        <span style="color: #04424d;">显示已有电子围栏：</span>
+
         <el-select
           v-model="selectedValue"
           placeholder="请选择电子围栏"
@@ -102,9 +114,14 @@
           size="small"
           style="margin-left:20px; background-color: #00a29a"
        
-        >绘制已有电子围栏</el-button> -->
+        >绘制已有电子围栏</el-button>-->
         <el-button type size="small" style="margin-left:20px;" @click="reset">清除</el-button>
-        <el-button type="primary" size="small" style="margin-left:20px;background-color: #00a29a" @click="saveHurdle">保存</el-button>
+        <el-button
+          type="primary"
+          size="small"
+          style="margin-left:20px;background-color: #00a29a"
+          @click="saveHurdle"
+        >保存</el-button>
       </el-row>
     </el-footer>
   </el-container>
@@ -166,15 +183,13 @@ export default {
       value: "",
       options: [],
       outAlert: [],
-      productList1: [],
+      productList1: []
     };
   },
   created() {
     this.getFenceData();
-      this.productList1 = JSON.parse(
-        window.localStorage.getItem("productList1")
-      );
-      console.log(this.productList1)
+    this.productList1 = JSON.parse(window.localStorage.getItem("productList1"));
+    console.log(this.productList1);
   },
   watch: {
     // 绘制类型变更
@@ -201,7 +216,7 @@ export default {
     this.map = new BMap.Map("map-container", {
       enableMapClick: false,
       minZoom: 5,
-      maxZoom: 15
+      maxZoom: 30
     });
     // 设置中心点坐标和地图级别
     this.map.centerAndZoom(
@@ -210,6 +225,9 @@ export default {
     );
     // 开启鼠标滚轮缩放
     this.map.enableScrollWheelZoom(true);
+    this.map.addControl(
+      new BMap.MapTypeControl({ mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP] })
+    );
 
     // 创建鼠标绘制工具
     this.drawingManager = new BMapLib.DrawingManager(this.map, {
@@ -265,14 +283,14 @@ export default {
   methods: {
     getFenceData() {
       // this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
-     var username = window.sessionStorage.getItem("username")
-     UserDetail(username).then((res)=>{
+      var username = window.sessionStorage.getItem("username");
+      UserDetail(username).then(res => {
         if (res.msg == "ok") {
-      this.options = res.data.extraInfo.fence
+          this.options = res.data.extraInfo.fence;
         } else {
-          this.$message.error(res.msg)
+          this.$message.error(res.msg);
         }
-      })
+      });
     },
     // 清除地图覆盖物
     clearOverlays() {
@@ -367,19 +385,19 @@ export default {
     saveHurdle() {
       var overlays = this.map.getOverlays();
       console.log(overlays);
-      console.log(overlays.length)
+      console.log(overlays.length);
       var num = [];
-      console.log(this.productList1)
-      if(this.productList1.length!==0||this.productList1!==null) {
-     this.productList1.forEach(item=>{
-        if(item.latestData.location !=="-") {
-          num.push(item)
-        }
-      })
+      console.log(this.productList1);
+      if (this.productList1.length !== 0 || this.productList1 !== null) {
+        this.productList1.forEach(item => {
+          if (item.latestData.location !== "-") {
+            num.push(item);
+          }
+        });
       }
- 
-      console.log(num.length)
-      this.fenceList = overlays.slice(num.length,overlays.length);
+
+      console.log(num.length);
+      this.fenceList = overlays.slice(num.length, overlays.length);
       console.log(this.fenceList);
       console.log(this.fenceList.length);
       this.input = new Array(this.fenceList.length).fill("");
@@ -406,7 +424,7 @@ export default {
       // console.log(data);
       // console.log(pointsStrArr);
       // alert(data);
-          this.getFenceData()
+      this.getFenceData();
     },
 
     // 坐标点数组转字符串
@@ -466,16 +484,16 @@ export default {
           this.map.clearOverlays();
           // var obj = [];
           console.log(this.lastFencedata);
-               var username = window.sessionStorage.getItem("username")
+          var username = window.sessionStorage.getItem("username");
           UserDetail(username).then(res => {
             console.log(res);
             var fenceData = res.data;
             // res.data.extraInfo.fence = [];  //一开始
             // console.log(res.data.extraInfo.fence)
-            if(res.data.extraInfo.fence == undefined) {
+            if (res.data.extraInfo.fence == undefined) {
               res.data.extraInfo.fence = [];
             }
-             var obj = res.data.extraInfo.fence;
+            var obj = res.data.extraInfo.fence;
             for (var i = 0; i < this.lastFencedata.length; i++) {
               var name = this.lastFencedata[i].name;
               this.lastFencedata[i].description = {};
@@ -492,7 +510,7 @@ export default {
               //  var obj1 = JSON.parse(JSON.stringify(this.lastFencedata[i].description).replace(/name/g,name))
               //  console.log(obj1)
               // console.log(this.lastFencedata)
-              console.log(this.lastFencedata[i].description)
+              console.log(this.lastFencedata[i].description);
               obj.push(this.lastFencedata[i].description);
             }
             console.log(obj);
@@ -549,7 +567,7 @@ export default {
     changeFence(value) {
       // console.log(value);
       this.localPoint = value;
-            var polArry = [];
+      var polArry = [];
       this.localPoint.forEach(item => {
         var p = new BMap.Point(item.lng, item.lat);
         polArry.push(p);
@@ -565,9 +583,8 @@ export default {
     },
     //绘制手环的坐标的函数
     addPiont() {
-    
-      this.productList1.forEach((item,index) => {
-      // console.log(item.latestData.location)
+      this.productList1.forEach((item, index) => {
+        // console.log(item.latestData.location)
         if (item.latestData.location !== "-") {
           // console.log(item.latestData.location)
           var markerArr = {
@@ -575,41 +592,49 @@ export default {
             address: item.latestData.location.desc,
             title: item.productName,
             status: item.extraInfo.status
-          }
-                   var marker = item.latestData.location.location;
-               var array=marker.split(",");
-
+          };
+          var marker = item.latestData.location.location;
+          var array = marker.split(",");
+          var x = array[0];
+          var y = array[1];
+          var X_PI = (Math.PI * 3000.0) / 180.0;
+          // var x = 116.32652,
+          //   y = 39.995685;
+          var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * X_PI);
+          var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * X_PI);
+          var bd_lng = z * Math.cos(theta) + 0.0065;
+          var bd_lat = z * Math.sin(theta) + 0.006;
 
           // this.marker1 = new BMap.Marker(
           //   new BMap.Point(array[0], array[1])
           // );
           // this.map.addOverlay(this.marker1);
           this.marker1 = this.addMarker(
-            new window.BMap.Point(array[0], array[1]),
+            new window.BMap.Point(bd_lng, bd_lat),
             markerArr
           );
-          this.addInfoWindow(this.marker1, markerArr,index)
+          this.addInfoWindow(this.marker1, markerArr, index);
         }
       });
     },
-    addMarker(point,i) {
+    addMarker(point, i) {
       // console.log(i)
-      if (i.status== "离线") {
-             var myIcon = new BMap.Icon(
+      if (i.status == "离线") {
+        var myIcon = new BMap.Icon(
           require("@/assets/img/定位红.png"),
-          new BMap.Size(50,50)
+          new BMap.Size(50, 50)
         );
       }
-           if (i.status == "在线") {
+      if (i.status == "在线") {
         var myIcon = new BMap.Icon(
           require("@/assets/img/定位绿.png"),
-          new BMap.Size(50,50)
+          new BMap.Size(50, 50)
         );
       }
-          var marker = new BMap.Marker(point, {
+      var marker = new BMap.Marker(point, {
         icon: myIcon
       });
-            var labelopts = {
+      var labelopts = {
         position: point, // 指定文本标注所在的地理位置
         offset: new BMap.Size(-30, -30) // 设置文本偏移量
       };
@@ -626,7 +651,7 @@ export default {
       // this.map.addOverlay(label);
       return marker;
     },
-        // 添加信息窗口
+    // 添加信息窗口
     addInfoWindow(marker, poi) {
       //pop弹窗标题
       // console.log(poi)
@@ -699,7 +724,7 @@ export default {
 
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
-    },
+    }
   }
 };
 </script>
@@ -728,8 +753,7 @@ export default {
   width: 90%;
   margin-left: 5%;
   height: 600px;
- border-radius: 15px;
-
+  border-radius: 15px;
 }
 #mask {
   position: absolute;
@@ -774,12 +798,12 @@ export default {
   top: 100px;
   z-index: 10;
   padding: 20px;
-   height: 300px;
-   width: 300px;
-   background-color: rgba(255,255,255,0.7);
-   color: #484647;
-   font-size:14px;
-   line-height: 18px;
+  height: 300px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #484647;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .s-control-r {

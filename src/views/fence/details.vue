@@ -6,18 +6,26 @@
     >
       <!-- <img src="./主页背景.png" width="100%" height="100%" /> -->
     </div>
-<div v-show = "mapShow"   style = "position: absolute; left: 15%;  top: 10%; z-index: 100; height: 500px; width: 70%; ;">
-  <p style = "height: 50px; width: 100%; background-color: #fff;">
-    <span style= "height: 50px;  background-color: #fff;color: #000; font-size: 25px; line-height: 50px; margin-left: 30px;">电子围栏展示({{title}})</span>
- <i @click = "close" class = "el-icon-close"  style = "float: right; font-size: 30px; line-height: 50px; margin-right: 20px;"></i>
-  </p>
-<div id = "mapBody" style = "width: 100%; height: 450px;"></div>
-</div>
+    <div
+      v-show="mapShow"
+      style="position: absolute; left: 15%;  top: 10%; z-index: 100; height: 500px; width: 70%; ;"
+       >
+      <p style="height: 50px; width: 100%; background-color: #fff;">
+        <span
+          style="height: 50px;  background-color: #fff;color: #000; font-size: 25px; line-height: 50px; margin-left: 30px;"
+        >电子围栏展示({{title}})</span>
+        <i
+          @click="close"
+          class="el-icon-close"
+          style="float: right; font-size: 30px; line-height: 50px; margin-right: 20px;"
+        ></i>
+      </p>
+      <div id="mapBody" style="width: 100%; height: 450px;"></div>
+    </div>
     <el-header>
       <el-page-header @back="goBack" content="电子围栏列表"></el-page-header>
     </el-header>
     <el-card class="body">
-
       <el-table
         :data="fenceList"
         v-loading="loading"
@@ -68,12 +76,12 @@ export default {
       fenceData: {}, //用于修改用户信息，本页面主要用于删除设备
       dialogVisible: false,
       loading: true,
-      center: {lng: 104.00909, lat: 35.473013}, // 中心点坐标
+      center: { lng: 104.00909, lat: 35.473013 }, // 中心点坐标
       polylinePath: [],
-        map: null,
-        zoom: 6,
-        localPoint:[],
-             styleOptions: {
+      map: null,
+      zoom: 6,
+      localPoint: [],
+      styleOptions: {
         strokeColor: "#5E87DB", // 边线颜色
         fillColor: "#5E87DB", // 填充颜色。当参数为空时，圆形没有填充颜色
         strokeWeight: 2, // 边线宽度，以像素为单位
@@ -81,13 +89,13 @@ export default {
         fillOpacity: 0.2 // 填充透明度，取值范围0-1
       },
       title: "",
-mapShow: false,
-polArry: [],
-pointArray:[],
-polygon: [],
+      mapShow: false,
+      polArry: [],
+      pointArray: [],
+      polygon: []
     };
   },
-    mounted() {
+  mounted() {
     this.map = new BMap.Map("mapBody", {
       enableMapClick: false,
       minZoom: 5,
@@ -98,14 +106,16 @@ polygon: [],
     //   new BMap.Point(this.center.lng, this.center.lat),
     //   10
     // );
-    this.map.centerAndZoom(new BMap.Point(this.center.lng, this.center.lat),
-      this.zoom);
+    this.map.centerAndZoom(
+      new BMap.Point(this.center.lng, this.center.lat),
+      this.zoom
+    );
     this.map.enableScrollWheelZoom(true);
   },
 
   methods: {
     userData() {
-      var username = window.sessionStorage.getItem("username")
+      var username = window.sessionStorage.getItem("username");
       UserDetail(username).then(res => {
         console.log(res);
         if (res.msg == "ok") {
@@ -115,14 +125,7 @@ polygon: [],
         } else {
           this.$message.error(res.msg);
         }
-        // this.fenceList = res.data.extraInfo.fence
-        // console.log(this.fenceList)
-        // this.fenceData = res.data;
-        // console.log(this.fenceData)
       });
-      // this.fenceList = JSON.parse(window.sessionStorage.getItem('fenceList'))
-      // this.fenceData = JSON.parse(window.sessionStorage.getItem('fenceData'))
-      //         console.log(this.fenceData)
     },
     deleteItem(i, index) {
       this.$confirm("此操作将永久删除该围栏, 是否继续?", "提示", {
@@ -148,34 +151,34 @@ polygon: [],
     },
     detailFence(val) {
       this.mapShow = true;
-      
-      setTimeout(this.deal,1000);
+
+      setTimeout(this.deal, 1000);
       // console.log(val.fence);
-      this.center = val.fence.data[0]
+      this.center = val.fence.data[0];
       this.title = val.fence.fenceName;
       this.localPoint = val.fence.data;
-  
 
- this.pointArray = [];
- this.polArry = [];
- this.polygon = [];
-   this.map.clearOverlays(); //清除地图覆盖物
-   this.center={lng: 104.00909, lat: 35.473013};
-   this.zoom = 6;
-      this.map.centerAndZoom(new BMap.Point(this.center.lng, this.center.lat),
-      this.zoom);
+      this.pointArray = [];
+      this.polArry = [];
+      this.polygon = [];
+      this.map.clearOverlays(); //清除地图覆盖物
+      this.center = { lng: 104.00909, lat: 35.473013 };
+      this.zoom = 6;
+      this.map.centerAndZoom(
+        new BMap.Point(this.center.lng, this.center.lat),
+        this.zoom
+      );
     },
     deal() {
-    
       this.localPoint.forEach(item => {
         var p = new BMap.Point(item.lng, item.lat);
         this.polArry.push(p);
       });
       console.log(this.polArry);
-     this.polygon = new BMap.Polygon(this.polArry, this.styleOptions);
-    
+      this.polygon = new BMap.Polygon(this.polArry, this.styleOptions);
+
       this.map.addOverlay(this.polygon);
-     
+
       this.pointArray = this.pointArray.concat(this.polygon.getPath());
       this.map.setViewport(this.pointArray); //调整视野
     },

@@ -68,7 +68,13 @@ module.exports = {
         '@': resolve('src')
       }
     }
-  },  configureWebpack: {
+  },  
+  configureWebpack: {
+    externals: {
+      AMap: "AMap", //加这个！！
+      AMapUI: "AMapUI"
+    },
+
     resolve: {
       extensions: ['.md'],
     }
