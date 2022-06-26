@@ -1300,14 +1300,23 @@ export default {
       zoom: 6,
       baiduMap: false,
       currentRole: mapDetail,
-      mapDetail: false
+      mapDetail: false,
+      sosMessage: "",
     };
   },
   created() {
     this.prepare();
     setTimeout(this.echarts, 1000);
   },
+   watch: {
+    sosMessage() {
+      if (this.sosMessage == "SOS") {
+        this.btnClick1();
+      }
+    }
+  },
   mounted() {
+        this.initWebSocket(); //页面渲染的时候，对ws进行初始化
     // setTimeout(this.getGeoJson(100000), 1000);
     setInterval(this.timer, 1000);
     // var that = this; //防止this指向问题
@@ -1323,8 +1332,47 @@ export default {
     if (this.date) {
       clearInterval(this.timer);
     }
+    this.websock.close();
   },
   methods: {
+      btnClick1() {
+      this.$popup({
+        btnText: "详情",
+        content: this.content,
+        click: () => {
+          // 点击按钮事件
+          this.$router.push({ path: "/alert/index" });
+        }
+      });
+    },
+     initWebSocket() {
+      this.websock = new WebSocket("wss://smartwatch.ahusmart.com/api/v1/ws"); //这个连接ws://固定，后面的根据自己的IP和端口进行改变，我设置监听的就是8081
+      console.log(this.websock);
+      this.websock.onmessage = this.websocketonmessage;
+
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onclose = this.websocketclose;
+    },
+    websocketonopen() {
+      // 连接建立之后执行send方法发送数据，这个和自己的后端沟通好需要传什么数据，我的是要进行token验证
+      var data = {
+        type: "REGISTER",
+        data: "message"
+      };
+      this.websock.send(JSON.stringify(data));
+      this.websock.send("connection");
+    },
+    websocketonerror() {
+      //连接错误
+      console.log("WebSocket连接失败");
+    },
+    websocketonmessage(e) {
+      // 数据接收
+      console.log(e);
+      this.sosMessage = JSON.parse(e.data).content;
+      console.log(this.sosMessage);
+    },
     getGeoJson(adcode) {
       let that = this;
       AMapUI.loadUI(["geo/DistrictExplorer"], DistrictExplorer => {
