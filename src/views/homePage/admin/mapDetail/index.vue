@@ -1,75 +1,103 @@
 <template>
-    <div class="layout">
-<div style = "position: absolute; left: 50px; top: -20px"> 
-    <el-select
-          v-model="selectedValue"
-          placeholder="请选择电子围栏"
-          @change="changeFence(selectedValue)"
-          class = "select"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.fence.fenceName"
-            :label="item.fence.fenceName"
-            :value="item.fence.data"
-          ></el-option>
-        </el-select></div>
-<div id="container" style = "height: 100%; width: 100%; background-color: #fff; border-radius: 30px;">
-
-</div>
+  <div class="layout" style="z-index: 300">
+    <!-- <span style = "color: #fff; font-size: 30px;"> 12{{cente}}</span> -->
+    <div style="position: absolute; left: 50px; top: -20px">
+      <select
+        v-model="selectedValue"
+        placeholder="请选择电子围栏"
+        @change="changeFence(selectedValue)"
+        class="select"
+      >
+        <option
+          v-for="item in options"
+          :key="item.fence.fenceName"
+          :label="item.fence.fenceName"
+          :value="item.fence.data"
+        ></option>
+      </select>
     </div>
+    <div
+      id="container"
+      style="height: 100%; width: 100%; background-color: #fff; border-radius: 30px;"
+    ></div>
+  </div>
 </template>
 <script>
 import { UserDetail } from "@/api/admin";
 export default {
-    name: "mapDetail",
-       props: {
-      setCenter: String,
+  props: ["cente"],
+
+  name: "mapDetail",
+  watch: {
+    cente(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        // this.fetch(); //这里里面放你代码的逻辑
+        console.log(newValue);
+        // console.log("1")
+        this.center = newValue;
+        this.reset();
+      }
     },
-    data() {
-        return {
-                 map: null,
-       center: "重庆市",
-       productList:[],
-       selectedValue:"",
-       options:[],
-             styleOptions: {
+    mmediate: true
+  },
+  data() {
+    return {
+      map: null,
+      center: "重庆市",
+      productList: [],
+      selectedValue: "",
+      options: [],
+      styleOptions: {
         strokeColor: "#5E87DB", // 边线颜色
         fillColor: "#5E87DB", // 填充颜色。当参数为空时，圆形没有填充颜色
         strokeWeight: 2, // 边线宽度，以像素为单位
         strokeOpacity: 1, // 边线透明度，取值范围0-1
         fillOpacity: 0.2 // 填充透明度，取值范围0-1
       },
-        }
-   
-    },
-    created() {
-this. getFenceData()
-this.centerSetting()
-    },
-    mounted() {
-            this.map = new BMap.Map("container", {
-      enableMapClick: false,
-      minZoom: 5,
-      maxZoom: 30
-    });
-    // 设置中心点坐标和地图级别
-    // this.map.centerAndZoom(
-    //   new BMap.Point(this.center.lng, this.center.lat),
-    //   10
-    // );
-    this.map.centerAndZoom(
-        this.center,
-      6
-    );
-    // this.map.setCenter("合肥市")
-    this.map.enableScrollWheelZoom(true);
-    this.map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_HYBRID_MAP,BMAP_NORMAL_MAP]}));  
-     this.productList = JSON.parse(
+      zoom: 5
+    };
+  },
+  created() {
+    console.log(this.center);
+    this.getFenceData();
+  },
+  mounted() {
+    this.reset();
+  },
+  methods: {
+
+    reset() {
+      console.log(this.center)
+      if (this.center !== "重庆市") {
+        this.zoom = 10;
+      } else {
+        this.zoom = 5;
+      }
+
+      console.log(this.zoom);
+      this.map = new BMap.Map("container", {
+        enableMapClick: false,
+        minZoom: 5,
+        maxZoom: 30
+      });
+      // 设置中心点坐标和地图级别
+      // this.map.centerAndZoom(
+      //   new BMap.Point(this.center.lng, this.center.lat),
+      //   10
+      // );
+      this.map.centerAndZoom(this.center, this.zoom);
+      // this.map.setCenter("合肥市")
+      this.map.enableScrollWheelZoom(true);
+      this.map.addControl(
+        new BMap.MapTypeControl({
+          mapTypes: [BMAP_HYBRID_MAP, BMAP_NORMAL_MAP]
+        })
+      );
+      this.productList = JSON.parse(
         window.localStorage.getItem("productList1")
       );
-      console.log(this.productList)
-         this.productList.forEach((item, index) => {
+      console.log(this.productList);
+      this.productList.forEach((item, index) => {
         // console.log(item.latestData.location)
         if (item.latestData.location !== "-") {
           // console.log(item.latestData.location)
@@ -101,27 +129,27 @@ this.centerSetting()
           );
           this.addInfoWindow(this.marker1, markerArr, index);
         }
-     
       });
-   
     },
-    methods: {
-        centerSetting() {
-this.center = this.setCenter
-this.map.centerAndZoom(this.center, 10)
-        },
-            getFenceData() {
+    getFenceData() {
       // this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
       var username = window.sessionStorage.getItem("username");
       UserDetail(username).then(res => {
         if (res.msg == "ok") {
           this.options = res.data.extraInfo.fence;
+          console.log(this.options);
+          this.options.push({
+            fence: {
+              fenceName: "空围栏",
+              data: ""
+            }
+          });
         } else {
           this.$message.error(res.msg);
         }
       });
     },
-         addMarker(point, i) {
+    addMarker(point, i) {
       // console.log(i)
       if (i.status == "离线") {
         var myIcon = new BMap.Icon(
@@ -229,9 +257,12 @@ this.map.centerAndZoom(this.center, 10)
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
     },
-        changeFence(value) {
-      // console.log(value);
-      this.localPoint = value;
+    changeFence(value) {
+      console.log(value);
+      if (value == "") {
+        this.reset();
+      } else {
+          this.localPoint = value;
       var polArry = [];
       this.localPoint.forEach(item => {
         var p = new BMap.Point(item.lng, item.lat);
@@ -245,8 +276,10 @@ this.map.centerAndZoom(this.center, 10)
       var pointArray = [];
       pointArray = pointArray.concat(polygon.getPath());
       this.map.setViewport(pointArray); //调整视野
+      }
+    
     },
-       addPiont() {
+    addPiont() {
       this.productList.forEach((item, index) => {
         // console.log(item.latestData.location)
         if (item.latestData.location !== "-") {
@@ -280,21 +313,24 @@ this.map.centerAndZoom(this.center, 10)
           this.addInfoWindow(this.marker1, markerArr, index);
         }
       });
-    },
     }
-} 
+  }
+};
 </script>
 <style lang="scss" scoped>
 .layout {
-      .select {
-          width: 90%;
-          float: left;
-          margin-left: 2%;
-          background-color: #00093e !important;
-          color: #9b8f8f;
-          border: 1px solid #001257;
-          outline: none;
-        }
+  z-index: 300;
+  .select {
+    width: 90%;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 15px;
+    float: left;
+    margin-left: 2%;
+    background-color: #798a6c !important;
+    color: #fff;
+    border: 1px solid #798a6c;
+    outline: none;
+  }
 }
-
 </style>
