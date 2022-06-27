@@ -68,11 +68,7 @@ export default {
 
     reset() {
       console.log(this.center)
-      if (this.center !== "重庆市") {
-        this.zoom = 10;
-      } else {
-        this.zoom = 5;
-      }
+
 
       console.log(this.zoom);
       this.map = new BMap.Map("container", {
@@ -85,7 +81,16 @@ export default {
       //   new BMap.Point(this.center.lng, this.center.lat),
       //   10
       // );
-      this.map.centerAndZoom(this.center, this.zoom);
+            if (this.center !== "重庆市") {
+        this.zoom = 9;
+         this.map.centerAndZoom(this.center, this.zoom);
+            this.getBoundary();
+      } else {
+        this.zoom = 5;
+         this.map.centerAndZoom(this.center, this.zoom);
+      }
+   
+     
       // this.map.setCenter("合肥市")
       this.map.enableScrollWheelZoom(true);
       this.map.addControl(
@@ -93,6 +98,12 @@ export default {
           mapTypes: [BMAP_HYBRID_MAP, BMAP_NORMAL_MAP]
         })
       );
+
+// this. map.panBy(-210, 330);
+   
+
+
+
       this.productList = JSON.parse(
         window.localStorage.getItem("productList1")
       );
@@ -257,6 +268,30 @@ export default {
       marker.addEventListener("click", openInfoWinFun);
       return openInfoWinFun;
     },
+    getBoundary() {
+   this.map.clearOverlays(); // 清除地图的其余覆盖物
+   const bdary = new BMap.Boundary();
+   bdary.get(this.center, (rs) => {
+     const count = rs.boundaries.length;
+     if (count === 0) {
+       return ;
+     }
+     const EN_JW = '180, 90;';
+     const NW_JW = '-180,  90;';
+     const WS_JW = '-180, -90;';
+     const SE_JW = '180, -90;';
+     // 东南西北四个角添加一个覆盖物
+     const ply1 = new BMap.Polygon(rs.boundaries[0] + SE_JW + SE_JW + WS_JW + NW_JW + EN_JW + SE_JW,
+     { strokeColor: 'none', fillColor: '#333', fillOpacity: 1, strokeOpacity: 1 });
+     this.map.addOverlay(ply1);
+     // 绘制‘贵州省’整体的外轮廓
+     for (let i = 0; i < count; i++) {
+       const ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 0.5, strokeColor: 'transparent', fillColor: 'transparent'});
+       this.map.addOverlay(ply);
+     }
+   });
+ },
+
     changeFence(value) {
       console.log(value);
       if (value == "") {
