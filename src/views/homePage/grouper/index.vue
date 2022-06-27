@@ -780,7 +780,7 @@ export default {
       this.productList1 = [];
       this.fenceList = [];
 
-      var username = window.sessionStorage.getItem("username");
+      var username = window.localStorage.getItem("username");
       console.log(username);
       UserDetail(username).then(res => {
         if (res.msg == "ok") {

@@ -133,7 +133,7 @@ export default {
     },
     getFenceData() {
       // this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
-      var username = window.sessionStorage.getItem("username");
+      var username = window.localStorage.getItem("username");
       UserDetail(username).then(res => {
         if (res.msg == "ok") {
           this.options = res.data.extraInfo.fence;

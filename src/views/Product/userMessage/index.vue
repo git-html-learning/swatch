@@ -357,7 +357,7 @@ export default {
 
     //   },
     prepare() {
-      var username = window.sessionStorage.getItem("username");
+      var username = window.localStorage.getItem("username");
       UserDetail(username).then(res => {
         if (res.msg == "ok") {
           this.userList = res.data.extraInfo.userMessage;

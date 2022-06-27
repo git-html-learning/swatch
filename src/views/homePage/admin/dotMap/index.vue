@@ -78,7 +78,7 @@ this.dataPrepare();
         console.log(res);
         if (res.msg == "ok") {
           this.productnameList = res.data.productKeys;
-          var username = window.sessionStorage.getItem("username");
+          var username = window.localStorage.getItem("username");
           getDeviceDatas({
             username: username,
             pkList: this.productnameList,

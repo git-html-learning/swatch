@@ -143,7 +143,7 @@ export default {
           this.outAlert = [];
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
-          var username = window.sessionStorage.getItem("username");
+          var username = window.localStorage.getItem("username");
           getDeviceDatas({
             username: username,
             pkList: this.productNameList,
@@ -166,7 +166,7 @@ export default {
                 }
                 // console.log(item.extraInfo.fence)
                 if (item.extraInfo.fence !== "-") {
-                  var username = window.sessionStorage.getItem("username");
+                  var username = window.localStorage.getItem("username");
                   UserDetail(username).then(res => {
                     // console.log(res)
                     this.fenceList = res.data.extraInfo.fence;

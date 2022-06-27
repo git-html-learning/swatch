@@ -30,7 +30,7 @@ this.prepare();
         },
         methods: {
 prepare() {
-  var username = window.sessionStorage.getItem("username")
+  var username = window.localStorage.getItem("username")
           UserDetail(username.then(res => {
         console.log(res);
         if (res.msg == "ok") {

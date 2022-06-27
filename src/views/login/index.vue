@@ -142,7 +142,7 @@ export default {
                   "token",
                   res.data.token
                 );
-                window.sessionStorage.setItem(
+                window.localStorage.setItem(
                   "username",
                   this.loginForm.username
                 );

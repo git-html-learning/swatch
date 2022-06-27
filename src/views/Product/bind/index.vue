@@ -553,7 +553,7 @@ export default {
         if (res.msg == "ok") {
           this.productNameList = res.data.productKeys;
           // console.log(this.productNameList);
-          var username = window.sessionStorage.getItem("username");
+          var username = window.localStorage.getItem("username");
           console.log(username);
           getDeviceDatas({
             username: username,
@@ -685,7 +685,7 @@ export default {
           this.$message.error(res.msg);
         }
       });
-      var username = window.sessionStorage.getItem("username");
+      var username = window.localStorage.getItem("username");
       UserDetail(username).then(res => {
         console.log(res);
         if (res.msg == "ok") {
@@ -851,7 +851,7 @@ export default {
       } else {
         console.log("可以开始创建");
         //获取并修改管理员的信息
-        var username = window.sessionStorage.getItem("username");
+        var username = window.localStorage.getItem("username");
         UserDetail(username).then(res => {
           console.log(res);
           if (res.msg == "ok") {
@@ -987,7 +987,7 @@ export default {
         this.$message.info("未选组");
       } else {
         //管理员信息获取与修改
-        var username = window.sessionStorage.getItem("username");
+        var username = window.localStorage.getItem("username");
         UserDetail(username).then(res => {
           //   console.log(res);
           if (res.msg == "ok") {
@@ -1147,7 +1147,7 @@ export default {
           this.$message.warning("没有选中组");
         } else {
           this.dialogVisible1 = true;
-          var username = window.sessionStorage.getItem("username");
+          var username = window.localStorage.getItem("username");
           UserDetail(username).then(res => {
             // console.log(res)
             var selected = [];
@@ -1209,7 +1209,7 @@ export default {
           this.$message.warning("没有选中组");
         } else {
           //1. 修改管理员的extraInfo
-          var username = window.sessionStorage.getItem("username");
+          var username = window.localStorage.getItem("username");
           UserDetail(username).then(res => {
             // console.log(res)
             var selected = res.data.extraInfo.groups;

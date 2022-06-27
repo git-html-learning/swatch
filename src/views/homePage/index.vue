@@ -31,7 +31,7 @@ export default {
   },
   created() {
     // console.log(this.name)
-    var username = window.sessionStorage.getItem("username");
+    var username = window.localStorage.getItem("username");
     console.log(username);
     UserDetail(username).then(res => {
       console.log(res.data.extraInfo.role);

@@ -241,7 +241,7 @@ export default {
 
   methods: {
     products() {
-      var username = window.sessionStorage.getItem("username");
+      var username = window.localStorage.getItem("username");
       UserDetail(username).then(res => {
         if (res.msg == "ok") {
           this.productNameList = res.data.productKeys;

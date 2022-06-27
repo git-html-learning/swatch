@@ -1614,7 +1614,7 @@ export default {
     },
     prepare() {
       console.log("初始数据准备");
-      var username = window.sessionStorage.getItem("username");
+      var username = window.localStorage.getItem("username");
       console.log(username);
       UserDetail(username).then(res => {
         console.log(res);
@@ -1693,7 +1693,7 @@ export default {
               }
             }
           }
-          var username = window.sessionStorage.getItem("username");
+          var username = window.localStorage.getItem("username");
           getDeviceDatas({
             username: username,
             pkList: this.productnameList,

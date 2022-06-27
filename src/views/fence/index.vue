@@ -283,7 +283,7 @@ export default {
   methods: {
     getFenceData() {
       // this.options = JSON.parse(window.sessionStorage.getItem("fenceList"));
-      var username = window.sessionStorage.getItem("username");
+      var username = window.localStorage.getItem("username");
       UserDetail(username).then(res => {
         if (res.msg == "ok") {
           this.options = res.data.extraInfo.fence;
@@ -484,7 +484,7 @@ export default {
           this.map.clearOverlays();
           // var obj = [];
           console.log(this.lastFencedata);
-          var username = window.sessionStorage.getItem("username");
+          var username = window.localStorage.getItem("username");
           UserDetail(username).then(res => {
             console.log(res);
             var fenceData = res.data;
