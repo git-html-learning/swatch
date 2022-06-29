@@ -68,9 +68,10 @@ export default {
 
     reset() {
       console.log(this.center)
+      console.log(this.center.center)
 
 
-      console.log(this.zoom);
+      // console.log(this.zoom);
       this.map = new BMap.Map("container", {
         enableMapClick: false,
         minZoom: 5,
@@ -81,13 +82,13 @@ export default {
       //   new BMap.Point(this.center.lng, this.center.lat),
       //   10
       // );
-            if (this.center !== "重庆市") {
-        this.zoom = 9;
-         this.map.centerAndZoom(this.center, this.zoom);
+            if (this.center.if == "yes") {
+        // this.zoom = 9;
+         this.map.centerAndZoom(this.center.center, 9);
             this.getBoundary();
       } else {
-        this.zoom = 5;
-         this.map.centerAndZoom(this.center, this.zoom);
+        // this.zoom = 5;
+         this.map.centerAndZoom(this.center.center, 5);
       }
    
      
@@ -98,8 +99,6 @@ export default {
           mapTypes: [BMAP_HYBRID_MAP, BMAP_NORMAL_MAP]
         })
       );
-
-// this. map.panBy(-210, 330);
    
 
 
@@ -271,7 +270,7 @@ export default {
     getBoundary() {
    this.map.clearOverlays(); // 清除地图的其余覆盖物
    const bdary = new BMap.Boundary();
-   bdary.get(this.center, (rs) => {
+   bdary.get(this.center.center, (rs) => {
      const count = rs.boundaries.length;
      if (count === 0) {
        return ;
