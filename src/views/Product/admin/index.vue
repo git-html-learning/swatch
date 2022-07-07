@@ -753,7 +753,7 @@ export default {
       ) {
         return "color: red";
       } else if (
-        (row.latestData.heartRate > 110 || row.latestData.heartRate < 60) &&
+        (row.latestData.heartRate > 120 || row.latestData.heartRate < 60) &&
         columnIndex === 4
       ) {
         return "color: red";

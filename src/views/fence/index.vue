@@ -717,6 +717,7 @@ export default {
         title: title,
         width: 200
       });
+      // console.log(infoWindow)
 
       var openInfoWinFun = function() {
         marker.openInfoWindow(infoWindow);
